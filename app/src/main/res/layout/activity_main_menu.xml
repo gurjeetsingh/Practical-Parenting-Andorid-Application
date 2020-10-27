@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/child"
+    tools:context=".UI.MainMenu">
+
+    <Button
+        android:id="@+id/configchild"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="192dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="247dp"
+        android:text="CONFIGURE CHILDREN!"
+        android:textColor="#00ACC1"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/coinflip"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="192dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="11dp"
+        android:text="Filp A Coin!"
+        android:textColor="#00ACC1"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/configchild" />
+
+    <Button
+        android:id="@+id/timeout"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="192dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="28dp"
+        android:text="Timeout Timer!"
+        android:textColor="#00ACC1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coinflip" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
