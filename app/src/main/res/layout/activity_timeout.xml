@@ -3,8 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/child"
     android:layout_height="match_parent"
+    android:background="@drawable/child"
     tools:context=".UI.TimeoutActivity">
 
+    <TextView
+        android:id="@+id/timertext"
+        android:layout_width="213dp"
+        android:layout_height="112dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginBottom="294dp"
+        android:textAlignment="viewStart"
+        android:textColor="#E53935"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/timepushbtn"
+        android:layout_width="136dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="146dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="36dp"
+        android:text="StartTimer"
+        app:layout_constraintBottom_toTopOf="@+id/timertext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
