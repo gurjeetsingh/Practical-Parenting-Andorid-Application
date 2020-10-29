@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PracticalParentLavaTeam</string>
+
+    <string name="history">History</string>
+    <string name="flip">Flip</string>
+    <string name="head">Head</string>
+    <string name="tails">Tails</string>
 </resources>
