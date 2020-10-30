@@ -1,3 +1,5 @@
+/*This is the flipping history which show the history of the flipping*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.AppCompatActivity;

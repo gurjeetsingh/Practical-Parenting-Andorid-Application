@@ -1,3 +1,5 @@
+/*This is the activity for flipping coin, and it include Flipping history*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -110,7 +112,6 @@ public class CoinFlipActivity extends AppCompatActivity {
                     c = 0;
                 else if(choise.equals("Head"))
                     c = 1;
-                Random r = new Random();
                 int image;
                 if(c == num) {
                     image = win;
@@ -160,7 +161,6 @@ public class CoinFlipActivity extends AppCompatActivity {
         });
     }
     public static Intent makeIntent(Context context) {
-        Intent coinflipintent = new Intent(context, CoinFlipActivity.class);
-        return coinflipintent;
+        return new Intent(context, CoinFlipActivity.class);
     }
 }
