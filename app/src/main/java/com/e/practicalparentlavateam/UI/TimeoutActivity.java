@@ -1,8 +1,11 @@
 package com.e.practicalparentlavateam.UI;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,11 +28,14 @@ public class TimeoutActivity extends AppCompatActivity {
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
     private Button mButtonReset;
+    private Button custombtn;
+    EditText usertime;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     private long selectedtime;
-    String[] timepiece = new String[]{"Select Duration", "1", "2","3","5","10"};
+    final Context context=this;
+    String[] timepiece = new String[]{"Select Duration", "Set Time: 1 Minute", "Set Time: 2 Minutes","Set Time: 3 Minutes","Set Time: 5 Minutes","Set Time: 10 Minutes"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,7 @@ public class TimeoutActivity extends AppCompatActivity {
         mTextViewCountDown = findViewById(R.id.timertext);
         mTextViewCountDown.setBackgroundResource(R.color.stopg);
         mButtonStartPause = findViewById(R.id.timepushbtn);
+        custombtn=findViewById(R.id.customtime);
         createtimedurationspinner();
         mButtonReset = findViewById(R.id.resetbtn);
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +55,36 @@ public class TimeoutActivity extends AppCompatActivity {
                 } else {
                     startTimer();
                 }
+            }
+        });
+
+        custombtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                builder.setTitle("Please Enter Custom Minute:");
+                builder.setMessage("Please Fill this In:");
+                usertime=new EditText(context);
+                builder.setView(usertime);
+                builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newtime=usertime.getText().toString();
+                        long customtime = Long.parseLong(newtime);
+                        mTimeLeftInMillis=customtime*60000;
+                        selectedtime=mTimeLeftInMillis;
+                        updateCountDownText();
+
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog ad=builder.create();
+                ad.show();
             }
         });
         mButtonReset.setOnClickListener(new View.OnClickListener() {
@@ -124,34 +162,73 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0)
                 {
-                    mTimeLeftInMillis=60000;
-                    selectedtime=60000;
-                    updateCountDownText();
+                    if(mTimerRunning==true)
+                    {
+                        Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        mTimeLeftInMillis = 60000;
+                        selectedtime = 60000;
+                        updateCountDownText();
+                    }
                 }
                 if(position==1)
                 {
-                    mTimeLeftInMillis=60000;
-                    selectedtime=60000;
-                    updateCountDownText();
+                    if(mTimerRunning==true)
+                    {
+                        Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        mTimeLeftInMillis = 60000;
+                        selectedtime = 60000;
+                        updateCountDownText();
+                    }
                 }
                 if(position==2)
                 {
-                    mTimeLeftInMillis=120000;
-                    selectedtime=120000;
-                    updateCountDownText();
+                    if(mTimerRunning==true)
+                    {
+                        Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        mTimeLeftInMillis = 120000;
+                        selectedtime = 120000;
+                        updateCountDownText();
+                    }
                 }
-                if(position==3)
-                { mTimeLeftInMillis=180000;
-                    selectedtime=180000;
-                    updateCountDownText();}
+                if(position==3) {
+                    if (mTimerRunning == true) {
+                        Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        mTimeLeftInMillis = 180000;
+                        selectedtime = 180000;
+                        updateCountDownText();
+                    }
+                }
                 if(position==4)
-                { mTimeLeftInMillis=300000;
-                    selectedtime=300000;
-                    updateCountDownText();}
-                if(position==5)
-                { mTimeLeftInMillis=600000;
-                    selectedtime=600000;
-                    updateCountDownText();}
+                {
+                    if(mTimerRunning==true)
+                    {
+                        Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        mTimeLeftInMillis=300000;
+                        selectedtime=300000;
+                        updateCountDownText();
+                    }
+
+                    }
+                if(position==5) {
+                    if (mTimerRunning == true) {
+                        Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        mTimeLeftInMillis = 600000;
+                        selectedtime = 600000;
+                        updateCountDownText();
+                    }
+                }
             }
 
             @Override
