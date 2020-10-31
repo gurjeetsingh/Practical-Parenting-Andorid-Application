@@ -131,12 +131,14 @@ public class CoinFlipActivity extends AppCompatActivity {
                     image = win;
                     Date currentTime = new Date();
                     manager.add(new HistoryItem(currentTime.toString(), choise, image));
+                    HistoryManager.setInstance(manager);
                     Save(manager);
                 }
                 else {
                     image = lose;
                     Date currentTime = new Date();
                     manager.add(new HistoryItem(currentTime.toString(), choise, image));
+                    HistoryManager.setInstance(manager);
                     Save(manager);
                 }
             }
