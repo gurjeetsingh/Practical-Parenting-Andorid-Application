@@ -16,6 +16,8 @@
             android:parentActivityName=".UI.MainMenu"/>
         <activity android:name=".UI.CoinFlipActivity"
             android:parentActivityName=".UI.MainMenu"/>
+        <activity android:name=".UI.FlippingHistory"
+            android:parentActivityName=".UI.CoinFlipActivity"></activity>
         <activity android:name=".UI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
