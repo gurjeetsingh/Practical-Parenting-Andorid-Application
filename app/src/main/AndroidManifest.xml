@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.FlippingHistory"></activity>
+        <activity android:name=".UI.FlippingHistory"
+            android:parentActivityName=".UI.CoinFlipActivity"></activity>
         <activity android:name=".UI.MainMenu" />
         <activity android:name=".UI.TimeoutActivity" />
         <activity android:name=".UI.ConfigureChildren" />

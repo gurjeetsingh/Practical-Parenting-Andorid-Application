@@ -49,6 +49,20 @@ public class CoinFlipActivity extends AppCompatActivity {
         head();
         tails();
         flipCoin();
+        deleteHistory();
+    }
+
+    private void deleteHistory() {
+        Button delete = (Button) findViewById(R.id.delethistory);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manager = new HistoryManager();
+                HistoryManager.setInstance(new HistoryManager());
+                Save(manager);
+                Toast.makeText(CoinFlipActivity.this,"You Delete Flipping History!",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void tails() {
