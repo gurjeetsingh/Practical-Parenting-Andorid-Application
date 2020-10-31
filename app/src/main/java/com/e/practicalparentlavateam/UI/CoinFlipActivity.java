@@ -2,7 +2,9 @@
 
 package com.e.practicalparentlavateam.UI;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -43,6 +45,12 @@ public class CoinFlipActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_flip);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.flipCoinToolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         getHistory();
         history();
