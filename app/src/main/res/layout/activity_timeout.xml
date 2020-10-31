@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/child"
+    android:foregroundTint="#FFFFFF"
     tools:context=".UI.TimeoutActivity">
 
     <RelativeLayout
@@ -27,43 +28,46 @@
 
         <Button
             android:id="@+id/timepushbtn"
-            android:layout_width="wrap_content"
+            android:layout_width="126dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="22dp"
-            android:layout_marginBottom="132dp"
-            android:text="Start Timer" />
-
-        <Button
-            android:id="@+id/pausebtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="134dp"
-            android:text="Pause" />
+            android:layout_marginBottom="139dp"
+            android:text="@string/start_timer" />
 
         <TextView
             android:id="@+id/timertext"
-            android:layout_width="143dp"
-            android:layout_height="88dp"
+            android:layout_width="271dp"
+            android:layout_height="131dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="93dp"
-            android:layout_marginTop="90dp"
-            android:textSize="24sp" />
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="72dp"
+            android:gravity="center"
+            android:textSize="64sp" />
 
         <Button
             android:id="@+id/resetbtn"
-            android:layout_width="77dp"
-            android:layout_height="38dp"
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="122dp"
-            android:layout_marginBottom="102dp"
-            android:text="reset" />
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="141dp"
+            android:text="@string/reset" />
+
+        <Spinner
+            android:id="@+id/timespinner"
+            android:layout_width="131dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="102dp"
+            android:layout_marginTop="278dp"
+            android:background="@color/colorPrimaryDark"
+            android:popupBackground="@color/forrest"
+            android:spinnerMode="dropdown" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

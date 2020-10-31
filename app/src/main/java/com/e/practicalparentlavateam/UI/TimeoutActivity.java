@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +20,7 @@ import java.util.Locale;
 
 public class TimeoutActivity extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 600000;
+    private final long START_TIME_IN_MILLIS = 600000;
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
     private Button mButtonReset;
@@ -30,7 +33,9 @@ public class TimeoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeout);
         mTextViewCountDown = findViewById(R.id.timertext);
+        mTextViewCountDown.setBackgroundResource(R.color.stopg);
         mButtonStartPause = findViewById(R.id.timepushbtn);
+        createtimedurationspinner();
         mButtonReset = findViewById(R.id.resetbtn);
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +74,7 @@ public class TimeoutActivity extends AppCompatActivity {
         }.start();
         mTimerRunning = true;
         mButtonStartPause.setText("pause");
-        mButtonReset.setVisibility(View.INVISIBLE);
+       // mButtonReset.setVisibility(View.INVISIBLE);
     }
 
     public static Intent makeIntent(Context context) {
@@ -86,19 +91,27 @@ public class TimeoutActivity extends AppCompatActivity {
     }
 
     private void resetTimer() {
+        mCountDownTimer.cancel();
+        mTimerRunning = false;
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
+        mButtonStartPause.setText("Start");
         updateCountDownText();
-        mButtonReset.setVisibility(View.INVISIBLE);
-        mButtonStartPause.setVisibility(View.VISIBLE);
+       // mButtonReset.setVisibility(View.INVISIBLE);
+        //mButtonStartPause.setVisibility(View.VISIBLE);
     }
 
     private void updateCountDownText() {
-        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+        int minutes = (int) (mTimeLeftInMillis / (double)1000) / 60;
+        int seconds = (int) (mTimeLeftInMillis / (double) 1000) % 60;
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         mTextViewCountDown.setText(timeLeftFormatted);
 
 
+    }
+
+
+    private void createtimedurationspinner() {
+        Spinner bombfieldspinner= (Spinner) findViewById(R.id.timespinner);
     }
 
 }

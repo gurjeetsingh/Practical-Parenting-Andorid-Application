@@ -3,4 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="forrest">#228B22</color>
+    <color name="dg">#006400</color>
+    <color name="lime">#00FF00</color>
+    <color name="stopg">#E5FFCC</color>
+
 </resources>
