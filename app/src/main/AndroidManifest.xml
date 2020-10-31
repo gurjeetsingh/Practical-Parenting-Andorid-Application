@@ -9,12 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UI.MainMenu"></activity>
+        <activity android:name=".UI.TimeoutActivity"
+            android:parentActivityName=".UI.MainMenu"/>
+        <activity android:name=".UI.ConfigureChildren"
+            android:parentActivityName=".UI.MainMenu"/>
+        <activity android:name=".UI.CoinFlipActivity"
+            android:parentActivityName=".UI.MainMenu"/>
         <activity android:name=".UI.FlippingHistory"
             android:parentActivityName=".UI.CoinFlipActivity"></activity>
-        <activity android:name=".UI.MainMenu" />
-        <activity android:name=".UI.TimeoutActivity" />
-        <activity android:name=".UI.ConfigureChildren" />
-        <activity android:name=".UI.CoinFlipActivity" />
         <activity android:name=".UI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
