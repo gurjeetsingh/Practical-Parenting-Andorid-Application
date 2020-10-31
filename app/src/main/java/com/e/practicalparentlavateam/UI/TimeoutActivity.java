@@ -20,13 +20,15 @@ import java.util.Locale;
 
 public class TimeoutActivity extends AppCompatActivity {
 
-    private final long START_TIME_IN_MILLIS = 600000;
+    private long START_TIME_IN_MILLIS = 600000;
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
     private Button mButtonReset;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private long selectedtime;
+    String[] timepiece = new String[]{"Select Duration", "1", "2","3","5","10"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +70,9 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onFinish() {
                 mTimerRunning = false;
                 mButtonStartPause.setText("Start");
-                mButtonStartPause.setVisibility(View.INVISIBLE);
-                mButtonReset.setVisibility(View.VISIBLE);
+                resetTimer();
+               // mButtonStartPause.setVisibility(View.INVISIBLE);
+               // mButtonReset.setVisibility(View.VISIBLE);
             }
         }.start();
         mTimerRunning = true;
@@ -86,14 +89,14 @@ public class TimeoutActivity extends AppCompatActivity {
     private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
-        mButtonStartPause.setText("Start");
+        mButtonStartPause.setText("Resume");
         mButtonReset.setVisibility(View.VISIBLE);
     }
 
     private void resetTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
-        mTimeLeftInMillis = START_TIME_IN_MILLIS;
+        mTimeLeftInMillis = selectedtime;
         mButtonStartPause.setText("Start");
         updateCountDownText();
        // mButtonReset.setVisibility(View.INVISIBLE);
@@ -111,7 +114,53 @@ public class TimeoutActivity extends AppCompatActivity {
 
 
     private void createtimedurationspinner() {
-        Spinner bombfieldspinner= (Spinner) findViewById(R.id.timespinner);
+        Spinner timefieldspinner= (Spinner) findViewById(R.id.timespinner);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timepiece);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        timefieldspinner.setAdapter(adapter);
+        timefieldspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0)
+                {
+                    mTimeLeftInMillis=60000;
+                    selectedtime=60000;
+                    updateCountDownText();
+                }
+                if(position==1)
+                {
+                    mTimeLeftInMillis=60000;
+                    selectedtime=60000;
+                    updateCountDownText();
+                }
+                if(position==2)
+                {
+                    mTimeLeftInMillis=120000;
+                    selectedtime=120000;
+                    updateCountDownText();
+                }
+                if(position==3)
+                { mTimeLeftInMillis=180000;
+                    selectedtime=180000;
+                    updateCountDownText();}
+                if(position==4)
+                { mTimeLeftInMillis=300000;
+                    selectedtime=300000;
+                    updateCountDownText();}
+                if(position==5)
+                { mTimeLeftInMillis=600000;
+                    selectedtime=600000;
+                    updateCountDownText();}
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                mTimeLeftInMillis=60000;
+            }
+        });
+
+
     }
 
 }

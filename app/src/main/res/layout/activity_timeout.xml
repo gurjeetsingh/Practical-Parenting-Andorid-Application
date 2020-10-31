@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/child"
+    android:background="@drawable/calming"
     android:foregroundTint="#FFFFFF"
     tools:context=".UI.TimeoutActivity">
 
     <RelativeLayout
-        android:layout_width="332dp"
-        android:layout_height="399dp"
+        android:layout_width="369dp"
+        android:layout_height="446dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.602">
+        app:layout_constraintVertical_bias="0.253">
 
         <ImageView
             android:id="@+id/timeoutimage"
@@ -28,22 +28,22 @@
 
         <Button
             android:id="@+id/timepushbtn"
-            android:layout_width="126dp"
+            android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="22dp"
-            android:layout_marginBottom="139dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginBottom="174dp"
             android:text="@string/start_timer" />
 
         <TextView
             android:id="@+id/timertext"
-            android:layout_width="271dp"
-            android:layout_height="131dp"
+            android:layout_width="297dp"
+            android:layout_height="149dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="72dp"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="64dp"
             android:gravity="center"
             android:textSize="64sp" />
 
@@ -53,21 +53,31 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="141dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="173dp"
             android:text="@string/reset" />
 
         <Spinner
             android:id="@+id/timespinner"
-            android:layout_width="131dp"
-            android:layout_height="wrap_content"
+            android:layout_width="135dp"
+            android:layout_height="22dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="102dp"
-            android:layout_marginTop="278dp"
-            android:background="@color/colorPrimaryDark"
-            android:popupBackground="@color/forrest"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="35dp"
+            android:background="@color/silver"
+            android:popupBackground="@color/darksilver"
             android:spinnerMode="dropdown" />
+
+        <Button
+            android:id="@+id/customtime"
+            android:layout_width="58dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="162dp"
+            android:layout_marginBottom="141dp"
+            android:text="Set Time" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
