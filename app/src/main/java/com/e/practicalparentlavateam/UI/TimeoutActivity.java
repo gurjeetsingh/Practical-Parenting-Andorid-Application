@@ -1,7 +1,9 @@
 package com.e.practicalparentlavateam.UI;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.AlarmManager;
@@ -17,6 +19,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.Bundle;
+import android.view.Menu;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
@@ -207,6 +210,11 @@ public class TimeoutActivity extends AppCompatActivity {
         super.onPause();
     }
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.timeoutToolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -224,6 +232,13 @@ public class TimeoutActivity extends AppCompatActivity {
         timerValue.setText(timeLeftFormatted);
         pauseintent=intent;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_timeout, menu);
+        return true;
+    }
+
 
 
 

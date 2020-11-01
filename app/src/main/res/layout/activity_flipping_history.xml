@@ -3,18 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/child"
     android:layout_height="match_parent"
-    tools:context=".UI.ConfigureChildren">
+    android:background="@drawable/child"
+    tools:context=".UI.FlippingHistory">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/configureToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+    <ListView
+        android:id="@+id/HistoryList"
+        android:layout_width="413dp"
+        android:layout_height="731dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
