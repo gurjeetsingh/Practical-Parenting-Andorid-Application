@@ -73,6 +73,11 @@ public class TimeoutActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.timeoutToolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
         createtimedurationspinner();
         timerValue = (TextView) findViewById(R.id.timertext);
         timerValue.setBackgroundResource(R.color.stopg);
@@ -210,11 +215,7 @@ public class TimeoutActivity extends AppCompatActivity {
         super.onPause();
     }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.timeoutToolbar);
-        setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
