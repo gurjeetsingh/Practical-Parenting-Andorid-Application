@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -57,13 +58,13 @@ public class ChildDetails extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // Extract data from screen
-                        String Name = etName.getText().toString();
+                        String name = etName.getText().toString();
 
 
                         // Create new data object
-                        Child child = new Lens(make, aperture, focLen);
-                        LensManager lenses = LensManager.getInstance();
-                        lenses.add(lens);
+                        Child child = new Child(name);
+                        ChildrenManager children = ChildrenManager.getInstance();
+                        children.add(child);
                         ChildDetails.this.finish();
                     }
                 }

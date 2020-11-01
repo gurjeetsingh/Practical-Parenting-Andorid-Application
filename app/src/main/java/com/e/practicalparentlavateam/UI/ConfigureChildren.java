@@ -15,8 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.e.practicalparentlavateam.R;
-import com.e.practicalparentlavateam.UI.model.Child;
-import com.e.practicalparentlavateam.UI.model.ChildrenManager;
+import com.e.practicalparentlavateam.Model.Child;
+import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ConfigureChildren extends AppCompatActivity {
@@ -98,9 +98,12 @@ public class ConfigureChildren extends AppCompatActivity {
 
     private void setupFloatingActionButton() {
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            Intent i = LensDetailsActivity.makeIntentForAdd(MainActivity.this);
-            startActivityForResult(i, ACTIVITY_RESULT_ADD);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = ChildDetails.makeIntentForAdd(ConfigureChildren.this);
+                ConfigureChildren.this.startActivityForResult(i, ACTIVITY_RESULT_ADD);
+            }
         });
     }
 }
