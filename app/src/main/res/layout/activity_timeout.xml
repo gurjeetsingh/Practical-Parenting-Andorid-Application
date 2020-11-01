@@ -3,9 +3,94 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/child"
     android:layout_height="match_parent"
+    android:background="@drawable/calming"
+    android:foregroundTint="#FFFFFF"
     tools:context=".UI.TimeoutActivity">
+
+    <RelativeLayout
+        android:layout_width="384dp"
+        android:layout_height="461dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.253">
+
+        <ImageView
+            android:id="@+id/timeoutimage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="28dp"
+            app:srcCompat="@drawable/timeouttimer" />
+
+        <Button
+            android:id="@+id/timepushbtn"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="26dp"
+            android:layout_marginBottom="196dp"
+            android:text="@string/start_timer" />
+
+        <TextView
+            android:id="@+id/timertext"
+            android:layout_width="297dp"
+            android:layout_height="149dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="62dp"
+            android:gravity="center"
+            android:textColor="#3949AB"
+            android:textSize="64sp" />
+
+        <Button
+            android:id="@+id/pausebtn"
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="33dp"
+            android:layout_marginBottom="194dp"
+            android:text="Pause" />
+
+        <Spinner
+            android:id="@+id/timespinner"
+            android:layout_width="135dp"
+            android:layout_height="22dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="35dp"
+            android:background="@color/silver"
+            android:popupBackground="@color/darksilver"
+            android:spinnerMode="dropdown" />
+
+        <Button
+            android:id="@+id/customtime"
+            android:layout_width="58dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="170dp"
+            android:layout_marginBottom="160dp"
+            android:text="Set Time" />
+
+        <Button
+            android:id="@+id/alarmoff"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="275dp"
+            android:layout_marginEnd="21dp"
+            android:text="Alarm OFF"
+            android:textSize="10sp" />
+    </RelativeLayout>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/timeoutToolbar"
