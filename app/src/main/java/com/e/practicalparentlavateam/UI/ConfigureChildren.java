@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.e.practicalparentlavateam.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ConfigureChildren extends AppCompatActivity {
 
@@ -24,6 +25,8 @@ public class ConfigureChildren extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
+        setupFloatingActionButton();
     }
 
     @Override
@@ -38,3 +41,11 @@ public class ConfigureChildren extends AppCompatActivity {
         return configintent;
     }
 }
+
+    private void setupFloatingActionButton() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            Intent i = LensDetailsActivity.makeIntentForAdd(MainActivity.this);
+            startActivityForResult(i, ACTIVITY_RESULT_ADD);
+        });
+    }
