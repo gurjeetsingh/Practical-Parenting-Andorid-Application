@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.e.practicalparentlavateam">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".UI.MainMenu"></activity>
-        <activity android:name=".UI.TimeoutActivity" />
+        <activity android:name=".UI.TimeoutActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".UI.ConfigureChildren" />
         <activity android:name=".UI.CoinFlipActivity" />
         <activity android:name=".UI.MainActivity">

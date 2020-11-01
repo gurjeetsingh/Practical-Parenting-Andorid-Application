@@ -4,11 +4,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.MediaPlayer;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,7 +43,9 @@ public class TimeoutActivity extends AppCompatActivity {
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private long mEndTime;
     private long selectedtime;
+    final static int RQS_1 = 1;
     final Context context=this;
     String[] timepiece = new String[]{"Select Duration", "Set Time: 1 Minute", "Set Time: 2 Minutes","Set Time: 3 Minutes","Set Time: 5 Minutes","Set Time: 10 Minutes"};
 
@@ -58,14 +70,15 @@ public class TimeoutActivity extends AppCompatActivity {
             }
         });
 
+
         custombtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                AlertDialog.Builder builder=new AlertDialog.Builder(context,R.style.MyDialogTheme);
                 builder.setTitle("Please Enter Custom Minute:");
-                builder.setMessage("Please Fill this In:");
                 usertime=new EditText(context);
                 builder.setView(usertime);
+                builder.setIcon(R.drawable.babyclock);
                 builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -96,7 +109,45 @@ public class TimeoutActivity extends AppCompatActivity {
         updateCountDownText();
     }
 
+    @Override
+    protected void onStop(){
+        super.onStop();
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("millisLeft", mTimeLeftInMillis);
+        editor.putBoolean("timerRunning", mTimerRunning);
+        editor.putLong("endTime", mEndTime);
+        editor.apply();
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        mTimeLeftInMillis = prefs.getLong("millisLeft", selectedtime);
+        mTimerRunning = prefs.getBoolean("timerRunning", false);
+        updateCountDownText();
+        updateButtons();
+        if (mTimerRunning) {
+            mEndTime = prefs.getLong("endTime", 0);
+            mTimeLeftInMillis = mEndTime - System.currentTimeMillis();
+            if (mTimeLeftInMillis < 0) {
+                mTimeLeftInMillis = 0;
+                mTimerRunning = false;
+                updateCountDownText();
+                updateButtons();
+            } else {
+                startTimer();
+            }
+        }
+    }
+
+
     private void startTimer() {
+        mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -109,6 +160,8 @@ public class TimeoutActivity extends AppCompatActivity {
                 mTimerRunning = false;
                 mButtonStartPause.setText("Start");
                 resetTimer();
+
+
                // mButtonStartPause.setVisibility(View.INVISIBLE);
                // mButtonReset.setVisibility(View.VISIBLE);
             }
@@ -150,6 +203,29 @@ public class TimeoutActivity extends AppCompatActivity {
 
     }
 
+    private void updateButtons() {
+        if (mTimerRunning) {
+            //mButtonReset.setVisibility(View.INVISIBLE);
+            mButtonStartPause.setText("Pause");
+        } else {
+            mButtonStartPause.setText("Start");
+            /*
+            if (mTimeLeftInMillis < 1000) {
+                mButtonStartPause.setVisibility(View.INVISIBLE);
+            } else {
+                mButtonStartPause.setVisibility(View.VISIBLE);
+
+
+            }
+            if (mTimeLeftInMillis < START_TIME_IN_MILLIS) {
+                mButtonReset.setVisibility(View.VISIBLE);
+            } else {
+                mButtonReset.setVisibility(View.INVISIBLE);
+            }
+             */
+        }
+    }
+
 
     private void createtimedurationspinner() {
         Spinner timefieldspinner= (Spinner) findViewById(R.id.timespinner);
@@ -164,7 +240,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 {
                     if(mTimerRunning==true)
                     {
-                        Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         mTimeLeftInMillis = 60000;
