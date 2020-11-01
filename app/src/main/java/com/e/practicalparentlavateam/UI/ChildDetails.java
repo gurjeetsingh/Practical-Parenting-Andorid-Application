@@ -8,10 +8,13 @@ import com.e.practicalparentlavateam.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import com.e.practicalparentlavateam.Model.Child;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class ChildDetails extends AppCompatActivity {
@@ -28,7 +31,42 @@ public class ChildDetails extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        etName = findViewById(R.id.)
+        etName = findViewById(R.id.etName);
 
+        setupButtonCancel();
+        setupButtonOk();
+
+    }
+
+    private void setupButtonCancel() {
+        Button btn = findViewById(R.id.btnCancel);
+        btn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ChildDetails.this.finish();
+                    }
+                }
+        );
+    }
+
+    private void setupButtonOk() {
+        Button btn = findViewById(R.id.btnSave);
+        btn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Extract data from screen
+                        String Name = etName.getText().toString();
+
+
+                        // Create new data object
+                        Child child = new Lens(make, aperture, focLen);
+                        LensManager lenses = LensManager.getInstance();
+                        lenses.add(lens);
+                        ChildDetails.this.finish();
+                    }
+                }
+        );
     }
 }
