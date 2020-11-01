@@ -19,7 +19,7 @@
         app:layout_constraintTop_toBottomOf="@+id/configureToolbar" />
 
     <ListView
-        android:id="@+id/lensListView"
+        android:id="@+id/childListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lensListView"
+        app:layout_constraintTop_toBottomOf="@+id/childListView"
         app:layout_constraintVertical_bias="0.6"
         app:srcCompat="@drawable/ic_add_black_24dp" />
 
