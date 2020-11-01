@@ -1,4 +1,4 @@
-package com.e.practicalparentlavateam.UI.model;
+package com.e.practicalparentlavateam.Model;
 
 public class HistoryItem {
     private String time;

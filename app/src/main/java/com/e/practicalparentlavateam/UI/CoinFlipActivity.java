@@ -12,27 +12,22 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaParser;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.e.practicalparentlavateam.R;
-import com.e.practicalparentlavateam.UI.model.HistoryItem;
-import com.e.practicalparentlavateam.UI.model.HistoryManager;
+import com.e.practicalparentlavateam.Model.HistoryItem;
+import com.e.practicalparentlavateam.Model.HistoryManager;
 import com.google.gson.Gson;
 
 import java.util.Date;
-import java.util.Random;
-
 import java.util.Random;
 
 public class CoinFlipActivity extends AppCompatActivity {

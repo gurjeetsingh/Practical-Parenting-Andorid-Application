@@ -2,9 +2,7 @@
 
 package com.e.practicalparentlavateam.UI;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,8 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.e.practicalparentlavateam.R;
-import com.e.practicalparentlavateam.UI.model.HistoryItem;
-import com.e.practicalparentlavateam.UI.model.HistoryManager;
+import com.e.practicalparentlavateam.Model.HistoryItem;
+import com.e.practicalparentlavateam.Model.HistoryManager;
 
 public class FlippingHistory extends AppCompatActivity {
     private HistoryManager manager;

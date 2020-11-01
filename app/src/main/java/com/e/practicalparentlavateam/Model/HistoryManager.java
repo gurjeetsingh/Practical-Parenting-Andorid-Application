@@ -1,4 +1,4 @@
-package com.e.practicalparentlavateam.UI.model;
+package com.e.practicalparentlavateam.Model;
 
 import java.util.ArrayList;
 import java.util.List;
