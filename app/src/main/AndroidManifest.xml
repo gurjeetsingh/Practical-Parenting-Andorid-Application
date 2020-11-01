@@ -12,15 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.MainMenu"></activity>
-        <activity android:name=".UI.TimeoutActivity"
-            android:parentActivityName=".UI.MainMenu"/>
-        <activity android:name=".UI.ConfigureChildren"
-            android:parentActivityName=".UI.MainMenu"/>
-        <activity android:name=".UI.CoinFlipActivity"
-            android:parentActivityName=".UI.MainMenu"/>
-        <activity android:name=".UI.FlippingHistory"
-            android:parentActivityName=".UI.CoinFlipActivity"></activity>
+        <activity
+            android:name=".UI.ChildDetails"
+            android:label="@string/title_activity_child_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".UI.MainMenu" />
+        <activity
+            android:name=".UI.TimeoutActivity"
+            android:parentActivityName=".UI.MainMenu" />
+        <activity
+            android:name=".UI.ConfigureChildren"
+            android:parentActivityName=".UI.MainMenu" />
+        <activity
+            android:name=".UI.CoinFlipActivity"
+            android:parentActivityName=".UI.MainMenu" />
+        <activity
+            android:name=".UI.FlippingHistory"
+            android:parentActivityName=".UI.CoinFlipActivity" />
         <activity android:name=".UI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".Model.CounterService" />
     </application>
 
