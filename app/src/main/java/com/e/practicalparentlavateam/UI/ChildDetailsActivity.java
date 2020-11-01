@@ -7,6 +7,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.e.practicalparentlavateam.R;
+
 public class ChildDetailsActivity {
     private EditText etName;
 
