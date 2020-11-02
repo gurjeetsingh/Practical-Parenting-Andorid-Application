@@ -4,32 +4,19 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.FragmentManager;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Icon;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.os.Binder;
 import android.os.Bundle;
 import android.view.Menu;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,21 +24,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.e.practicalparentlavateam.Model.AudioPlay;
+import com.e.practicalparentlavateam.Model.AudioController;
 import com.e.practicalparentlavateam.Model.CounterService;
 import com.e.practicalparentlavateam.R;
 
 import java.util.Locale;
 
-import static android.app.Notification.EXTRA_NOTIFICATION_ID;
-
 public class TimeoutActivity extends AppCompatActivity {
 
 
-    private TextView mTextViewCountDown;
     private Button startButton;
     private Button pauseButton;
     private Button resetbutton;
@@ -82,29 +65,22 @@ public class TimeoutActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.timeoutToolbar);
         setSupportActionBar(toolbar);
 
-
-
-
-
-
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         createtimedurationspinner();
 
+
         timerValue = (TextView) findViewById(R.id.timertext);
         timerValue.setBackgroundResource(R.color.stopg);
-
-
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null)
             {
-                //Cry about not being clicked on
             }
-            else if (extras.getBoolean("NotiClick"))
+            else if (extras.getBoolean("StopAlarm"))
             {
-                AudioPlay.stopAudio();
+                AudioController.stopAudio();
                 finish();
             }
 
@@ -189,7 +165,7 @@ public class TimeoutActivity extends AppCompatActivity {
         alrmoffbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AudioPlay.stopAudio();
+                AudioController.stopAudio();
             }
         });
 
@@ -343,14 +319,19 @@ public class TimeoutActivity extends AppCompatActivity {
         return timeoutintent;
     }
 
+
+    /*
+    The following method implements our notification, which takes sends an intent to the TimeoutActivity
+    and calls the AudioManager class to stop audio.
+     */
     public void notif()
     {
         Intent intent = new Intent(this, TimeoutActivity.class);
-        intent.putExtra("NotiClick",true);
+        intent.putExtra("StopAlarm",true);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification Noti;
-        Noti = new Notification.Builder(this)
+        Notification AlarmNotify;
+        AlarmNotify = new Notification.Builder(this)
                 .setContentTitle("TIME'S UP!")
                 .setContentText("Please Click Box To Turn Off Alarm.")
                 .setSmallIcon(R.mipmap.ic_launcher_round)
@@ -363,7 +344,7 @@ public class TimeoutActivity extends AppCompatActivity {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0, Noti);
+        notificationManager.notify(0, AlarmNotify);
     }
 
     }
