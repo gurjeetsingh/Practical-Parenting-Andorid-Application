@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ChildrenManager implements Iterable<Child>{
+
+
     private List<Child> children = new ArrayList<>();
 
     private static ChildrenManager instance;
@@ -37,6 +39,9 @@ public class ChildrenManager implements Iterable<Child>{
         return children.size();
     }
 
+    public void setChildren(List<Child> children) {
+        this.children = children;
+    }
 
     @Override
     public Iterator<Child> iterator() {

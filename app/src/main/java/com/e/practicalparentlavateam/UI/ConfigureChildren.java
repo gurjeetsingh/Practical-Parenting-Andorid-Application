@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.e.practicalparentlavateam.R;
 import com.e.practicalparentlavateam.Model.Child;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 public class ConfigureChildren extends AppCompatActivity {
     // Arbitrary numbers for startActivityForResult:
@@ -42,10 +44,10 @@ public class ConfigureChildren extends AppCompatActivity {
         children = ChildrenManager.getInstance();
 
         setupFloatingActionButton();
-        setupLensView();
+        setupChildrenView();
     }
 
-    private void setupLensView() {
+    private void setupChildrenView() {
         // SOURCE: https://developer.android.com/guide/topics/ui/layout/recyclerview
         ListView rv = findViewById(R.id.childListView);
 
@@ -105,6 +107,14 @@ public class ConfigureChildren extends AppCompatActivity {
                 ConfigureChildren.this.startActivityForResult(i, ACTIVITY_RESULT_ADD);
             }
         });
+    }
+
+    public  getChildList(){
+        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString(key, null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        return gson.fromJson(json, type);
     }
 }
 
