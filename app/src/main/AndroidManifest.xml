@@ -15,7 +15,7 @@
         <activity
             android:name=".UI.ChildDetails"
             android:label="@string/title_activity_child_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            ></activity>
         <activity android:name=".UI.MainMenu" />
         <activity
             android:name=".UI.TimeoutActivity"
