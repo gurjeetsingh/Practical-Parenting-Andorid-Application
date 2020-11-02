@@ -28,7 +28,7 @@ public class CounterService  extends Service {
     public void onCreate() {
         super.onCreate();
         handler.removeCallbacks(sendUpdatesToUI);
-        handler.postDelayed(sendUpdatesToUI, 1000); // 1 second
+        handler.postDelayed(sendUpdatesToUI, 0); // 1 second
 
     }
 

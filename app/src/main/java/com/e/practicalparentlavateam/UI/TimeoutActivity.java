@@ -45,8 +45,9 @@ public class TimeoutActivity extends AppCompatActivity {
 
 
     private TextView mTextViewCountDown;
-    private Button mButtonStartPause;
-    private Button mButtonReset;
+    private Button startButton;
+    private Button pauseButton;
+    private Button resetbutton;
     private Button custombtn;
     private Button alrmoffbtn;
     private long START_TIME_IN_MILLIS = 10000;
@@ -60,8 +61,6 @@ public class TimeoutActivity extends AppCompatActivity {
     String[] timepiece = new String[]{"Select Duration", "Set Time: 1 Minute", "Set Time: 2 Minutes","Set Time: 3 Minutes","Set Time: 5 Minutes","Set Time: 10 Minutes"};
 
 
-    private Button startButton;
-    private Button pauseButton;
 
 
     private TextView timerValue;
@@ -79,8 +78,20 @@ public class TimeoutActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         createtimedurationspinner();
+
         timerValue = (TextView) findViewById(R.id.timertext);
         timerValue.setBackgroundResource(R.color.stopg);
+
+
+        if(istimerrunning==false)
+        {
+            int mins = (int) (selectedtime/ (double)1000) / 60;
+            int secs = (int) (selectedtime/ (double) 1000) % 60;
+            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
+            timerValue.setText(timeLeftFormatted);
+        }
+
+
         startButton = (Button) findViewById(R.id.timepushbtn);
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -103,6 +114,7 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onClick(View view) {
                     int time = pauseintent.getIntExtra("time", 0);
                     mTimeLeftInMillis = time;
+                    istimerrunning=false;
                 //System.out.println("Time left for pause"+mTimeLeftInMillis);
                     Intent serviceintent = new Intent(TimeoutActivity.this, CounterService.class);
                     stopService(serviceintent);
@@ -142,11 +154,26 @@ public class TimeoutActivity extends AppCompatActivity {
         });
 
         alrmoffbtn=(Button) findViewById(R.id.alarmoff);
-
         alrmoffbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AudioPlay.stopAudio();
+            }
+        });
+
+        resetbutton=(Button) findViewById(R.id.resetbtn);
+        resetbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent serviceintent = new Intent(TimeoutActivity.this, CounterService.class);
+                stopService(serviceintent);
+                mTimeLeftInMillis = selectedtime;
+                istimerrunning=false;
+                int mins = (int) (mTimeLeftInMillis/ (double)1000) / 60;
+                int secs = (int) (mTimeLeftInMillis / (double) 1000) % 60;
+
+                String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
+                timerValue.setText(timeLeftFormatted);
             }
         });
 
@@ -228,6 +255,10 @@ public class TimeoutActivity extends AppCompatActivity {
         int time = intent.getIntExtra("time", 0);
         int mins = (int) (time/ (double)1000) / 60;
         int secs = (int) (time / (double) 1000) % 60;
+        if(time==0||time<0)
+        {
+            istimerrunning=false;
+        }
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
         timerValue.setText(timeLeftFormatted);
