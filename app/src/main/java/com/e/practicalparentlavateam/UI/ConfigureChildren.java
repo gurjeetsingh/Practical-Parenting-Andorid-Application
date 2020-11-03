@@ -20,6 +20,11 @@ import com.e.practicalparentlavateam.Model.Child;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfigureChildren extends AppCompatActivity {
     // Arbitrary numbers for startActivityForResult:
@@ -40,8 +45,9 @@ public class ConfigureChildren extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
+        getChildList();
         children = ChildrenManager.getInstance();
+
 
         setupFloatingActionButton();
         setupChildrenView();
@@ -109,12 +115,13 @@ public class ConfigureChildren extends AppCompatActivity {
         });
     }
 
-    public  getChildList(){
+    public void  getChildList(){
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = prefs.getString(key, null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        return gson.fromJson(json, type);
+        String json = prefs.getString("childPrefs", null);
+        Type type = new TypeToken<ArrayList<Child>>() {}.getType();
+        children = ChildrenManager.getInstance();
+        children = gson.fromJson(json, type);
     }
 }
 
