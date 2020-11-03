@@ -10,7 +10,7 @@ import com.e.practicalparentlavateam.R;
 This is the underlying service which allows the timer to run in the background
 even if the app is turned off, or if user navigates to different activities.
  */
-public class CounterService  extends Service {
+public class TimeService extends Service {
 
     private Intent comintent;
     private Intent mainintent;
