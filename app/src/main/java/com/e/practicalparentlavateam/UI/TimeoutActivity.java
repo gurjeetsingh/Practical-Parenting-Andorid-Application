@@ -273,6 +273,7 @@ public class TimeoutActivity extends AppCompatActivity {
         //startService(serviceIntent);
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -284,7 +285,10 @@ public class TimeoutActivity extends AppCompatActivity {
         super.onPause();
     }
 
-
+    /*
+    The broadcast reciever, whenever it recieves information from the service,which is the
+    time remaining in milliseconds, it immediately updates the UI.
+     */
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -293,6 +297,11 @@ public class TimeoutActivity extends AppCompatActivity {
         }
     };
 
+    /*
+    This updates the UI whenever user is viewing the activity. It gets the information
+    from the counterservice. When the time goes to 0 or below 0, a notification is sent
+    to the phone immediately.
+     */
     private void updateUI(Intent intent) {
         int time = intent.getIntExtra("time", 0);
         int mins = (int) (time / (double) 1000) / 60;
@@ -314,6 +323,9 @@ public class TimeoutActivity extends AppCompatActivity {
     }
 
 
+    /*
+    For making the intent
+     */
     public static Intent makeIntent(Context context) {
         Intent timeoutintent = new Intent(context, TimeoutActivity.class);
         return timeoutintent;
@@ -322,7 +334,7 @@ public class TimeoutActivity extends AppCompatActivity {
 
     /*
     The following method implements our notification, which takes sends an intent to the TimeoutActivity
-    and calls the AudioManager class to stop audio.
+    and calls the AudioManager class to stop audio, once the notification box is clicked.
      */
     public void notif()
     {
