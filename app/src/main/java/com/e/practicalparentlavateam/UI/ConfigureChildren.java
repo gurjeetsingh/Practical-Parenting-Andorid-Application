@@ -122,7 +122,8 @@ public class ConfigureChildren extends AppCompatActivity {
         Type type = new TypeToken<List<String>>() {}.getType();
         children = ChildrenManager.getInstance();
         List<String> tempList = gson.fromJson(json, type);
-        children.setChildren(tempList);
+        if(tempList != null)
+            children.setChildren(tempList);
     }
 }
 
