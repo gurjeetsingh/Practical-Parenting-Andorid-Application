@@ -67,7 +67,9 @@ public class EditChild extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        children = ChildrenManager.getInstance();
                         children.remove(childEditingIndex);
+                        saveChildDetails();
                         EditChild.this.finish();
                     }
                 }
