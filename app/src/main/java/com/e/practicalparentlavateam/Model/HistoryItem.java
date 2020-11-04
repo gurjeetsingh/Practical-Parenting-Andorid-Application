@@ -3,6 +3,7 @@ package com.e.practicalparentlavateam.Model;
 public class HistoryItem {
     private String time;
     private String choise;
+    private String name;
     private int id;
 
     public void setTime(String t){ time = t;}

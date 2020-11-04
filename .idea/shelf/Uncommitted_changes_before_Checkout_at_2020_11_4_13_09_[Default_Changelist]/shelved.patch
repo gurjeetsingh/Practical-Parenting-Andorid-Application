@@ -1,0 +1,268 @@
+Index: app/src/main/java/com/e/practicalparentlavateam/UI/CoinFlipActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*This is the activity for flipping coin, and it include Flipping history*/\r\n\r\npackage com.e.practicalparentlavateam.UI;\r\n\r\nimport androidx.appcompat.app.ActionBar;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.Toolbar;\r\n\r\nimport android.animation.Animator;\r\nimport android.animation.AnimatorListenerAdapter;\r\nimport android.animation.ObjectAnimator;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.content.SharedPreferences;\r\nimport android.media.MediaPlayer;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.TextView;\r\nimport android.view.animation.AccelerateDecelerateInterpolator;\r\nimport android.view.animation.DecelerateInterpolator;\r\nimport android.widget.ImageView;\r\nimport android.widget.Toast;\r\n\r\nimport com.e.practicalparentlavateam.R;\r\nimport com.e.practicalparentlavateam.Model.HistoryItem;\r\nimport com.e.practicalparentlavateam.Model.HistoryManager;\r\nimport com.google.gson.Gson;\r\n\r\nimport java.util.Date;\r\nimport java.util.Random;\r\n\r\npublic class CoinFlipActivity extends AppCompatActivity {\r\n    private HistoryManager manager;\r\n    private String choise;\r\n    private int win = R.drawable.win;\r\n    private int lose = R.drawable.lose;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_coin_flip);\r\n\r\n        Toolbar toolbar = (Toolbar) findViewById(R.id.flipCoinToolbar);\r\n        setSupportActionBar(toolbar);\r\n\r\n        ActionBar ab = getSupportActionBar();\r\n        ab.setDisplayHomeAsUpEnabled(true);\r\n\r\n        getHistory();\r\n        history();\r\n        head();\r\n        tails();\r\n        flipCoin();\r\n        deleteHistory();\r\n    }\r\n\r\n    private void deleteHistory() {\r\n        Button delete = (Button) findViewById(R.id.delethistory);\r\n        delete.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                manager = new HistoryManager();\r\n                HistoryManager.setInstance(new HistoryManager());\r\n                Save(manager);\r\n                Toast.makeText(CoinFlipActivity.this,\"You Delete Flipping History!\",Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n    }\r\n\r\n    private void tails() {\r\n        Button tails = (Button) findViewById(R.id.tails);\r\n        tails.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                choise = \"Tails\";\r\n                TextView showChoise = (TextView) findViewById(R.id.choise);\r\n                showChoise.setText(choise);\r\n            }\r\n        });\r\n    }\r\n\r\n    private void head() {\r\n        Button head = (Button) findViewById(R.id.head);\r\n        head.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                choise = \"Head\";\r\n                TextView showChoise = (TextView) findViewById(R.id.choise);\r\n                showChoise.setText(choise);\r\n            }\r\n        });\r\n    }\r\n\r\n    private void flipCoin() {\r\n        //https://stackoverflow.com/questions/46111262/card-flip-animation-in-android\r\n        final Random random = new Random();\r\n        final ImageView image1 = (ImageView) findViewById(R.id.front);\r\n        Button button = (Button) findViewById(R.id.button);\r\n        button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                MediaPlayer sound = MediaPlayer.create(CoinFlipActivity.this, R.raw.coin);\r\n                sound.start();\r\n                final ObjectAnimator front = ObjectAnimator.ofFloat(image1, \"scaleX\", 1f, 0f);\r\n                final ObjectAnimator back = ObjectAnimator.ofFloat(image1, \"scaleX\", 0f, 1f);\r\n                front.setInterpolator(new DecelerateInterpolator());\r\n                back.setInterpolator(new AccelerateDecelerateInterpolator());\r\n                final int num = random.nextInt(2);\r\n                front.addListener(new AnimatorListenerAdapter() {\r\n                    @Override\r\n                    public void onAnimationEnd(Animator animation) {\r\n                        super.onAnimationEnd(animation);\r\n                        if(num == 1){\r\n                            //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023\r\n                            image1.setImageResource(R.drawable.coin_front);\r\n                        }\r\n                        else{\r\n                            image1.setImageResource(R.drawable.coin_back);\r\n                        }\r\n                        back.start();\r\n                    }\r\n                });\r\n                front.start();\r\n                int c = 2;\r\n                if(choise == null)\r\n                    return;\r\n                else if(choise.equals(\"Tails\"))\r\n                    c = 0;\r\n                else if(choise.equals(\"Head\"))\r\n                    c = 1;\r\n                int image;\r\n                if(c == num) {\r\n                    image = win;\r\n                    Date currentTime = new Date();\r\n                    manager.add(new HistoryItem(currentTime.toString(), choise, image));\r\n                    HistoryManager.setInstance(manager);\r\n                    Save(manager);\r\n                }\r\n                else {\r\n                    image = lose;\r\n                    Date currentTime = new Date();\r\n                    manager.add(new HistoryItem(currentTime.toString(), choise, image));\r\n                    HistoryManager.setInstance(manager);\r\n                    Save(manager);\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    private HistoryManager getData(){\r\n        SharedPreferences sp = getSharedPreferences(\"Save history\",MODE_PRIVATE);\r\n        Gson g = new Gson();\r\n        String temp = sp.getString(\"history\",null);\r\n        return g.fromJson(temp,HistoryManager.class);\r\n    }\r\n\r\n    private void getHistory() {\r\n        HistoryManager.setInstance(getData());\r\n        manager = HistoryManager.getInstance();\r\n    }\r\n\r\n    private void Save(HistoryManager m){\r\n        SharedPreferences sp = getSharedPreferences(\"Save history\",MODE_PRIVATE);\r\n        SharedPreferences.Editor edit = sp.edit();\r\n        Gson g = new Gson();\r\n        String temp = g.toJson(m);\r\n        edit.putString(\"history\",temp);\r\n        edit.apply();\r\n    }\r\n\r\n    private void history() {\r\n        Button his = (Button) findViewById(R.id.history);\r\n        his.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = FlippingHistory.makeLaunch(CoinFlipActivity.this);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n    }\r\n    public static Intent makeIntent(Context context) {\r\n        return new Intent(context, CoinFlipActivity.class);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/e/practicalparentlavateam/UI/CoinFlipActivity.java	(revision c0dc564f720e389f4f021427da50304d077a2f12)
++++ app/src/main/java/com/e/practicalparentlavateam/UI/CoinFlipActivity.java	(date 1604524125751)
+@@ -31,6 +31,8 @@
+ import java.util.Random;
+ 
+ public class CoinFlipActivity extends AppCompatActivity {
++    private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
++
+     private HistoryManager manager;
+     private String choise;
+     private int win = R.drawable.win;
+@@ -47,6 +49,7 @@
+         ActionBar ab = getSupportActionBar();
+         ab.setDisplayHomeAsUpEnabled(true);
+ 
++        chooseChild();
+         getHistory();
+         history();
+         head();
+@@ -55,6 +58,17 @@
+         deleteHistory();
+     }
+ 
++    private void chooseChild() {
++        TextView text = (TextView) findViewById(R.id.name);
++        text.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                Intent intent = Choose_children.makeIntent2(CoinFlipActivity.this);
++                startActivity(intent);
++            }
++        });
++    }
++
+     private void deleteHistory() {
+         Button delete = (Button) findViewById(R.id.delethistory);
+         delete.setOnClickListener(new View.OnClickListener() {
+@@ -179,7 +193,9 @@
+             }
+         });
+     }
+-    public static Intent makeIntent(Context context) {
+-        return new Intent(context, CoinFlipActivity.class);
++    public static Intent makeIntent(Context context, String name) {
++        Intent intent = new Intent(context, CoinFlipActivity.class);
++        intent.putExtra(EXTRA_NAME, name);
++        return intent;
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/children_view_for_list.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:textSize=\"24sp\"\r\n    tools:text=\"Just Testing\">\r\n\r\n</TextView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/children_view_for_list.xml	(revision c0dc564f720e389f4f021427da50304d077a2f12)
++++ app/src/main/res/layout/children_view_for_list.xml	(date 1604523443470)
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/childList"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:textSize="24sp"
+Index: app/src/main/res/layout/activity_coin_flip.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@drawable/child\"\r\n    tools:context=\".UI.CoinFlipActivity\">\r\n\r\n    <Button\r\n        android:id=\"@+id/history\"\r\n        style=\"@style/Widget.AppCompat.Button.Borderless\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginBottom=\"24dp\"\r\n        android:text=\"@string/history\"\r\n        android:textColor=\"#00ACC1\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/head\"\r\n        style=\"@style/Widget.AppCompat.Button.Borderless\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginTop=\"92dp\"\r\n        android:text=\"@string/head\"\r\n        android:textColor=\"#00ACC1\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/tails\"\r\n        style=\"@style/Widget.AppCompat.Button.Borderless\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"92dp\"\r\n        android:layout_marginEnd=\"68dp\"\r\n        android:text=\"@string/tails\"\r\n        android:textColor=\"#00ACC1\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/choise\"\r\n        android:layout_width=\"180dp\"\r\n        android:layout_height=\"34dp\"\r\n        android:layout_marginStart=\"112dp\"\r\n        android:layout_marginTop=\"164dp\"\r\n        android:gravity=\"center\"\r\n        android:text=\"Head or Tails\"\r\n        android:textColor=\"#090909\"\r\n        android:textSize=\"18sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/front\"\r\n        android:layout_width=\"172dp\"\r\n        android:layout_height=\"175dp\"\r\n        android:layout_marginTop=\"336dp\"\r\n        android:alpha=\"1.0\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.502\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/coin_front\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"164dp\"\r\n        android:layout_marginBottom=\"72dp\"\r\n        android:text=\"@string/flip\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <androidx.appcompat.widget.Toolbar\r\n        android:id=\"@+id/flipCoinToolbar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:background=\"@color/colorPrimary\"\r\n        android:minHeight=\"?attr/actionBarSize\"\r\n        android:theme=\"?attr/actionBarTheme\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n    <Button\r\n        android:id=\"@+id/delethistory\"\r\n        style=\"@style/Widget.AppCompat.Button.Borderless\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginEnd=\"36dp\"\r\n        android:layout_marginBottom=\"24dp\"\r\n        android:text=\"@string/deletehistory\"\r\n        android:textColor=\"#00ACC1\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_coin_flip.xml	(revision c0dc564f720e389f4f021427da50304d077a2f12)
++++ app/src/main/res/layout/activity_coin_flip.xml	(date 1604516363061)
+@@ -101,4 +101,17 @@
+         android:textColor="#00ACC1"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
++
++    <TextView
++        android:id="@+id/name"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="28dp"
++        android:text="Who's turn"
++        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
++        android:textColor="#000000"
++        android:clickable="true"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/choise" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/e/practicalparentlavateam/UI/Choose_children.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/e/practicalparentlavateam/UI/Choose_children.java	(date 1604524125877)
++++ app/src/main/java/com/e/practicalparentlavateam/UI/Choose_children.java	(date 1604524125877)
+@@ -0,0 +1,96 @@
++package com.e.practicalparentlavateam.UI;
++
++import androidx.appcompat.app.ActionBar;
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.appcompat.widget.Toolbar;
++
++import android.content.Context;
++import android.content.Intent;
++import android.content.SharedPreferences;
++import android.os.Bundle;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.AdapterView;
++import android.widget.ArrayAdapter;
++import android.widget.BaseAdapter;
++import android.widget.ListView;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import com.e.practicalparentlavateam.Model.ChildrenManager;
++import com.e.practicalparentlavateam.R;
++import com.google.gson.Gson;
++import com.google.gson.reflect.TypeToken;
++
++import java.lang.reflect.Type;
++import java.util.ArrayList;
++import java.util.List;
++
++public class Choose_children extends AppCompatActivity {
++    private ChildrenManager children;
++    private ArrayAdapter<String> adapter;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_choose_children);
++
++        Toolbar toolbar = (Toolbar) findViewById(R.id.choose_child);
++        setSupportActionBar(toolbar);
++
++        ActionBar ab = getSupportActionBar();
++        ab.setDisplayHomeAsUpEnabled(true);
++
++        //setupChildrenView();
++        populateListView();
++    }
++
++    private void populateListView() {
++        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
++        Gson gson = new Gson();
++        String json = prefs.getString("childPrefs", null);
++        Type type = new TypeToken<List<String>>() {}.getType();
++        children = ChildrenManager.getInstance();
++        List<String> tempList = gson.fromJson(json, type);
++        if(tempList != null)
++            children.setChildren(tempList);
++        adapter = new MyListAdapter();
++        ListView list = (ListView) findViewById(R.id.listOfChildren);
++        list.setAdapter(adapter);
++    }
++
++    private class MyListAdapter extends ArrayAdapter<String> {
++        public MyListAdapter(){
++            super(Choose_children.this, R.layout.children_view_for_list, children.getChildren());
++        }
++        @Override
++        public View getView(int position, View convertView, ViewGroup parent){
++            View itemView = convertView;
++            if(itemView == null){
++                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
++            }
++
++            String currentChild = children.getChildren().get(position);
++            TextView makeView = (TextView)itemView.findViewById(R.id.childList);
++            return itemView;
++        }
++    }
++
++    private void registClickCallback(){
++        ListView list = (ListView) findViewById(R.id.listOfChildren);
++        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
++            @Override
++            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
++                String clickedName = children.getChildren().get(position);
++
++                Intent intent = CoinFlipActivity.makeIntent(Choose_children.this, clickedName);
++                startActivity(intent);
++            }
++        });
++    }
++
++    public static Intent makeIntent2(Context context){
++        Intent intent = new Intent(context,Choose_children.class);
++        return intent;
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_choose_children.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_choose_children.xml	(date 1604517287401)
++++ app/src/main/res/layout/activity_choose_children.xml	(date 1604517287401)
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="@drawable/child"
++    tools:context=".UI.Choose_children">
++
++    <ListView
++        android:id="@+id/listOfChildren"
++        android:layout_width="387dp"
++        android:layout_height="556dp"
++        android:layout_marginTop="84dp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <androidx.appcompat.widget.Toolbar
++        android:id="@+id/choose_child"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:background="?attr/colorPrimary"
++        android:minHeight="?attr/actionBarSize"
++        android:theme="?attr/actionBarTheme"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"com.e.practicalparentlavateam\">\r\n\r\n    <uses-permission android:name=\"android.permission.VIBRATE\" />\r\n    <uses-permission android:name=\"android.permission.VIBRATE\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\">\r\n        <activity\r\n            android:name=\".UI.ChildDetails\"\r\n            android:label=\"@string/title_activity_child_details\"\r\n            ></activity>\r\n        <activity android:name=\".UI.MainMenu\" />\r\n        <activity\r\n            android:name=\".UI.TimeoutActivity\"\r\n            android:parentActivityName=\".UI.MainMenu\" />\r\n        <activity\r\n            android:name=\".UI.ConfigureChildren\"\r\n            android:parentActivityName=\".UI.MainMenu\" />\r\n        <activity\r\n            android:name=\".UI.CoinFlipActivity\"\r\n            android:parentActivityName=\".UI.MainMenu\" />\r\n        <activity\r\n            android:name=\".UI.FlippingHistory\"\r\n            android:parentActivityName=\".UI.CoinFlipActivity\" />\r\n        <activity android:name=\".UI.MainActivity\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n        <service android:name=\".Model.CounterService\" />\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision c0dc564f720e389f4f021427da50304d077a2f12)
++++ app/src/main/AndroidManifest.xml	(date 1604517287349)
+@@ -12,10 +12,11 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
++        <activity android:name=".UI.Choose_children"
++            android:parentActivityName=".UI.CoinFlipActivity"></activity>
+         <activity
+             android:name=".UI.ChildDetails"
+-            android:label="@string/title_activity_child_details"
+-            ></activity>
++            android:label="@string/title_activity_child_details" />
+         <activity android:name=".UI.MainMenu" />
+         <activity
+             android:name=".UI.TimeoutActivity"

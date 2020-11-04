@@ -31,6 +31,9 @@ import java.util.Date;
 import java.util.Random;
 
 public class CoinFlipActivity extends AppCompatActivity {
+    private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
+
+    private String name = "";
     private HistoryManager manager;
     private String choise;
     private int win = R.drawable.win;
@@ -47,12 +50,25 @@ public class CoinFlipActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+        chooseChild();
         getHistory();
         history();
         head();
         tails();
         flipCoin();
+        getName();
         deleteHistory();
+    }
+
+    private void chooseChild() {
+        TextView text = (TextView) findViewById(R.id.name);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = Choose_children.makeIntent2(CoinFlipActivity.this);
+                startActivity(intent);
+            }
+        });
     }
 
     private void deleteHistory() {
@@ -179,7 +195,22 @@ public class CoinFlipActivity extends AppCompatActivity {
             }
         });
     }
-    public static Intent makeIntent(Context context) {
+
+    private void getName() {
+        Intent i = getIntent();
+        name = i.getStringExtra(EXTRA_NAME);
+        TextView text = (TextView) findViewById(R.id.name);
+        if(name != null)
+            text.setText(name);
+    }
+
+    public static Intent makeIntent2(Context context, String name) {
+        Intent intent = new Intent(context, CoinFlipActivity.class);
+        intent.putExtra(EXTRA_NAME, name);
+        return intent;
+    }
+
+    public static Intent makeIntent(Context context){
         return new Intent(context, CoinFlipActivity.class);
     }
 }
