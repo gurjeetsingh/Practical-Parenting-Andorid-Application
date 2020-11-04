@@ -34,6 +34,10 @@ public class ChildrenManager {
         return children.get(i);
     }
 
+    public void set (int i, String name) {
+        children.set(i, name);
+    }
+
     public int getNumChildren() {
         return children.size();
     }

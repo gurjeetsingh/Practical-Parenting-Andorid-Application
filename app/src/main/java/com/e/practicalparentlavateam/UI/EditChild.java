@@ -54,7 +54,7 @@ public class EditChild extends AppCompatActivity {
         //etName2.setHint(children.get(childEditingIndex));
 
         setupButtonDelete();
-        //setupButtonOk();
+        setupButtonOk();
 
 
     }
@@ -67,6 +67,26 @@ public class EditChild extends AppCompatActivity {
                     public void onClick(View view) {
                         children.remove(childEditingIndex);
                         EditChild.this.finish();
+                    }
+                }
+        );
+    }
+
+    private void setupButtonOk() {
+        Button btn = findViewById(R.id.btnSaveEdit);
+        btn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Extract data from screen
+                        String name = etName2.getText().toString();
+
+
+                        // Create new data object
+                        children = ChildrenManager.getInstance();
+                        children.add(name);
+                        saveChildDetails();
+                        finish();
                     }
                 }
         );
