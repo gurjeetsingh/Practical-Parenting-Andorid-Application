@@ -32,6 +32,7 @@ public class ChildDetails extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        children = ChildrenManager.getInstance();
         etName = findViewById(R.id.etName);
 
         setupButtonCancel();
@@ -62,9 +63,8 @@ public class ChildDetails extends AppCompatActivity {
 
 
                         // Create new data object
-                        Child child = new Child(name);
                         children = ChildrenManager.getInstance();
-                        children.add(child);
+                        children.add(name);
                         saveChildDetails();
                         ChildDetails.this.finish();
                     }
@@ -90,9 +90,9 @@ public class ChildDetails extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(children);
+        String json = gson.toJson(children.getChildren());
         editor.putString("childPrefs", json);
         System.out.println(json);
-        editor.apply();     // This line is IMPORTANT !!!
+        editor.commit();     // This line is IMPORTANT !!!
     }
 }

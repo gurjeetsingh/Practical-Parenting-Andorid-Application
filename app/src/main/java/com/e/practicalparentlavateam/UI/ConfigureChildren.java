@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigureChildren extends AppCompatActivity {
@@ -43,8 +44,9 @@ public class ConfigureChildren extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-        getChildList();
         children = ChildrenManager.getInstance();
+        getChildList();
+
 
 
         setupFloatingActionButton();
@@ -63,7 +65,7 @@ public class ConfigureChildren extends AppCompatActivity {
             }
 
             @Override
-            public Child getItem(int position) {
+            public String getItem(int position) {
                 return children.get(position);
             }
 
@@ -78,7 +80,7 @@ public class ConfigureChildren extends AppCompatActivity {
                     convertView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
                 }
 
-                String name = getItem(position).getName();
+                String name = getItem(position);
                 ((TextView) convertView)
                         .setText(name);
                 return convertView;
@@ -117,9 +119,10 @@ public class ConfigureChildren extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
-        Type type = new TypeToken<List<Child>>() {}.getType();
+        Type type = new TypeToken<List<String>>() {}.getType();
         children = ChildrenManager.getInstance();
-        children = gson.fromJson(json, type);
+        List<String> tempList = gson.fromJson(json, type);
+        children.setChildren(tempList);
     }
 }
 

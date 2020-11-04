@@ -6,7 +6,6 @@ import java.util.List;
 
 public class ChildrenManager {
 
-
     private List<String> children = new ArrayList<>();
 
     private static ChildrenManager instance;
@@ -37,6 +36,10 @@ public class ChildrenManager {
 
     public int getNumChildren() {
         return children.size();
+    }
+
+    public List<String> getChildren() {
+        return children;
     }
 
     public void setChildren(List<String> children) {
