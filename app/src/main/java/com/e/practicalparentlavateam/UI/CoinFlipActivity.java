@@ -84,9 +84,11 @@ public class CoinFlipActivity extends AppCompatActivity {
             for(int i=0; i<childList.size(); i++){
                 if(childList.get(i).equals(LastTimeName)){
                     int num = (i+1)%childList.size();
-                    name = childList.get(num);
-                    TextView text = (TextView) findViewById(R.id.name);
-                    text.setText(name);
+                    if(name == null) {
+                        name = childList.get(num);
+                        TextView text = (TextView) findViewById(R.id.name);
+                        text.setText(name);
+                    }
                     break;
                 }
             }
