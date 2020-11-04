@@ -13,9 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".EditChild"
+            android:label="@string/title_activity_edit_child"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".UI.ChildDetails"
-            android:label="@string/title_activity_child_details"
-            ></activity>
+            android:label="@string/title_activity_child_details" />
         <activity android:name=".UI.MainMenu" />
         <activity
             android:name=".UI.TimeoutActivity"

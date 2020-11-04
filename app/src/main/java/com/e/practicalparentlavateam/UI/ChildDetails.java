@@ -66,7 +66,7 @@ public class ChildDetails extends AppCompatActivity {
                         children = ChildrenManager.getInstance();
                         children.add(name);
                         saveChildDetails();
-                        ChildDetails.this.finish();
+                        finish();
                     }
                 }
         );
@@ -82,7 +82,7 @@ public class ChildDetails extends AppCompatActivity {
 //        //apply the change
 //
 //        game.setPumpkinTotal(numPumpkins);
-//        editor.commit();
+//        editor.commit()
 //
 //    }
 

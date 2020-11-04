@@ -1,5 +1,6 @@
 package com.e.practicalparentlavateam.UI;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -46,6 +47,7 @@ public class ConfigureChildren extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         children = ChildrenManager.getInstance();
         getChildList();
+        //children.add("Gurjeet");
 
 
 
@@ -56,6 +58,7 @@ public class ConfigureChildren extends AppCompatActivity {
     private void setupChildrenView() {
         // SOURCE: https://developer.android.com/guide/topics/ui/layout/recyclerview
         ListView rv = findViewById(R.id.childListView);
+        getChildList();
 
         // Could also use an ArrayAdapter (as in tutorial video)
         adapter = new BaseAdapter() {
@@ -124,6 +127,17 @@ public class ConfigureChildren extends AppCompatActivity {
         List<String> tempList = gson.fromJson(json, type);
         if(tempList != null)
             children.setChildren(tempList);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ACTIVITY_RESULT_ADD:
+            case ACTIVITY_RESULT_EDIT:
+                adapter.notifyDataSetChanged();
+                break;
+        }
     }
 }
 
