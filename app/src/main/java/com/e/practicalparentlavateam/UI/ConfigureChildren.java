@@ -150,5 +150,6 @@ public class ConfigureChildren extends AppCompatActivity {
         }
     }
     //testcommentfor test commit
+    //master merged to branch 3
 }
 
