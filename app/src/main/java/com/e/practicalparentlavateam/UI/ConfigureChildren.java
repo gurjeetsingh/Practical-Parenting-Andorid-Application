@@ -149,5 +149,6 @@ public class ConfigureChildren extends AppCompatActivity {
                 break;
         }
     }
+    //testcommentfor test commit
 }
 
