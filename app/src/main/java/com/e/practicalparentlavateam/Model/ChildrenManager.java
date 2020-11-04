@@ -26,8 +26,8 @@ public class ChildrenManager {
     }
 
     //remove a child
-    public void remove (String child){
-        children.remove(child);
+    public void remove (int index){
+        children.remove(index);
     }
 
     public String get (int i) {
@@ -45,6 +45,7 @@ public class ChildrenManager {
     public void setChildren(List<String> children) {
         this.children = children;
     }
+
 
 //    @Override
 //    public Iterator<String> iterator() {

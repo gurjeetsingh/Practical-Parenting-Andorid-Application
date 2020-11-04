@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -91,6 +92,15 @@ public class ConfigureChildren extends AppCompatActivity {
         };
         rv.setAdapter(adapter);
 
+        rv.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = EditChild.makeEditIntent(ConfigureChildren.this, position);
+                        ConfigureChildren.this.startActivityForResult(intent, ACTIVITY_RESULT_EDIT);
+                    }
+                }
+        );
 
 
     }
