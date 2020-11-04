@@ -119,7 +119,7 @@ public class ConfigureChildren extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
-        Type type = new TypeToken<ArrayList<Child>>() {}.getType();
+        Type type = new TypeToken<List<Child>>() {}.getType();
         children = ChildrenManager.getInstance();
         children = gson.fromJson(json, type);
     }

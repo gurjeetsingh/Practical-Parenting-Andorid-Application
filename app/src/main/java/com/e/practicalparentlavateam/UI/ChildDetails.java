@@ -98,6 +98,7 @@ public class ChildDetails extends AppCompatActivity {
         Gson gson = new Gson();
         String json = gson.toJson(children);
         editor.putString("childPrefs", json);
+        System.out.println(json);
         editor.apply();     // This line is IMPORTANT !!!
     }
 }
