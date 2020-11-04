@@ -134,7 +134,7 @@ public class ConfigureChildren extends AppCompatActivity {
         String json = prefs.getString("childPrefs", null);
         Type type = new TypeToken<List<String>>() {}.getType();
         children = ChildrenManager.getInstance();
-        List<String> tempList = gson.fromJson(json, type); //issue here //not being a problem now?
+        List<String> tempList = gson.fromJson(json, type);
         if(tempList != null)
             children.setChildren(tempList);
     }

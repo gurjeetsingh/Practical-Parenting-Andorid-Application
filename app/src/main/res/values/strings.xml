@@ -8,6 +8,7 @@
     <string name="head">Head</string>
     <string name="tails">Tails</string>
     <string name="deletehistory">Delete</string>
+    <string name="LastTime">Last Time:</string>
     <string name="title_activity_child_details">ChildDetails</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
