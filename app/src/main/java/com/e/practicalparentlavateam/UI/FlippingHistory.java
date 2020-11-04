@@ -56,8 +56,11 @@ public class FlippingHistory extends AppCompatActivity {
             TextView timeView = (TextView) itemView.findViewById(R.id.item_time);
             timeView.setText(currentItem.getTime());
 
-            TextView numView = (TextView) itemView.findViewById(R.id.item_num);
-            numView.setText(currentItem.getChoise());
+            TextView choiceView = (TextView) itemView.findViewById(R.id.item_num);
+            choiceView.setText(currentItem.getChoise());
+
+            TextView nameView = (TextView) itemView.findViewById(R.id.item_name);
+            nameView.setText(currentItem.getName());
 
             ImageView result = (ImageView) itemView.findViewById(R.id.winOrfalse);
             result.setImageResource(currentItem.getId());
