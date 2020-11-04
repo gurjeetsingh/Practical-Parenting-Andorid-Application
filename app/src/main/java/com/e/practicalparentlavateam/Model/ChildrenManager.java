@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ChildrenManager implements Iterable<Child>{
+public class ChildrenManager {
 
 
-    private List<Child> children = new ArrayList<>();
+    private List<String> children = new ArrayList<>();
 
     private static ChildrenManager instance;
     public static ChildrenManager getInstance() {
@@ -22,16 +22,16 @@ public class ChildrenManager implements Iterable<Child>{
     }
 
     //add a new child
-    public void add (Child child){
+    public void add (String child){
         children.add(child);
     }
 
     //remove a child
-    public void remove (Child child){
+    public void remove (String child){
         children.remove(child);
     }
 
-    public Child get (int i) {
+    public String get (int i) {
         return children.get(i);
     }
 
@@ -39,12 +39,12 @@ public class ChildrenManager implements Iterable<Child>{
         return children.size();
     }
 
-    public void setChildren(List<Child> children) {
+    public void setChildren(List<String> children) {
         this.children = children;
     }
 
-    @Override
-    public Iterator<Child> iterator() {
-        return children.iterator();
-    }
+//    @Override
+//    public Iterator<String> iterator() {
+//        return children.iterator();
+//    }
 }
