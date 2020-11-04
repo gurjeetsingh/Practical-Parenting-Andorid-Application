@@ -37,4 +37,5 @@ public class ConfigureChildren extends AppCompatActivity {
         Intent configintent = new Intent(context,ConfigureChildren.class);
         return configintent;
     }
+    //testcommentfor test commit
 }
