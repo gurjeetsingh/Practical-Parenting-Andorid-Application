@@ -10,6 +10,7 @@
     <color name="silver">#E0E0E0</color>
     <color name="darksilver">#606060</color>
     <color name="black">#000000</color>
+    <color name="appcolr">#00CCCC</color>
     <color name="mycolor">#CCE5FF</color>
 
 </resources>
