@@ -54,6 +54,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+        getName();
         loadLastTime();
         chooseChild();
         getHistory();
@@ -61,13 +62,12 @@ public class CoinFlipActivity extends AppCompatActivity {
         head();
         tails();
         flipCoin();
-        getName();
         deleteHistory();
     }
 
     private void loadLastTime() {
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
-        String LastTimeName = sp.getString("mame",null);
+        String LastTimeName = sp.getString("name",null);
         System.out.println(LastTimeName);
         TextView lastTimeChild = findViewById(R.id.LastTimeChild);
         if(LastTimeName == null){
