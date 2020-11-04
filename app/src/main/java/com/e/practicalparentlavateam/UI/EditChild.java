@@ -2,12 +2,14 @@ package com.e.practicalparentlavateam.UI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -84,12 +86,22 @@ public class EditChild extends AppCompatActivity {
 
                         // Create new data object
                         children = ChildrenManager.getInstance();
-                        children.add(name);
+                        children.set(childEditingIndex, name);
                         saveChildDetails();
                         finish();
                     }
                 }
         );
+    }
+
+    public void saveChildDetails(){
+        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(children.getChildren());
+        editor.putString("childPrefs", json);
+        System.out.println(json);
+        editor.commit();     // This line is IMPORTANT !!!
     }
 
 }
