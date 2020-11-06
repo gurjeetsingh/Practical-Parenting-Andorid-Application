@@ -3,11 +3,23 @@
     <string name="start_timer">Start Timer</string>
     <string name="reset">reset</string>
 
+    <string name="menu1">Configure Children</string>
+    <string name="menu2">Flip A Coin</string>
+    <string name="menu3">Timeout Timer</string>
+
+    <string name="configure">Select a Child to edit:</string>
+
+    <string name="timer1">Pause</string>
+    <string name="timer2">Set Custom Time</string>
+    <string name="timer3">Alarm OFF</string>
+    <string name="timer4">reset</string>
+
     <string name="history">History</string>
     <string name="flip">Flip</string>
     <string name="head">Head</string>
     <string name="tails">Tails</string>
     <string name="deletehistory">Delete</string>
+    <string name="LastTime">Last Time:</string>
     <string name="title_activity_child_details">ChildDetails</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

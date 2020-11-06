@@ -1,3 +1,5 @@
+/*This is the class to edit or delete the name of the child*/
+
 package com.e.practicalparentlavateam.UI;
 
 import android.content.Context;

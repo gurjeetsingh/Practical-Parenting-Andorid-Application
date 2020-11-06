@@ -1,3 +1,6 @@
+/*This activity is to see the child you already have and decide to add or
+* edit children's name*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.annotation.Nullable;
@@ -134,7 +137,7 @@ public class ConfigureChildren extends AppCompatActivity {
         String json = prefs.getString("childPrefs", null);
         Type type = new TypeToken<List<String>>() {}.getType();
         children = ChildrenManager.getInstance();
-        List<String> tempList = gson.fromJson(json, type); //issue here //not being a problem now?
+        List<String> tempList = gson.fromJson(json, type);
         if(tempList != null)
             children.setChildren(tempList);
     }

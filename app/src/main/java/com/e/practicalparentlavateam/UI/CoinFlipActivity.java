@@ -22,15 +22,22 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.e.practicalparentlavateam.Model.HistoryItem;
 import com.e.practicalparentlavateam.Model.HistoryManager;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class CoinFlipActivity extends AppCompatActivity {
+    private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
+
+    private String name = "";
     private HistoryManager manager;
     private String choise;
     private int win = R.drawable.win;
@@ -47,12 +54,56 @@ public class CoinFlipActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+        getName();
+        loadLastTime();
+        chooseChild();
         getHistory();
         history();
         head();
         tails();
         flipCoin();
         deleteHistory();
+    }
+
+    private void loadLastTime() {
+        SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
+        String LastTimeName = sp.getString("name",null);
+        System.out.println(LastTimeName);
+        TextView lastTimeChild = findViewById(R.id.LastTimeChild);
+        if(LastTimeName == null){
+            lastTimeChild.setText("None");
+        }
+        else{
+            lastTimeChild.setText(LastTimeName);
+            SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = prefs.getString("childPrefs", null);
+            Type type = new TypeToken<List<String>>() {}.getType();
+            List<String> childList = gson.fromJson(json, type);
+
+            for(int i=0; i<childList.size(); i++){
+                if(childList.get(i).equals(LastTimeName)){
+                    int num = (i+1)%childList.size();
+                    if(name == null) {
+                        name = childList.get(num);
+                        TextView text = (TextView) findViewById(R.id.name);
+                        text.setText(name);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    private void chooseChild() {
+        TextView text = (TextView) findViewById(R.id.name);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = Choose_children.makeIntent2(CoinFlipActivity.this);
+                startActivity(intent);
+            }
+        });
     }
 
     private void deleteHistory() {
@@ -133,15 +184,17 @@ public class CoinFlipActivity extends AppCompatActivity {
                 if(c == num) {
                     image = win;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(), choise, image));
+                    manager.add(new HistoryItem(currentTime.toString(), name, choise, image));
                     HistoryManager.setInstance(manager);
+                    SaveName(name);
                     Save(manager);
                 }
                 else {
                     image = lose;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(), choise, image));
+                    manager.add(new HistoryItem(currentTime.toString(),name, choise, image));
                     HistoryManager.setInstance(manager);
+                    SaveName(name);
                     Save(manager);
                 }
             }
@@ -158,6 +211,13 @@ public class CoinFlipActivity extends AppCompatActivity {
     private void getHistory() {
         HistoryManager.setInstance(getData());
         manager = HistoryManager.getInstance();
+    }
+
+    private void SaveName(String n){
+        SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("name",n);
+        edit.apply();
     }
 
     private void Save(HistoryManager m){
@@ -179,7 +239,22 @@ public class CoinFlipActivity extends AppCompatActivity {
             }
         });
     }
-    public static Intent makeIntent(Context context) {
+
+    private void getName() {
+        Intent i = getIntent();
+        name = i.getStringExtra(EXTRA_NAME);
+        TextView text = (TextView) findViewById(R.id.name);
+        if(name != null)
+            text.setText(name);
+    }
+
+    public static Intent makeIntent2(Context context, String name) {
+        Intent intent = new Intent(context, CoinFlipActivity.class);
+        intent.putExtra(EXTRA_NAME, name);
+        return intent;
+    }
+
+    public static Intent makeIntent(Context context){
         return new Intent(context, CoinFlipActivity.class);
     }
 }

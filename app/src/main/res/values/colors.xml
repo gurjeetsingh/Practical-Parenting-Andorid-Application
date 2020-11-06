@@ -12,5 +12,10 @@
     <color name="black">#000000</color>
     <color name="appcolr">#00CCCC</color>
     <color name="mycolor">#CCE5FF</color>
+    <color name="babyblue">#89CFF0</color>
+    <color name="pastelBlue">#ADD8E6</color>
+    <color name="backgroundGrey">#aab8bb</color>
+    <color name="emraldSea">#5f9595</color>
+    <color name="testGreen1">#379683</color>
 
 </resources>

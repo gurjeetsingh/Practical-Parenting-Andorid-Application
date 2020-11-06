@@ -1,3 +1,5 @@
+/*This activity is to add the name of the child*/
+
 package com.e.practicalparentlavateam.UI;
 
 import android.content.Context;
@@ -71,20 +73,6 @@ public class ChildDetails extends AppCompatActivity {
                 }
         );
     }
-
-//    private void saveChildDetails() {
-//        //shared preferences object
-//        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
-//        //shared preferences editor
-//        SharedPreferences.Editor editor = prefs.edit();
-//        //edit item at key
-//        editor.putString("Children", numPumpkins);
-//        //apply the change
-//
-//        game.setPumpkinTotal(numPumpkins);
-//        editor.commit()
-//
-//    }
 
     public void saveChildDetails(){
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);

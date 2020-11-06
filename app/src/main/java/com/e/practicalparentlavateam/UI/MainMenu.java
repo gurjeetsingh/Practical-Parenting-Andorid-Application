@@ -1,3 +1,5 @@
+/*This is the main menu of the whole app*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.AppCompatActivity;

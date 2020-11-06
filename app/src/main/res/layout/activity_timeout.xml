@@ -57,7 +57,7 @@
             android:layout_marginEnd="21dp"
             android:layout_marginBottom="179dp"
             android:visibility="invisible"
-            android:text="Pause" />
+            android:text="@string/timer1" />
 
         <Spinner
             android:id="@+id/timespinner"
@@ -79,7 +79,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="128dp"
             android:layout_marginBottom="130dp"
-            android:text="Set Custom Time" />
+            android:text="@string/timer2" />
 
         <Button
             android:id="@+id/alarmoff"
@@ -89,6 +89,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="57dp"
             android:layout_marginEnd="13dp"
+            android:text="@string/timer3"
             android:text="Alarm OFF"
             android:visibility="invisible"
             android:textSize="10sp" />
@@ -101,7 +102,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="400dp"
-            android:text="reset" />
+            android:text="@string/timer4" />
 
     </RelativeLayout>
 
