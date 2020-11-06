@@ -3,8 +3,8 @@
     <string name="start_timer">Start Timer</string>
     <string name="reset">reset</string>
 
-    <string name="menu1">CONFIGURE CHILDREN!</string>
-    <string name="menu2">Filp A Coin!</string>
+    <string name="menu1">Configure Children</string>
+    <string name="menu2">Flip A Coin!</string>
     <string name="menu3">Timeout Timer!</string>
 
     <string name="configure">Select a Child to edit:</string>
