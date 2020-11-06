@@ -14,7 +14,7 @@
         android:layout_height="115dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="244dp"
-        android:background="@color/testGreen1"
+        android:background="@drawable/rounded_corners"
         android:fontFamily="@font/imprima"
         android:text="@string/menu1"
         android:textAllCaps="false"
@@ -59,5 +59,14 @@
         android:typeface="serif"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coinflip" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="370dp"
+        android:layout_height="215dp"
+        android:background="#B6BD6A"
+        app:srcCompat="@drawable/title"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
