@@ -1,3 +1,5 @@
+/*This is the class to manage the data of the children*/
+
 package com.e.practicalparentlavateam.Model;
 
 import java.util.ArrayList;
@@ -49,10 +51,4 @@ public class ChildrenManager {
     public void setChildren(List<String> children) {
         this.children = children;
     }
-
-
-//    @Override
-//    public Iterator<String> iterator() {
-//        return children.iterator();
-//    }
 }

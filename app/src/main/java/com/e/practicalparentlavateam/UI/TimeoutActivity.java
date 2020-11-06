@@ -1,3 +1,5 @@
+/*THis is the activity for the timer*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.ActionBar;

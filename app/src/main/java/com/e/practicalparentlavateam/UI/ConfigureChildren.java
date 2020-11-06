@@ -1,3 +1,6 @@
+/*This activity is to see the child you already have and decide to add or
+* edit children's name*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.annotation.Nullable;

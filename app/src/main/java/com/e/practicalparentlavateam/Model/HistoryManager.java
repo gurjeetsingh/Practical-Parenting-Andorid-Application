@@ -1,3 +1,5 @@
+/*This is rhw class to manage the HistoryItem class*/
+
 package com.e.practicalparentlavateam.Model;
 
 import java.util.ArrayList;

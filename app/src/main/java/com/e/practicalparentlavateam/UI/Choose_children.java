@@ -1,3 +1,5 @@
+/*This activity is to choose the child who will choose the head or tails*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.ActionBar;
