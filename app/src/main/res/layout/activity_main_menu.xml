@@ -8,13 +8,30 @@
     tools:context=".UI.MainMenu">
 
     <Button
+        android:id="@+id/coinflip"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="292dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_corners_buttons"
+        android:fontFamily="@font/imprima"
+        android:text="@string/menu2"
+        android:textColor="#2D2F31"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/configchild" />
+
+    <Button
         android:id="@+id/configchild"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="169dp"
-        android:layout_height="115dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="244dp"
-        android:background="@drawable/rounded_corners"
+        android:layout_width="292dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:text="@string/menu1"
         android:textAllCaps="false"
@@ -22,34 +39,19 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/coinflip"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="172dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="11dp"
-        android:background="@color/testGreen1"
-        android:fontFamily="@font/imprima"
-        android:text="@string/menu2"
-        android:textColor="#2D2F31"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:typeface="serif"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configchild" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/timeout"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="169dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="11dp"
-        android:background="@color/testGreen1"
+        android:layout_width="292dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:text="@string/menu3"
         android:textAlignment="center"
@@ -57,16 +59,24 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coinflip" />
+        app:layout_constraintTop_toBottomOf="@+id/coinflip"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="370dp"
         android:layout_height="215dp"
-        android:background="#B6BD6A"
-        app:srcCompat="@drawable/title"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

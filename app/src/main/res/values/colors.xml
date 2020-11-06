@@ -15,7 +15,8 @@
     <color name="babyblue">#89CFF0</color>
     <color name="pastelBlue">#ADD8E6</color>
     <color name="backgroundGrey">#aab8bb</color>
-    <color name="emraldSea">#5f9595</color>
+    <color name="emeraldSea">#5f9595</color>
     <color name="testGreen1">#379683</color>
+    <color name="titlecolour">#75B6BD6A</color>
 
 </resources>
