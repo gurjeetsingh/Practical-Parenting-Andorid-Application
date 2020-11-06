@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.view.Menu;
 import android.os.CountDownTimer;
@@ -41,13 +42,11 @@ public class TimeoutActivity extends AppCompatActivity {
     private Button resetbutton;
     private Button custombtn;
     private Button alrmoffbtn;
-    Vibrator alarmvibrator;
 
     private long START_TIME_IN_MILLIS = 10000;
     EditText usertime;
     public static final int NOTIFICATION_ID = 1;
     public static final String ACTION_1 = "action_1";
-    private CountDownTimer mCountDownTimer;
     private boolean istimerrunning = false;
     private long timeleftinmilliseconds;
     private long selectedtime;
@@ -63,6 +62,7 @@ public class TimeoutActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        alrmoffbtn = (Button) findViewById(R.id.alarmoff);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.timeoutToolbar);
@@ -87,7 +87,6 @@ public class TimeoutActivity extends AppCompatActivity {
             else if (extras.getBoolean("StopAlarm"))
             {
                 AudioController.stopAudio();
-                alarmvibrator.cancel();
                 finish();
             }
 
@@ -112,7 +111,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 istimerrunning = true;
                 startService(serviceintent);
                 //System.out.println("Time left for start" + mTimeLeftInMillis);
-                registerReceiver(broadcastReceiver, new IntentFilter(TimeService.BROADCAST_ACTION));
+                registerReceiver(broadcastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
                 pauseButton.setVisibility(View.VISIBLE);
             }
         });
@@ -184,6 +183,7 @@ public class TimeoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AudioController.stopAudio();
+                alrmoffbtn.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -230,8 +230,8 @@ public class TimeoutActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    timeleftinmilliseconds = 60000;
-                    selectedtime = 60000;
+                    timeleftinmilliseconds = 5000;
+                    selectedtime = 5000;
                     // Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
                 }
                 if (position == 1) {
@@ -278,26 +278,20 @@ public class TimeoutActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
-
+    
 
 
     @Override
     protected void onStop() {
         super.onStop();
-        //Intent serviceIntent = new Intent(this, CounterService.class);
-        //startService(serviceIntent);
+
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(broadcastReceiver, new IntentFilter(TimeService.BROADCAST_ACTION));
+        registerReceiver(broadcastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
     }
 
     @Override
@@ -327,9 +321,18 @@ public class TimeoutActivity extends AppCompatActivity {
         int secs = (int) (time / (double) 1000) % 60;
         if (time == 0 || time < 0) {
             istimerrunning = false;
+            alrmoffbtn.setVisibility(View.VISIBLE);
             notif();
-            alarmvibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            alarmvibrator.vibrate(12000);
+
+            //This handler is for removing the alarmoff button after a period of time
+            Handler cancelnotificiaton = new Handler();
+            long delay = 12000;
+            cancelnotificiaton.postDelayed(new Runnable() {
+                public void run() {
+                    alrmoffbtn.setVisibility(View.INVISIBLE);
+                }
+            }, delay);
+
         }
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
@@ -374,10 +377,20 @@ public class TimeoutActivity extends AppCompatActivity {
                 .setColor(getResources().getColor(R.color.appcolr))
                 .setAutoCancel(true).build();
 
-        NotificationManager notificationManager =
+        final NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, AlarmNotify);
+
+
+        //To turn off the notification bar after some time:
+        Handler cancelnotificiaton = new Handler();
+        long delay = 12000;
+        cancelnotificiaton.postDelayed(new Runnable() {
+            public void run() {
+                notificationManager.cancel(0);
+            }
+        }, delay);
     }
 
     public void millisecondconverterandTimerUIupdate(long selectedtime, TextView usertext)

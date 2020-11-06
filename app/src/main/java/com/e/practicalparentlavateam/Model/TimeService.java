@@ -14,7 +14,7 @@ public class TimeService extends Service {
 
     private Intent comintent;
     private Intent mainintent;
-    public static final String BROADCAST_ACTION = "TimeService";
+    public static final String TIME_BROADCAST = "TimeService";
     private Handler handler = new Handler();
     private long userselectedtime;
     private long finaltime;
@@ -48,7 +48,7 @@ the ticker moves down, subtracting a millisecond..
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        comintent = new Intent(BROADCAST_ACTION);
+        comintent = new Intent(TIME_BROADCAST);
 
         long usertime = intent.getLongExtra("mills",0);
         if(flag<1) {
@@ -87,6 +87,10 @@ the ticker moves down, subtracting a millisecond..
   the service, and starts the alarm.
    */
     private void ServiceUIUpdate() {
+        //2000
+        //+4000
+        //6000-4000
+        //6000-4001
         mTimeLeftInMillis = finaltime - System.currentTimeMillis();
         int timer = (int) mTimeLeftInMillis;
         if(timer<0)
