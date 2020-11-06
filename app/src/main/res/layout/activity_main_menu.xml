@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/child"
+    android:background="@drawable/background"
     tools:context=".UI.MainMenu">
 
     <Button
@@ -18,7 +18,7 @@
         android:fontFamily="@font/imprima"
         android:text="@string/menu1"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="#2D2F31"
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
@@ -35,7 +35,7 @@
         android:background="@color/testGreen1"
         android:fontFamily="@font/imprima"
         android:text="@string/menu2"
-        android:textColor="#FFFFFF"
+        android:textColor="#2D2F31"
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
@@ -53,7 +53,7 @@
         android:fontFamily="@font/imprima"
         android:text="@string/menu3"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#2D2F31"
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
