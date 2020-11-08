@@ -58,8 +58,6 @@ public class TimeoutActivity extends AppCompatActivity {
 
 
     private TextView timerValue;
-
-    Intent intent;
     Intent pauseintent;
 
     @Override
@@ -232,9 +230,8 @@ public class TimeoutActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    timeleftinmilliseconds = 5000;
-                    selectedtime = 5000;
-                    // Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
+                    timeleftinmilliseconds = 60000;
+                    selectedtime = 60000;
                 }
                 if (position == 1) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -324,6 +321,7 @@ public class TimeoutActivity extends AppCompatActivity {
         if (time == 0 || time < 0) {
             istimerrunning = false;
             alrmoffbtn.setVisibility(View.VISIBLE);
+            pauseButton.setVisibility(View.INVISIBLE);
             notif();
 
             //This handler is for removing the alarmoff button after a period of time
