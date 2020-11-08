@@ -48,6 +48,7 @@ public class Choose_children extends AppCompatActivity {
         registClickCallback();
     }
 
+    /*Show the children list to choose*/
     private void populateListView() {
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -80,6 +81,7 @@ public class Choose_children extends AppCompatActivity {
         }
     }
 
+    /*Click to choose children*/
     private void registClickCallback(){
         ListView list = (ListView) findViewById(R.id.listOfChildren);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

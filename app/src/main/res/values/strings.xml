@@ -20,7 +20,10 @@
     <string name="tails">Tails</string>
     <string name="deletehistory">Delete</string>
     <string name="LastTime">Last Time:</string>
+    <string name="headOrtail">Head or Tails</string>
     <string name="title_activity_child_details">ChildDetails</string>
+
+    <string name="Choice">Choise:</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

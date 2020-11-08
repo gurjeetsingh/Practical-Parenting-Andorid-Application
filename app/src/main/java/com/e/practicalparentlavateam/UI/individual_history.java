@@ -1,5 +1,3 @@
-/*This is the flipping history which show the history of the flipping*/
-
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,40 +7,48 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.e.practicalparentlavateam.R;
 import com.e.practicalparentlavateam.Model.HistoryItem;
 import com.e.practicalparentlavateam.Model.HistoryManager;
+import com.e.practicalparentlavateam.R;
 
-public class FlippingHistory extends AppCompatActivity {
-    private HistoryManager manager;
+public class individual_history extends AppCompatActivity {
+    private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
+    HistoryManager manager = new HistoryManager();
     private ArrayAdapter<HistoryItem> adapter;
-
-    public static Intent makeLaunch(Context c) {
-        return new Intent(c, FlippingHistory.class);
-    }
+    private String name = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_flipping_history);
+        setContentView(R.layout.activity_individual_history);
 
+        getName();
+        getIndividualHistory();
         populateList();
     }
 
+    private void getIndividualHistory() {
+        HistoryManager temp = HistoryManager.getInstance();
+        for(int i = 0; i < temp.getList().size(); i++){
+            if(temp.getList().get(i).getName().equals(name))
+                manager.add(temp.getList().get(i));
+        }
+    }
+
     private void populateList() {
-        manager = HistoryManager.getInstance();
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.HistoryList);
+        ListView list = (ListView) findViewById(R.id.individualHistory);
         list.setAdapter(adapter);
     }
 
-    private class MyListAdapter extends ArrayAdapter<HistoryItem>{
-        public MyListAdapter() {super(FlippingHistory.this, R.layout.history_list, manager.getList());}
+    private class MyListAdapter extends ArrayAdapter<HistoryItem> {
+        public MyListAdapter() {super(individual_history.this, R.layout.history_list, manager.getList());}
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -69,5 +75,16 @@ public class FlippingHistory extends AppCompatActivity {
             coin.setImageResource(currentItem.getCoinIcon());
             return itemView;
         }
+    }
+
+    public static Intent makeIntent(Context context, String name){
+        Intent intent = new Intent(context, individual_history.class);
+        intent.putExtra(EXTRA_NAME, name);
+        return intent;
+    }
+
+    private void getName(){
+        Intent i = getIntent();
+        name = i.getStringExtra(EXTRA_NAME);
     }
 }

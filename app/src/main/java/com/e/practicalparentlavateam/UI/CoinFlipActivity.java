@@ -42,6 +42,8 @@ public class CoinFlipActivity extends AppCompatActivity {
     private String choise;
     private int win = R.drawable.win;
     private int lose = R.drawable.lose;
+    private int coinFront = R.drawable.coin_front;
+    private int coinBack = R.drawable.coin_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +57,36 @@ public class CoinFlipActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         getName();
-        loadLastTime();
+        loadLastTimeChild();
         chooseChild();
         getHistory();
         history();
+        individualHistory();
         head();
         tails();
         flipCoin();
         deleteHistory();
     }
 
-    private void loadLastTime() {
+    private void individualHistory() {
+        Button indHisbt = findViewById(R.id.childHistory);
+        if(name == null)
+            indHisbt.setVisibility(View.INVISIBLE);
+        else {
+            indHisbt.setVisibility(View.VISIBLE);
+            indHisbt.setText(name + "'s");
+        }
+        indHisbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = individual_history.makeIntent(CoinFlipActivity.this, name);
+                startActivity(intent);
+            }
+        });
+    }
+
+    /*Get the child who flipped last time and choose the child this time to flip*/
+    private void loadLastTimeChild() {
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
         System.out.println(LastTimeName);
@@ -151,6 +172,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //This is the animation part
                 MediaPlayer sound = MediaPlayer.create(CoinFlipActivity.this, R.raw.coin);
                 sound.start();
                 final ObjectAnimator front = ObjectAnimator.ofFloat(image1, "scaleX", 1f, 0f);
@@ -173,6 +195,9 @@ public class CoinFlipActivity extends AppCompatActivity {
                     }
                 });
                 front.start();
+
+                //Judge if the child win the Flipping and push into the history
+                //If no choice of head or tails, no record of history
                 int c = 2;
                 if(choise == null)
                     return;
@@ -181,10 +206,15 @@ public class CoinFlipActivity extends AppCompatActivity {
                 else if(choise.equals("Head"))
                     c = 1;
                 int image;
+                int coinID;
+                if(num == 1)
+                    coinID = coinFront;
+                else
+                    coinID = coinBack;
                 if(c == num) {
                     image = win;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(), name, choise, image));
+                    manager.add(new HistoryItem(currentTime.toString(), name, choise, image, coinID));
                     HistoryManager.setInstance(manager);
                     SaveName(name);
                     Save(manager);
@@ -192,7 +222,7 @@ public class CoinFlipActivity extends AppCompatActivity {
                 else {
                     image = lose;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(),name, choise, image));
+                    manager.add(new HistoryItem(currentTime.toString(),name, choise, image, coinID));
                     HistoryManager.setInstance(manager);
                     SaveName(name);
                     Save(manager);

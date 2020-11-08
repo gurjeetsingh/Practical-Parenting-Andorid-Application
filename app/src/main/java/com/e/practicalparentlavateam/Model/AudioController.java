@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.os.Vibrator;
 
 /*
 The following class universally declares a mediaplayer,
@@ -19,7 +20,13 @@ public class AudioController {
         mediaPlayer = MediaPlayer.create(c,id);
         mediaPlayer.start();
     }
+
     public static void stopAudio(){
         mediaPlayer.stop();
+    }
+
+    public static void stopvibration()
+    {
+        stopvibration();
     }
 }
