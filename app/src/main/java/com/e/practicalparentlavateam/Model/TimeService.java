@@ -29,7 +29,6 @@ public class TimeService extends Service {
     private long userselectedtime;
     private long finaltime;
     private int flag=0;
-    long timeInMilliseconds = 0L;
     long  timeleftinmilliseconds;
 
 

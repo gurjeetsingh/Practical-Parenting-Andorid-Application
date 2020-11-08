@@ -127,7 +127,6 @@ public class TimeoutActivity extends AppCompatActivity {
                 int time = pauseintent.getIntExtra("time", 0);
                 timeleftinmilliseconds = time;
                 istimerrunning = false;
-                //System.out.println("Time left for pause"+mTimeLeftInMillis);
                 Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceintent);
                 // unregisterReceiver(broadcastReceiver);
