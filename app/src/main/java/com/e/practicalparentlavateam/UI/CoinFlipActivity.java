@@ -59,10 +59,28 @@ public class CoinFlipActivity extends AppCompatActivity {
         chooseChild();
         getHistory();
         history();
+        individualHistory();
         head();
         tails();
         flipCoin();
         deleteHistory();
+    }
+
+    private void individualHistory() {
+        Button indHisbt = findViewById(R.id.childHistory);
+        if(name == null)
+            indHisbt.setVisibility(View.INVISIBLE);
+        else {
+            indHisbt.setVisibility(View.VISIBLE);
+            indHisbt.setText(name + "'s");
+        }
+        indHisbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = individual_history.makeIntent(CoinFlipActivity.this, name);
+                startActivity(intent);
+            }
+        });
     }
 
     /*Get the child who flipped last time and choose the child this time to flip*/
