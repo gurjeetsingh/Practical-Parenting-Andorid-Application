@@ -1,4 +1,9 @@
-/*THis is the activity for the timer*/
+/*This is the activity for the timer
+* Here, the timeout activity is  defined and
+* layout is used to make the timer run. It
+* is heavily reliant on the TimeService to
+* keep timer alive even if app is closed.
+* */
 
 package com.e.practicalparentlavateam.UI;
 
@@ -44,22 +49,15 @@ public class TimeoutActivity extends AppCompatActivity {
     private Button resetbutton;
     private Button custombtn;
     private Button alrmoffbtn;
-
-    private long START_TIME_IN_MILLIS = 10000;
     EditText usertime;
-    public static final int NOTIFICATION_ID = 1;
-    public static final String ACTION_1 = "action_1";
     private boolean istimerrunning = false;
     private long timeleftinmilliseconds;
     private long selectedtime;
     Context context = this;
-    private final static String TAG = "BroadcastService";
     String[] timepiece = new String[]{"Select Duration", "Set Time: 1 Minute", "Set Time: 2 Minutes", "Set Time: 3 Minutes", "Set Time: 5 Minutes", "Set Time: 10 Minutes"};
 
 
     private TextView timerValue;
-
-    Intent intent;
     Intent pauseintent;
 
     @Override
@@ -129,7 +127,6 @@ public class TimeoutActivity extends AppCompatActivity {
                 int time = pauseintent.getIntExtra("time", 0);
                 timeleftinmilliseconds = time;
                 istimerrunning = false;
-                //System.out.println("Time left for pause"+mTimeLeftInMillis);
                 Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceintent);
                 // unregisterReceiver(broadcastReceiver);
@@ -232,9 +229,8 @@ public class TimeoutActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    timeleftinmilliseconds = 5000;
-                    selectedtime = 5000;
-                    // Toast.makeText(TimeoutActivity.this, "Please Reset Timer First.", Toast.LENGTH_SHORT).show();
+                    timeleftinmilliseconds = 60000;
+                    selectedtime = 60000;
                 }
                 if (position == 1) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -324,6 +320,7 @@ public class TimeoutActivity extends AppCompatActivity {
         if (time == 0 || time < 0) {
             istimerrunning = false;
             alrmoffbtn.setVisibility(View.VISIBLE);
+            pauseButton.setVisibility(View.INVISIBLE);
             notif();
 
             //This handler is for removing the alarmoff button after a period of time
@@ -361,6 +358,9 @@ public class TimeoutActivity extends AppCompatActivity {
     /*
     The following method implements our notification, which takes sends an intent to the TimeoutActivity
     and calls the AudioManager class to stop audio, once the notification box is clicked.
+
+    Resources used to learn make a notification:https://developer.android.com/training/notify-user/build-notification
+    Another resource: https://developer.android.com/guide/topics/ui/notifiers/notifications
      */
     public void notif()
     {
@@ -395,6 +395,9 @@ public class TimeoutActivity extends AppCompatActivity {
         }, delay);
     }
 
+
+    //The following function streamlines our updating the textview to easily convert
+    //from seconds to milliseconds.
     public void millisecondconverterandTimerUIupdate(long selectedtime, TextView usertext)
     {
         int mins = (int) (selectedtime / (double) 1000) / 60;

@@ -9,6 +9,16 @@ import com.e.practicalparentlavateam.R;
 /*
 This is the underlying service which allows the timer to run in the background
 even if the app is turned off, or if user navigates to different activities.
+Resources used to learn how a service works:
+https://developer.android.com/guide/components/services
+https://stackoverflow.com/questions/4360074/creating-a-service-in-android
+https://stackoverflow.com/questions/22496863/how-to-run-countdowntimer-in-a-service-in-android
+
+TO understand broadcasts:
+https://developer.android.com/reference/android/content/BroadcastReceiver
+
+Understanding how to pass data from service to an intent, and how a service works:
+https://stackoverflow.com/questions/3293243/pass-data-from-activity-to-service-using-an-intent
  */
 public class TimeService extends Service {
 
@@ -19,8 +29,7 @@ public class TimeService extends Service {
     private long userselectedtime;
     private long finaltime;
     private int flag=0;
-    long timeInMilliseconds = 0L;
-    long  mTimeLeftInMillis;
+    long  timeleftinmilliseconds;
 
 
 
@@ -29,6 +38,9 @@ The oncreate will have handlers; the remove
 call backs will remove any outstanding handler actions on the
 stack, and the postDelayed will delay update to the UI, just so that
 the ticker moves down, subtracting a millisecond..
+To understand how handlers work, which are integral to the application:
+https://developer.android.com/reference/android/os/Handler#removeCallbacks(java.lang.Runnable,%2520java.lang.Object)
+https://developer.android.com/reference/android/os/Handler
  */
     @Override
     public void onCreate() {
@@ -85,14 +97,22 @@ the ticker moves down, subtracting a millisecond..
   UI to update it readily.
   If the time goes below 0, the timer stops
   the service, and starts the alarm.
+
+  Here, we use a technique to make the ticker go down.
+  Suppose our endtime is 6000 milliseconds, which we have calculated.
+  System time is at 4000 millseconds.
+  thus, the time left in millis will be calculated, at a delay of 1 second,
+  like this:
+  1st Iteration: timeleftinmillseconds=6000-4000=2000
+  as system time will increase, time left in millis will increase.
+  2nd Iteration: timeleftinmillseconds=6000-4001=1999
+  3rd Iteration: timeleftinmillseconds=6000-4002=1998
+  and so on...
    */
     private void ServiceUIUpdate() {
-        //2000
-        //+4000
-        //6000-4000
-        //6000-4001
-        mTimeLeftInMillis = finaltime - System.currentTimeMillis();
-        int timer = (int) mTimeLeftInMillis;
+
+        timeleftinmilliseconds = finaltime - System.currentTimeMillis();
+        int timer = (int) timeleftinmilliseconds;
         if(timer<0)
         {
             startalarm();
@@ -111,7 +131,8 @@ the ticker moves down, subtracting a millisecond..
     }
 
     /*
-    to remove any outstanding calls to the UI when the app is destroyed.
+    to remove any outstanding calls to the UI i.e. remove outstanding
+     messages on the handler when the app is destroyed.
      */
     @Override
     public void onDestroy() {
