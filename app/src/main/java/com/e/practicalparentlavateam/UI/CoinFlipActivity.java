@@ -55,7 +55,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         getName();
-        loadLastTime();
+        loadLastTimeChild();
         chooseChild();
         getHistory();
         history();
@@ -65,7 +65,8 @@ public class CoinFlipActivity extends AppCompatActivity {
         deleteHistory();
     }
 
-    private void loadLastTime() {
+    /*Get the child who flipped last time and choose the child this time to flip*/
+    private void loadLastTimeChild() {
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
         System.out.println(LastTimeName);
@@ -151,6 +152,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //This is the animation part
                 MediaPlayer sound = MediaPlayer.create(CoinFlipActivity.this, R.raw.coin);
                 sound.start();
                 final ObjectAnimator front = ObjectAnimator.ofFloat(image1, "scaleX", 1f, 0f);
@@ -173,6 +175,9 @@ public class CoinFlipActivity extends AppCompatActivity {
                     }
                 });
                 front.start();
+
+                //Judge if the child win the Flipping and push into the history
+                //If no choice of head or tails, no record of history
                 int c = 2;
                 if(choise == null)
                     return;
