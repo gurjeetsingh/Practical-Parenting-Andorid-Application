@@ -64,6 +64,9 @@ public class FlippingHistory extends AppCompatActivity {
 
             ImageView result = (ImageView) itemView.findViewById(R.id.winOrfalse);
             result.setImageResource(currentItem.getId());
+
+            ImageView coin = (ImageView) itemView.findViewById(R.id.coinResult);
+            coin.setImageResource(currentItem.getCoinIcon());
             return itemView;
         }
     }

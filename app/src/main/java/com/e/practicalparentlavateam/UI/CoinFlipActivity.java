@@ -42,6 +42,8 @@ public class CoinFlipActivity extends AppCompatActivity {
     private String choise;
     private int win = R.drawable.win;
     private int lose = R.drawable.lose;
+    private int coinFront = R.drawable.coin_front;
+    private int coinBack = R.drawable.coin_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,10 +206,15 @@ public class CoinFlipActivity extends AppCompatActivity {
                 else if(choise.equals("Head"))
                     c = 1;
                 int image;
+                int coinID;
+                if(num == 1)
+                    coinID = coinFront;
+                else
+                    coinID = coinBack;
                 if(c == num) {
                     image = win;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(), name, choise, image));
+                    manager.add(new HistoryItem(currentTime.toString(), name, choise, image, coinID));
                     HistoryManager.setInstance(manager);
                     SaveName(name);
                     Save(manager);
@@ -215,7 +222,7 @@ public class CoinFlipActivity extends AppCompatActivity {
                 else {
                     image = lose;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(),name, choise, image));
+                    manager.add(new HistoryItem(currentTime.toString(),name, choise, image, coinID));
                     HistoryManager.setInstance(manager);
                     SaveName(name);
                     Save(manager);
