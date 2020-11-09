@@ -36,7 +36,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Following activity returns the help menu's intent
-                Intent flipintent=CoinFlipActivity.makeIntent(MainMenu.this);
+                Intent flipintent=CoinFlipActivity.makeIntent(MainMenu.this,"Please select child and heads or tails!");
                 startActivity(flipintent);
             }
         });

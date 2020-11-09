@@ -56,6 +56,10 @@ public class CoinFlipActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+        Intent i = getIntent();
+        String message = i.getStringExtra("hint");
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+
         getName();
         loadLastTimeChild();
         chooseChild();
@@ -135,7 +139,7 @@ public class CoinFlipActivity extends AppCompatActivity {
             public void onClick(View v) {
                 manager = new HistoryManager();
                 HistoryManager.setInstance(new HistoryManager());
-                Save(manager);
+                SaveHistory(manager);
                 Toast.makeText(CoinFlipActivity.this,"You Delete Flipping History!",Toast.LENGTH_SHORT).show();
             }
         });
@@ -168,7 +172,7 @@ public class CoinFlipActivity extends AppCompatActivity {
     private void flipCoin() {
         //https://stackoverflow.com/questions/46111262/card-flip-animation-in-android
         final Random random = new Random();
-        final ImageView image1 = (ImageView) findViewById(R.id.front);
+        final ImageView coinImage = (ImageView) findViewById(R.id.front);
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,8 +180,8 @@ public class CoinFlipActivity extends AppCompatActivity {
                 //This is the animation part
                 MediaPlayer sound = MediaPlayer.create(CoinFlipActivity.this, R.raw.coin);
                 sound.start();
-                final ObjectAnimator front = ObjectAnimator.ofFloat(image1, "scaleX", 1f, 0f);
-                final ObjectAnimator back = ObjectAnimator.ofFloat(image1, "scaleX", 0f, 1f);
+                final ObjectAnimator front = ObjectAnimator.ofFloat(coinImage, "scaleX", 1f, 0f);
+                final ObjectAnimator back = ObjectAnimator.ofFloat(coinImage, "scaleX", 0f, 1f);
                 front.setInterpolator(new DecelerateInterpolator());
                 back.setInterpolator(new AccelerateDecelerateInterpolator());
                 final int num = random.nextInt(2);
@@ -187,10 +191,10 @@ public class CoinFlipActivity extends AppCompatActivity {
                         super.onAnimationEnd(animation);
                         if(num == 1){
                             //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
-                            image1.setImageResource(R.drawable.coin_front);
+                            coinImage.setImageResource(R.drawable.coin_front);
                         }
                         else{
-                            image1.setImageResource(R.drawable.coin_back);
+                            coinImage.setImageResource(R.drawable.coin_back);
                         }
                         back.start();
                     }
@@ -218,7 +222,7 @@ public class CoinFlipActivity extends AppCompatActivity {
                     manager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
                     HistoryManager.setInstance(manager);
                     SaveName(name);
-                    Save(manager);
+                    SaveHistory(manager);
                 }
                 else {
                     image = lose;
@@ -226,7 +230,7 @@ public class CoinFlipActivity extends AppCompatActivity {
                     manager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
                     HistoryManager.setInstance(manager);
                     SaveName(name);
-                    Save(manager);
+                    SaveHistory(manager);
                 }
             }
         });
@@ -251,7 +255,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         edit.apply();
     }
 
-    private void Save(HistoryManager m){
+    private void SaveHistory(HistoryManager m){
         SharedPreferences sp = getSharedPreferences("Save history",MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         Gson g = new Gson();
@@ -285,7 +289,9 @@ public class CoinFlipActivity extends AppCompatActivity {
         return intent;
     }
 
-    public static Intent makeIntent(Context context){
-        return new Intent(context, CoinFlipActivity.class);
+    public static Intent makeIntent(Context context, String message){
+        Intent intent = new Intent(context, CoinFlipActivity.class);
+        intent.putExtra("hint", message);
+        return intent;
     }
 }
