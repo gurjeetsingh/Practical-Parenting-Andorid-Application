@@ -9,7 +9,7 @@
 
     <string name="configure">Select a Child to edit:</string>
 
-    <stwerqwring name="timer1">Pause</stwerqwring>
+    <string name="timer1">Pause</string>
     <string name="timer2">Set Custom Time</string>
     <string name="timer3">Alarm OFF</string>
     <string name="timer4">reset</string>
