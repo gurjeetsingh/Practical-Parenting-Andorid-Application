@@ -61,7 +61,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         getHistory();
         history();
         individualHistory();
-        head();
+        heads();
         tails();
         flipCoin();
         deleteHistory();
@@ -145,20 +145,20 @@ public class CoinFlipActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 choice = "Tails";
-                TextView showChoise = (TextView) findViewById(R.id.choise);
-                showChoise.setText(choice);
+                TextView showChoice = (TextView) findViewById(R.id.choice);
+                showChoice.setText(choice);
             }
         });
     }
 
-    private void head() {
-        Button head = (Button) findViewById(R.id.head);
-        head.setOnClickListener(new View.OnClickListener() {
+    private void heads() {
+        Button heads = (Button) findViewById(R.id.heads);
+        heads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choice = "Head";
-                TextView showChoise = (TextView) findViewById(R.id.choise);
-                showChoise.setText(choice);
+                choice = "Heads";
+                TextView showChoice = (TextView) findViewById(R.id.choice);
+                showChoice.setText(choice);
             }
         });
     }
@@ -196,13 +196,13 @@ public class CoinFlipActivity extends AppCompatActivity {
                 front.start();
 
                 //Judge if the child win the Flipping and push into the history
-                //If no choice of head or tails, no record of history
+                //If no choice of heads or tails, no record of history
                 int c = 2;
                 if(choice == null)
                     return;
                 else if(choice.equals("Tails"))
                     c = 0;
-                else if(choice.equals("Head"))
+                else if(choice.equals("Heads"))
                     c = 1;
                 int image;
                 int coinID;

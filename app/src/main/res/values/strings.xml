@@ -24,7 +24,7 @@
     <string name="headOrtail">Heads or Tails</string>
     <string name="title_activity_child_details">Child Details</string>
 
-    <string name="Choice">Choise:</string>
+    <string name="Choice">Choice:</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
