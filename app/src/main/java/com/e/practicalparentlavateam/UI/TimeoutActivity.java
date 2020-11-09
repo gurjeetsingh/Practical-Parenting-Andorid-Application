@@ -229,8 +229,8 @@ public class TimeoutActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    timeleftinmilliseconds = 5000;
-                    selectedtime = 5000;
+                    timeleftinmilliseconds = 60000;
+                    selectedtime = 60000;
                 }
                 if (position == 1) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
