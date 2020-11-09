@@ -197,7 +197,7 @@ public class CoinFlipActivity extends AppCompatActivity {
                 front.start();
 
                 //Judge if the child win the Flipping and push into the history
-                //If no choice of head or tails, no record of history
+                //If no choice of heads or tails, no record of history
                 int c = 2;
                 if(choise == null)
                     return;
