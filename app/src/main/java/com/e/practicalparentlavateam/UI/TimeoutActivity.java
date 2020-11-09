@@ -322,6 +322,9 @@ public class TimeoutActivity extends AppCompatActivity {
             alrmoffbtn.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.INVISIBLE);
             notif();
+            //Added vibrator
+            Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            alarm.vibrate(5000);
 
             //This handler is for removing the alarmoff button after a period of time
             Handler cancelnotificiaton = new Handler();

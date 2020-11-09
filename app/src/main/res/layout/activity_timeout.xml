@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/backgroundGreen"
     android:foregroundTint="#FFFFFF"
     tools:context=".UI.TimeoutActivity">
 
     <RelativeLayout
         android:layout_width="407dp"
         android:layout_height="493dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -41,7 +45,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="105dp"
-            android:background="#A6DFD7EA"
+            android:background="#8CDFD7EA"
             android:gravity="center"
             android:textColor="#B4000000"
             android:textSize="64sp" />

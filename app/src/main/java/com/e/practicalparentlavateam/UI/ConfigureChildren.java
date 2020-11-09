@@ -51,9 +51,6 @@ public class ConfigureChildren extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         children = ChildrenManager.getInstance();
         getChildList();
-        //children.add("Gurjeet");
-
-
 
         setupFloatingActionButton();
         setupChildrenView();
@@ -152,7 +149,6 @@ public class ConfigureChildren extends AppCompatActivity {
                 break;
         }
     }
-    //testcommentfor test commit
-    //master merged to branch 3
+
 }
 

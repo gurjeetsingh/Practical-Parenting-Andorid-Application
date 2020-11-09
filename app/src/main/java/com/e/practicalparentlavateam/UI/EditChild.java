@@ -55,12 +55,9 @@ public class EditChild extends AppCompatActivity {
 
         //initalize values
         extractIndexFromIntent();
-        //etName2.setHint(children.get(childEditingIndex));
 
         setupButtonDelete();
         setupButtonOk();
-
-
     }
 
     private void setupButtonDelete() {
@@ -87,7 +84,6 @@ public class EditChild extends AppCompatActivity {
                         // Extract data from screen
                         String name = etName2.getText().toString();
 
-
                         // Create new data object
                         children = ChildrenManager.getInstance();
                         children.set(childEditingIndex, name);
@@ -107,5 +103,4 @@ public class EditChild extends AppCompatActivity {
         System.out.println(json);
         editor.commit();     // This line is IMPORTANT !!!
     }
-
 }

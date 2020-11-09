@@ -28,7 +28,7 @@
         android:layout_marginTop="8dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
-        android:text="History Starts Here"
+        android:text="@string/history_starts_here"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

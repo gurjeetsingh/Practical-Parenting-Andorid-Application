@@ -1,4 +1,4 @@
-/*This is the class to define the data of the history item*/
+/*This is the class to define the data of the history item.*/
 
 package com.e.practicalparentlavateam.Model;
 
