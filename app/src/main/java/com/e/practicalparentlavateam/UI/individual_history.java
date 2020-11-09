@@ -1,3 +1,5 @@
+/*Show the individual history of chosen child*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
