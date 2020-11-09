@@ -190,7 +190,7 @@ public class CoinFlipActivity extends AppCompatActivity {
                         if(num == 1){
                             //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
                             coinImage.setImageResource(R.drawable.coin_front);
-                            result.setText("Head");
+                            result.setText("Heads");
                             result.setVisibility(View.VISIBLE);
                         }
                         else{
