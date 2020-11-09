@@ -20,5 +20,6 @@
     <color name="titlecolour">#75B6BD6A</color>
     <color name="yellowish">#edf5e1</color>
     <color name="pastelBlue2">#c1e0ec</color>
+    <color name="backgroundGreen">#edf5e1</color>
 
 </resources>
