@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -56,10 +55,6 @@ public class CoinFlipActivity extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
-        Intent i = getIntent();
-        String message = i.getStringExtra("hint");
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
 
         getName();
         loadLastTimeChild();
@@ -171,6 +166,8 @@ public class CoinFlipActivity extends AppCompatActivity {
     }
 
     private void flipCoin() {
+        final TextView result = findViewById(R.id.resultOfFlipping);
+        result.setVisibility(View.INVISIBLE);
         //https://stackoverflow.com/questions/46111262/card-flip-animation-in-android
         final Random random = new Random();
         final ImageView coinImage = (ImageView) findViewById(R.id.front);
@@ -193,9 +190,13 @@ public class CoinFlipActivity extends AppCompatActivity {
                         if(num == 1){
                             //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
                             coinImage.setImageResource(R.drawable.coin_front);
+                            result.setText("Head");
+                            result.setVisibility(View.VISIBLE);
                         }
                         else{
                             coinImage.setImageResource(R.drawable.coin_back);
+                            result.setText("Tails");
+                            result.setVisibility(View.VISIBLE);
                         }
                         back.start();
                     }

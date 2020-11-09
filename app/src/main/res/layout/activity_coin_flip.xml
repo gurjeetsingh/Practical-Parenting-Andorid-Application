@@ -85,8 +85,10 @@
         android:alpha="1.0"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.247"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintVertical_bias="0.56"
         app:srcCompat="@drawable/coin_front" />
 
     <Button
@@ -259,4 +261,20 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/resultOfFlipping"
+        android:layout_width="98dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="276dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/front" />
 </androidx.constraintlayout.widget.ConstraintLayout>
