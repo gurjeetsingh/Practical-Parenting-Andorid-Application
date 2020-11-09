@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="#A65F9595"
+        android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:text="Name"
         android:textColor="#FFFFFF"
