@@ -16,12 +16,13 @@
 
     <string name="history">History</string>
     <string name="flip">Flip</string>
-    <string name="head">Head</string>
+    <string name="head">Heads</string>
     <string name="tails">Tails</string>
     <string name="deletehistory">Delete</string>
-    <string name="LastTime">Last Time:</string>
-    <string name="headOrtail">Head or Tails</string>
-    <string name="title_activity_child_details">ChildDetails</string>
+    <string name="LastTime">Chose Last:</string>
+    <string name="SelectedSide">Selected Side:</string>
+    <string name="headOrtail">Heads or Tails</string>
+    <string name="title_activity_child_details">Child Details</string>
 
     <string name="Choice">Choise:</string>
     <!-- Strings used for fragments for navigation -->
