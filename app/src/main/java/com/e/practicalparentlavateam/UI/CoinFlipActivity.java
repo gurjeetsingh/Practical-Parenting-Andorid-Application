@@ -1,4 +1,5 @@
 /*This is the activity for flipping coin, and it include Flipping history*/
+//merged with master
 
 package com.e.practicalparentlavateam.UI;
 
@@ -22,7 +23,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.e.practicalparentlavateam.Model.HistoryItem;
 import com.e.practicalparentlavateam.Model.HistoryManager;
@@ -39,7 +39,7 @@ public class CoinFlipActivity extends AppCompatActivity {
 
     private String name = "";
     private HistoryManager manager;
-    private String choise;
+    private String choice;
     private int win = R.drawable.win;
     private int lose = R.drawable.lose;
     private int coinFront = R.drawable.coin_front;
@@ -62,7 +62,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         getHistory();
         history();
         individualHistory();
-        head();
+        heads();
         tails();
         flipCoin();
         deleteHistory();
@@ -74,7 +74,7 @@ public class CoinFlipActivity extends AppCompatActivity {
             indHisbt.setVisibility(View.INVISIBLE);
         else {
             indHisbt.setVisibility(View.VISIBLE);
-            indHisbt.setText(name + "'s");
+            indHisbt.setText(name + "'s history");
         }
         indHisbt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,21 +145,21 @@ public class CoinFlipActivity extends AppCompatActivity {
         tails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choise = "Tails";
-                TextView showChoise = (TextView) findViewById(R.id.choise);
-                showChoise.setText(choise);
+                choice = "Tails";
+                TextView showChoice = (TextView) findViewById(R.id.choice);
+                showChoice.setText(choice);
             }
         });
     }
 
-    private void head() {
-        Button head = (Button) findViewById(R.id.head);
-        head.setOnClickListener(new View.OnClickListener() {
+    private void heads() {
+        Button heads = (Button) findViewById(R.id.heads);
+        heads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choise = "Head";
-                TextView showChoise = (TextView) findViewById(R.id.choise);
-                showChoise.setText(choise);
+                choice = "Heads";
+                TextView showChoice = (TextView) findViewById(R.id.choice);
+                showChoice.setText(choice);
             }
         });
     }
@@ -199,11 +199,11 @@ public class CoinFlipActivity extends AppCompatActivity {
                 //Judge if the child win the Flipping and push into the history
                 //If no choice of heads or tails, no record of history
                 int c = 2;
-                if(choise == null)
+                if(choice == null)
                     return;
-                else if(choise.equals("Tails"))
+                else if(choice.equals("Tails"))
                     c = 0;
-                else if(choise.equals("Head"))
+                else if(choice.equals("Heads"))
                     c = 1;
                 int image;
                 int coinID;
@@ -214,7 +214,7 @@ public class CoinFlipActivity extends AppCompatActivity {
                 if(c == num) {
                     image = win;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(), name, choise, image, coinID));
+                    manager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
                     HistoryManager.setInstance(manager);
                     SaveName(name);
                     Save(manager);
@@ -222,7 +222,7 @@ public class CoinFlipActivity extends AppCompatActivity {
                 else {
                     image = lose;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(),name, choise, image, coinID));
+                    manager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
                     HistoryManager.setInstance(manager);
                     SaveName(name);
                     Save(manager);

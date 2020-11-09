@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/calming"
+    android:background="@drawable/background"
     android:foregroundTint="#FFFFFF"
     tools:context=".UI.TimeoutActivity">
 
     <RelativeLayout
-        android:layout_width="404dp"
-        android:layout_height="489dp"
+        android:layout_width="407dp"
+        android:layout_height="493dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -18,90 +18,107 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.253">
 
-        <ImageView
-            android:id="@+id/timeoutimage"
-            android:layout_width="match_parent"
-            android:layout_height="362dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="28dp"
-            app:srcCompat="@drawable/timeouttimer" />
-
         <Button
             android:id="@+id/timepushbtn"
-            android:layout_width="124dp"
-            android:layout_height="wrap_content"
+            android:layout_width="132dp"
+            android:layout_height="62dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="13dp"
-            android:layout_marginBottom="178dp"
-            android:text="@string/start_timer" />
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="108dp"
+            android:background="@drawable/calm_rounded_buttons"
+            android:fontFamily="@font/imprima"
+            android:text="@string/start_timer"
+            android:textColor="#ED171732"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/timertext"
-            android:layout_width="323dp"
+            android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="91dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="105dp"
+            android:background="#A6DFD7EA"
             android:gravity="center"
             android:textColor="#B4000000"
             android:textSize="64sp" />
 
         <Button
             android:id="@+id/pausebtn"
-            android:layout_width="104dp"
-            android:layout_height="wrap_content"
+            android:layout_width="132dp"
+            android:layout_height="62dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="179dp"
-            android:visibility="invisible"
-            android:text="@string/timer1" />
+            android:layout_marginEnd="26dp"
+            android:layout_marginBottom="106dp"
+            android:background="@drawable/calm_rounded_buttons"
+            android:fontFamily="@font/imprima"
+            android:text="@string/timer1"
+            android:textColor="#ED171732"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
 
         <Spinner
             android:id="@+id/timespinner"
-            android:layout_width="135dp"
-            android:layout_height="22dp"
+            android:layout_width="130dp"
+            android:layout_height="42dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="129dp"
-            android:layout_marginTop="61dp"
-            android:background="@color/silver"
+            android:layout_marginStart="138dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/calm_rounded_buttons"
             android:popupBackground="@color/darksilver"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/customtime"
-            android:layout_width="160dp"
-            android:layout_height="37dp"
+            android:layout_width="159dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="128dp"
-            android:layout_marginBottom="130dp"
-            android:text="@string/timer2" />
+            android:layout_marginStart="124dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/calm_rounded_buttons"
+            android:fontFamily="@font/imprima"
+            android:text="@string/timer2"
+            android:textColor="#ED171732"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/alarmoff"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="57dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="13dp"
+            android:background="@drawable/calm_rounded_buttons"
+            android:fontFamily="@font/imprima"
             android:text="@string/timer3"
-            android:visibility="invisible"
-            android:textSize="10sp" />
+            android:textColor="#ED171732"
+            android:textSize="18sp"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/resetbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="400dp"
-            android:text="@string/timer4" />
+            android:layout_marginBottom="409dp"
+            android:background="@drawable/calm_rounded_buttons"
+            android:fontFamily="@font/imprima"
+            android:text="@string/timer4"
+            android:textColor="#ED171732"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

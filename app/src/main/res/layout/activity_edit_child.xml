@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".UI.EditChild">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,8 +21,9 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_edit_child" />
-
+    <include
+        layout="@layout/content_edit_child"
+        android:background="@drawable/background" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

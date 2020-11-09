@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimary">#445871</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="forrest">#228B22</color>
@@ -15,7 +15,10 @@
     <color name="babyblue">#89CFF0</color>
     <color name="pastelBlue">#ADD8E6</color>
     <color name="backgroundGrey">#aab8bb</color>
-    <color name="emraldSea">#5f9595</color>
+    <color name="emeraldSea">#5f9595</color>
     <color name="testGreen1">#379683</color>
+    <color name="titlecolour">#75B6BD6A</color>
+    <color name="yellowish">#edf5e1</color>
+    <color name="pastelBlue2">#c1e0ec</color>
 
 </resources>
