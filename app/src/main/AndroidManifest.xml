@@ -12,7 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.individual_history"></activity>
+        <activity android:name=".UI.SelectChildren"
+            android:parentActivityName=".UI.MainMenu"></activity>
+        <activity android:name=".UI.chooseSide"
+            android:parentActivityName=".UI.SelectChildren"/>
+        <activity android:name=".UI.individual_history"
+            android:parentActivityName=".UI.CoinFlipActivity"/>
         <activity
             android:name=".UI.Choose_children"
             android:label="@string/title_activity_select_child"

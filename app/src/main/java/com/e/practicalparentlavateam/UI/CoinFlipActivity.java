@@ -36,11 +36,12 @@ import java.util.List;
 import java.util.Random;
 
 public class CoinFlipActivity extends AppCompatActivity {
+    private static final String EXTRA_CHOICE = "com.e.practicalparentlavateam.UI - the choice";
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
 
     private String name = "";
     private HistoryManager manager;
-    private String choice;
+    private String choice = "";
     private int win = R.drawable.win;
     private int lose = R.drawable.lose;
     private int coinFront = R.drawable.coin_front;
@@ -58,13 +59,10 @@ public class CoinFlipActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         getName();
-        loadLastTimeChild();
-        chooseChild();
+        getChoice();
         getHistory();
         history();
         individualHistory();
-        heads();
-        tails();
         flipCoin();
         deleteHistory();
     }
@@ -86,49 +84,6 @@ public class CoinFlipActivity extends AppCompatActivity {
         });
     }
 
-    /*Get the child who flipped last time and choose the child this time to flip*/
-    private void loadLastTimeChild() {
-        SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
-        String LastTimeName = sp.getString("name",null);
-        System.out.println(LastTimeName);
-        TextView lastTimeChild = findViewById(R.id.LastTimeChild);
-        if(LastTimeName == null){
-            lastTimeChild.setText("None");
-        }
-        else{
-            lastTimeChild.setText(LastTimeName);
-            SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
-            Gson gson = new Gson();
-            String json = prefs.getString("childPrefs", null);
-            Type type = new TypeToken<List<String>>() {}.getType();
-            List<String> childList = gson.fromJson(json, type);
-
-            for(int i=0; i<childList.size(); i++){
-                if(childList.get(i).equals(LastTimeName)){
-                    int num = (i+1)%childList.size();
-                    if(name == null) {
-                        name = childList.get(num);
-                        TextView text = (TextView) findViewById(R.id.name);
-                        text.setText(name);
-                    }
-                    break;
-                }
-            }
-        }
-    }
-
-    private void chooseChild() {
-        TextView text = (TextView) findViewById(R.id.name);
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = Choose_children.makeIntent2(CoinFlipActivity.this);
-                startActivity(intent);
-
-            }
-        });
-    }
-
     private void deleteHistory() {
         Button delete = (Button) findViewById(R.id.delethistory);
         delete.setOnClickListener(new View.OnClickListener() {
@@ -138,30 +93,6 @@ public class CoinFlipActivity extends AppCompatActivity {
                 HistoryManager.setInstance(new HistoryManager());
                 SaveHistory(manager);
                 Toast.makeText(CoinFlipActivity.this,"You Delete Flipping History!",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void tails() {
-        Button tails = (Button) findViewById(R.id.tails);
-        tails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choice = "Tails";
-                TextView showChoice = (TextView) findViewById(R.id.choice);
-                showChoice.setText(choice);
-            }
-        });
-    }
-
-    private void heads() {
-        Button heads = (Button) findViewById(R.id.heads);
-        heads.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choice = "Heads";
-                TextView showChoice = (TextView) findViewById(R.id.choice);
-                showChoice.setText(choice);
             }
         });
     }
@@ -275,22 +206,30 @@ public class CoinFlipActivity extends AppCompatActivity {
     private void getName() {
         Intent i = getIntent();
         name = i.getStringExtra(EXTRA_NAME);
-        TextView text = (TextView) findViewById(R.id.name);
+        TextView text = (TextView) findViewById(R.id.ChildName);
         if(name != null)
             text.setText(name);
     }
 
-    public static Intent makeIntent2(Context context, String name) {
+    private void getChoice() {
+        Intent i = getIntent();
+        choice = i.getStringExtra(EXTRA_CHOICE);
+        TextView text = (TextView) findViewById(R.id.choice);
+        if(choice != null)
+            text.setText(choice);
+    }
+
+    public static Intent makeLaunch1(Context context) {
+        return new Intent(context, CoinFlipActivity.class);
+    }
+
+    public static Intent makeIntent3(Context context, String choice, String name){
         Intent intent = new Intent(context, CoinFlipActivity.class);
+        intent.putExtra(EXTRA_CHOICE, choice);
         intent.putExtra(EXTRA_NAME, name);
         return intent;
     }
 
-    public static Intent makeIntent(Context context, String message){
-        Intent intent = new Intent(context, CoinFlipActivity.class);
-        intent.putExtra("hint", message);
-        return intent;
-    }
     @Override
     public void onBackPressed() {
         //clear the old stack

@@ -1,0 +1,118 @@
+package com.e.practicalparentlavateam.UI;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.e.practicalparentlavateam.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
+public class SelectChildren extends AppCompatActivity {
+    private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
+    private String name = null;
+
+    public static Intent makeLaunch(Context context, String name) {
+        Intent intent = new Intent(context, SelectChildren.class);
+        intent.putExtra(EXTRA_NAME, name);
+        return intent;
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, SelectChildren.class);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_select_children);
+
+        getName();
+        loadLastTimeChild();
+        chooseChild();
+        skip();
+        chooseside();
+    }
+
+    private void chooseside() {
+        Button choose = findViewById(R.id.chooseSide);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = chooseSide.makeLaunch(SelectChildren.this, name);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void skip() {
+        Button skip = findViewById(R.id.skip);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CoinFlipActivity.makeLaunch1(SelectChildren.this);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    /*Get the child who flipped last time and choose the child this time to flip*/
+    private void loadLastTimeChild() {
+        SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
+        String LastTimeName = sp.getString("name",null);
+        TextView lastTimeChild = findViewById(R.id.LastTimeChild);
+        if(LastTimeName == null){
+            lastTimeChild.setText("None");
+        }
+        else{
+            lastTimeChild.setText(LastTimeName);
+            SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = prefs.getString("childPrefs", null);
+            Type type = new TypeToken<List<String>>() {}.getType();
+            List<String> childList = gson.fromJson(json, type);
+
+            for(int i=0; i<childList.size(); i++){
+                if(childList.get(i).equals(LastTimeName)){
+                    int num = (i+1)%childList.size();
+                    if(name == null) {
+                        name = childList.get(num);
+                        System.out.println(name);
+                        TextView text = (TextView) findViewById(R.id.name);
+                        text.setText(name);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    private void chooseChild() {
+        TextView text = (TextView) findViewById(R.id.name);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = Choose_children.makeIntent2(SelectChildren.this);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void getName() {
+        Intent i = getIntent();
+        name = i.getStringExtra(EXTRA_NAME);
+        TextView text = (TextView) findViewById(R.id.name);
+        text.setText(name);
+    }
+}
