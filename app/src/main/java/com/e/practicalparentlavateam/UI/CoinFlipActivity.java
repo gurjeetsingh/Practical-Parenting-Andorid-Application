@@ -123,6 +123,7 @@ public class CoinFlipActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = Choose_children.makeIntent2(CoinFlipActivity.this);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -93,6 +93,7 @@ public class Choose_children extends AppCompatActivity {
 
                 Intent intent = CoinFlipActivity.makeIntent2(Choose_children.this, clickedName);
                 startActivity(intent);
+                finish();
             }
         });
     }
