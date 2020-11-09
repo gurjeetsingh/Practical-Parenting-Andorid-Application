@@ -13,7 +13,8 @@
         android:layout_width="104dp"
         android:layout_height="56dp"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -22,7 +23,8 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
         android:id="@+id/head"
@@ -78,12 +80,11 @@
         android:id="@+id/front"
         android:layout_width="185dp"
         android:layout_height="193dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:alpha="1.0"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:srcCompat="@drawable/coin_front" />
@@ -122,8 +123,9 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="104dp"
         android:layout_height="56dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -132,14 +134,15 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="#A6445871"
+        android:layout_width="158dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_corners_buttons"
         android:clickable="true"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -149,7 +152,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.802"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LastTimeChild" />
 
@@ -157,7 +160,7 @@
         android:id="@+id/LastTimeChild"
         android:layout_width="94dp"
         android:layout_height="31dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -174,7 +177,7 @@
         android:id="@+id/LastTime"
         android:layout_width="133dp"
         android:layout_height="31dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="88dp"
         android:layout_marginTop="230dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
@@ -185,14 +188,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/LastTimeChild"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/flipCoinToolbar" />
+        app:layout_constraintTop_toTopOf="@+id/flipCoinToolbar"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/childHistory"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="144dp"
         android:layout_height="56dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -200,8 +205,9 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/delethistory"
-        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toEndOf="@+id/history"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
@@ -237,4 +243,20 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:text="Select child: "
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/name"
+        app:layout_constraintEnd_toStartOf="@+id/name"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
