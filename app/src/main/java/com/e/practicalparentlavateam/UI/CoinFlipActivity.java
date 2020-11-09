@@ -57,10 +57,6 @@ public class CoinFlipActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        Intent i = getIntent();
-        String message = i.getStringExtra("hint");
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
-
         getName();
         loadLastTimeChild();
         chooseChild();
