@@ -15,6 +15,7 @@
         <activity android:name=".UI.individual_history"></activity>
         <activity
             android:name=".UI.Choose_children"
+            android:label="@string/title_activity_select_child"
             android:parentActivityName=".UI.CoinFlipActivity" />
         <activity
             android:name=".UI.EditChild"
@@ -26,12 +27,15 @@
         <activity android:name=".UI.MainMenu" />
         <activity
             android:name=".UI.TimeoutActivity"
+            android:label="@string/title_activity_timeout_timer"
             android:parentActivityName=".UI.MainMenu" />
         <activity
             android:name=".UI.ConfigureChildren"
+            android:label="@string/title_activity_configure_children"
             android:parentActivityName=".UI.MainMenu" />
         <activity
             android:name=".UI.CoinFlipActivity"
+            android:label="@string/title_activity_Flip_coin"
             android:parentActivityName=".UI.MainMenu" />
         <activity
             android:name=".UI.FlippingHistory"

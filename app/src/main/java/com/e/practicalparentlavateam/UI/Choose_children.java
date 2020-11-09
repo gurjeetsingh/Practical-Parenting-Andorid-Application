@@ -40,9 +40,6 @@ public class Choose_children extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.choose_child);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-
         //setupChildrenView();
         populateListView();
         registClickCallback();
