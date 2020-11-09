@@ -1,5 +1,5 @@
 /*This is the activity for flipping coin, and it include Flipping history*/
-//test
+//merged with master
 
 package com.e.practicalparentlavateam.UI;
 
