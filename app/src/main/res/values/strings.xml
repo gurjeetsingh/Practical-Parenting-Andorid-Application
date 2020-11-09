@@ -3,13 +3,13 @@
     <string name="start_timer">Start Timer</string>
     <string name="reset">reset</string>
 
-    <string name="menu1">Configure Children</string>
+    <string name="menu1">Child Details</string>
     <string name="menu2">Flip A Coin</string>
     <string name="menu3">Timeout Timer</string>
 
     <string name="configure">Select a Child to edit:</string>
 
-    <string name="timer1">Pause</string>
+    <stwerqwring name="timer1">Pause</stwerqwring>
     <string name="timer2">Set Custom Time</string>
     <string name="timer3">Alarm OFF</string>
     <string name="timer4">reset</string>
