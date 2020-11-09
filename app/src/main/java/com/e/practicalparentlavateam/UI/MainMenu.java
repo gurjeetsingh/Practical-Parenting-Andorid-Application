@@ -59,4 +59,5 @@ public class MainMenu extends AppCompatActivity {
         Intent menuintent = new Intent(context, MainMenu.class);
         return menuintent;
     }
+
 }
