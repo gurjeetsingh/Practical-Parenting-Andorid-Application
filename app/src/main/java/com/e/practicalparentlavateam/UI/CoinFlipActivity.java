@@ -73,7 +73,7 @@ public class CoinFlipActivity extends AppCompatActivity {
             indHisbt.setVisibility(View.INVISIBLE);
         else {
             indHisbt.setVisibility(View.VISIBLE);
-            indHisbt.setText(name + "'s");
+            indHisbt.setText(name + "'s history");
         }
         indHisbt.setOnClickListener(new View.OnClickListener() {
             @Override
