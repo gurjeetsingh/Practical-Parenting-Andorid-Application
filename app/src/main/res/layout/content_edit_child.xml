@@ -14,7 +14,7 @@
         android:layout_marginEnd="8dp"
         android:background="#A65F9595"
         android:ems="10"
-        android:hint="ex: Gurjeet"
+        android:hint="@string/ex_gurjeet"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
@@ -22,7 +22,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editChild" />
+        app:layout_constraintTop_toBottomOf="@+id/editChild"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/editChild"
@@ -32,7 +33,7 @@
         android:layout_marginTop="16dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
-        android:text="Name"
+        android:text="@string/name"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -48,7 +49,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
-        android:text="Delete"
+        android:text="@string/delete"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -66,7 +67,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
-        android:text="Save"
+        android:text="@string/save"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
