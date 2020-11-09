@@ -229,8 +229,8 @@ public class TimeoutActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    timeleftinmilliseconds = 60000;
-                    selectedtime = 60000;
+                    timeleftinmilliseconds = 5000;
+                    selectedtime = 5000;
                 }
                 if (position == 1) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -322,6 +322,8 @@ public class TimeoutActivity extends AppCompatActivity {
             alrmoffbtn.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.INVISIBLE);
             notif();
+            Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            alarm.vibrate(5000);
 
             //This handler is for removing the alarmoff button after a period of time
             Handler cancelnotificiaton = new Handler();
