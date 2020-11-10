@@ -1,3 +1,5 @@
+/*Select child or just skip to flip*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.ActionBar;

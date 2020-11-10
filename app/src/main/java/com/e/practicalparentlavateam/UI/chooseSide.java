@@ -1,3 +1,5 @@
+/*Choose side*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
