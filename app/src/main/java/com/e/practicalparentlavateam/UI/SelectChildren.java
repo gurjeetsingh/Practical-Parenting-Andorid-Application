@@ -94,16 +94,34 @@ public class SelectChildren extends AppCompatActivity {
             Type type = new TypeToken<List<String>>() {}.getType();
             List<String> childList = gson.fromJson(json, type);
 
-            for(int i=0; i<childList.size(); i++){
-                if(childList.get(i).equals(LastTimeName)){
-                    int num = (i+1)%childList.size();
-                    if(name == null) {
-                        name = childList.get(num);
+            if(childList.size()==0){
+                name = null;
+                TextView text = (TextView) findViewById(R.id.name);
+                text.setText("No child");
+            }
+
+            else {
+                int i = 0;
+                while (i < childList.size()) {
+                    if (childList.get(i).equals(LastTimeName)) {
+                        int num = (i + 1) % childList.size();
+                        if (name == null) {
+                            name = childList.get(num);
+                            System.out.println(name);
+                            TextView text = (TextView) findViewById(R.id.name);
+                            text.setText(name);
+                        }
+                        break;
+                    }
+                    i++;
+                }
+                if (i == childList.size()) {
+                    if (name == null) {
+                        name = childList.get(0);
                         System.out.println(name);
                         TextView text = (TextView) findViewById(R.id.name);
                         text.setText(name);
                     }
-                    break;
                 }
             }
         }
