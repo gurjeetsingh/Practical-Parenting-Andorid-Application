@@ -80,6 +80,12 @@ public class SelectChildren extends AppCompatActivity {
 
     /*Get the child who flipped last time and choose the child this time to flip*/
     private void loadLastTimeChild() {
+        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString("childPrefs", null);
+        Type type = new TypeToken<List<String>>() {}.getType();
+        List<String> childList = gson.fromJson(json, type);
+
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
         TextView lastTimeChild = findViewById(R.id.LastTimeChild);
@@ -88,40 +94,27 @@ public class SelectChildren extends AppCompatActivity {
         }
         else{
             lastTimeChild.setText(LastTimeName);
-            SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
-            Gson gson = new Gson();
-            String json = prefs.getString("childPrefs", null);
-            Type type = new TypeToken<List<String>>() {}.getType();
-            List<String> childList = gson.fromJson(json, type);
 
-            if(childList.size()==0){
-                name = null;
-                TextView text = (TextView) findViewById(R.id.name);
-                text.setText("No child");
-            }
-
-            else {
-                int i = 0;
-                while (i < childList.size()) {
-                    if (childList.get(i).equals(LastTimeName)) {
-                        int num = (i + 1) % childList.size();
-                        if (name == null) {
-                            name = childList.get(num);
-                            System.out.println(name);
-                            TextView text = (TextView) findViewById(R.id.name);
-                            text.setText(name);
-                        }
-                        break;
-                    }
-                    i++;
-                }
-                if (i == childList.size()) {
+            int i = 0;
+            while (i < childList.size()) {
+                if (childList.get(i).equals(LastTimeName)) {
+                    int num = (i + 1) % childList.size();
                     if (name == null) {
-                        name = childList.get(0);
+                        name = childList.get(num);
                         System.out.println(name);
                         TextView text = (TextView) findViewById(R.id.name);
                         text.setText(name);
                     }
+                    break;
+                }
+                i++;
+            }
+            if (i == childList.size()) {
+                if (name == null) {
+                    name = childList.get(0);
+                    System.out.println(name);
+                    TextView text = (TextView) findViewById(R.id.name);
+                    text.setText(name);
                 }
             }
         }
