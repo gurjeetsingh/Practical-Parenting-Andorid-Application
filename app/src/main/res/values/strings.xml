@@ -27,6 +27,7 @@
     <string name="title_activity_Flip_coin">Flip Coin</string>
     <string name="title_activity_configure_children">Configure your Children</string>
     <string name="title_activity_timeout_timer">Timeout Timer</string>
+    <string name="title_select_children">Select Children</string>
 
     <string name="Choice">Choice:</string>
     <!-- Strings used for fragments for navigation -->

@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".UI.SelectChildren"
-            android:parentActivityName=".UI.MainMenu"></activity>
+            android:parentActivityName=".UI.MainMenu"
+            android:label="@string/title_select_children"></activity>
         <activity android:name=".UI.chooseSide"
             android:parentActivityName=".UI.SelectChildren"/>
         <activity android:name=".UI.individual_history"

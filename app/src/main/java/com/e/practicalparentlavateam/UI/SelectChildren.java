@@ -1,6 +1,8 @@
 package com.e.practicalparentlavateam.UI;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +38,12 @@ public class SelectChildren extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_children);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.selectChildToolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
         getName();
         loadLastTimeChild();
         chooseChild();
@@ -50,7 +58,6 @@ public class SelectChildren extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = chooseSide.makeLaunch(SelectChildren.this, name);
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -114,5 +121,15 @@ public class SelectChildren extends AppCompatActivity {
         name = i.getStringExtra(EXTRA_NAME);
         TextView text = (TextView) findViewById(R.id.name);
         text.setText(name);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //clear the old stack
+        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        Intent mainintent=MainMenu.makeIntent(SelectChildren.this);
+        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainintent);
+        SelectChildren.this.finish();
     }
 }
