@@ -19,7 +19,7 @@
     <string name="head">Heads</string>
     <string name="tails">Tails</string>
     <string name="deletehistory">Delete</string>
-    <string name="LastTime">Chose Last:</string>
+    <string name="LastTime">Last time:</string>
     <string name="SelectedSide">Selected Side:</string>
     <string name="headOrtail">Heads or Tails</string>
     <string name="title_activity_child_details">Child Details</string>
