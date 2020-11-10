@@ -54,4 +54,5 @@
     <string name="save">Save</string>
     <string name="ex_gurjeet">ex: Gurjeet</string>
     <string name="child_history">Button</string>
+    <string name="last_picked">Last Child</string>
 </resources>
