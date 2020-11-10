@@ -88,7 +88,7 @@ public class Choose_children extends AppCompatActivity {
                 /*TextView text = (TextView)findViewById(R.id.name);
                 text.setText(clickedName);*/
 
-                Intent intent = CoinFlipActivity.makeIntent2(Choose_children.this, clickedName);
+                Intent intent = SelectChildren.makeLaunch(Choose_children.this, clickedName);
                 startActivity(intent);
                 finish();
             }
@@ -96,7 +96,7 @@ public class Choose_children extends AppCompatActivity {
     }
 
     public static Intent makeIntent2(Context context){
-        Intent intent = new Intent(context,Choose_children.class);
+        Intent intent = new Intent(context, Choose_children.class);
         return intent;
     }
 }
