@@ -53,6 +53,8 @@ public class SelectChildren extends AppCompatActivity {
 
     private void chooseside() {
         Button choose = findViewById(R.id.chooseSide);
+        if(name == null)
+            choose.setVisibility(View.INVISIBLE);
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
