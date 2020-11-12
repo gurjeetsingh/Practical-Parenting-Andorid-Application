@@ -59,17 +59,23 @@ public class Choose_children extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
-        int index = 0;
-        for(int i = 0; i < children.getChildren().size(); i++){
-            if(children.getChildren().get(i).equals(LastTimeName))
-                index = i+1;
+        if(LastTimeName == null){
+            currentChildrenList = children;
+            currentChildrenList.add("nobody");
         }
-        while(!children.getChildren().get(index).equals(LastTimeName)){
-            currentChildrenList.add(children.getChildren().get(index));
-            index = (index + 1) % children.getChildren().size();
+        else {
+            int index = 0;
+            for (int i = 0; i < children.getChildren().size(); i++) {
+                if (children.getChildren().get(i).equals(LastTimeName))
+                    index = (i + 1) % children.getChildren().size();
+            }
+            while (!children.getChildren().get(index).equals(LastTimeName)) {
+                currentChildrenList.add(children.getChildren().get(index));
+                index = (index + 1) % children.getChildren().size();
+            }
+            currentChildrenList.add(LastTimeName);
+            currentChildrenList.add("nobody");
         }
-        currentChildrenList.add(LastTimeName);
-        currentChildrenList.add("nobody");
 
         adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.listOfChildren);
