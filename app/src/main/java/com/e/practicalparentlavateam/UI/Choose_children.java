@@ -30,6 +30,7 @@ import java.util.List;
 
 public class Choose_children extends AppCompatActivity {
     private ChildrenManager children;
+    private ChildrenManager currentChildrenList = new ChildrenManager();
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -55,6 +56,21 @@ public class Choose_children extends AppCompatActivity {
         List<String> tempList = gson.fromJson(json, type);
         if(tempList != null)
             children.setChildren(tempList);
+
+        SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
+        String LastTimeName = sp.getString("name",null);
+        int index = 0;
+        for(int i = 0; i < children.getChildren().size(); i++){
+            if(children.getChildren().get(i).equals(LastTimeName))
+                index = i+1;
+        }
+        while(!children.getChildren().get(index).equals(LastTimeName)){
+            currentChildrenList.add(children.getChildren().get(index));
+            index = (index + 1) % children.getChildren().size();
+        }
+        currentChildrenList.add(LastTimeName);
+        currentChildrenList.add("nobody");
+
         adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.listOfChildren);
         list.setAdapter(adapter);
@@ -62,7 +78,7 @@ public class Choose_children extends AppCompatActivity {
 
     private class MyListAdapter extends ArrayAdapter<String> {
         public MyListAdapter(){
-            super(Choose_children.this, R.layout.children_view_for_list, children.getChildren());
+            super(Choose_children.this, R.layout.children_view_for_list, currentChildrenList.getChildren());
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
@@ -71,7 +87,7 @@ public class Choose_children extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
             }
 
-            String currentChild = children.getChildren().get(position);
+            String currentChild = currentChildrenList.getChildren().get(position);
             TextView makeView = (TextView)itemView.findViewById(R.id.childList);
             makeView.setText(currentChild);
             return itemView;
@@ -84,7 +100,7 @@ public class Choose_children extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                String clickedName = children.getChildren().get(position);
+                String clickedName = currentChildrenList.getChildren().get(position);
                 /*TextView text = (TextView)findViewById(R.id.name);
                 text.setText(clickedName);*/
 

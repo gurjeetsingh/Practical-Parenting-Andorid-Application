@@ -55,7 +55,7 @@ public class SelectChildren extends AppCompatActivity {
 
     private void chooseside() {
         Button choose = findViewById(R.id.chooseSide);
-        if(name == null)
+        if(name == null || name.equals("nobody"))
             choose.setVisibility(View.INVISIBLE);
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +91,7 @@ public class SelectChildren extends AppCompatActivity {
         TextView lastTimeChild = findViewById(R.id.LastTimeChild);
         if(LastTimeName == null){
             lastTimeChild.setText("None");
+
         }
         else{
             lastTimeChild.setText(LastTimeName);
@@ -134,8 +135,10 @@ public class SelectChildren extends AppCompatActivity {
     private void getName() {
         Intent i = getIntent();
         name = i.getStringExtra(EXTRA_NAME);
-        TextView text = (TextView) findViewById(R.id.name);
-        text.setText(name);
+        if(name != null) {
+            TextView text = (TextView) findViewById(R.id.name);
+            text.setText(name);
+        }
     }
 
     @Override
