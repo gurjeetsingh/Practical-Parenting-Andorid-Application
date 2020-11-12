@@ -49,7 +49,6 @@ public class MainMenu extends AppCompatActivity {
                 if(childList==null || childList.size() == 0){
                     Intent intent = CoinFlipActivity.makeLaunch1(MainMenu.this);
                     startActivity(intent);
-                    finish();
                 }
                 else {
                     //Following activity returns the help menu's intent
