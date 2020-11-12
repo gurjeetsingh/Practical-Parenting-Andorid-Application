@@ -19,9 +19,9 @@ import com.e.practicalparentlavateam.Model.HistoryItem;
 import com.e.practicalparentlavateam.Model.HistoryManager;
 import com.e.practicalparentlavateam.R;
 
-public class individual_history extends AppCompatActivity {
+public class IndividualHistory extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
-    HistoryManager manager = new HistoryManager();
+    HistoryManager history_manager = new HistoryManager();
     private ArrayAdapter<HistoryItem> adapter;
     private String name = null;
 
@@ -39,7 +39,7 @@ public class individual_history extends AppCompatActivity {
         HistoryManager temp = HistoryManager.getInstance();
         for(int i = 0; i < temp.getList().size(); i++){
             if(temp.getList().get(i).getName().equals(name))
-                manager.add(temp.getList().get(i));
+                history_manager.add(temp.getList().get(i));
         }
     }
 
@@ -50,7 +50,7 @@ public class individual_history extends AppCompatActivity {
     }
 
     private class MyListAdapter extends ArrayAdapter<HistoryItem> {
-        public MyListAdapter() {super(individual_history.this, R.layout.history_list, manager.getList());}
+        public MyListAdapter() {super(IndividualHistory.this, R.layout.history_list, history_manager.getList());}
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -59,7 +59,7 @@ public class individual_history extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.history_list, parent, false);
             }
 
-            HistoryItem currentItem = manager.getList().get(position);
+            HistoryItem currentItem = history_manager.getList().get(position);
 
             TextView timeView = (TextView) itemView.findViewById(R.id.item_time);
             timeView.setText(currentItem.getTime());
@@ -80,7 +80,7 @@ public class individual_history extends AppCompatActivity {
     }
 
     public static Intent makeIntent(Context context, String name){
-        Intent intent = new Intent(context, individual_history.class);
+        Intent intent = new Intent(context, IndividualHistory.class);
         intent.putExtra(EXTRA_NAME, name);
         return intent;
     }

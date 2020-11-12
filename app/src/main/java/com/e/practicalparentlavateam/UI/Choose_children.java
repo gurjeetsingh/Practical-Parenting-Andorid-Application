@@ -30,7 +30,7 @@ import java.util.List;
 
 public class Choose_children extends AppCompatActivity {
     private ChildrenManager children;
-    private ChildrenManager currentChildrenList = new ChildrenManager();
+    private ChildrenManager current_childrenList = new ChildrenManager();
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -60,8 +60,8 @@ public class Choose_children extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
         if(LastTimeName == null){
-            currentChildrenList = children;
-            currentChildrenList.add("nobody");
+            current_childrenList = children;
+            current_childrenList.add("nobody");
         }
         else {
             int index = 0;
@@ -70,11 +70,11 @@ public class Choose_children extends AppCompatActivity {
                     index = (i + 1) % children.getChildren().size();
             }
             while (!children.getChildren().get(index).equals(LastTimeName)) {
-                currentChildrenList.add(children.getChildren().get(index));
+                current_childrenList.add(children.getChildren().get(index));
                 index = (index + 1) % children.getChildren().size();
             }
-            currentChildrenList.add(LastTimeName);
-            currentChildrenList.add("nobody");
+            current_childrenList.add(LastTimeName);
+            current_childrenList.add("nobody");
         }
 
         adapter = new MyListAdapter();
@@ -84,19 +84,19 @@ public class Choose_children extends AppCompatActivity {
 
     private class MyListAdapter extends ArrayAdapter<String> {
         public MyListAdapter(){
-            super(Choose_children.this, R.layout.children_view_for_list, currentChildrenList.getChildren());
+            super(Choose_children.this, R.layout.children_view_for_list, current_childrenList.getChildren());
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
-            View itemView = convertView;
-            if(itemView == null){
-                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
+            View item_view = convertView;
+            if(item_view == null){
+                item_view = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
             }
 
-            String currentChild = currentChildrenList.getChildren().get(position);
-            TextView makeView = (TextView)itemView.findViewById(R.id.childList);
+            String currentChild = current_childrenList.getChildren().get(position);
+            TextView makeView = (TextView)item_view.findViewById(R.id.childList);
             makeView.setText(currentChild);
-            return itemView;
+            return item_view;
         }
     }
 
@@ -106,7 +106,7 @@ public class Choose_children extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                String clickedName = currentChildrenList.getChildren().get(position);
+                String clickedName = current_childrenList.getChildren().get(position);
                 /*TextView text = (TextView)findViewById(R.id.name);
                 text.setText(clickedName);*/
 

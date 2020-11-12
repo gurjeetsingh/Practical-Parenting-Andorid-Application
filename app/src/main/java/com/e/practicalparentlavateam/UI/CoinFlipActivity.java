@@ -39,12 +39,12 @@ public class CoinFlipActivity extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
 
     private String name = "";
-    private HistoryManager manager;
+    private HistoryManager history_manager;
     private String choice = "";
     private int win = R.drawable.win;
     private int lose = R.drawable.lose;
-    private int coinFront = R.drawable.coin_front;
-    private int coinBack = R.drawable.coin_back;
+    private int coin_front = R.drawable.coin_front;
+    private int coin_back = R.drawable.coin_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +60,45 @@ public class CoinFlipActivity extends AppCompatActivity {
         getName();
         getChoice();
         getHistory();
-        history();
-        individualHistory();
-        flipCoin();
-        deleteHistory();
+        historyButton();
+        individualHistoryButton();
+        flipCoinButton();
+        deleteHistoryButton();
     }
 
-    private void individualHistory() {
+    private void getName() {
+        Intent i = getIntent();
+        name = i.getStringExtra(EXTRA_NAME);
+        TextView text = (TextView) findViewById(R.id.ChildName);
+        if(name != null)
+            text.setText(name);
+    }
+
+    private void getChoice() {
+        Intent i = getIntent();
+        choice = i.getStringExtra(EXTRA_CHOICE);
+        TextView text = (TextView) findViewById(R.id.choice);
+        if(choice != null)
+            text.setText(choice);
+    }
+
+    private void getHistory() {
+        HistoryManager.setInstance(getData());
+        history_manager = HistoryManager.getInstance();
+    }
+
+    private void historyButton() {
+        Button his = (Button) findViewById(R.id.history);
+        his.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = FlippingHistory.makeLaunch(CoinFlipActivity.this);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void individualHistoryButton() {
         Button indHisbt = findViewById(R.id.childHistory);
         if(name == null)
             indHisbt.setVisibility(View.INVISIBLE);
@@ -83,20 +115,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteHistory() {
-        Button delete = (Button) findViewById(R.id.delethistory);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                manager = new HistoryManager();
-                HistoryManager.setInstance(new HistoryManager());
-                SaveHistory(manager);
-                Toast.makeText(CoinFlipActivity.this,"You Delete Flipping History!",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void flipCoin() {
+    private void flipCoinButton() {
         final TextView result = findViewById(R.id.resultOfFlipping);
         result.setVisibility(View.INVISIBLE);
         //https://stackoverflow.com/questions/46111262/card-flip-animation-in-android
@@ -146,25 +165,38 @@ public class CoinFlipActivity extends AppCompatActivity {
                 int image;
                 int coinID;
                 if(num == 1)
-                    coinID = coinFront;
+                    coinID = coin_front;
                 else
-                    coinID = coinBack;
+                    coinID = coin_back;
                 if(c == num) {
                     image = win;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
-                    HistoryManager.setInstance(manager);
+                    history_manager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
+                    HistoryManager.setInstance(history_manager);
                     SaveName(name);
-                    SaveHistory(manager);
+                    SaveHistory(history_manager);
                 }
                 else {
                     image = lose;
                     Date currentTime = new Date();
-                    manager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
-                    HistoryManager.setInstance(manager);
+                    history_manager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
+                    HistoryManager.setInstance(history_manager);
                     SaveName(name);
-                    SaveHistory(manager);
+                    SaveHistory(history_manager);
                 }
+            }
+        });
+    }
+
+    private void deleteHistoryButton() {
+        Button delete = (Button) findViewById(R.id.delethistory);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                history_manager = new HistoryManager();
+                HistoryManager.setInstance(new HistoryManager());
+                SaveHistory(history_manager);
+                Toast.makeText(CoinFlipActivity.this,"You Delete Flipping History!",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -174,11 +206,6 @@ public class CoinFlipActivity extends AppCompatActivity {
         Gson g = new Gson();
         String temp = sp.getString("history",null);
         return g.fromJson(temp,HistoryManager.class);
-    }
-
-    private void getHistory() {
-        HistoryManager.setInstance(getData());
-        manager = HistoryManager.getInstance();
     }
 
     private void SaveName(String n){
@@ -195,33 +222,6 @@ public class CoinFlipActivity extends AppCompatActivity {
         String temp = g.toJson(m);
         edit.putString("history",temp);
         edit.apply();
-    }
-
-    private void history() {
-        Button his = (Button) findViewById(R.id.history);
-        his.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = FlippingHistory.makeLaunch(CoinFlipActivity.this);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void getName() {
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
-        TextView text = (TextView) findViewById(R.id.ChildName);
-        if(name != null)
-            text.setText(name);
-    }
-
-    private void getChoice() {
-        Intent i = getIntent();
-        choice = i.getStringExtra(EXTRA_CHOICE);
-        TextView text = (TextView) findViewById(R.id.choice);
-        if(choice != null)
-            text.setText(choice);
     }
 
     public static Intent makeLaunch1(Context context) {
