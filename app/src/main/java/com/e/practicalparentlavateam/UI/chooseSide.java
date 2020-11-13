@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.e.practicalparentlavateam.R;
 
@@ -25,11 +24,11 @@ public class chooseSide extends AppCompatActivity {
         setContentView(R.layout.activity_choose_side);
 
         getName();
-        heads();
-        tails();
+        headsButton();
+        tailsButton();
     }
 
-    private void tails() {
+    private void tailsButton() {
         Button tails = (Button) findViewById(R.id.tails);
         tails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +41,7 @@ public class chooseSide extends AppCompatActivity {
         });
     }
 
-    private void heads() {
+    private void headsButton() {
         Button heads = (Button) findViewById(R.id.heads);
         heads.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +57,6 @@ public class chooseSide extends AppCompatActivity {
     private void getName() {
         Intent i = getIntent();
         name = i.getStringExtra(EXTRA_NAME);
-        TextView text = (TextView) findViewById(R.id.name);
     }
 
     public static Intent makeLaunch(Context context, String name){

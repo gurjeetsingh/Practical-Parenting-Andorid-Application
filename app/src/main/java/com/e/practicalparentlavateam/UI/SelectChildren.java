@@ -25,16 +25,6 @@ public class SelectChildren extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
     private String name = null;
 
-    public static Intent makeLaunch(Context context, String name) {
-        Intent intent = new Intent(context, SelectChildren.class);
-        intent.putExtra(EXTRA_NAME, name);
-        return intent;
-    }
-
-    public static Intent makeIntent(Context context) {
-        return new Intent(context, SelectChildren.class);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,34 +38,18 @@ public class SelectChildren extends AppCompatActivity {
 
         getName();
         loadLastTimeChild();
-        chooseChild();
-        skip();
-        chooseside();
+        chooseChildButton();
+        skipButton();
+        chooseSideButton();
     }
 
-    private void chooseside() {
-        Button choose = findViewById(R.id.chooseSide);
-        if(name == null || name.equals("nobody"))
-            choose.setVisibility(View.INVISIBLE);
-        choose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = chooseSide.makeLaunch(SelectChildren.this, name);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void skip() {
-        Button skip = findViewById(R.id.skip);
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = CoinFlipActivity.makeLaunch1(SelectChildren.this);
-                startActivity(intent);
-                finish();
-            }
-        });
+    private void getName() {
+        Intent i = getIntent();
+        name = i.getStringExtra(EXTRA_NAME);
+        if(name != null) {
+            TextView text = (TextView) findViewById(R.id.name);
+            text.setText(name);
+        }
     }
 
     /*Get the child who flipped last time and choose the child this time to flip*/
@@ -121,7 +95,7 @@ public class SelectChildren extends AppCompatActivity {
         }
     }
 
-    private void chooseChild() {
+    private void chooseChildButton() {
         TextView text = (TextView) findViewById(R.id.name);
         text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,13 +106,39 @@ public class SelectChildren extends AppCompatActivity {
         });
     }
 
-    private void getName() {
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
-        if(name != null) {
-            TextView text = (TextView) findViewById(R.id.name);
-            text.setText(name);
-        }
+    private void skipButton() {
+        Button skip = findViewById(R.id.skip);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CoinFlipActivity.makeLaunch1(SelectChildren.this);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void chooseSideButton() {
+        Button choose = findViewById(R.id.chooseSide);
+        if(name == null || name.equals("nobody"))
+            choose.setVisibility(View.INVISIBLE);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = chooseSide.makeLaunch(SelectChildren.this, name);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public static Intent makeLaunch(Context context, String name) {
+        Intent intent = new Intent(context, SelectChildren.class);
+        intent.putExtra(EXTRA_NAME, name);
+        return intent;
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, SelectChildren.class);
     }
 
     @Override
