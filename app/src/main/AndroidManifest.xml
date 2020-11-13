@@ -17,7 +17,7 @@
             android:label="@string/title_select_children"></activity>
         <activity android:name=".UI.chooseSide"
             android:parentActivityName=".UI.SelectChildren"/>
-        <activity android:name=".UI.individual_history"
+        <activity android:name=".UI.IndividualHistory"
             android:parentActivityName=".UI.CoinFlipActivity"/>
         <activity
             android:name=".UI.Choose_children"

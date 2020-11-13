@@ -109,7 +109,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         indHisbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = individual_history.makeIntent(CoinFlipActivity.this, name);
+                Intent intent = IndividualHistory.makeIntent(CoinFlipActivity.this, name);
                 startActivity(intent);
             }
         });
