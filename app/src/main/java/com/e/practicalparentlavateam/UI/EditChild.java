@@ -70,7 +70,9 @@ public class EditChild extends AppCompatActivity {
                         children = ChildrenManager.getInstance();
                         children.remove(childEditingIndex);
                         saveChildDetails();
-                        EditChild.this.finish();
+                        Intent intent = ConfigureChildren.makeIntent(EditChild.this);
+                        startActivity(intent);
+                        finish();
                     }
                 }
         );
