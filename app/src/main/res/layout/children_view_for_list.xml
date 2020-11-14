@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/childList"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#A65F9595"
-    android:fontFamily="@font/imprima"
-    android:textColor="#FFFFFF"
-    android:textSize="24sp"
-    android:textStyle="bold"
-    tools:text="Just Testing">
+    android:layout_height="match_parent">
 
-</TextView>
+    <TextView
+        android:id="@+id/childList"
+        android:layout_width="231dp"
+        android:layout_height="35dp"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

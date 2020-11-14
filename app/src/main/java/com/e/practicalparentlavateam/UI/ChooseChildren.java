@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -28,9 +29,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Choose_children extends AppCompatActivity {
+public class ChooseChildren extends AppCompatActivity {
     private ChildrenManager children;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Children> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,9 @@ public class Choose_children extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
-        Type type = new TypeToken<List<String>>() {}.getType();
+        Type type = new TypeToken<List<Children>>() {}.getType();
         children = ChildrenManager.getInstance();
-        List<String> tempList = gson.fromJson(json, type);
+        List<Children> tempList = gson.fromJson(json, type);
         if(tempList != null)
             children.setChildren(tempList);
         adapter = new MyListAdapter();
@@ -60,9 +61,9 @@ public class Choose_children extends AppCompatActivity {
         list.setAdapter(adapter);
     }
 
-    private class MyListAdapter extends ArrayAdapter<String> {
+    private class MyListAdapter extends ArrayAdapter<Children> {
         public MyListAdapter(){
-            super(Choose_children.this, R.layout.children_view_for_list, children.getChildren());
+            super(ChooseChildren.this, R.layout.children_view_for_list, children.getChildren());
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
@@ -71,7 +72,7 @@ public class Choose_children extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
             }
 
-            String currentChild = children.getChildren().get(position);
+            String currentChild = children.getChildren().get(position).getName();
             TextView makeView = (TextView)itemView.findViewById(R.id.childList);
             makeView.setText(currentChild);
             return itemView;
@@ -84,11 +85,11 @@ public class Choose_children extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                String clickedName = children.getChildren().get(position);
+                String clickedName = children.getChildren().get(position).getName();
                 /*TextView text = (TextView)findViewById(R.id.name);
                 text.setText(clickedName);*/
 
-                Intent intent = SelectChildren.makeLaunch(Choose_children.this, clickedName);
+                Intent intent = SelectChildren.makeLaunch(ChooseChildren.this, clickedName);
                 startActivity(intent);
                 finish();
             }
@@ -96,7 +97,7 @@ public class Choose_children extends AppCompatActivity {
     }
 
     public static Intent makeIntent2(Context context){
-        Intent intent = new Intent(context, Choose_children.class);
+        Intent intent = new Intent(context, ChooseChildren.class);
         return intent;
     }
 }

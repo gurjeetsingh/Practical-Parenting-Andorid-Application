@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,8 +40,8 @@ public class EditChild extends AppCompatActivity {
         Intent intent = getIntent();
         childEditingIndex = intent.getIntExtra(EXTRA_CHILD_INDEX, 0);
         children = ChildrenManager.getInstance();
-        childEditing = children.get(childEditingIndex);
-        etName2.setHint(children.get(childEditingIndex));
+        childEditing = children.get(childEditingIndex).getName();
+        etName2.setHint(children.get(childEditingIndex).getName());
     }
 
     @Override
@@ -86,8 +87,10 @@ public class EditChild extends AppCompatActivity {
 
                         // Create new data object
                         children = ChildrenManager.getInstance();
-                        children.set(childEditingIndex, name);
+                        children.set(childEditingIndex, new Children(name, 3));
                         saveChildDetails();
+                        Intent intent = ConfigureChildren.makeIntent(EditChild.this);
+                        startActivity(intent);
                         finish();
                     }
                 }

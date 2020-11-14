@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,12 +45,11 @@ public class MainMenu extends AppCompatActivity {
                 SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                 Gson gson = new Gson();
                 String json = prefs.getString("childPrefs", null);
-                Type type = new TypeToken<List<String>>() {}.getType();
-                List<String> childList = gson.fromJson(json, type);
+                Type type = new TypeToken<List<Children>>() {}.getType();
+                List<Children> childList = gson.fromJson(json, type);
                 if(childList==null || childList.size() == 0){
                     Intent intent = CoinFlipActivity.makeLaunch1(MainMenu.this);
                     startActivity(intent);
-                    finish();
                 }
                 else {
                     //Following activity returns the help menu's intent

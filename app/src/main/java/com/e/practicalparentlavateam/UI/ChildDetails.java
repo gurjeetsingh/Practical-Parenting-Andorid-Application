@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 
@@ -66,7 +67,7 @@ public class ChildDetails extends AppCompatActivity {
 
                         // Create new data object
                         children = ChildrenManager.getInstance();
-                        children.add(name);
+                        children.add(new Children(name, 3));
                         saveChildDetails();
                         finish();
                     }

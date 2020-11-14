@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -83,8 +84,8 @@ public class SelectChildren extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
-        Type type = new TypeToken<List<String>>() {}.getType();
-        List<String> childList = gson.fromJson(json, type);
+        Type type = new TypeToken<List<Children>>() {}.getType();
+        List<Children> childList = gson.fromJson(json, type);
 
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
@@ -97,10 +98,10 @@ public class SelectChildren extends AppCompatActivity {
 
             int i = 0;
             while (i < childList.size()) {
-                if (childList.get(i).equals(LastTimeName)) {
+                if (childList.get(i).getName().equals(LastTimeName)) {
                     int num = (i + 1) % childList.size();
                     if (name == null) {
-                        name = childList.get(num);
+                        name = childList.get(num).getName();
                         System.out.println(name);
                         TextView text = (TextView) findViewById(R.id.name);
                         text.setText(name);
@@ -111,7 +112,7 @@ public class SelectChildren extends AppCompatActivity {
             }
             if (i == childList.size()) {
                 if (name == null) {
-                    name = childList.get(0);
+                    name = childList.get(0).getName();
                     System.out.println(name);
                     TextView text = (TextView) findViewById(R.id.name);
                     text.setText(name);
@@ -125,7 +126,7 @@ public class SelectChildren extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = Choose_children.makeIntent2(SelectChildren.this);
+                Intent intent = ChooseChildren.makeIntent2(SelectChildren.this);
                 startActivity(intent);
             }
         });

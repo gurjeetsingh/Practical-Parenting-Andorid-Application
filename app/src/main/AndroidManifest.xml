@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.e.practicalparentlavateam">
 
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,16 +21,16 @@
         <activity android:name=".UI.individual_history"
             android:parentActivityName=".UI.CoinFlipActivity"/>
         <activity
-            android:name=".UI.Choose_children"
+            android:name=".UI.ChooseChildren"
             android:label="@string/title_activity_select_child"
             android:parentActivityName=".UI.CoinFlipActivity" />
         <activity
             android:name=".UI.EditChild"
             android:label="@string/title_activity_edit_child"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".UI.ChildDetails"
-            android:label="@string/title_activity_child_details" />
+            android:label="@string/title_activity_child_details"/>
         <activity android:name=".UI.MainMenu" />
         <activity
             android:name=".UI.TimeoutActivity"

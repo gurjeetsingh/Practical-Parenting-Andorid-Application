@@ -16,10 +16,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.R;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,7 +39,7 @@ public class ConfigureChildren extends AppCompatActivity {
     private static final int ACTIVITY_RESULT_CALCULATE = 103;
 
     private ChildrenManager children;
-    private BaseAdapter adapter;
+    private ArrayAdapter<Children> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +55,12 @@ public class ConfigureChildren extends AppCompatActivity {
         getChildList();
 
         setupFloatingActionButton();
-        setupChildrenView();
+        //setupChildrenView();
+        populateListView();
+        registClickCallback();
     }
 
-    private void setupChildrenView() {
+    /*private void setupChildrenView() {
         // SOURCE: https://developer.android.com/guide/topics/ui/layout/recyclerview
         ListView rv = findViewById(R.id.childListView);
         getChildList();
@@ -103,6 +107,43 @@ public class ConfigureChildren extends AppCompatActivity {
         );
 
 
+    }*/
+
+    private void populateListView() {
+        children = ChildrenManager.getInstance();
+        adapter = new MyListAdapter();
+        ListView list = (ListView) findViewById(R.id.childListView);
+        list.setAdapter(adapter);
+    }
+
+    private class MyListAdapter extends ArrayAdapter<Children> {
+        public MyListAdapter(){
+            super(ConfigureChildren.this, R.layout.children_view_for_list, children.getChildren());
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent){
+            View itemView = convertView;
+            if(itemView == null){
+                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
+            }
+
+            String currentChild = children.getChildren().get(position).getName();
+            TextView makeView = (TextView)itemView.findViewById(R.id.childList);
+            makeView.setText(currentChild);
+            return itemView;
+        }
+    }
+
+    private void registClickCallback(){
+        ListView list = (ListView) findViewById(R.id.childListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                Intent intent = EditChild.makeEditIntent(ConfigureChildren.this, position);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -132,9 +173,9 @@ public class ConfigureChildren extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
-        Type type = new TypeToken<List<String>>() {}.getType();
+        Type type = new TypeToken<List<Children>>() {}.getType();
         children = ChildrenManager.getInstance();
-        List<String> tempList = gson.fromJson(json, type);
+        List<Children> tempList = gson.fromJson(json, type);
         if(tempList != null)
             children.setChildren(tempList);
     }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ChildrenManager {
 
-    private List<String> children = new ArrayList<>();
+    private List<Children> children = new ArrayList<>();
 
     private static ChildrenManager instance;
     public static ChildrenManager getInstance() {
@@ -23,7 +23,7 @@ public class ChildrenManager {
     }
 
     //add a new child
-    public void add (String child){
+    public void add (Children child){
         children.add(child);
     }
 
@@ -32,11 +32,11 @@ public class ChildrenManager {
         children.remove(index);
     }
 
-    public String get (int i) {
+    public Children get (int i) {
         return children.get(i);
     }
 
-    public void set (int i, String name) {
+    public void set (int i, Children name) {
         children.set(i, name);
     }
 
@@ -44,11 +44,11 @@ public class ChildrenManager {
         return children.size();
     }
 
-    public List<String> getChildren() {
-        return children;
+    public List<Children> getChildren() {
+        return this.children;
     }
 
-    public void setChildren(List<String> children) {
+    public void setChildren(List<Children> children) {
         this.children = children;
     }
 }
