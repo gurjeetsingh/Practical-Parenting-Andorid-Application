@@ -149,4 +149,14 @@ public class WhoseTurn extends AppCompatActivity {
     public static Intent makeIntent(Context context) {
         return new Intent(context, WhoseTurn.class);
     }
+
+    @Override
+    public void onBackPressed() {
+        //clear the old stack
+        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        Intent mainintent=MainMenu.makeIntent(WhoseTurn.this);
+        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainintent);
+        WhoseTurn.this.finish();
+    }
 }
