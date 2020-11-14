@@ -29,7 +29,6 @@ import java.util.List;
 
 public class WhoseTurn extends AppCompatActivity {
     TaskManager task_manager;
-    List<String> name_list;
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -64,8 +63,11 @@ public class WhoseTurn extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("nameList", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("nameList", null);
+        task_manager = TaskManager.getInstance();
         Type type = new TypeToken<List<String>>() {}.getType();
-        name_list = gson.fromJson(json, type);
+        List<String> temp = gson.fromJson(json, type);
+        if(temp != null)
+            task_manager.setName(temp);
     }
 
     private void populateListView() {
@@ -79,8 +81,8 @@ public class WhoseTurn extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                String clickedLens = task_manager.getTasks().get(position);
-
+                Intent intent = ChangeTurn.makeChangeIntent(WhoseTurn.this, position);
+                startActivity(intent);
             }
         });
     }
@@ -98,27 +100,29 @@ public class WhoseTurn extends AppCompatActivity {
             }
 
             String current_task = task_manager.getTasks().get(position);
+            String current_name = task_manager.getName().get(position);
 
             TextView taskView = (TextView) itemView.findViewById(R.id.TaskName);
             taskView.setText(current_task);
 
-            /*TextView nameView = (TextView) itemView.findViewById(R.id.NameOfChild);
-            if(name_list == null || name_list.get(position).equals("No Child")) {
+            TextView nameView = (TextView) itemView.findViewById(R.id.NameOfChild);
+            if(current_name.equals("No Child")) {
                 SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                 Gson gson = new Gson();
                 String json = prefs.getString("childPrefs", null);
                 Type type = new TypeToken<List<String>>() {}.getType();
                 List<String> child_list = gson.fromJson(json, type);
                 if(child_list != null && child_list.size() != 0) {
-                    nameView.setText(child_list.get(position));
+                    task_manager.setName(position,child_list.get(0));
+                    nameView.setText(child_list.get(0));
                 }
                 else{
                     nameView.setText("No Child");
                 }
             }
             else{
-                nameView.setText(name_list.get(position));
-            }*/
+                nameView.setText(current_name);
+            }
 
             return itemView;
         }
@@ -142,7 +146,7 @@ public class WhoseTurn extends AppCompatActivity {
         }
     }
 
-    public static Intent make_intent(Context context) {
+    public static Intent makeIntent(Context context) {
         return new Intent(context, WhoseTurn.class);
     }
 }

@@ -31,7 +31,6 @@ import java.util.ListIterator;
 public class AddTask extends AppCompatActivity {
     private EditText task_name;
     private TaskManager task_manager;
-    List<String> name_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +43,8 @@ public class AddTask extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        getName();
         setupButtonCancel();
         setupButtonOk();
-    }
-
-    private void getName() {
-        SharedPreferences prefs = this.getSharedPreferences("nameList", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = prefs.getString("nameList", null);
-        Type type = new TypeToken<List<String>>() {}.getType();
-        name_list = gson.fromJson(json, type);
     }
 
     private void setupButtonCancel() {
@@ -77,24 +67,25 @@ public class AddTask extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // Extract data from screen
+                        String child_name;
                         String name = task_name.getText().toString();
-                        /*SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
+                        SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                         Gson gson = new Gson();
                         String json = prefs.getString("childPrefs", null);
                         Type type = new TypeToken<List<String>>() {}.getType();
                         List<String> child_list = gson.fromJson(json, type);
                         if(child_list == null || child_list.size() == 0) {
-                            name_list.add("No Child");
+                            child_name = "No Child";
                         }
                         else {
-                            name_list.add(child_list.get(0));
-                        }*/
+                            child_name = child_list.get(0);
+                        }
 
                         // Create new data object
                         task_manager = TaskManager.getInstance();
-                        task_manager.add(name);
+                        task_manager.add(name, child_name);
                         saveNewTask(task_manager.getTasks());
-                        //saveNameList(name_list);
+                        saveNameList(task_manager.getName());
                         Intent intent = EditTasksList.makeLaunch(AddTask.this);
                         startActivity(intent);
                         finish();

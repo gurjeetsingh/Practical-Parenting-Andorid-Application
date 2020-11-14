@@ -86,7 +86,7 @@ public class MainMenu extends AppCompatActivity {
         whose_turn_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tasks_intent = WhoseTurn.make_intent(MainMenu.this);
+                Intent tasks_intent = WhoseTurn.makeIntent(MainMenu.this);
                 startActivity(tasks_intent);
             }
         });

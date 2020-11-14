@@ -63,7 +63,6 @@ public class EditTasksList extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                String clickedTask = task_manager.getTasks().get(position);
                 Intent intent = EditTask.makeEditIntent(EditTasksList.this, position);
                 startActivity(intent);
             }

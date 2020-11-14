@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/task_name"
         android:layout_width="356dp"
         android:layout_height="46dp"
         android:layout_marginTop="32dp"
@@ -46,10 +46,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/task_name" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="252dp"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TurnName" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/canelChangeTurn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -78,5 +78,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/done" />
 </androidx.constraintlayout.widget.ConstraintLayout>

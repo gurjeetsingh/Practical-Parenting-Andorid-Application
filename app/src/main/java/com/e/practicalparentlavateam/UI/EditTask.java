@@ -63,7 +63,7 @@ public class EditTask extends AppCompatActivity {
                         String name = enter_edit_task.getText().toString();
 
                         // Create new data object
-                        task_manager.set(position, name);
+                        task_manager.setTasks(position, name);
                         saveNewTask(task_manager.getTasks());
                         Intent intent = EditTasksList.makeLaunch(EditTask.this);
                         startActivity(intent);

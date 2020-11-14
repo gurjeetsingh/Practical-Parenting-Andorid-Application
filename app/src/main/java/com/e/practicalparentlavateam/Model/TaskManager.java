@@ -5,6 +5,7 @@ import java.util.List;
 
 public class TaskManager {
     private List<String> tasks = new ArrayList<>();
+    private List<String> name = new ArrayList<>();
 
     private static TaskManager instance;
     public static TaskManager getInstance() {
@@ -19,21 +20,31 @@ public class TaskManager {
     }
 
     //add a new task
-    public void add (String task){
+    public void add (String task, String name){
         tasks.add(task);
+        this.name.add(name);
     }
 
     //remove a task
     public void remove (int index){
         tasks.remove(index);
+        name.remove(index);
     }
 
-    public String get (int i) {
+    public String getTasks (int i) {
         return tasks.get(i);
     }
 
-    public void set (int i, String name) {
+    public void setTasks (int i, String name) {
         tasks.set(i, name);
+    }
+
+    public String getName (int i) {
+        return name.get(i);
+    }
+
+    public void setName (int i, String name) {
+        this.name.set(i, name);
     }
 
     public int getNumTasks() {
@@ -43,8 +54,14 @@ public class TaskManager {
     public List<String> getTasks() {
         return tasks;
     }
+    public List<String> getName() {
+        return name;
+    }
 
     public void setTasks(List<String> tasks) {
         this.tasks = tasks;
+    }
+    public void setName(List<String> name) {
+        this.name = name;
     }
 }

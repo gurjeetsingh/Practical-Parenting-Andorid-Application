@@ -58,7 +58,7 @@ public class SelectChildren extends AppCompatActivity {
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
         Type type = new TypeToken<List<String>>() {}.getType();
-        List<String> childList = gson.fromJson(json, type);
+        List<String> child_list = gson.fromJson(json, type);
 
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
@@ -71,11 +71,11 @@ public class SelectChildren extends AppCompatActivity {
             lastTimeChild.setText(LastTimeName);
 
             int i = 0;
-            while (i < childList.size()) {
-                if (childList.get(i).equals(LastTimeName)) {
-                    int num = (i + 1) % childList.size();
+            while (i < child_list.size()) {
+                if (child_list.get(i).equals(LastTimeName)) {
+                    int num = (i + 1) % child_list.size();
                     if (name == null) {
-                        name = childList.get(num);
+                        name = child_list.get(num);
                         System.out.println(name);
                         TextView text = (TextView) findViewById(R.id.name);
                         text.setText(name);
@@ -84,9 +84,9 @@ public class SelectChildren extends AppCompatActivity {
                 }
                 i++;
             }
-            if (i == childList.size()) {
+            if (i == child_list.size()) {
                 if (name == null) {
-                    name = childList.get(0);
+                    name = child_list.get(0);
                     System.out.println(name);
                     TextView text = (TextView) findViewById(R.id.name);
                     text.setText(name);
