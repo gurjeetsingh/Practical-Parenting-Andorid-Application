@@ -6,6 +6,7 @@
     <string name="menu1">Child Details</string>
     <string name="menu2">Flip A Coin</string>
     <string name="menu3">Timeout Timer</string>
+    <string name="menu4">Whose turn to do</string>
 
     <string name="configure">Select a Child to edit:</string>
 
@@ -28,6 +29,11 @@
     <string name="title_activity_configure_children">Configure your Children</string>
     <string name="title_activity_timeout_timer">Timeout Timer</string>
     <string name="title_select_children">Select Children</string>
+    <string name="title_whose_turn">Whose Turn</string>
+    <string name="title_edit_tasks_list">Edit Tasks List</string>
+    <string name="title_edit_task">Edit Task</string>
+    <string name="title_add_tasks">Add Tasks</string>
+    <string name="title_change_turn">Change Turn</string>
 
     <string name="Choice">Choice:</string>
     <!-- Strings used for fragments for navigation -->
@@ -50,9 +56,13 @@
     <string name="select_child">Selected child:</string>
     <string name="cancel">Cancel</string>
     <string name="name">Name</string>
+    <string name="task_name">Task Name:</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
     <string name="ex_gurjeet">ex: Gurjeet</string>
+    <string name="ex_task_name">ex: Play The Game</string>
     <string name="child_history">Button</string>
     <string name="last_picked">Last Child</string>
+    <string name="edit">Edit</string>
+    <string name="done">Done</string>
 </resources>

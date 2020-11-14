@@ -12,13 +12,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.SelectChildren"
-            android:parentActivityName=".UI.MainMenu"
-            android:label="@string/title_select_children"></activity>
-        <activity android:name=".UI.chooseSide"
-            android:parentActivityName=".UI.SelectChildren"/>
-        <activity android:name=".UI.IndividualHistory"
-            android:parentActivityName=".UI.CoinFlipActivity"/>
+        <activity android:name=".UI.ChangeTurn"
+            android:label="@string/title_change_turn"
+            android:parentActivityName=".UI.WhoseTurn"></activity>
+        <activity android:name=".UI.EditTask"
+            android:label="@string/title_edit_task"
+            android:parentActivityName=".UI.EditTasksList"/>
+        <activity android:name=".UI.AddTask"
+            android:label="@string/title_add_tasks"
+            android:parentActivityName=".UI.EditTasksList"/>
+        <activity
+            android:name=".UI.EditTasksList"
+            android:label="@string/title_edit_tasks_list"
+            android:parentActivityName=".UI.WhoseTurn" />
+        <activity
+            android:name=".UI.WhoseTurn"
+            android:label="@string/title_whose_turn"
+            android:parentActivityName=".UI.MainMenu" />
+        <activity
+            android:name=".UI.SelectChildren"
+            android:label="@string/title_select_children"
+            android:parentActivityName=".UI.MainMenu" />
+        <activity
+            android:name=".UI.chooseSide"
+            android:parentActivityName=".UI.SelectChildren" />
+        <activity
+            android:name=".UI.IndividualHistory"
+            android:parentActivityName=".UI.CoinFlipActivity" />
         <activity
             android:name=".UI.Choose_children"
             android:label="@string/title_activity_select_child"

@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.view.Menu;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -65,6 +64,7 @@ public class TimeoutActivity extends AppCompatActivity {
         alrmoffbtn = (Button) findViewById(R.id.alarmoff);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeout);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.timeoutToolbar);
         setSupportActionBar(toolbar);
 

@@ -35,14 +35,6 @@ public class EditChild extends AppCompatActivity {
         return intent;
     }
 
-    public void extractIndexFromIntent(){
-        Intent intent = getIntent();
-        childEditingIndex = intent.getIntExtra(EXTRA_CHILD_INDEX, 0);
-        children = ChildrenManager.getInstance();
-        childEditing = children.get(childEditingIndex);
-        etName2.setHint(children.get(childEditingIndex));
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +50,14 @@ public class EditChild extends AppCompatActivity {
 
         setupButtonDelete();
         setupButtonOk();
+    }
+
+    public void extractIndexFromIntent(){
+        Intent intent = getIntent();
+        childEditingIndex = intent.getIntExtra(EXTRA_CHILD_INDEX, 0);
+        children = ChildrenManager.getInstance();
+        childEditing = children.get(childEditingIndex);
+        etName2.setHint(children.get(childEditingIndex));
     }
 
     private void setupButtonDelete() {
