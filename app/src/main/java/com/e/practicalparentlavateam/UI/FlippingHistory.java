@@ -19,12 +19,8 @@ import com.e.practicalparentlavateam.Model.HistoryItem;
 import com.e.practicalparentlavateam.Model.HistoryManager;
 
 public class FlippingHistory extends AppCompatActivity {
-    private HistoryManager manager;
+    private HistoryManager history_manager;
     private ArrayAdapter<HistoryItem> adapter;
-
-    public static Intent makeLaunch(Context c) {
-        return new Intent(c, FlippingHistory.class);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +31,14 @@ public class FlippingHistory extends AppCompatActivity {
     }
 
     private void populateList() {
-        manager = HistoryManager.getInstance();
+        history_manager = HistoryManager.getInstance();
         adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.HistoryList);
         list.setAdapter(adapter);
     }
 
     private class MyListAdapter extends ArrayAdapter<HistoryItem>{
-        public MyListAdapter() {super(FlippingHistory.this, R.layout.history_list, manager.getList());}
+        public MyListAdapter() {super(FlippingHistory.this, R.layout.history_list, history_manager.getList());}
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -51,7 +47,7 @@ public class FlippingHistory extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.history_list, parent, false);
             }
 
-            HistoryItem currentItem = manager.getList().get(position);
+            HistoryItem currentItem = history_manager.getList().get(position);
 
             TextView timeView = (TextView) itemView.findViewById(R.id.item_time);
             timeView.setText(currentItem.getTime());
@@ -69,5 +65,9 @@ public class FlippingHistory extends AppCompatActivity {
             coin.setImageResource(currentItem.getCoinIcon());
             return itemView;
         }
+    }
+
+    public static Intent makeLaunch(Context c) {
+        return new Intent(c, FlippingHistory.class);
     }
 }

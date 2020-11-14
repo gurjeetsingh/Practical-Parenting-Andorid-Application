@@ -18,7 +18,7 @@ public class ChildrenManager {
         return instance;
     }
 
-    private ChildrenManager() {
+    public ChildrenManager() {
         //ensuring it is a singleton
     }
 

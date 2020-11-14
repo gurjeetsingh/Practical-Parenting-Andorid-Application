@@ -6,15 +6,15 @@ public class HistoryItem {
     private String time;
     private String choise;
     private String name;
-    private int winOrLose;
-    private int coinIcon;
+    private int win_or_Lose;
+    private int coin_icon;
 
     public int getCoinIcon() {
-        return coinIcon;
+        return coin_icon;
     }
 
     public void setCoinIcon(int icon) {
-        this.coinIcon = icon;
+        this.coin_icon = icon;
     }
 
     public void setTime(String t){ time = t;}
@@ -23,7 +23,7 @@ public class HistoryItem {
 
     public void setName(String n){name = n;}
 
-    public void setId(int i){winOrLose = i;}
+    public void setId(int i){win_or_Lose = i;}
 
     public String getTime() {return time;}
 
@@ -31,13 +31,13 @@ public class HistoryItem {
 
     public String getName(){return name;}
 
-    public int getId(){return winOrLose;}
+    public int getId(){return win_or_Lose;}
 
-    public HistoryItem(String time, String name, String choise, int winOrLose, int coinIcon){
+    public HistoryItem(String time, String name, String choise, int win_or_Lose, int coin_icon){
         setTime(time);
         setChoise(choise);
         setName(name);
-        setId(winOrLose);
-        setCoinIcon(coinIcon);
+        setId(win_or_Lose);
+        setCoinIcon(coin_icon);
     }
 }

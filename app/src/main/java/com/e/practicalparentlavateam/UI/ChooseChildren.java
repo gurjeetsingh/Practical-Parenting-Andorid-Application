@@ -32,6 +32,7 @@ import java.util.List;
 public class ChooseChildren extends AppCompatActivity {
     private ChildrenManager children;
     private ArrayAdapter<Children> adapter;
+    private ChildrenManager current_childrenList = new ChildrenManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,27 @@ public class ChooseChildren extends AppCompatActivity {
         List<Children> tempList = gson.fromJson(json, type);
         if(tempList != null)
             children.setChildren(tempList);
+
+        SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
+        String LastTimeName = sp.getString("name",null);
+        if(LastTimeName == null){
+            current_childrenList = children;
+            current_childrenList.add("nobody");
+        }
+        else {
+            int index = 0;
+            for (int i = 0; i < children.getChildren().size(); i++) {
+                if (children.getChildren().get(i).equals(LastTimeName))
+                    index = (i + 1) % children.getChildren().size();
+            }
+            while (!children.getChildren().get(index).equals(LastTimeName)) {
+                current_childrenList.add(children.getChildren().get(index));
+                index = (index + 1) % children.getChildren().size();
+            }
+            current_childrenList.add(LastTimeName);
+            current_childrenList.add("nobody");
+        }
+
         adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.listOfChildren);
         list.setAdapter(adapter);
