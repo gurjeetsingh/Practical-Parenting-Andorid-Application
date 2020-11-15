@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.e.practicalparentlavateam.Model.ChildrenManager;
+import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -49,7 +50,7 @@ public class EditTask extends AppCompatActivity {
     private void setHint() {
         task_manager = TaskManager.getInstance();
         enter_edit_task = findViewById(R.id.EnterEditTastName);
-        enter_edit_task.setHint(task_manager.getTasks().get(position));
+        enter_edit_task.setHint(task_manager.getTasks().get(position).getTask());
     }
 
     private void setUpButtonOk() {
@@ -63,8 +64,8 @@ public class EditTask extends AppCompatActivity {
                         String name = enter_edit_task.getText().toString();
 
                         // Create new data object
-                        task_manager.setTasks(position, name);
-                        saveNewTask(task_manager.getTasks());
+                        task_manager.setTask(position, name);
+                        saveNewTask(task_manager);
                         Intent intent = EditTasksList.makeLaunch(EditTask.this);
                         startActivity(intent);
                         finish();
@@ -80,8 +81,7 @@ public class EditTask extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         task_manager.remove(position);
-                        saveNewTask(task_manager.getTasks());
-                        saveNameList(task_manager.getName());
+                        saveNewTask(task_manager);
                         Intent intent = EditTasksList.makeLaunch(EditTask.this);
                         startActivity(intent);
                         finish();
@@ -90,22 +90,12 @@ public class EditTask extends AppCompatActivity {
         );
     }
 
-    public void saveNewTask(List<String> t){
+    public void saveNewTask(TaskManager t){
         SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(t);
         editor.putString("taskPrefs", json);
-        System.out.println(json);
-        editor.commit();
-    }
-
-    public void saveNameList(List<String> n){
-        SharedPreferences prefs = this.getSharedPreferences("nameList", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(n);
-        editor.putString("nameList", json);
         System.out.println(json);
         editor.commit();
     }

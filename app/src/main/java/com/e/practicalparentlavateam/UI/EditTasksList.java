@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,7 +23,7 @@ import com.google.gson.Gson;
 
 public class EditTasksList extends AppCompatActivity {
     TaskManager task_manager;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Task> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class EditTasksList extends AppCompatActivity {
         });
     }
 
-    private class MyListAdapter extends ArrayAdapter<String> {
+    private class MyListAdapter extends ArrayAdapter<Task> {
         public MyListAdapter() {
             super(EditTasksList.this, R.layout.edit_tasks_list, task_manager.getTasks());
         }
@@ -81,7 +82,7 @@ public class EditTasksList extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.edit_tasks_list, parent, false);
             }
 
-            String current_task = task_manager.getTasks().get(position);
+            String current_task = task_manager.getTasks(position).getTask();
 
             TextView makeView = (TextView) itemView.findViewById(R.id.TaskName);
             makeView.setText(current_task);

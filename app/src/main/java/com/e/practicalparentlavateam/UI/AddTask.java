@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.e.practicalparentlavateam.Model.ChildrenManager;
+import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -43,6 +44,7 @@ public class AddTask extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+        task_manager = TaskManager.getInstance();
         setupButtonCancel();
         setupButtonOk();
     }
@@ -84,8 +86,7 @@ public class AddTask extends AppCompatActivity {
                         // Create new data object
                         task_manager = TaskManager.getInstance();
                         task_manager.add(name, child_name);
-                        saveNewTask(task_manager.getTasks());
-                        saveNameList(task_manager.getName());
+                        saveNewTask(task_manager);
                         Intent intent = EditTasksList.makeLaunch(AddTask.this);
                         startActivity(intent);
                         finish();
@@ -94,22 +95,12 @@ public class AddTask extends AppCompatActivity {
         );
     }
 
-    public void saveNewTask(List<String> t){
+    public void saveNewTask(TaskManager t){
         SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(t);
         editor.putString("taskPrefs", json);
-        System.out.println(json);
-        editor.commit();
-    }
-
-    public void saveNameList(List<String> n){
-        SharedPreferences prefs = this.getSharedPreferences("nameList", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(n);
-        editor.putString("nameList", json);
         System.out.println(json);
         editor.commit();
     }
