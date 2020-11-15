@@ -1,6 +1,8 @@
 package com.e.practicalparentlavateam.UI;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
+import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -29,6 +32,12 @@ public class ChangeTurn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_turn);
 
+        Toolbar toolbar = findViewById(R.id.ChangeTurnToolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
         getPosition();
         setText();
         doneButton();
@@ -42,10 +51,10 @@ public class ChangeTurn extends AppCompatActivity {
 
     private void setText() {
         task_manager = TaskManager.getInstance();
-        TextView taskName = findViewById(R.id.task_name);
-        taskName.setText(task_manager.getTasks(position));
-        TextView childName = findViewById(R.id.TurnName);
-        childName.setText(task_manager.getName(position));
+        TextView task_name = findViewById(R.id.task_name);
+        task_name.setText(task_manager.getTasks(position).getTask());
+        TextView child_name = findViewById(R.id.TurnName);
+        child_name.setText(task_manager.getTasks(position).getName());
     }
 
     private void doneButton() {
@@ -58,22 +67,27 @@ public class ChangeTurn extends AppCompatActivity {
                 SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                 Gson gson = new Gson();
                 String json = prefs.getString("childPrefs", null);
-                Type type = new TypeToken<List<Children>>() {}.getType();
-                List<Children> childList = gson.fromJson(json, type);
-                int i = 0;
-                int num = 0;
-                while (i < childList.size()) {
-                    if (childList.get(i).getName().equals(task_manager.getName(position))) {
-                        num = (i + 1) % childList.size();
-                        break;
+                Type type = new TypeToken<List<String>>() {}.getType();
+                List<String> child_list = gson.fromJson(json, type);
+                if(child_list.size() == 0){
+                    task_manager.setName(position,"No Child");
+                }
+                else {
+                    int i = 0;
+                    int num = 0;
+                    while (i < child_list.size()) {
+                        if (child_list.get(i).equals(task_manager.getTasks(position).getName())) {
+                            num = (i + 1) % child_list.size();
+                            break;
+                        }
+                        i++;
                     }
-                    i++;
+                    if (i == child_list.size()) {
+                        num = 0;
+                    }
+                    task_manager.setName(position, child_list.get(num));
                 }
-                if (i == childList.size()) {
-                    num = 0;
-                }
-                task_manager.setName(position,childList.get(num).getName());
-                saveNameList(task_manager.getName());
+                saveNewTask(task_manager);
                 Intent intent = WhoseTurn.makeIntent(ChangeTurn.this);
                 startActivity(intent);
                 finish();
@@ -83,7 +97,7 @@ public class ChangeTurn extends AppCompatActivity {
 
     private void setupButtonCancel() {
         Button btn = findViewById(R.id.canelChangeTurn);
-        if(task_manager.getName(position).equals("No Child"))
+        if(task_manager.getTasks(position).getName().equals("No Child"))
             btn.setVisibility(View.INVISIBLE);
         btn.setOnClickListener(
                 new View.OnClickListener() {
@@ -95,12 +109,12 @@ public class ChangeTurn extends AppCompatActivity {
         );
     }
 
-    public void saveNameList(List<String> n){
-        SharedPreferences prefs = this.getSharedPreferences("nameList", MODE_PRIVATE);
+    public void saveNewTask(TaskManager t){
+        SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(n);
-        editor.putString("nameList", json);
+        String json = gson.toJson(t);
+        editor.putString("taskPrefs", json);
         System.out.println(json);
         editor.commit();
     }

@@ -18,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.e.practicalparentlavateam.Model.ChildrenManager;
+import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -27,8 +29,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class WhoseTurn extends AppCompatActivity {
-    TaskManager taskManager;
-    private ArrayAdapter<String> adapter;
+    TaskManager task_manager;
+    private ArrayAdapter<Task> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,6 @@ public class WhoseTurn extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         getTasks();
-        getName();
         populateListView();
         registerClickCallback();
     }
@@ -51,22 +52,12 @@ public class WhoseTurn extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("taskPrefs", null);
-        taskManager = TaskManager.getInstance();
-        Type type = new TypeToken<List<String>>() {}.getType();
-        List<String> temp = gson.fromJson(json, type);
+        task_manager = TaskManager.getInstance();
+        Type type = new TypeToken<TaskManager>() {}.getType();
+        TaskManager temp = gson.fromJson(json, type);
         if(temp != null)
-            taskManager.setTasks(temp);
-    }
-
-    private void getName() {
-        SharedPreferences prefs = this.getSharedPreferences("nameList", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = prefs.getString("nameList", null);
-        taskManager = TaskManager.getInstance();
-        Type type = new TypeToken<List<String>>() {}.getType();
-        List<String> temp = gson.fromJson(json, type);
-        if(temp != null)
-            taskManager.setName(temp);
+            task_manager = temp;
+        TaskManager.setInstance(task_manager);
     }
 
     private void populateListView() {
@@ -88,7 +79,7 @@ public class WhoseTurn extends AppCompatActivity {
 
     private class MyListAdapter extends ArrayAdapter<String> {
         public MyListAdapter() {
-            super(WhoseTurn.this, R.layout.tasks_list, taskManager.getTasks());
+            super(WhoseTurn.this, R.layout.tasks_list, task_manager.getTasks());
         }
 
         @Override
@@ -98,33 +89,45 @@ public class WhoseTurn extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.tasks_list, parent, false);
             }
 
-            String currentTask = taskManager.getTasks().get(position);
-            String currentName = taskManager.getName().get(position);
+            String current_task = task_manager.getTasks().get(position).getTask();
+            String current_name = task_manager.getTasks().get(position).getName();
 
             TextView taskView = (TextView) itemView.findViewById(R.id.TaskName);
-            taskView.setText(currentTask);
+            taskView.setText(current_task);
 
+            SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = prefs.getString("childPrefs", null);
+            Type type = new TypeToken<List<String>>() {}.getType();
+            List<String> child_list = gson.fromJson(json, type);
             TextView nameView = (TextView) itemView.findViewById(R.id.NameOfChild);
-            if(currentName.equals("No Child")) {
-                SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
-                Gson gson = new Gson();
-                String json = prefs.getString("childPrefs", null);
-                Type type = new TypeToken<List<String>>() {}.getType();
-                List<String> childList = gson.fromJson(json, type);
-                if(childList != null && childList.size() != 0) {
-                    taskManager.setName(position,childList.get(0));
-                    nameView.setText(childList.get(0));
-                }
-                else{
-                    nameView.setText("No Child");
-                }
+            if(child_list == null || child_list.size() == 0){
+                task_manager.setName(position,"No Child");
+                saveNewTask(task_manager);
+                nameView.setText("No Child");
             }
-            else{
-                nameView.setText(currentName);
+            else {
+                if (current_name.equals("No Child")) {
+                    task_manager.setName(position, child_list.get(0));
+                    saveNewTask(task_manager);
+                    nameView.setText(child_list.get(0));
+                } else {
+                    nameView.setText(current_name);
+                }
             }
 
             return itemView;
         }
+    }
+
+    public void saveNewTask(TaskManager t){
+        SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(t);
+        editor.putString("taskPrefs", json);
+        System.out.println(json);
+        editor.commit();
     }
 
     @Override
