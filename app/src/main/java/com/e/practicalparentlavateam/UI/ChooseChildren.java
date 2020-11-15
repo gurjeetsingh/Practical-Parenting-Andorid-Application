@@ -62,7 +62,7 @@ public class ChooseChildren extends AppCompatActivity {
         String LastTimeName = sp.getString("name",null);
         if(LastTimeName == null){
             current_childrenList = children;
-            current_childrenList.add("nobody");
+            current_childrenList.add(new Children("nobody", 0));
         }
         else {
             int index = 0;
@@ -74,8 +74,8 @@ public class ChooseChildren extends AppCompatActivity {
                 current_childrenList.add(children.getChildren().get(index));
                 index = (index + 1) % children.getChildren().size();
             }
-            current_childrenList.add(LastTimeName);
-            current_childrenList.add("nobody");
+            current_childrenList.add(new Children(LastTimeName,0));
+            current_childrenList.add(new Children("nobody", 0));
         }
 
         adapter = new MyListAdapter();

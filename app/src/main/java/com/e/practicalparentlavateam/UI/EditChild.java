@@ -61,14 +61,6 @@ public class EditChild extends AppCompatActivity {
         setupButtonOk();
     }
 
-    public void extractIndexFromIntent(){
-        Intent intent = getIntent();
-        childEditingIndex = intent.getIntExtra(EXTRA_CHILD_INDEX, 0);
-        children = ChildrenManager.getInstance();
-        childEditing = children.get(childEditingIndex);
-        etName2.setHint(children.get(childEditingIndex));
-    }
-
     private void setupButtonDelete() {
         Button btn = findViewById(R.id.btnDelete);
         btn.setOnClickListener(

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
@@ -41,10 +42,10 @@ public class ChangeTurn extends AppCompatActivity {
 
     private void setText() {
         task_manager = TaskManager.getInstance();
-        TextView task_name = findViewById(R.id.task_name);
-        task_name.setText(task_manager.getTasks(position));
-        TextView child_name = findViewById(R.id.TurnName);
-        child_name.setText(task_manager.getName(position));
+        TextView taskName = findViewById(R.id.task_name);
+        taskName.setText(task_manager.getTasks(position));
+        TextView childName = findViewById(R.id.TurnName);
+        childName.setText(task_manager.getName(position));
     }
 
     private void doneButton() {
@@ -57,21 +58,21 @@ public class ChangeTurn extends AppCompatActivity {
                 SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                 Gson gson = new Gson();
                 String json = prefs.getString("childPrefs", null);
-                Type type = new TypeToken<List<String>>() {}.getType();
-                List<String> child_list = gson.fromJson(json, type);
+                Type type = new TypeToken<List<Children>>() {}.getType();
+                List<Children> childList = gson.fromJson(json, type);
                 int i = 0;
                 int num = 0;
-                while (i < child_list.size()) {
-                    if (child_list.get(i).equals(task_manager.getName(position))) {
-                        num = (i + 1) % child_list.size();
+                while (i < childList.size()) {
+                    if (childList.get(i).getName().equals(task_manager.getName(position))) {
+                        num = (i + 1) % childList.size();
                         break;
                     }
                     i++;
                 }
-                if (i == child_list.size()) {
+                if (i == childList.size()) {
                     num = 0;
                 }
-                task_manager.setName(position,child_list.get(num));
+                task_manager.setName(position,childList.get(num).getName());
                 saveNameList(task_manager.getName());
                 Intent intent = WhoseTurn.makeIntent(ChangeTurn.this);
                 startActivity(intent);

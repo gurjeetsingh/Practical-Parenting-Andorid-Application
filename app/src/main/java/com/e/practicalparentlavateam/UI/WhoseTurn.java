@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -28,7 +27,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class WhoseTurn extends AppCompatActivity {
-    TaskManager task_manager;
+    TaskManager taskManager;
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -52,22 +51,22 @@ public class WhoseTurn extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("taskPrefs", null);
-        task_manager = TaskManager.getInstance();
+        taskManager = TaskManager.getInstance();
         Type type = new TypeToken<List<String>>() {}.getType();
         List<String> temp = gson.fromJson(json, type);
         if(temp != null)
-            task_manager.setTasks(temp);
+            taskManager.setTasks(temp);
     }
 
     private void getName() {
         SharedPreferences prefs = this.getSharedPreferences("nameList", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("nameList", null);
-        task_manager = TaskManager.getInstance();
+        taskManager = TaskManager.getInstance();
         Type type = new TypeToken<List<String>>() {}.getType();
         List<String> temp = gson.fromJson(json, type);
         if(temp != null)
-            task_manager.setName(temp);
+            taskManager.setName(temp);
     }
 
     private void populateListView() {
@@ -89,7 +88,7 @@ public class WhoseTurn extends AppCompatActivity {
 
     private class MyListAdapter extends ArrayAdapter<String> {
         public MyListAdapter() {
-            super(WhoseTurn.this, R.layout.tasks_list, task_manager.getTasks());
+            super(WhoseTurn.this, R.layout.tasks_list, taskManager.getTasks());
         }
 
         @Override
@@ -99,29 +98,29 @@ public class WhoseTurn extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.tasks_list, parent, false);
             }
 
-            String current_task = task_manager.getTasks().get(position);
-            String current_name = task_manager.getName().get(position);
+            String currentTask = taskManager.getTasks().get(position);
+            String currentName = taskManager.getName().get(position);
 
             TextView taskView = (TextView) itemView.findViewById(R.id.TaskName);
-            taskView.setText(current_task);
+            taskView.setText(currentTask);
 
             TextView nameView = (TextView) itemView.findViewById(R.id.NameOfChild);
-            if(current_name.equals("No Child")) {
+            if(currentName.equals("No Child")) {
                 SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                 Gson gson = new Gson();
                 String json = prefs.getString("childPrefs", null);
                 Type type = new TypeToken<List<String>>() {}.getType();
-                List<String> child_list = gson.fromJson(json, type);
-                if(child_list != null && child_list.size() != 0) {
-                    task_manager.setName(position,child_list.get(0));
-                    nameView.setText(child_list.get(0));
+                List<String> childList = gson.fromJson(json, type);
+                if(childList != null && childList.size() != 0) {
+                    taskManager.setName(position,childList.get(0));
+                    nameView.setText(childList.get(0));
                 }
                 else{
                     nameView.setText("No Child");
                 }
             }
             else{
-                nameView.setText(current_name);
+                nameView.setText(currentName);
             }
 
             return itemView;
@@ -148,5 +147,15 @@ public class WhoseTurn extends AppCompatActivity {
 
     public static Intent makeIntent(Context context) {
         return new Intent(context, WhoseTurn.class);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //clear the old stack
+        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        Intent mainintent=MainMenu.makeIntent(WhoseTurn.this);
+        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainintent);
+        WhoseTurn.this.finish();
     }
 }
