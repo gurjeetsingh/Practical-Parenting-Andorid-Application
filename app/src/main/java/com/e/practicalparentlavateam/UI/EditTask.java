@@ -81,6 +81,7 @@ public class EditTask extends AppCompatActivity {
                     public void onClick(View view) {
                         task_manager.remove(position);
                         saveNewTask(task_manager.getTasks());
+                        saveNameList(task_manager.getName());
                         Intent intent = EditTasksList.makeLaunch(EditTask.this);
                         startActivity(intent);
                         finish();
@@ -95,6 +96,16 @@ public class EditTask extends AppCompatActivity {
         Gson gson = new Gson();
         String json = gson.toJson(t);
         editor.putString("taskPrefs", json);
+        System.out.println(json);
+        editor.commit();
+    }
+
+    public void saveNameList(List<String> n){
+        SharedPreferences prefs = this.getSharedPreferences("nameList", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(n);
+        editor.putString("nameList", json);
         System.out.println(json);
         editor.commit();
     }

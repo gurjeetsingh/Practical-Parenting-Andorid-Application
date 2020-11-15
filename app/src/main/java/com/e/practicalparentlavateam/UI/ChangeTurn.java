@@ -1,6 +1,8 @@
 package com.e.practicalparentlavateam.UI;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +29,12 @@ public class ChangeTurn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_turn);
+
+        Toolbar toolbar = findViewById(R.id.ChangeTurnToolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         getPosition();
         setText();
@@ -59,19 +67,24 @@ public class ChangeTurn extends AppCompatActivity {
                 String json = prefs.getString("childPrefs", null);
                 Type type = new TypeToken<List<String>>() {}.getType();
                 List<String> child_list = gson.fromJson(json, type);
-                int i = 0;
-                int num = 0;
-                while (i < child_list.size()) {
-                    if (child_list.get(i).equals(task_manager.getName(position))) {
-                        num = (i + 1) % child_list.size();
-                        break;
+                if(child_list.size() == 0){
+                    task_manager.setName(position,"No Child");
+                }
+                else {
+                    int i = 0;
+                    int num = 0;
+                    while (i < child_list.size()) {
+                        if (child_list.get(i).equals(task_manager.getName(position))) {
+                            num = (i + 1) % child_list.size();
+                            break;
+                        }
+                        i++;
                     }
-                    i++;
+                    if (i == child_list.size()) {
+                        num = 0;
+                    }
+                    task_manager.setName(position, child_list.get(num));
                 }
-                if (i == child_list.size()) {
-                    num = 0;
-                }
-                task_manager.setName(position,child_list.get(num));
                 saveNameList(task_manager.getName());
                 Intent intent = WhoseTurn.makeIntent(ChangeTurn.this);
                 startActivity(intent);
