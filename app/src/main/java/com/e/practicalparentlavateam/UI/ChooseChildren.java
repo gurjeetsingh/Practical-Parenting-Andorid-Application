@@ -59,11 +59,10 @@ public class ChooseChildren extends AppCompatActivity {
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
         Type type = new TypeToken<ChildrenManager>() {}.getType();
+        ChildrenManager temp = gson.fromJson(json, type);
+        if(temp != null)
+            ChildrenManager.setInstance(temp);
         children = ChildrenManager.getInstance();
-        ChildrenManager tempList = gson.fromJson(json, type);
-        if(tempList != null)
-            children.setChildren(tempList.getChildren());
-
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
         if(LastTimeName == null){

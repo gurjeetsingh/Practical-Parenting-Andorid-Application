@@ -64,10 +64,10 @@ public class ChangeTurn extends AppCompatActivity {
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
         Type type = new TypeToken<ChildrenManager>() {}.getType();
-        children = ChildrenManager.getInstance();
         ChildrenManager temp = gson.fromJson(json, type);
         if(temp != null)
-            children.setInstance(temp);
+            ChildrenManager.setInstance(temp);
+        children = ChildrenManager.getInstance();
     }
 
     private void setText() {
