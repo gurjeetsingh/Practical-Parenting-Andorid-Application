@@ -39,6 +39,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ChildDetails extends AppCompatActivity {
     private EditText etName;
@@ -104,7 +105,7 @@ public class ChildDetails extends AppCompatActivity {
         // Here we need to check if the activity that was triggers was the Image Gallery.
         // If it is the requestCode will match the LOAD_IMAGE_RESULTS value.
         // If the resultCode is RESULT_OK and there is some data we know that an image was picked.
-        if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK && data != null) {
+        else if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK && data != null) {
             // Let's read picked image data - its URI
             Uri pickedImage = data.getData();
             // Let's read picked image path using content resolver
@@ -112,8 +113,14 @@ public class ChildDetails extends AppCompatActivity {
             Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
             cursor.moveToFirst();
             String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
-            children.setPath(imagePath);
-
+            //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
+            try {
+                InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
+                Bitmap captureImage = BitmapFactory.decodeStream(inputStream);
+                image.setImageBitmap(captureImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
             // At the end remember to close the cursor or you will end with the RuntimeException!
             cursor.close();
