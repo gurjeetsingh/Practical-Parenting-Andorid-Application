@@ -106,4 +106,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/child_image" />
 
+    <Button
+        android:id="@+id/gallerybtn"
+        android:layout_width="139dp"
+        android:layout_height="63dp"
+        android:text="Choose From Gallery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="477dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
