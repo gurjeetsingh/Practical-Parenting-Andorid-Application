@@ -2,6 +2,10 @@
 
 package com.e.practicalparentlavateam.Model;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,13 +13,19 @@ import java.util.List;
 public class ChildrenManager {
 
     private List<Children> children = new ArrayList<>();
+    String path;
 
     private static ChildrenManager instance;
+
     public static ChildrenManager getInstance() {
         if (instance == null) {
             instance = new ChildrenManager();
         }
         return instance;
+    }
+
+    public static void setInstance(ChildrenManager c){
+        instance = c;
     }
 
     public ChildrenManager() {
@@ -38,6 +48,14 @@ public class ChildrenManager {
 
     public void set (int i, Children name) {
         children.set(i, name);
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public int getNumChildren() {

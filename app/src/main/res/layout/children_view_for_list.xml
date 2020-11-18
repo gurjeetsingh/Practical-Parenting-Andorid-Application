@@ -7,15 +7,24 @@
 
     <TextView
         android:id="@+id/childList"
-        android:layout_width="231dp"
-        android:layout_height="35dp"
+        android:layout_width="253dp"
+        android:layout_height="65dp"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
         android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/portrait"
+        android:layout_width="67dp"
+        android:layout_height="65dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/childList"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

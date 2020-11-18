@@ -13,15 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.ChangeTurn"
+        <activity android:name=".UI.Help"></activity>
+        <activity
+            android:name=".UI.ChangeTurn"
             android:label="@string/title_change_turn"
-            android:parentActivityName=".UI.WhoseTurn"></activity>
-        <activity android:name=".UI.EditTask"
+            android:parentActivityName=".UI.WhoseTurn" />
+        <activity
+            android:name=".UI.EditTask"
             android:label="@string/title_edit_task"
-            android:parentActivityName=".UI.EditTasksList"/>
-        <activity android:name=".UI.AddTask"
+            android:parentActivityName=".UI.EditTasksList" />
+        <activity
+            android:name=".UI.AddTask"
             android:label="@string/title_add_tasks"
-            android:parentActivityName=".UI.EditTasksList"/>
+            android:parentActivityName=".UI.EditTasksList" />
         <activity
             android:name=".UI.EditTasksList"
             android:label="@string/title_edit_tasks_list"
@@ -47,10 +51,10 @@
         <activity
             android:name=".UI.EditChild"
             android:label="@string/title_activity_edit_child"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UI.ChildDetails"
-            android:label="@string/title_activity_child_details"/>
+            android:label="@string/title_activity_child_details" />
         <activity android:name=".UI.MainMenu" />
         <activity
             android:name=".UI.TimeoutActivity"

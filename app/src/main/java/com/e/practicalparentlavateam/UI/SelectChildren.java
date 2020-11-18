@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.e.practicalparentlavateam.Model.Children;
+import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -56,7 +57,7 @@ public class SelectChildren extends AppCompatActivity {
 
     private void chooseside() {
         Button choose = findViewById(R.id.chooseSide);
-        if(name == null)
+        if(name == null || name.equals("nobody"))
             choose.setVisibility(View.INVISIBLE);
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +85,8 @@ public class SelectChildren extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
-        Type type = new TypeToken<List<Children>>() {}.getType();
-        List<Children> childList = gson.fromJson(json, type);
+        Type type = new TypeToken<ChildrenManager>() {}.getType();
+        ChildrenManager childList = gson.fromJson(json, type);
 
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
@@ -97,9 +98,9 @@ public class SelectChildren extends AppCompatActivity {
             lastTimeChild.setText(LastTimeName);
 
             int i = 0;
-            while (i < childList.size()) {
+            while (i < childList.getChildren().size()) {
                 if (childList.get(i).getName().equals(LastTimeName)) {
-                    int num = (i + 1) % childList.size();
+                    int num = (i + 1) % childList.getChildren().size();
                     if (name == null) {
                         name = childList.get(num).getName();
                         System.out.println(name);
@@ -110,7 +111,7 @@ public class SelectChildren extends AppCompatActivity {
                 }
                 i++;
             }
-            if (i == childList.size()) {
+            if (i == childList.getChildren().size()) {
                 if (name == null) {
                     name = childList.get(0).getName();
                     System.out.println(name);
@@ -135,8 +136,10 @@ public class SelectChildren extends AppCompatActivity {
     private void getName() {
         Intent i = getIntent();
         name = i.getStringExtra(EXTRA_NAME);
-        TextView text = (TextView) findViewById(R.id.name);
-        text.setText(name);
+        if(name != null){
+            TextView text = (TextView) findViewById(R.id.name);
+            text.setText(name);
+        }
     }
 
     @Override

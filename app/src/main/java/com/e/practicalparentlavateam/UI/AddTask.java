@@ -75,9 +75,9 @@ public class AddTask extends AppCompatActivity {
                         SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                         Gson gson = new Gson();
                         String json = prefs.getString("childPrefs", null);
-                        Type type = new TypeToken<List<Children>>() {}.getType();
-                        List<Children> child_list = gson.fromJson(json, type);
-                        if(child_list == null || child_list.size() == 0) {
+                        Type type = new TypeToken<ChildrenManager>() {}.getType();
+                        ChildrenManager child_list = gson.fromJson(json, type);
+                        if(child_list == null || child_list.getChildren().size() == 0) {
                             child_name = "No Child";
                         }
                         else {
