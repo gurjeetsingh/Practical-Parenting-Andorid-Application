@@ -213,8 +213,6 @@ public class EditChild extends AppCompatActivity {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.setType("image/*");
                 startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-
-
             }
         });
     }
