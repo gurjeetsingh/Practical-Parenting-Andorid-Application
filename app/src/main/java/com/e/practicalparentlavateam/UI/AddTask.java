@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
@@ -74,13 +75,13 @@ public class AddTask extends AppCompatActivity {
                         SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                         Gson gson = new Gson();
                         String json = prefs.getString("childPrefs", null);
-                        Type type = new TypeToken<List<String>>() {}.getType();
-                        List<String> child_list = gson.fromJson(json, type);
-                        if(child_list == null || child_list.size() == 0) {
+                        Type type = new TypeToken<ChildrenManager>() {}.getType();
+                        ChildrenManager child_list = gson.fromJson(json, type);
+                        if(child_list == null || child_list.getChildren().size() == 0) {
                             child_name = "No Child";
                         }
                         else {
-                            child_name = child_list.get(0);
+                            child_name = child_list.get(0).getName();
                         }
 
                         // Create new data object

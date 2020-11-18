@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
@@ -29,7 +30,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class WhoseTurn extends AppCompatActivity {
-    TaskManager task_manager;
+    TaskManager taskManager;
     private ArrayAdapter<Task> adapter;
 
     @Override
@@ -52,12 +53,12 @@ public class WhoseTurn extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("taskPrefs", null);
-        task_manager = TaskManager.getInstance();
+        taskManager = TaskManager.getInstance();
         Type type = new TypeToken<TaskManager>() {}.getType();
         TaskManager temp = gson.fromJson(json, type);
         if(temp != null)
-            task_manager = temp;
-        TaskManager.setInstance(task_manager);
+            taskManager = temp;
+        TaskManager.setInstance(taskManager);
     }
 
     private void populateListView() {
@@ -79,7 +80,7 @@ public class WhoseTurn extends AppCompatActivity {
 
     private class MyListAdapter extends ArrayAdapter<Task> {
         public MyListAdapter() {
-            super(WhoseTurn.this, R.layout.tasks_list, task_manager.getTasks());
+            super(WhoseTurn.this, R.layout.tasks_list, taskManager.getTasks());
         }
 
         @Override
@@ -89,8 +90,8 @@ public class WhoseTurn extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.tasks_list, parent, false);
             }
 
-            String current_task = task_manager.getTasks().get(position).getTask();
-            String current_name = task_manager.getTasks().get(position).getName();
+            String current_task = taskManager.getTasks().get(position).getTask();
+            String current_name = taskManager.getTasks().get(position).getName();
 
             TextView taskView = (TextView) itemView.findViewById(R.id.TaskName);
             taskView.setText(current_task);
@@ -98,19 +99,19 @@ public class WhoseTurn extends AppCompatActivity {
             SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = prefs.getString("childPrefs", null);
-            Type type = new TypeToken<List<String>>() {}.getType();
-            List<String> child_list = gson.fromJson(json, type);
+            Type type = new TypeToken<ChildrenManager>() {}.getType();
+            ChildrenManager child_list = gson.fromJson(json, type);
             TextView nameView = (TextView) itemView.findViewById(R.id.NameOfChild);
-            if(child_list == null || child_list.size() == 0){
-                task_manager.setName(position,"No Child");
-                saveNewTask(task_manager);
+            if(child_list == null || child_list.getChildren().size() == 0){
+                taskManager.setName(position,"No Child");
+                saveNewTask(taskManager);
                 nameView.setText("No Child");
             }
             else {
                 if (current_name.equals("No Child")) {
-                    task_manager.setName(position, child_list.get(0));
-                    saveNewTask(task_manager);
-                    nameView.setText(child_list.get(0));
+                    taskManager.setName(position, child_list.get(0).getName());
+                    saveNewTask(taskManager);
+                    nameView.setText(child_list.get(0).getName());
                 } else {
                     nameView.setText(current_name);
                 }

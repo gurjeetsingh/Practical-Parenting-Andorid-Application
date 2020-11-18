@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.e.practicalparentlavateam">
 
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,15 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.ChangeTurn"
+        <activity android:name=".UI.Help"></activity>
+        <activity
+            android:name=".UI.ChangeTurn"
             android:label="@string/title_change_turn"
-            android:parentActivityName=".UI.WhoseTurn"></activity>
-        <activity android:name=".UI.EditTask"
+            android:parentActivityName=".UI.WhoseTurn" />
+        <activity
+            android:name=".UI.EditTask"
             android:label="@string/title_edit_task"
-            android:parentActivityName=".UI.EditTasksList"/>
-        <activity android:name=".UI.AddTask"
+            android:parentActivityName=".UI.EditTasksList" />
+        <activity
+            android:name=".UI.AddTask"
             android:label="@string/title_add_tasks"
-            android:parentActivityName=".UI.EditTasksList"/>
+            android:parentActivityName=".UI.EditTasksList" />
         <activity
             android:name=".UI.EditTasksList"
             android:label="@string/title_edit_tasks_list"
@@ -40,7 +45,7 @@
             android:name=".UI.IndividualHistory"
             android:parentActivityName=".UI.CoinFlipActivity" />
         <activity
-            android:name=".UI.Choose_children"
+            android:name=".UI.ChooseChildren"
             android:label="@string/title_activity_select_child"
             android:parentActivityName=".UI.CoinFlipActivity" />
         <activity

@@ -11,24 +11,29 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.R;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConfigureChildren extends AppCompatActivity {
     // Arbitrary numbers for startActivityForResult:
@@ -37,7 +42,7 @@ public class ConfigureChildren extends AppCompatActivity {
     private static final int ACTIVITY_RESULT_CALCULATE = 103;
 
     private ChildrenManager children;
-    private BaseAdapter adapter;
+    private ArrayAdapter<Children> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +55,15 @@ public class ConfigureChildren extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         children = ChildrenManager.getInstance();
-        getChildList();
+        getChild();
 
         setupFloatingActionButton();
-        setupChildrenView();
+        //setupChildrenView();
+        populateListView();
+        registClickCallback();
     }
 
-    private void setupChildrenView() {
+    /*private void setupChildrenView() {
         // SOURCE: https://developer.android.com/guide/topics/ui/layout/recyclerview
         ListView rv = findViewById(R.id.childListView);
         getChildList();
@@ -103,6 +110,55 @@ public class ConfigureChildren extends AppCompatActivity {
         );
 
 
+    }*/
+
+    private void populateListView() {
+        children = ChildrenManager.getInstance();
+        adapter = new MyListAdapter();
+        ListView list = (ListView) findViewById(R.id.childListView);
+        list.setAdapter(adapter);
+    }
+
+    private class MyListAdapter extends ArrayAdapter<Children> {
+        public MyListAdapter(){
+            super(ConfigureChildren.this, R.layout.children_view_for_list, children.getChildren());
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent){
+            View itemView = convertView;
+            if(itemView == null){
+                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
+            }
+
+            String currentChild = children.getChildren().get(position).getName();
+            TextView makeView = (TextView)itemView.findViewById(R.id.childList);
+            makeView.setText(currentChild);
+
+            ImageView imageView = (ImageView)itemView.findViewById(R.id.portrait);
+            try {
+                File f=new File(children.getPath(), currentChild + ".jpg");
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                imageView.setImageBitmap(b);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+
+            return itemView;
+        }
+    }
+
+    private void registClickCallback(){
+        ListView list = (ListView) findViewById(R.id.childListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                Intent intent = EditChild.makeEditIntent(ConfigureChildren.this, position);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -128,15 +184,15 @@ public class ConfigureChildren extends AppCompatActivity {
         });
     }
 
-    public void  getChildList(){
+    public void getChild(){
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
-        Type type = new TypeToken<List<String>>() {}.getType();
+        Type type = new TypeToken<ChildrenManager>() {}.getType();
+        ChildrenManager temp = gson.fromJson(json, type);
+        if(temp != null)
+            ChildrenManager.setInstance(temp);
         children = ChildrenManager.getInstance();
-        List<String> tempList = gson.fromJson(json, type);
-        if(tempList != null)
-            children.setChildren(tempList);
     }
 
     @Override
