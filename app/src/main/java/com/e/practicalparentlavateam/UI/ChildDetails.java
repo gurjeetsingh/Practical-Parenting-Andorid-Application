@@ -8,9 +8,11 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.e.practicalparentlavateam.Model.Children;
@@ -37,6 +39,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ChildDetails extends AppCompatActivity {
     private EditText etName;
@@ -44,6 +47,7 @@ public class ChildDetails extends AppCompatActivity {
     private ImageView image;
     private Button takePhoto;
     private String path;
+    private final static int SELECT_PHOTO = 12345;
 
     public static Intent makeIntentForAdd(Context context) {
         return new Intent(context, ChildDetails.class);
@@ -62,8 +66,11 @@ public class ChildDetails extends AppCompatActivity {
         takePhotoForChild();
         setupButtonCancel();
         setupButtonOk();
+        setupButtongallery();
 
     }
+
+
 
     //https://www.youtube.com/watch?v=RaOyw84625w
     private void takePhotoForChild() {
@@ -94,6 +101,29 @@ public class ChildDetails extends AppCompatActivity {
         if (requestCode == 100) {
             Bitmap captureImage = (Bitmap) data.getExtras().get("data");
             image.setImageBitmap(captureImage);
+        }
+        // Here we need to check if the activity that was triggers was the Image Gallery.
+        // If it is the requestCode will match the LOAD_IMAGE_RESULTS value.
+        // If the resultCode is RESULT_OK and there is some data we know that an image was picked.
+        else if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK && data != null) {
+            // Let's read picked image data - its URI
+            Uri pickedImage = data.getData();
+            // Let's read picked image path using content resolver
+            String[] filePath = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
+            cursor.moveToFirst();
+            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+            //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
+            try {
+                InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
+                Bitmap captureImage = BitmapFactory.decodeStream(inputStream);
+                image.setImageBitmap(captureImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            // At the end remember to close the cursor or you will end with the RuntimeException!
+            cursor.close();
         }
     }
 
@@ -152,7 +182,26 @@ public class ChildDetails extends AppCompatActivity {
                     }
                 }
         );
+
+
+
+
     }
+
+    private void setupButtongallery() {
+        Button gallerbtn=findViewById(R.id.gallerybtn);
+        gallerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+
+
+            }
+        });
+    }
+
 
     public void saveChildDetails(){
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);

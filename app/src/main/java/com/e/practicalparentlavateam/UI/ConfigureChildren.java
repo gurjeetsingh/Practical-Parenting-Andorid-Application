@@ -63,6 +63,7 @@ public class ConfigureChildren extends AppCompatActivity {
         registClickCallback();
     }
 
+
     /*private void setupChildrenView() {
         // SOURCE: https://developer.android.com/guide/topics/ui/layout/recyclerview
         ListView rv = findViewById(R.id.childListView);

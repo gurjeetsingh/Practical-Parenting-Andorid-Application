@@ -29,7 +29,7 @@
         android:id="@+id/child_photo"
         android:layout_width="185dp"
         android:layout_height="192dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etName2"
@@ -53,10 +53,11 @@
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="141dp"
-        android:layout_height="54dp"
+        android:layout_height="53dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:text="@string/delete"
@@ -65,14 +66,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.899"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etName2"
+        app:layout_constraintVertical_bias="0.84000003" />
 
     <Button
         android:id="@+id/take_image"
         android:layout_width="156dp"
         android:layout_height="53dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:text="take photo"
@@ -87,10 +90,10 @@
     <Button
         android:id="@+id/btnSaveEdit"
         android:layout_width="141dp"
-        android:layout_height="54dp"
+        android:layout_height="53dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:text="@string/save"
@@ -103,6 +106,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnDelete"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/gallerbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="53dp"
+        android:background="@drawable/rounded_corners_buttons"
+        android:fontFamily="@font/imprima"
+        android:text="Choose From Gallery"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/take_image"
+        app:layout_constraintVertical_bias="0.159" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
