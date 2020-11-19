@@ -31,6 +31,7 @@ public class MainMenu extends AppCompatActivity {
         flipCoin_button();
         timeoutTimer_button();
         whoseTurn_button();
+        helpscreenbutton();
     }
 
     private void configureChildren_button() {
@@ -90,6 +91,18 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent tasks_intent = WhoseTurn.makeIntent(MainMenu.this);
                 startActivity(tasks_intent);
+            }
+        });
+    }
+
+    private void helpscreenbutton() {
+        //This will be for the helpscreen activity
+        Button helpbtn=findViewById(R.id.helpbtn);
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent helpintent=HelpActivity.makeIntent(MainMenu.this);
+                startActivity(helpintent);
             }
         });
     }
