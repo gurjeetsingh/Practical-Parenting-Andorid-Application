@@ -34,6 +34,7 @@
     <string name="title_edit_task">Edit Task</string>
     <string name="title_add_tasks">Add Tasks</string>
     <string name="title_change_turn">Change Turn</string>
+    <string name="title_help">Help</string>
 
     <string name="Choice">Choice:</string>
     <!-- Strings used for fragments for navigation -->
