@@ -85,6 +85,8 @@ public class SelectChildren extends AppCompatActivity {
         String json = prefs.getString("childPrefs", null);
         Type type = new TypeToken<ChildrenManager>() {}.getType();
         ChildrenManager childList = gson.fromJson(json, type);
+        if(childList != null)
+            ChildrenManager.setInstance(childList);
 
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);

@@ -13,6 +13,8 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -23,15 +25,16 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.e.practicalparentlavateam.Model.HistoryItem;
 import com.e.practicalparentlavateam.Model.HistoryManager;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 public class CoinFlipActivity extends AppCompatActivity {
@@ -57,7 +60,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        getName();
+        getChild();
         getChoice();
         getHistory();
         historyButton();
@@ -66,12 +69,23 @@ public class CoinFlipActivity extends AppCompatActivity {
         deleteHistoryButton();
     }
 
-    private void getName() {
+    private void getChild() {
         Intent i = getIntent();
         name = i.getStringExtra(EXTRA_NAME);
         TextView text = (TextView) findViewById(R.id.ChildName);
-        if(name != null)
+        ImageView imageView = (ImageView) findViewById(R.id.child_coin_image);
+        if(name != null){
             text.setText(name);
+            try {
+                File file=new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
+                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                imageView.setImageBitmap(bitmap);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void getChoice() {
