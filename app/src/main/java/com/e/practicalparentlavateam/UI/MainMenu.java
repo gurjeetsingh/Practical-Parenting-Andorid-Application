@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
@@ -97,7 +98,7 @@ public class MainMenu extends AppCompatActivity {
 
     private void helpscreenbutton() {
         //This will be for the helpscreen activity
-        Button helpbtn=findViewById(R.id.helpbtn);
+        ImageButton helpbtn=findViewById(R.id.helpbtn);
         helpbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
