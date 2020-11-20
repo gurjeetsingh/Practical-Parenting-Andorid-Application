@@ -35,7 +35,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class ChildDetails extends AppCompatActivity {
     private ImageView image;
     private Button takePhoto;
     private String path;
-    private final static int SELECT_PHOTO = 12345;
+    private final static int SELECT_FROM_GALLERY = 007;
 
     public static Intent makeIntentForAdd(Context context) {
         return new Intent(context, ChildDetails.class);
@@ -105,7 +104,7 @@ public class ChildDetails extends AppCompatActivity {
         // Here we need to check if the activity that was triggers was the Image Gallery.
         // If it is the requestCode will match the LOAD_IMAGE_RESULTS value.
         // If the resultCode is RESULT_OK and there is some data we know that an image was picked.
-        else if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK && data != null) {
+        else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
             // Let's read picked image data - its URI
             Uri pickedImage = data.getData();
             // Let's read picked image path using content resolver
@@ -195,7 +194,7 @@ public class ChildDetails extends AppCompatActivity {
             public void onClick(View v) {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                startActivityForResult(photoPickerIntent, SELECT_FROM_GALLERY);
 
 
             }
