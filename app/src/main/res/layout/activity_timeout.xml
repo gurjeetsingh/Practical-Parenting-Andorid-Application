@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.253">
 
         <Button
-            android:id="@+id/timepushbtn"
+            android:id="@+id/time_push_button"
             android:layout_width="132dp"
             android:layout_height="62dp"
             android:layout_alignParentStart="true"
@@ -38,7 +38,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/timertext"
+            android:id="@+id/timer_text"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_alignParentStart="true"
@@ -51,7 +51,7 @@
             android:textSize="64sp" />
 
         <Button
-            android:id="@+id/pausebtn"
+            android:id="@+id/pause_button"
             android:layout_width="132dp"
             android:layout_height="62dp"
             android:layout_alignParentEnd="true"
@@ -67,7 +67,7 @@
             android:visibility="invisible" />
 
         <Spinner
-            android:id="@+id/timespinner"
+            android:id="@+id/time_spinner"
             android:layout_width="130dp"
             android:layout_height="42dp"
             android:layout_alignParentStart="true"
@@ -80,7 +80,7 @@
             android:textAlignment="center" />
 
         <Button
-            android:id="@+id/customtime"
+            android:id="@+id/custom_time"
             android:layout_width="159dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -110,7 +110,7 @@
             android:visibility="invisible" />
 
         <Button
-            android:id="@+id/resetbtn"
+            android:id="@+id/reset_button"
             android:layout_width="98dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -127,7 +127,7 @@
     </RelativeLayout>
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/timeoutToolbar"
+        android:id="@+id/timeout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"

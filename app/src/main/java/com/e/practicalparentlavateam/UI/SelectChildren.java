@@ -14,14 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 public class SelectChildren extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
@@ -42,11 +40,11 @@ public class SelectChildren extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_children);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.selectChildToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.select_child_toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getName();
         loadLastTimeChild();
@@ -56,7 +54,7 @@ public class SelectChildren extends AppCompatActivity {
     }
 
     private void chooseside() {
-        Button choose = findViewById(R.id.chooseSide);
+        Button choose = findViewById(R.id.choose_side);
         if(name == null || name.equals("nobody"))
             choose.setVisibility(View.INVISIBLE);
         choose.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +88,7 @@ public class SelectChildren extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
-        TextView lastTimeChild = findViewById(R.id.LastTimeChild);
+        TextView lastTimeChild = findViewById(R.id.last_time_child);
         if(LastTimeName == null){
             lastTimeChild.setText("None");
         }
@@ -146,9 +144,9 @@ public class SelectChildren extends AppCompatActivity {
     public void onBackPressed() {
         //clear the old stack
         //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
-        Intent mainintent=MainMenu.makeIntent(SelectChildren.this);
-        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(mainintent);
+        Intent mainIntent = MainMenu.makeIntent(SelectChildren.this);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainIntent);
         SelectChildren.this.finish();
     }
 }

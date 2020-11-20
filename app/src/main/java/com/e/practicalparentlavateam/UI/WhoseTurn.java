@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
@@ -27,7 +26,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 public class WhoseTurn extends AppCompatActivity {
     TaskManager taskManager;
@@ -38,7 +36,7 @@ public class WhoseTurn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whose_turn);
 
-        Toolbar toolbar = findViewById(R.id.WhoseTurnToolbar);
+        Toolbar toolbar = findViewById(R.id.whose_turn_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
@@ -63,12 +61,12 @@ public class WhoseTurn extends AppCompatActivity {
 
     private void populateListView() {
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.TaskListView);
+        ListView list = (ListView) findViewById(R.id.task_list_view);
         list.setAdapter(adapter);
     }
 
     private void registerClickCallback() {
-        ListView list = (ListView) findViewById(R.id.TaskListView);
+        ListView list = (ListView) findViewById(R.id.task_list_view);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
@@ -93,7 +91,7 @@ public class WhoseTurn extends AppCompatActivity {
             String current_task = taskManager.getTasks().get(position).getTask();
             String current_name = taskManager.getTasks().get(position).getName();
 
-            TextView taskView = (TextView) itemView.findViewById(R.id.TaskName);
+            TextView taskView = (TextView) itemView.findViewById(R.id.task_name);
             taskView.setText(current_task);
 
             SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);

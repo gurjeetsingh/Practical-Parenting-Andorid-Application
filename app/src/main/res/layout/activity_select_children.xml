@@ -8,7 +8,7 @@
     tools:context=".UI.SelectChildren">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/selectChildToolbar"
+        android:id="@+id/select_child_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/LastTimeChild"
+        android:id="@+id/last_time_child"
         android:layout_width="174dp"
         android:layout_height="75dp"
         android:layout_marginTop="124dp"
@@ -34,11 +34,11 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/LastTime"
+        app:layout_constraintStart_toEndOf="@+id/last_time"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/LastTime"
+        android:id="@+id/last_time"
         android:layout_width="174dp"
         android:layout_height="75dp"
         android:layout_marginStart="16dp"
@@ -72,11 +72,11 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/text_view5"
         android:focusable="true" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/text_view5"
         android:layout_width="249dp"
         android:layout_height="86dp"
         android:layout_marginTop="44dp"
@@ -89,7 +89,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LastTimeChild" />
+        app:layout_constraintTop_toBottomOf="@+id/last_time_child" />
 
     <Button
         android:id="@+id/skip"
@@ -111,7 +111,7 @@
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <Button
-        android:id="@+id/chooseSide"
+        android:id="@+id/choose_side"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="160dp"
         android:layout_height="82dp"

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/HistoryList"
+    android:id="@+id/history_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A6445871">
@@ -15,7 +15,7 @@
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/winOrfalse" />
+        app:layout_constraintTop_toBottomOf="@+id/win_or_false" />
 
     <TextView
         android:id="@+id/item_num"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/winOrfalse"
+        android:id="@+id/win_or_false"
         android:layout_width="59dp"
         android:layout_height="33dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,11 +44,11 @@
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/winOrfalse"
+        app:layout_constraintStart_toEndOf="@+id/win_or_false"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/coinResult"
+        android:id="@+id/coin_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
         app:srcCompat="@drawable/coin_back" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/text_view2"
         android:layout_width="76dp"
         android:layout_height="34dp"
         android:layout_marginEnd="16dp"

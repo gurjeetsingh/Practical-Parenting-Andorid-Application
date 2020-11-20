@@ -45,35 +45,35 @@ public class TimeoutActivity extends AppCompatActivity {
 
     private Button startButton;
     private Button pauseButton;
-    private Button resetbutton;
-    private Button custombtn;
-    private Button alrmoffbtn;
-    EditText usertime;
-    private boolean istimerrunning = false;
-    private long timeleftinmilliseconds;
-    private long selectedtime;
+    private Button resetButton;
+    private Button customButton;
+    private Button alrmOffButton;
+    EditText userTime;
+    private boolean isTimerRunning = false;
+    private long timeLeftInMilliseconds;
+    private long selectedTime;
     Context context = this;
-    String[] timepiece = new String[]{"Select Duration", "Set Time: 1 Minute", "Set Time: 2 Minutes", "Set Time: 3 Minutes", "Set Time: 5 Minutes", "Set Time: 10 Minutes"};
+    String[] timePiece = new String[]{"Select Duration", "Set Time: 1 Minute", "Set Time: 2 Minutes", "Set Time: 3 Minutes", "Set Time: 5 Minutes", "Set Time: 10 Minutes"};
 
 
     private TextView timerValue;
-    Intent pauseintent;
+    Intent pauseIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        alrmoffbtn = (Button) findViewById(R.id.alarmoff);
+        alrmOffButton = (Button) findViewById(R.id.alarmoff);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeout);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.timeoutToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.timeout_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-        createtimedurationspinner();
+        createTimeDurationSpinner();
 
 
-        timerValue = (TextView) findViewById(R.id.timertext);
+        timerValue = (TextView) findViewById(R.id.timer_text);
         timerValue.setBackgroundResource(R.color.stopg);
 
         /*
@@ -93,25 +93,25 @@ public class TimeoutActivity extends AppCompatActivity {
         }
 
 
-        if (istimerrunning == false) {
-            millisecondconverterandTimerUIupdate(selectedtime,timerValue);
+        if (isTimerRunning == false) {
+            millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
         }
 
 
         /*
         The start button starts the background service by calling from counterservice, to run time.
          */
-        startButton = (Button) findViewById(R.id.timepushbtn);
+        startButton = (Button) findViewById(R.id.time_push_button);
         startButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
                 Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
-                serviceintent.putExtra("mills", timeleftinmilliseconds);
-                istimerrunning = true;
+                serviceintent.putExtra("mills", timeLeftInMilliseconds);
+                isTimerRunning = true;
                 startService(serviceintent);
                 //System.out.println("Time left for start" + mTimeLeftInMillis);
-                registerReceiver(broadcastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
+                registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
                 pauseButton.setVisibility(View.VISIBLE);
             }
         });
@@ -121,12 +121,12 @@ public class TimeoutActivity extends AppCompatActivity {
         /*
         Pause button stops the service temporarily storing the time left in milliseconds.
          */
-        pauseButton = (Button) findViewById(R.id.pausebtn);
+        pauseButton = (Button) findViewById(R.id.pause_button);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                int time = pauseintent.getIntExtra("time", 0);
-                timeleftinmilliseconds = time;
-                istimerrunning = false;
+                int time = pauseIntent.getIntExtra("time", 0);
+                timeLeftInMilliseconds = time;
+                isTimerRunning = false;
                 Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceintent);
                 // unregisterReceiver(broadcastReceiver);
@@ -140,25 +140,25 @@ public class TimeoutActivity extends AppCompatActivity {
         /*
         The CUSTOMBUTTON uses an alertdialog to quickly allow us to set a custom time.
          */
-        custombtn = (Button) findViewById(R.id.customtime);
-        custombtn.setOnClickListener(new View.OnClickListener() {
+        customButton = (Button) findViewById(R.id.custom_time);
+        customButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceintent);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
                 builder.setTitle("Please Enter Custom Minute:");
-                usertime = new EditText(context);
-                builder.setView(usertime);
+                userTime = new EditText(context);
+                builder.setView(userTime);
                 builder.setIcon(R.drawable.babyclock);
                 builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String newtime = usertime.getText().toString();
+                        String newtime = userTime.getText().toString();
                         long customtime = Long.parseLong(newtime);
-                        timeleftinmilliseconds = customtime * 60000;
-                        selectedtime = timeleftinmilliseconds;
-                        millisecondconverterandTimerUIupdate(selectedtime,timerValue);
+                        timeLeftInMilliseconds = customtime * 60000;
+                        selectedTime = timeLeftInMilliseconds;
+                        millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -177,12 +177,12 @@ public class TimeoutActivity extends AppCompatActivity {
         /*
         To turn off alarm at the push of a button using the AudioController function.
          */
-        alrmoffbtn = (Button) findViewById(R.id.alarmoff);
-        alrmoffbtn.setOnClickListener(new View.OnClickListener() {
+        alrmOffButton = (Button) findViewById(R.id.alarmoff);
+        alrmOffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AudioController.stopAudio();
-                alrmoffbtn.setVisibility(View.INVISIBLE);
+                alrmOffButton.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -193,16 +193,16 @@ public class TimeoutActivity extends AppCompatActivity {
         makes our pause button invisible as the timer is automatically paused.
          */
 
-        resetbutton = (Button) findViewById(R.id.resetbtn);
-        resetbutton.setOnClickListener(new View.OnClickListener() {
+        resetButton = (Button) findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceintent);
-                timeleftinmilliseconds = selectedtime;
+                timeLeftInMilliseconds = selectedTime;
                 pauseButton.setVisibility(View.INVISIBLE);
-                istimerrunning = false;
-                millisecondconverterandTimerUIupdate(selectedtime,timerValue);
+                isTimerRunning = false;
+                millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
             }
 
 
@@ -219,60 +219,60 @@ public class TimeoutActivity extends AppCompatActivity {
     until you click on start timer. Whenever you click on an option, the service will be stopped first,and the
     time will be sent to the UI updater. Then, you can START TIMER to restart the timer with the set duration.
      */
-    private void createtimedurationspinner() {
-        Spinner timefieldspinner = (Spinner) findViewById(R.id.timespinner);
+    private void createTimeDurationSpinner() {
+        Spinner timefieldspinner = (Spinner) findViewById(R.id.time_spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timepiece);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePiece);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timefieldspinner.setAdapter(adapter);
         timefieldspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    timeleftinmilliseconds = 60000;
-                    selectedtime = 60000;
+                    timeLeftInMilliseconds = 60000;
+                    selectedTime = 60000;
                 }
                 if (position == 1) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceintent);
-                    timeleftinmilliseconds = 60000;
-                    selectedtime = 60000;
-                    millisecondconverterandTimerUIupdate(selectedtime,timerValue);
+                    timeLeftInMilliseconds = 60000;
+                    selectedTime = 60000;
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
 
                 }
                 if (position == 2) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceintent);
-                    timeleftinmilliseconds = 120000;
-                    selectedtime = 120000;
-                    millisecondconverterandTimerUIupdate(selectedtime,timerValue);
+                    timeLeftInMilliseconds = 120000;
+                    selectedTime = 120000;
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 3) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceintent);
-                    timeleftinmilliseconds = 180000;
-                    selectedtime = 180000;
-                    millisecondconverterandTimerUIupdate(selectedtime,timerValue);
+                    timeLeftInMilliseconds = 180000;
+                    selectedTime = 180000;
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 4) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceintent);
-                    timeleftinmilliseconds = 300000;
-                    selectedtime = 300000;
-                    millisecondconverterandTimerUIupdate(selectedtime,timerValue);
+                    timeLeftInMilliseconds = 300000;
+                    selectedTime = 300000;
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 5) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceintent);
-                    timeleftinmilliseconds = 600000;
-                    selectedtime = 600000;
-                    millisecondconverterandTimerUIupdate(selectedtime,timerValue);
+                    timeLeftInMilliseconds = 600000;
+                    selectedTime = 600000;
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                timeleftinmilliseconds = selectedtime;
+                timeLeftInMilliseconds = selectedTime;
             }
         });
     }
@@ -289,7 +289,7 @@ public class TimeoutActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(broadcastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
+        registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
     }
 
     @Override
@@ -301,7 +301,7 @@ public class TimeoutActivity extends AppCompatActivity {
     The broadcast reciever, whenever it recieves information from the service,which is the
     time remaining in milliseconds, it immediately updates the UI.
      */
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    private BroadcastReceiver broadCastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             updateUI(intent);
@@ -318,10 +318,10 @@ public class TimeoutActivity extends AppCompatActivity {
         int mins = (int) (time / (double) 1000) / 60;
         int secs = (int) (time / (double) 1000) % 60;
         if (time == 0 || time < 0) {
-            istimerrunning = false;
-            alrmoffbtn.setVisibility(View.VISIBLE);
+            isTimerRunning = false;
+            alrmOffButton.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.INVISIBLE);
-            notif();
+            notIf();
             //Added vibrator
             Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             alarm.vibrate(5000);
@@ -331,7 +331,7 @@ public class TimeoutActivity extends AppCompatActivity {
             long delay = 12000;
             cancelnotificiaton.postDelayed(new Runnable() {
                 public void run() {
-                    alrmoffbtn.setVisibility(View.INVISIBLE);
+                    alrmOffButton.setVisibility(View.INVISIBLE);
                 }
             }, delay);
 
@@ -339,7 +339,7 @@ public class TimeoutActivity extends AppCompatActivity {
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
         timerValue.setText(timeLeftFormatted);
-        pauseintent = intent;
+        pauseIntent = intent;
     }
 
     @Override
@@ -365,7 +365,7 @@ public class TimeoutActivity extends AppCompatActivity {
     Resources used to learn make a notification:https://developer.android.com/training/notify-user/build-notification
     Another resource: https://developer.android.com/guide/topics/ui/notifiers/notifications
      */
-    public void notif()
+    public void notIf()
     {
         Intent intent = new Intent(this, TimeoutActivity.class);
         intent.putExtra("StopAlarm",true);
@@ -401,7 +401,7 @@ public class TimeoutActivity extends AppCompatActivity {
 
     //The following function streamlines our updating the textview to easily convert
     //from seconds to milliseconds.
-    public void millisecondconverterandTimerUIupdate(long selectedtime, TextView usertext)
+    public void millisecondConverterAndTimerUIupdate(long selectedtime, TextView usertext)
     {
         int mins = (int) (selectedtime / (double) 1000) / 60;
         int secs = (int) (selectedtime / (double) 1000) % 60;

@@ -8,7 +8,7 @@
     tools:context=".UI.FlippingHistory">
 
     <ListView
-        android:id="@+id/HistoryList"
+        android:id="@+id/history_list"
         android:layout_width="395dp"
         android:layout_height="602dp"
         android:layout_marginStart="8dp"

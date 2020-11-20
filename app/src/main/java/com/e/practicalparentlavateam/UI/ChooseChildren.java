@@ -2,7 +2,6 @@
 
 package com.e.practicalparentlavateam.UI;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -16,11 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
@@ -32,13 +29,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChooseChildren extends AppCompatActivity {
     private ChildrenManager children;
     private ArrayAdapter<Children> adapter;
-    private ChildrenManager current_childrenList = new ChildrenManager();
+    private ChildrenManager currentChildrenList = new ChildrenManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +61,8 @@ public class ChooseChildren extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sp.getString("name",null);
         if(LastTimeName == null){
-            current_childrenList = children;
-            current_childrenList.add(new Children("nobody"));
+            currentChildrenList = children;
+            currentChildrenList.add(new Children("nobody"));
         }
         else {
             int index = 0;
@@ -76,11 +71,11 @@ public class ChooseChildren extends AppCompatActivity {
                     index = (i + 1) % children.getChildren().size();
             }
             while (!children.getChildren().get(index).getName().equals(LastTimeName)) {
-                current_childrenList.add(children.getChildren().get(index));
+                currentChildrenList.add(children.getChildren().get(index));
                 index = (index + 1) % children.getChildren().size();
             }
-            current_childrenList.add(new Children(LastTimeName));
-            current_childrenList.add(new Children("nobody"));
+            currentChildrenList.add(new Children(LastTimeName));
+            currentChildrenList.add(new Children("nobody"));
         }
 
         adapter = new MyListAdapter();
@@ -90,7 +85,7 @@ public class ChooseChildren extends AppCompatActivity {
 
     private class MyListAdapter extends ArrayAdapter<Children> {
         public MyListAdapter(){
-            super(ChooseChildren.this, R.layout.children_view_for_list, current_childrenList.getChildren());
+            super(ChooseChildren.this, R.layout.children_view_for_list, currentChildrenList.getChildren());
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
@@ -99,8 +94,8 @@ public class ChooseChildren extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
             }
 
-            String currentChild = current_childrenList.getChildren().get(position).getName();
-            TextView makeView = (TextView)itemView.findViewById(R.id.childList);
+            String currentChild = currentChildrenList.getChildren().get(position).getName();
+            TextView makeView = (TextView)itemView.findViewById(R.id.child_list);
             makeView.setText(currentChild);
 
             ImageView imageView = (ImageView)itemView.findViewById(R.id.portrait);
@@ -127,7 +122,7 @@ public class ChooseChildren extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                String clickedName = current_childrenList.getChildren().get(position).getName();
+                String clickedName = currentChildrenList.getChildren().get(position).getName();
                 /*TextView text = (TextView)findViewById(R.id.name);
                 text.setText(clickedName);*/
 

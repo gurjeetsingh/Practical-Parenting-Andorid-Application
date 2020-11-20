@@ -35,7 +35,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -61,7 +60,7 @@ public class ChildDetails extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         children = ChildrenManager.getInstance();
-        etName = findViewById(R.id.etName);
+        etName = findViewById(R.id.edit_name);
 
         takePhotoForChild();
         setupButtonCancel();
@@ -128,7 +127,7 @@ public class ChildDetails extends AppCompatActivity {
     }
 
     private void setupButtonCancel() {
-        Button btn = findViewById(R.id.btnCancel);
+        Button btn = findViewById(R.id.button_cancel);
         btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -140,7 +139,7 @@ public class ChildDetails extends AppCompatActivity {
     }
 
     private void setupButtonOk() {
-        Button btn = findViewById(R.id.btnSave);
+        Button btn = findViewById(R.id.button_save);
         btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -148,25 +147,26 @@ public class ChildDetails extends AppCompatActivity {
                         // Extract data from screen
                         String name = etName.getText().toString();
 
+                        //https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android
                         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
                         Bitmap bitmapImage = drawable.getBitmap();
-                        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+                        ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
                         // path to /data/data/yourapp/app_data/imageDir
-                        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+                        File directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
                         // Create imageDir
-                        File mypath=new File(directory,etName.getText().toString() + ".jpg");
+                        File myPath=new File(directory,etName.getText().toString() + ".jpg");
 
-                        FileOutputStream fos = null;
+                        FileOutputStream fileOutputStream = null;
                         try {
-                            fos = new FileOutputStream(mypath);
+                            fileOutputStream = new FileOutputStream(myPath);
                             // Use the compress method on the BitMap object to write image to the OutputStream
-                            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
                             Toast.makeText(getApplicationContext(), "Image saved", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
                             try {
-                                fos.close();
+                                fileOutputStream.close();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -189,7 +189,7 @@ public class ChildDetails extends AppCompatActivity {
     }
 
     private void setupButtongallery() {
-        Button gallerbtn=findViewById(R.id.gallerybtn);
+        Button gallerbtn=findViewById(R.id.gallery_button);
         gallerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -18,8 +18,6 @@ import android.os.Bundle;
 import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import androidx.annotation.Nullable;
@@ -29,8 +27,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class EditChild extends AppCompatActivity {
-    private EditText etName2;
+    private EditText editName2;
     private String childEditing;
     private int childEditingIndex;
     private ChildrenManager children;
@@ -64,7 +60,7 @@ public class EditChild extends AppCompatActivity {
         childEditingIndex = intent.getIntExtra(EXTRA_CHILD_INDEX, 0);
         children = ChildrenManager.getInstance();
         childEditing = children.get(childEditingIndex).getName();
-        etName2.setHint(children.get(childEditingIndex).getName());
+        editName2.setHint(children.get(childEditingIndex).getName());
     }
 
     @Override
@@ -75,7 +71,7 @@ public class EditChild extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         children = ChildrenManager.getInstance();
-        etName2 = findViewById(R.id.etName2);
+        editName2 = findViewById(R.id.edit_name2);
 
         //initalize values
         extractIndexFromIntent();
@@ -143,7 +139,7 @@ public class EditChild extends AppCompatActivity {
     }
 
     private void setupButtonDelete() {
-        Button btn = findViewById(R.id.btnDelete);
+        Button btn = findViewById(R.id.button_delete);
         btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -166,27 +162,28 @@ public class EditChild extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // Extract data from screen
-                        String name = etName2.getText().toString();
+                        String name = editName2.getText().toString();
 
+                        //https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android
                         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
                         Bitmap bitmapImage = drawable.getBitmap();
-                        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+                        ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
                         // path to /data/data/yourapp/app_data/imageDir
-                        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+                        File directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
                         // Create imageDir
-                        File mypath=new File(directory,etName2.getText().toString() + ".jpg");
+                        File myPath = new File(directory, editName2.getText().toString() + ".jpg");
 
-                        FileOutputStream fos = null;
+                        FileOutputStream fileOutputStreams = null;
                         try {
-                            fos = new FileOutputStream(mypath);
+                            fileOutputStreams = new FileOutputStream(myPath);
                             // Use the compress method on the BitMap object to write image to the OutputStream
-                            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStreams);
                             Toast.makeText(getApplicationContext(), "Image saved", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
                             try {
-                                fos.close();
+                                fileOutputStreams.close();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -206,7 +203,7 @@ public class EditChild extends AppCompatActivity {
     }
 
     private void setupButtongallery() {
-        Button gallerbtn=findViewById(R.id.gallerbtn);
+        Button gallerbtn=findViewById(R.id.galler_button);
         gallerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

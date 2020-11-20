@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/EditTaskListView"
+    android:id="@+id/edit_task_list_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A6445871">>
 
     <TextView
-        android:id="@+id/TaskName"
+        android:id="@+id/task_name2"
         android:layout_width="412dp"
         android:layout_height="33dp"
         android:gravity="center_horizontal|center_vertical"

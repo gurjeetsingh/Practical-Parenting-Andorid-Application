@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +18,9 @@ import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
 
 public class EditTasksList extends AppCompatActivity {
-    TaskManager task_manager;
+    TaskManager taskManager;
     private ArrayAdapter<Task> adapter;
 
     @Override
@@ -42,8 +40,8 @@ public class EditTasksList extends AppCompatActivity {
     }
 
     private void setupFloatingActionButton() {
-        FloatingActionButton fab = findViewById(R.id.AddTask);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton floatActionButton = findViewById(R.id.AddTask);
+        floatActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = AddTask.makeIntentForAdd(EditTasksList.this);
@@ -53,14 +51,14 @@ public class EditTasksList extends AppCompatActivity {
     }
 
     private void populateListView() {
-        task_manager = TaskManager.getInstance();
+        taskManager = TaskManager.getInstance();
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.EditTaskListView);
+        ListView list = (ListView) findViewById(R.id.edit_task_list_view);
         list.setAdapter(adapter);
     }
 
     private void registerClickCallback() {
-        ListView list = (ListView) findViewById(R.id.EditTaskListView);
+        ListView list = (ListView) findViewById(R.id.edit_task_list_view);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
@@ -72,7 +70,7 @@ public class EditTasksList extends AppCompatActivity {
 
     private class MyListAdapter extends ArrayAdapter<Task> {
         public MyListAdapter() {
-            super(EditTasksList.this, R.layout.edit_tasks_list, task_manager.getTasks());
+            super(EditTasksList.this, R.layout.edit_tasks_list, taskManager.getTasks());
         }
 
         @Override
@@ -82,9 +80,9 @@ public class EditTasksList extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.edit_tasks_list, parent, false);
             }
 
-            String current_task = task_manager.getTasks(position).getTask();
+            String current_task = taskManager.getTasks(position).getTask();
 
-            TextView makeView = (TextView) itemView.findViewById(R.id.TaskName);
+            TextView makeView = (TextView) itemView.findViewById(R.id.task_name2);
             makeView.setText(current_task);
 
             return itemView;

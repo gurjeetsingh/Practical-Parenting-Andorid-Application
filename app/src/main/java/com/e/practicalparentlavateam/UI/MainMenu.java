@@ -11,14 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -27,13 +25,13 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        configureChildren_button();
-        flipCoin_button();
-        timeoutTimer_button();
-        whoseTurn_button();
+        configureChildrenButton();
+        flipCoinButton();
+        timeoutTimerButton();
+        whoseTurnButton();
     }
 
-    private void configureChildren_button() {
+    private void configureChildrenButton() {
         //This will be for our configuring the children activity.
         Button config_btn=(Button)findViewById(R.id.configchild);
         config_btn.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +44,7 @@ public class MainMenu extends AppCompatActivity {
         });
     }
 
-    private void flipCoin_button() {
+    private void flipCoinButton() {
         //This will be for flipping the coin activity
         Button flip_btn=(Button)findViewById(R.id.coinflip);
         flip_btn.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +68,7 @@ public class MainMenu extends AppCompatActivity {
         });
     }
 
-    private void timeoutTimer_button() {
+    private void timeoutTimerButton() {
         //This will be for the timeout timer activity
         Button timeout_btn=(Button)findViewById(R.id.timeout);
         timeout_btn.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +80,7 @@ public class MainMenu extends AppCompatActivity {
         });
     }
 
-    private void whoseTurn_button() {
+    private void whoseTurnButton() {
         //This will be for the whose turn activity
         Button whose_turn_btn = findViewById(R.id.tasks);
         whose_turn_btn.setOnClickListener(new View.OnClickListener() {

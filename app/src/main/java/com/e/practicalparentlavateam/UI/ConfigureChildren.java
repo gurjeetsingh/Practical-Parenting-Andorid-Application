@@ -132,7 +132,7 @@ public class ConfigureChildren extends AppCompatActivity {
             }
 
             String currentChild = children.getChildren().get(position).getName();
-            TextView makeView = (TextView)itemView.findViewById(R.id.childList);
+            TextView makeView = (TextView)itemView.findViewById(R.id.child_list);
             makeView.setText(currentChild);
 
             ImageView imageView = (ImageView)itemView.findViewById(R.id.portrait);
