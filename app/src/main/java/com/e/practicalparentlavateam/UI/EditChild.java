@@ -47,7 +47,7 @@ public class EditChild extends AppCompatActivity {
     private static final String EXTRA_CHILD_INDEX = "Extra - Child Index";
     private ImageView image;
     private Button takePhoto;
-    private final static int SELECT_PHOTO = 12345;
+    private final static int SELECT_FROM_GALLERY = 007;
 
     public static Intent makeEditIntent(Context c, int childIndex) {
         Intent intent = new Intent(c, EditChild.class);
@@ -113,10 +113,10 @@ public class EditChild extends AppCompatActivity {
             Bitmap captureImage = (Bitmap) data.getExtras().get("data");
             image.setImageBitmap(captureImage);
         }
-        // Here we need to check if the activity that was triggers was the Image Gallery.
-        // If it is the requestCode will match the LOAD_IMAGE_RESULTS value.
-        // If the resultCode is RESULT_OK and there is some data we know that an image was picked.
-        else if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK && data != null) {
+
+        //If the resultcode is result_OK, and we send in the request code select from gallery
+        //which was predetermined, then we understand that the data send is an image from the gallery.
+        else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
             // Let's read picked image data - its URI
             Uri pickedImage = data.getData();
             // Let's read picked image path using content resolver
@@ -124,6 +124,7 @@ public class EditChild extends AppCompatActivity {
             Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
             cursor.moveToFirst();
             String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+            //Resource used to find how to convert an inputstream into a bitmap:
             //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
             try {
                 InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
@@ -207,9 +208,11 @@ public class EditChild extends AppCompatActivity {
         gallerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                //This allows us to sent a particular type of intent i.e. pick from the gallery.
+                //We also send in the particular request code, so that we can select from the gallery.
+                Intent galleryintent = new Intent(Intent.ACTION_PICK);
+                galleryintent.setType("image/*");
+                startActivityForResult(galleryintent, SELECT_FROM_GALLERY);
             }
         });
     }
