@@ -1,6 +1,8 @@
 package com.e.practicalparentlavateam.UI;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +18,13 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.HelpToolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
         TextView getapp =(TextView) findViewById(R.id.projectid);
         getapp.setMovementMethod(LinkMovementMethod.getInstance());
     }
