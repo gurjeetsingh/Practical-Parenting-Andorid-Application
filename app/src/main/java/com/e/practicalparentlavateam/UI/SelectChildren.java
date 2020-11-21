@@ -87,9 +87,8 @@ public class SelectChildren extends AppCompatActivity {
         ChildrenManager childList = gson.fromJson(json, type);
         if(childList != null)
             ChildrenManager.setInstance(childList);
-
-        SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
-        String LastTimeName = sp.getString("name",null);
+        SharedPreferences sharedPreferences = getSharedPreferences("Save name",MODE_PRIVATE);
+        String LastTimeName = sharedPreferences.getString("name",null);
         TextView lastTimeChild = findViewById(R.id.last_time_child);
         if(LastTimeName == null){
             lastTimeChild.setText("None");

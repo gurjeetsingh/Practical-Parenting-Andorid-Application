@@ -58,8 +58,8 @@ public class ChooseChildren extends AppCompatActivity {
         if(temp != null)
             ChildrenManager.setInstance(temp);
         children = ChildrenManager.getInstance();
-        SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
-        String LastTimeName = sp.getString("name",null);
+        SharedPreferences sharedPrefernces = getSharedPreferences("Save name",MODE_PRIVATE);
+        String LastTimeName = sharedPrefernces.getString("name",null);
         if(LastTimeName == null){
             currentChildrenList = children;
             currentChildrenList.add(new Children("nobody"));

@@ -160,8 +160,8 @@
 
     <TextView
         android:id="@+id/ChildName"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="160dp"
         android:layout_marginEnd="8dp"
@@ -171,7 +171,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/none"
         android:textColor="#FFFFFF"
-        android:textSize="36sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/front"
         app:layout_constraintEnd_toEndOf="parent"
@@ -200,7 +200,7 @@
         android:id="@+id/child_coin_image"
         android:layout_width="85dp"
         android:layout_height="81dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ChildName"
