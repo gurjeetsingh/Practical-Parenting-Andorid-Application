@@ -1,10 +1,12 @@
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -21,6 +24,7 @@ public class EditTask extends AppCompatActivity {
     private TaskManager taskManager;
     private int position;
     private EditText enterEditTask;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +85,27 @@ public class EditTask extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        taskManager.remove(position);
-                        saveNewTask(taskManager);
-                        Intent intent = EditTasksList.makeLaunch(EditTask.this);
-                        startActivity(intent);
-                        finish();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogThemeEditChild);
+                        builder.setTitle("Are you sure you want to delete?");
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                taskManager.remove(position);
+                                saveNewTask(taskManager);
+                                Intent intent = EditTasksList.makeLaunch(EditTask.this);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        AlertDialog ad = builder.create();
+                        ad.show();
+
                     }
                 }
         );
