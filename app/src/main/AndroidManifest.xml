@@ -3,6 +3,7 @@
     package="com.e.practicalparentlavateam">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -41,7 +42,7 @@
             android:label="@string/title_select_children"
             android:parentActivityName=".UI.MainMenu" />
         <activity
-            android:name=".UI.chooseSide"
+            android:name=".UI.ChooseSide"
             android:parentActivityName=".UI.SelectChildren" />
         <activity
             android:name=".UI.IndividualHistory"

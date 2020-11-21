@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/childList"
+        android:id="@+id/child_list"
         android:layout_width="253dp"
         android:layout_height="65dp"
         android:fontFamily="@font/imprima"
@@ -24,7 +24,7 @@
         android:layout_width="67dp"
         android:layout_height="65dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/childList"
+        app:layout_constraintStart_toEndOf="@+id/child_list"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -132,14 +132,14 @@ public class ConfigureChildren extends AppCompatActivity {
             }
 
             String currentChild = children.getChildren().get(position).getName();
-            TextView makeView = (TextView)itemView.findViewById(R.id.childList);
+            TextView makeView = (TextView)itemView.findViewById(R.id.child_list);
             makeView.setText(currentChild);
 
             ImageView imageView = (ImageView)itemView.findViewById(R.id.portrait);
             try {
-                File f=new File(children.getPath(), currentChild + ".jpg");
-                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                imageView.setImageBitmap(b);
+                File file=new File(children.getPath(), currentChild + ".jpg");
+                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                imageView.setImageBitmap(bitmap);
             }
             catch (FileNotFoundException e)
             {

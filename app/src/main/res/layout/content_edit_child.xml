@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <EditText
-        android:id="@+id/etName2"
+        android:id="@+id/edit_name2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editChild" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_child" />
 
     <ImageView
         android:id="@+id/child_photo"
@@ -32,11 +32,11 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etName2"
+        app:layout_constraintTop_toBottomOf="@+id/edit_name2"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <TextView
-        android:id="@+id/editChild"
+        android:id="@+id/edit_child"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/button_delete"
         android:layout_width="141dp"
         android:layout_height="53dp"
         android:layout_marginStart="16dp"
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.865"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etName2"
+        app:layout_constraintTop_toBottomOf="@+id/edit_name2"
         app:layout_constraintVertical_bias="0.84000003" />
 
     <Button
@@ -104,11 +104,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnDelete"
+        app:layout_constraintTop_toTopOf="@+id/button_delete"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/gallerbtn"
+        android:id="@+id/galler_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

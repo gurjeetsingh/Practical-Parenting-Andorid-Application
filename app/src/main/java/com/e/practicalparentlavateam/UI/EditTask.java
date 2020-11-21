@@ -12,18 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.e.practicalparentlavateam.Model.ChildrenManager;
-import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 
-import java.util.List;
-
 public class EditTask extends AppCompatActivity {
-    private TaskManager task_manager;
+    private TaskManager taskManager;
     private int position;
-    private EditText enter_edit_task;
+    private EditText enterEditTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,24 +44,24 @@ public class EditTask extends AppCompatActivity {
     }
 
     private void setHint() {
-        task_manager = TaskManager.getInstance();
-        enter_edit_task = findViewById(R.id.EnterEditTastName);
-        enter_edit_task.setHint(task_manager.getTasks().get(position).getTask());
+        taskManager = TaskManager.getInstance();
+        enterEditTask = findViewById(R.id.EnterEditTastName);
+        enterEditTask.setHint(taskManager.getTasks().get(position).getTask());
     }
 
     private void setUpButtonOk() {
-        enter_edit_task = findViewById(R.id.EnterEditTastName);
+        enterEditTask = findViewById(R.id.EnterEditTastName);
         Button btn = findViewById(R.id.EditTaskOk);
         btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // Extract data from screen
-                        String name = enter_edit_task.getText().toString();
+                        String name = enterEditTask.getText().toString();
 
                         // Create new data object
-                        task_manager.setTask(position, name);
-                        saveNewTask(task_manager);
+                        taskManager.setTask(position, name);
+                        saveNewTask(taskManager);
                         Intent intent = EditTasksList.makeLaunch(EditTask.this);
                         startActivity(intent);
                         finish();
@@ -80,8 +76,8 @@ public class EditTask extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        task_manager.remove(position);
-                        saveNewTask(task_manager);
+                        taskManager.remove(position);
+                        saveNewTask(taskManager);
                         Intent intent = EditTasksList.makeLaunch(EditTask.this);
                         startActivity(intent);
                         finish();
@@ -90,11 +86,11 @@ public class EditTask extends AppCompatActivity {
         );
     }
 
-    public void saveNewTask(TaskManager t){
+    public void saveNewTask(TaskManager task){
         SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(t);
+        String json = gson.toJson(task);
         editor.putString("taskPrefs", json);
         System.out.println(json);
         editor.commit();

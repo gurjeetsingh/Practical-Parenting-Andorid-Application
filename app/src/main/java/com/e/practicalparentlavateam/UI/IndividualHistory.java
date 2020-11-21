@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,7 +20,7 @@ import com.e.practicalparentlavateam.R;
 
 public class IndividualHistory extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
-    HistoryManager history_manager = new HistoryManager();
+    HistoryManager historyManager = new HistoryManager();
     private ArrayAdapter<HistoryItem> adapter;
     private String name = null;
 
@@ -39,7 +38,7 @@ public class IndividualHistory extends AppCompatActivity {
         HistoryManager temp = HistoryManager.getInstance();
         for(int i = 0; i < temp.getList().size(); i++){
             if(temp.getList().get(i).getName().equals(name))
-                history_manager.add(temp.getList().get(i));
+                historyManager.add(temp.getList().get(i));
         }
     }
 
@@ -50,7 +49,7 @@ public class IndividualHistory extends AppCompatActivity {
     }
 
     private class MyListAdapter extends ArrayAdapter<HistoryItem> {
-        public MyListAdapter() {super(IndividualHistory.this, R.layout.history_list, history_manager.getList());}
+        public MyListAdapter() {super(IndividualHistory.this, R.layout.history_list, historyManager.getList());}
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -59,7 +58,7 @@ public class IndividualHistory extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.history_list, parent, false);
             }
 
-            HistoryItem currentItem = history_manager.getList().get(position);
+            HistoryItem currentItem = historyManager.getList().get(position);
 
             TextView timeView = (TextView) itemView.findViewById(R.id.item_time);
             timeView.setText(currentItem.getTime());
@@ -70,10 +69,10 @@ public class IndividualHistory extends AppCompatActivity {
             TextView nameView = (TextView) itemView.findViewById(R.id.item_name);
             nameView.setText(currentItem.getName());
 
-            ImageView result = (ImageView) itemView.findViewById(R.id.winOrfalse);
+            ImageView result = (ImageView) itemView.findViewById(R.id.win_or_false);
             result.setImageResource(currentItem.getId());
 
-            ImageView coin = (ImageView) itemView.findViewById(R.id.coinResult);
+            ImageView coin = (ImageView) itemView.findViewById(R.id.coin_result);
             coin.setImageResource(currentItem.getCoinIcon());
             return itemView;
         }

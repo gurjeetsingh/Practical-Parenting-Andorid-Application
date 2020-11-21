@@ -26,10 +26,10 @@ public class TimeService extends Service {
     private Intent mainintent;
     public static final String TIME_BROADCAST = "TimeService";
     private Handler handler = new Handler();
-    private long userselectedtime;
-    private long finaltime;
+    private long userSelectedTime;
+    private long finalTime;
     private int flag=0;
-    long  timeleftinmilliseconds;
+    long timeLeftInMilliseconds;
 
 
 
@@ -64,9 +64,9 @@ https://developer.android.com/reference/android/os/Handler
 
         long usertime = intent.getLongExtra("mills",0);
         if(flag<1) {
-            userselectedtime = usertime;
-            finaltime = userselectedtime + System.currentTimeMillis();
-            setFinaltime(finaltime);
+            userSelectedTime = usertime;
+            finalTime = userSelectedTime + System.currentTimeMillis();
+            setFinalTime(finalTime);
             flag++;
         }
         return START_STICKY;
@@ -77,9 +77,9 @@ https://developer.android.com/reference/android/os/Handler
     time + the user selected time. This allows us to figure out how much time
     is elapsing, by subtracting the current time from the final time.
      */
-  private void setFinaltime(long end)
+  private void setFinalTime(long end)
   {
-      finaltime =end;
+      finalTime =end;
   }
 
     private Runnable sendUpdatesToUI = new Runnable() {
@@ -111,8 +111,8 @@ https://developer.android.com/reference/android/os/Handler
    */
     private void ServiceUIUpdate() {
 
-        timeleftinmilliseconds = finaltime - System.currentTimeMillis();
-        int timer = (int) timeleftinmilliseconds;
+        timeLeftInMilliseconds = finalTime - System.currentTimeMillis();
+        int timer = (int) timeLeftInMilliseconds;
         if(timer<0)
         {
             startalarm();

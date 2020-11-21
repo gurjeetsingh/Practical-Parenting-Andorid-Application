@@ -19,7 +19,7 @@ import com.e.practicalparentlavateam.Model.HistoryItem;
 import com.e.practicalparentlavateam.Model.HistoryManager;
 
 public class FlippingHistory extends AppCompatActivity {
-    private HistoryManager history_manager;
+    private HistoryManager historyManager;
     private ArrayAdapter<HistoryItem> adapter;
 
     @Override
@@ -31,14 +31,14 @@ public class FlippingHistory extends AppCompatActivity {
     }
 
     private void populateList() {
-        history_manager = HistoryManager.getInstance();
+        historyManager = HistoryManager.getInstance();
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.HistoryList);
+        ListView list = (ListView) findViewById(R.id.history_list);
         list.setAdapter(adapter);
     }
 
     private class MyListAdapter extends ArrayAdapter<HistoryItem>{
-        public MyListAdapter() {super(FlippingHistory.this, R.layout.history_list, history_manager.getList());}
+        public MyListAdapter() {super(FlippingHistory.this, R.layout.history_list, historyManager.getList());}
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -47,7 +47,7 @@ public class FlippingHistory extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.history_list, parent, false);
             }
 
-            HistoryItem currentItem = history_manager.getList().get(position);
+            HistoryItem currentItem = historyManager.getList().get(position);
 
             TextView timeView = (TextView) itemView.findViewById(R.id.item_time);
             timeView.setText(currentItem.getTime());
@@ -58,10 +58,10 @@ public class FlippingHistory extends AppCompatActivity {
             TextView nameView = (TextView) itemView.findViewById(R.id.item_name);
             nameView.setText(currentItem.getName());
 
-            ImageView result = (ImageView) itemView.findViewById(R.id.winOrfalse);
+            ImageView result = (ImageView) itemView.findViewById(R.id.win_or_false);
             result.setImageResource(currentItem.getId());
 
-            ImageView coin = (ImageView) itemView.findViewById(R.id.coinResult);
+            ImageView coin = (ImageView) itemView.findViewById(R.id.coin_result);
             coin.setImageResource(currentItem.getCoinIcon());
             return itemView;
         }

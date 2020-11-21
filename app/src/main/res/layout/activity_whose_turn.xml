@@ -10,18 +10,18 @@
 
 
     <ListView
-        android:id="@+id/TaskListView"
+        android:id="@+id/task_list_view"
         android:layout_width="414dp"
         android:layout_height="613dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/WhoseTurnToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/whose_turn_toolbar"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/WhoseTurnToolbar"
+        android:id="@+id/whose_turn_toolbar"
         android:layout_width="416dp"
         android:layout_height="49dp"
         android:background="?attr/colorPrimary"

@@ -41,15 +41,15 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ChildName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.889"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.504" />
+        app:layout_constraintVertical_bias="0.018" />
 
     <ImageView
         android:id="@+id/front"
-        android:layout_width="206dp"
-        android:layout_height="221dp"
+        android:layout_width="160dp"
+        android:layout_height="170dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
@@ -145,17 +145,25 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ChildName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.504" />
+        app:layout_constraintVertical_bias="0.018" /><![CDATA[
+
+    app:layout_constraintTop_toTopOf="@+id/name" />
+
+
+
+
+
+    ]]>
 
     <TextView
         android:id="@+id/ChildName"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="160dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         android:background="#A6445871"
@@ -163,14 +171,13 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/none"
         android:textColor="#FFFFFF"
-        android:textSize="36sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/front"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-        app:layout_constraintTop_toTopOf="@+id/name" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/resultOfFlipping"
@@ -188,4 +195,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/front" />
+
+    <ImageView
+        android:id="@+id/child_coin_image"
+        android:layout_width="85dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ChildName"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
