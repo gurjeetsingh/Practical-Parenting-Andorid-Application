@@ -50,17 +50,17 @@ public class SelectChildren extends AppCompatActivity {
         loadLastTimeChild();
         chooseChild();
         skip();
-        chooseside();
+        chooseSide();
     }
 
-    private void chooseside() {
+    private void chooseSide() {
         Button choose = findViewById(R.id.choose_side);
         if(name == null || name.equals("nobody"))
             choose.setVisibility(View.INVISIBLE);
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = chooseSide.makeLaunch(SelectChildren.this, name);
+                Intent intent = ChooseSide.makeLaunch(SelectChildren.this, name);
                 startActivity(intent);
             }
         });

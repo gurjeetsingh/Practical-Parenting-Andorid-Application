@@ -42,7 +42,7 @@
             android:label="@string/title_select_children"
             android:parentActivityName=".UI.MainMenu" />
         <activity
-            android:name=".UI.chooseSide"
+            android:name=".UI.ChooseSide"
             android:parentActivityName=".UI.SelectChildren" />
         <activity
             android:name=".UI.IndividualHistory"
