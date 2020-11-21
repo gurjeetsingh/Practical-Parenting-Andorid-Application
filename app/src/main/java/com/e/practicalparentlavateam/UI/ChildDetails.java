@@ -65,7 +65,7 @@ public class ChildDetails extends AppCompatActivity {
         takePhotoForChild();
         setupButtonCancel();
         setupButtonOk();
-        setupButtongallery();
+        setupButtonGallery();
 
     }
 
@@ -101,17 +101,10 @@ public class ChildDetails extends AppCompatActivity {
             Bitmap captureImage = (Bitmap) data.getExtras().get("data");
             image.setImageBitmap(captureImage);
         }
-        // Here we need to check if the activity that was triggers was the Image Gallery.
-        // If it is the requestCode will match the LOAD_IMAGE_RESULTS value.
-        // If the resultCode is RESULT_OK and there is some data we know that an image was picked.
+        //If the resultcode is result_OK, and we send in the request code select from gallery
+        //which was predetermined, then we understand that the data send is an image from the gallery.
         else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
-            // Let's read picked image data - its URI
-            Uri pickedImage = data.getData();
-            // Let's read picked image path using content resolver
-            String[] filePath = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
-            cursor.moveToFirst();
-            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+            //Now, we create an inputstream from the URI data we obtained. Then we decode it, and set an image.
             //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
             try {
                 InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
@@ -120,9 +113,6 @@ public class ChildDetails extends AppCompatActivity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
-            // At the end remember to close the cursor or you will end with the RuntimeException!
-            cursor.close();
         }
     }
 
@@ -187,12 +177,17 @@ public class ChildDetails extends AppCompatActivity {
 
 
     }
-
-    private void setupButtongallery() {
+/*
+This button allows us to setup a button to access the gallery, while selecting a picture.
+ */
+    private void setupButtonGallery() {
         Button gallerbtn=findViewById(R.id.gallery_button);
         gallerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //This allows us to sent a particular type of intent i.e. pick from the gallery.
+                //This customizes the intent's data we are sending in.
+                //We also send in the particular request code, so that we can select from the gallery.
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.setType("image/*");
                 startActivityForResult(photoPickerIntent, SELECT_FROM_GALLERY);
