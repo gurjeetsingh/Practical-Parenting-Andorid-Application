@@ -65,7 +65,7 @@ public class ChildDetails extends AppCompatActivity {
         takePhotoForChild();
         setupButtonCancel();
         setupButtonOk();
-        setupButtongallery();
+        setupButtonGallery();
 
     }
 
@@ -189,12 +189,17 @@ public class ChildDetails extends AppCompatActivity {
 
 
     }
-
-    private void setupButtongallery() {
+/*
+This button allows us to setup a button to access the gallery, while selecting a picture.
+ */
+    private void setupButtonGallery() {
         Button gallerbtn=findViewById(R.id.gallery_button);
         gallerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //This allows us to sent a particular type of intent i.e. pick from the gallery.
+                //This customizes the intent's data we are sending in.
+                //We also send in the particular request code, so that we can select from the gallery.
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.setType("image/*");
                 startActivityForResult(photoPickerIntent, SELECT_FROM_GALLERY);

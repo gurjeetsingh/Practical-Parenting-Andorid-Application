@@ -97,47 +97,53 @@ public class TimeoutActivity extends AppCompatActivity {
             millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
         }
 
+        setupStartButton();
+        setupPauseButton();
+        setupCustomButton();
+        setupAlarmOffButton();
+        setupResetButton();
 
-        /*
-        The start button starts the background service by calling from counterservice, to run time.
+    }
+
+    private void setupResetButton() {
+                /*
+        The RESETBUTTON stops our service, and reverts back to our last chosen time. Also
+        makes our pause button invisible as the timer is automatically paused.
          */
-        startButton = (Button) findViewById(R.id.time_push_button);
-        startButton.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View view) {
-
-                Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
-                serviceintent.putExtra("mills", timeLeftInMilliseconds);
-                isTimerRunning = true;
-                startService(serviceintent);
-                //System.out.println("Time left for start" + mTimeLeftInMillis);
-                registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
-                pauseButton.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-
-        /*
-        Pause button stops the service temporarily storing the time left in milliseconds.
-         */
-        pauseButton = (Button) findViewById(R.id.pause_button);
-        pauseButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                int time = pauseIntent.getIntExtra("time", 0);
-                timeLeftInMilliseconds = time;
-                isTimerRunning = false;
+        resetButton = (Button) findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceintent);
-                // unregisterReceiver(broadcastReceiver);
+                timeLeftInMilliseconds = selectedTime;
                 pauseButton.setVisibility(View.INVISIBLE);
+                isTimerRunning = false;
+                millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+            }
 
+
+        });
+    }
+
+    /*
+      To turn off alarm at the push of a button using the AudioController function.
+       */
+    private void setupAlarmOffButton() {
+
+        alrmOffButton = (Button) findViewById(R.id.alarmoff);
+        alrmOffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AudioController.stopAudio();
+                alrmOffButton.setVisibility(View.INVISIBLE);
             }
         });
+    }
 
-
-
-        /*
+    private void setupCustomButton() {
+                /*
         The CUSTOMBUTTON uses an alertdialog to quickly allow us to set a custom time.
          */
         customButton = (Button) findViewById(R.id.custom_time);
@@ -171,45 +177,46 @@ public class TimeoutActivity extends AppCompatActivity {
                 ad.show();
             }
         });
+    }
 
+    /*
+ Pause button stops the service temporarily storing the time left in milliseconds.
+  */
+    private void setupPauseButton() {
 
-
-        /*
-        To turn off alarm at the push of a button using the AudioController function.
-         */
-        alrmOffButton = (Button) findViewById(R.id.alarmoff);
-        alrmOffButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AudioController.stopAudio();
-                alrmOffButton.setVisibility(View.INVISIBLE);
-            }
-        });
-
-
-
-        /*
-        The RESETBUTTON stops our service, and reverts back to our last chosen time. Also
-        makes our pause button invisible as the timer is automatically paused.
-         */
-
-        resetButton = (Button) findViewById(R.id.reset_button);
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        pauseButton = (Button) findViewById(R.id.pause_button);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                int time = pauseIntent.getIntExtra("time", 0);
+                timeLeftInMilliseconds = time;
+                isTimerRunning = false;
                 Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceintent);
-                timeLeftInMilliseconds = selectedTime;
+                // unregisterReceiver(broadcastReceiver);
                 pauseButton.setVisibility(View.INVISIBLE);
-                isTimerRunning = false;
-                millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+
             }
-
-
         });
+    }
+    /*
+  The start button starts the background service by calling from counterservice, to run time.
+   */
+    private void setupStartButton() {
 
+        startButton = (Button) findViewById(R.id.time_push_button);
+        startButton.setOnClickListener(new View.OnClickListener() {
 
+            public void onClick(View view) {
 
+                Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                serviceintent.putExtra("mills", timeLeftInMilliseconds);
+                isTimerRunning = true;
+                startService(serviceintent);
+                //System.out.println("Time left for start" + mTimeLeftInMillis);
+                registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
+                pauseButton.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
 

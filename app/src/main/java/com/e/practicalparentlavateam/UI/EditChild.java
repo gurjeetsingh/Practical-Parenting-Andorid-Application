@@ -78,7 +78,7 @@ public class EditChild extends AppCompatActivity {
 
         takePhotoForChild();
         setupButtonDelete();
-        setupButtongallery();
+        setupButtonGallery();
         setupButtonOk();
     }
 
@@ -205,16 +205,22 @@ public class EditChild extends AppCompatActivity {
         );
     }
 
-    private void setupButtongallery() {
+    /*
+    This button allows us to setup a button to access the gallery, while selecting a picture.
+     */
+    private void setupButtonGallery() {
         Button gallerbtn=findViewById(R.id.galler_button);
         gallerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //This allows us to sent a particular type of intent i.e. pick from the gallery.
+                //This customizes the intent's data we are sending in.
                 //We also send in the particular request code, so that we can select from the gallery.
-                Intent galleryintent = new Intent(Intent.ACTION_PICK);
-                galleryintent.setType("image/*");
-                startActivityForResult(galleryintent, SELECT_FROM_GALLERY);
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_FROM_GALLERY);
+
+
             }
         });
     }
