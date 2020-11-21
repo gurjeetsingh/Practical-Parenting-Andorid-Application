@@ -136,6 +136,10 @@ public class ChildDetails extends AppCompatActivity {
                     public void onClick(View view) {
                         // Extract data from screen
                         String name = etName.getText().toString();
+                        if(name.equals("")){
+                            Toast.makeText(ChildDetails.this,"Please Input A Name",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         //https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android
                         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
