@@ -96,6 +96,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="enter_custom_minute">Please Enter Custom Minute:</string>
+    <string name="do_you_want_to_delete_child">Are you sure you want to delete?</string>
+    <string name="yes">Yes</string>
 
 
 </resources>
