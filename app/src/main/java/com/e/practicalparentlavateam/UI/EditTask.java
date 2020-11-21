@@ -85,7 +85,7 @@ public class EditTask extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogThemeEditChild);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogThemeEditTask);
                         builder.setTitle("Are you sure you want to delete?");
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
