@@ -137,7 +137,6 @@ public class EditChild extends AppCompatActivity {
                     public void onClick(View view) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
                         builder.setTitle("Are you sure you want to delete?");
-                                builder.setIcon(R.drawable.babyclock);
                                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
