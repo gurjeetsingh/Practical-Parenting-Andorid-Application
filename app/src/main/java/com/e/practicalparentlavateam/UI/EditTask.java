@@ -33,7 +33,7 @@ public class EditTask extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         getPosition();
-        setHint();
+        setText();
         setUpButtonOk();
         setUpButtonDelete();
     }
@@ -43,10 +43,10 @@ public class EditTask extends AppCompatActivity {
         position = intent.getIntExtra("position_index",0);
     }
 
-    private void setHint() {
+    private void setText() {
         taskManager = TaskManager.getInstance();
         enterEditTask = findViewById(R.id.EnterEditTastName);
-        enterEditTask.setHint(taskManager.getTasks().get(position).getTask());
+        enterEditTask.setText(taskManager.getTasks().get(position).getTask());
     }
 
     private void setUpButtonOk() {

@@ -64,6 +64,7 @@ public class EditTasksList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 Intent intent = EditTask.makeEditIntent(EditTasksList.this, position);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -91,5 +92,15 @@ public class EditTasksList extends AppCompatActivity {
 
     public static Intent makeLaunch(Context context) {
         return new Intent(context, EditTasksList.class);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //clear the old stack
+        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        Intent mainintent=WhoseTurn.makeIntent(EditTasksList.this);
+        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainintent);
+        EditTasksList.this.finish();
     }
 }

@@ -49,19 +49,6 @@ public class EditChild extends AppCompatActivity {
     private Button takePhoto;
     private final static int SELECT_FROM_GALLERY = 007;
 
-    public static Intent makeEditIntent(Context c, int childIndex) {
-        Intent intent = new Intent(c, EditChild.class);
-        intent.putExtra(EXTRA_CHILD_INDEX, childIndex);
-        return intent;
-    }
-
-    public void extractIndexFromIntent(){
-        Intent intent = getIntent();
-        childEditingIndex = intent.getIntExtra(EXTRA_CHILD_INDEX, 0);
-        children = ChildrenManager.getInstance();
-        childEditing = children.get(childEditingIndex).getName();
-        editName2.setHint(children.get(childEditingIndex).getName());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +67,14 @@ public class EditChild extends AppCompatActivity {
         setupButtonDelete();
         setupButtongallery();
         setupButtonOk();
+    }
+
+    public void extractIndexFromIntent(){
+        Intent intent = getIntent();
+        childEditingIndex = intent.getIntExtra(EXTRA_CHILD_INDEX, 0);
+        children = ChildrenManager.getInstance();
+        childEditing = children.get(childEditingIndex).getName();
+        editName2.setText(children.get(childEditingIndex).getName());
     }
 
 
@@ -225,5 +220,11 @@ public class EditChild extends AppCompatActivity {
         editor.putString("childPrefs", json);
         System.out.println(json);
         editor.commit();     // This line is IMPORTANT !!!
+    }
+
+    public static Intent makeEditIntent(Context c, int childIndex) {
+        Intent intent = new Intent(c, EditChild.class);
+        intent.putExtra(EXTRA_CHILD_INDEX, childIndex);
+        return intent;
     }
 }
