@@ -5,6 +5,7 @@ package com.e.practicalparentlavateam.UI;
 import android.Manifest;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -21,6 +22,7 @@ import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -47,6 +49,7 @@ public class EditChild extends AppCompatActivity {
     private static final String EXTRA_CHILD_INDEX = "Extra - Child Index";
     private ImageView image;
     private Button takePhoto;
+    Context context = this;
     private final static int SELECT_FROM_GALLERY = 007;
 
 
@@ -132,12 +135,28 @@ public class EditChild extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        children = ChildrenManager.getInstance();
-                        children.remove(childEditingIndex);
-                        saveChildDetails();
-                        Intent intent = ConfigureChildren.makeIntent(EditChild.this);
-                        startActivity(intent);
-                        finish();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogThemeEditChild);
+                        builder.setTitle("Are you sure you want to delete?");
+                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        children = ChildrenManager.getInstance();
+                                        children.remove(childEditingIndex);
+                                        saveChildDetails();
+                                        Intent intent = ConfigureChildren.makeIntent(EditChild.this);
+                                        startActivity(intent);
+                                        finish();
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        AlertDialog ad = builder.create();
+                        ad.show();
+
                     }
                 }
         );
