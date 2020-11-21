@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
@@ -33,7 +34,7 @@ public class EditTask extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         getPosition();
-        setHint();
+        setText();
         setUpButtonOk();
         setUpButtonDelete();
     }
@@ -43,10 +44,10 @@ public class EditTask extends AppCompatActivity {
         position = intent.getIntExtra("position_index",0);
     }
 
-    private void setHint() {
+    private void setText() {
         taskManager = TaskManager.getInstance();
         enterEditTask = findViewById(R.id.EnterEditTastName);
-        enterEditTask.setHint(taskManager.getTasks().get(position).getTask());
+        enterEditTask.setText(taskManager.getTasks().get(position).getTask());
     }
 
     private void setUpButtonOk() {
@@ -58,6 +59,10 @@ public class EditTask extends AppCompatActivity {
                     public void onClick(View view) {
                         // Extract data from screen
                         String name = enterEditTask.getText().toString();
+                        if(name.equals("")){
+                            Toast.makeText(EditTask.this,"Please Input A Name",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         // Create new data object
                         taskManager.setTask(position, name);

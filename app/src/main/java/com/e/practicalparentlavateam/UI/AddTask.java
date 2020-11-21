@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
@@ -72,6 +73,10 @@ public class AddTask extends AppCompatActivity {
                         // Extract data from screen
                         String child_name;
                         String name = task_name.getText().toString();
+                        if(name.equals("")){
+                            Toast.makeText(AddTask.this,"Please Input A Name",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                         Gson gson = new Gson();
                         String json = prefs.getString("childPrefs", null);
