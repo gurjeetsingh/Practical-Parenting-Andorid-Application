@@ -118,14 +118,7 @@ public class EditChild extends AppCompatActivity {
             //If the resultcode is result_OK, and we send in the request code select from gallery
             //which was predetermined, then we understand that the data send is an image from the gallery.
             else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
-                // Let's read picked image data - its URI
-                Uri pickedImage = data.getData();
-                // Let's read picked image path using content resolver
-                String[] filePath = {MediaStore.Images.Media.DATA};
-                Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
-                cursor.moveToFirst();
-                String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
-                //Resource used to find how to convert an inputstream into a bitmap:
+                //Now, we create an inputstream from the URI data we obtained. Then we decade it, and set on image.
                 //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
                 try {
                     InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
@@ -134,9 +127,6 @@ public class EditChild extends AppCompatActivity {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-
-                // At the end remember to close the cursor or you will end with the RuntimeException!
-                cursor.close();
             }
         }
     }
