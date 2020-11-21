@@ -15,6 +15,10 @@
         <item name="android:background">@color/emeraldSea</item>
     </style>
 
+    <style name="MyDialogThemeEditTask" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/emeraldSea</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
