@@ -97,21 +97,23 @@ public class ChildDetails extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
-            image.setImageBitmap(captureImage);
-        }
-        //If the resultcode is result_OK, and we send in the request code select from gallery
-        //which was predetermined, then we understand that the data send is an image from the gallery.
-        else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
-            //Now, we create an inputstream from the URI data we obtained. Then we decode it, and set an image.
-            //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
-            try {
-                InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
-                Bitmap captureImage = BitmapFactory.decodeStream(inputStream);
+        if(data != null) {
+            if (requestCode == 100) {
+                Bitmap captureImage = (Bitmap) data.getExtras().get("data");
                 image.setImageBitmap(captureImage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            }
+            //If the resultcode is result_OK, and we send in the request code select from gallery
+            //which was predetermined, then we understand that the data send is an image from the gallery
+            else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
+                //Now, we create an inputstream from the URI data we obtained. Then we decade it, and set on image.
+                //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
+                try {
+                    InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
+                    Bitmap captureImage = BitmapFactory.decodeStream(inputStream);
+                    image.setImageBitmap(captureImage);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
