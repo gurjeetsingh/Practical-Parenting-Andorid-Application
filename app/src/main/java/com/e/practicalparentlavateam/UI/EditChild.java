@@ -109,33 +109,35 @@ public class EditChild extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
-            image.setImageBitmap(captureImage);
-        }
-
-        //If the resultcode is result_OK, and we send in the request code select from gallery
-        //which was predetermined, then we understand that the data send is an image from the gallery.
-        else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
-            // Let's read picked image data - its URI
-            Uri pickedImage = data.getData();
-            // Let's read picked image path using content resolver
-            String[] filePath = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
-            cursor.moveToFirst();
-            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
-            //Resource used to find how to convert an inputstream into a bitmap:
-            //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
-            try {
-                InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
-                Bitmap captureImage = BitmapFactory.decodeStream(inputStream);
+        if(data != null){
+            if (requestCode == 100) {
+                Bitmap captureImage = (Bitmap) data.getExtras().get("data");
                 image.setImageBitmap(captureImage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             }
 
-            // At the end remember to close the cursor or you will end with the RuntimeException!
-            cursor.close();
+            //If the resultcode is result_OK, and we send in the request code select from gallery
+            //which was predetermined, then we understand that the data send is an image from the gallery.
+            else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
+                // Let's read picked image data - its URI
+                Uri pickedImage = data.getData();
+                // Let's read picked image path using content resolver
+                String[] filePath = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
+                cursor.moveToFirst();
+                String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+                //Resource used to find how to convert an inputstream into a bitmap:
+                //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
+                try {
+                    InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
+                    Bitmap captureImage = BitmapFactory.decodeStream(inputStream);
+                    image.setImageBitmap(captureImage);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                // At the end remember to close the cursor or you will end with the RuntimeException!
+                cursor.close();
+            }
         }
     }
 
