@@ -36,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -62,6 +63,7 @@ public class EditChild extends AppCompatActivity {
 
         children = ChildrenManager.getInstance();
         editName2 = findViewById(R.id.edit_name2);
+        image = findViewById(R.id.child_photo);
 
         //initalize values
         extractIndexFromIntent();
@@ -77,7 +79,18 @@ public class EditChild extends AppCompatActivity {
         childEditingIndex = intent.getIntExtra(EXTRA_CHILD_INDEX, 0);
         children = ChildrenManager.getInstance();
         childEditing = children.get(childEditingIndex).getName();
+        //sets the current text displayed as the name of the current child
         editName2.setText(children.get(childEditingIndex).getName());
+        //sets the picture as the picture of the current child
+        try {
+            File file=new File(children.getPath(), childEditing + ".jpg");
+            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+            image.setImageBitmap(bitmap);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
