@@ -61,8 +61,8 @@
     <string name="child_history">Button</string>
     <string name="last_picked">Last Child</string>
     <string name="edit">Edit</string>
-    <string name="done">Done</string>
-    <string name="developed_by_team_lava">Developed by Team Lava</string>
+
+    <string name="developed_by_team_lava">Developed by Team Lava.</string>
     <string name="yuhan_he">Yuhan He</string>
     <string name="gurjeet_singh">Gurjeet Singh</string>
     <string name="yuchun_he">Yuchun He</string>
