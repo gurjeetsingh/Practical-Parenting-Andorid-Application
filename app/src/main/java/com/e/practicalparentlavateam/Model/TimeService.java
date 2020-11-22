@@ -28,7 +28,7 @@ public class TimeService extends Service {
     private Handler handler = new Handler();
     private long userSelectedTime;
     private long finalTime;
-    private int flag=0;
+    private int flag = 0;
     long timeLeftInMilliseconds;
 
 
@@ -84,7 +84,7 @@ https://developer.android.com/reference/android/os/Handler
 
     private Runnable sendUpdatesToUI = new Runnable() {
         public void run() {
-            ServiceUIUpdate();
+            serviceUIUpdate();
             handler.postDelayed(this, 1000); // 1 seconds
         }
     };
@@ -109,7 +109,7 @@ https://developer.android.com/reference/android/os/Handler
   3rd Iteration: timeleftinmillseconds=6000-4002=1998
   and so on...
    */
-    private void ServiceUIUpdate() {
+    private void serviceUIUpdate() {
 
         timeLeftInMilliseconds = finalTime - System.currentTimeMillis();
         int timer = (int) timeLeftInMilliseconds;

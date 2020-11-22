@@ -188,9 +188,9 @@ public class CoinFlipActivity extends AppCompatActivity {
                     history_manager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
                     HistoryManager.setInstance(history_manager);
                     if(!name.equals("nobody")) {
-                        SaveName(name);
+                        saveName(name);
                     }
-                    SaveHistory(history_manager);
+                    saveHistory(history_manager);
                 }
                 else {
                     image = lose;
@@ -198,9 +198,9 @@ public class CoinFlipActivity extends AppCompatActivity {
                     history_manager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
                     HistoryManager.setInstance(history_manager);
                     if(!name.equals("nobody")) {
-                        SaveName(name);
+                        saveName(name);
                     }
-                    SaveHistory(history_manager);
+                    saveHistory(history_manager);
                 }
             }
         });
@@ -213,7 +213,7 @@ public class CoinFlipActivity extends AppCompatActivity {
             public void onClick(View v) {
                 history_manager = new HistoryManager();
                 HistoryManager.setInstance(new HistoryManager());
-                SaveHistory(history_manager);
+                saveHistory(history_manager);
                 Toast.makeText(CoinFlipActivity.this, R.string.hint_for_delete_history,Toast.LENGTH_SHORT).show();
             }
         });
@@ -226,20 +226,30 @@ public class CoinFlipActivity extends AppCompatActivity {
         return g.fromJson(temp,HistoryManager.class);
     }
 
-    private void SaveName(String n){
+    private void saveName(String n){
         SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         edit.putString("name",n);
         edit.apply();
     }
 
-    private void SaveHistory(HistoryManager m){
+    private void saveHistory(HistoryManager m){
         SharedPreferences sp = getSharedPreferences("Save history",MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         Gson g = new Gson();
         String temp = g.toJson(m);
         edit.putString("history",temp);
         edit.apply();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //clear the old stack
+        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        Intent mainintent=MainMenu.makeIntent(CoinFlipActivity.this);
+        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainintent);
+        CoinFlipActivity.this.finish();
     }
 
     public static Intent makeLaunch1(Context context) {
@@ -251,16 +261,6 @@ public class CoinFlipActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_CHOICE, choice);
         intent.putExtra(EXTRA_NAME, name);
         return intent;
-    }
-
-    @Override
-    public void onBackPressed() {
-        //clear the old stack
-        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
-        Intent mainintent=MainMenu.makeIntent(CoinFlipActivity.this);
-        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(mainintent);
-        CoinFlipActivity.this.finish();
     }
 
 }

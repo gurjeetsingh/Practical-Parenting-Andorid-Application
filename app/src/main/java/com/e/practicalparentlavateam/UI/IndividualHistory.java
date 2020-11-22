@@ -34,6 +34,11 @@ public class IndividualHistory extends AppCompatActivity {
         populateList();
     }
 
+    private void getName(){
+        Intent intent = getIntent();
+        name = intent.getStringExtra(EXTRA_NAME);
+    }
+
     private void getIndividualHistory() {
         HistoryManager temp = HistoryManager.getInstance();
         for(int i = 0; i < temp.getList().size(); i++){
@@ -76,11 +81,6 @@ public class IndividualHistory extends AppCompatActivity {
             coin.setImageResource(currentItem.getCoinIcon());
             return itemView;
         }
-    }
-
-    private void getName(){
-        Intent intent = getIntent();
-        name = intent.getStringExtra(EXTRA_NAME);
     }
 
     public static Intent makeIntent(Context context, String name){

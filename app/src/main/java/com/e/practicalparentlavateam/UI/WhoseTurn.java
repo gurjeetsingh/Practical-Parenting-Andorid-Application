@@ -47,6 +47,12 @@ public class WhoseTurn extends AppCompatActivity {
         registerClickCallback();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_whose_turn,menu);
+        return true;
+    }
+
     private void getTasks() {
         SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -63,17 +69,6 @@ public class WhoseTurn extends AppCompatActivity {
         adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.task_list_view);
         list.setAdapter(adapter);
-    }
-
-    private void registerClickCallback() {
-        ListView list = (ListView) findViewById(R.id.task_list_view);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                Intent intent = ChangeTurn.makeChangeIntent(WhoseTurn.this, position);
-                startActivity(intent);
-            }
-        });
     }
 
     private class MyListAdapter extends ArrayAdapter<Task> {
@@ -141,10 +136,15 @@ public class WhoseTurn extends AppCompatActivity {
         editor.commit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_whose_turn,menu);
-        return true;
+    private void registerClickCallback() {
+        ListView list = (ListView) findViewById(R.id.task_list_view);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                Intent intent = ChangeTurn.makeChangeIntent(WhoseTurn.this, position);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item){

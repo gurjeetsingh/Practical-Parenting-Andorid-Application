@@ -39,7 +39,6 @@ public class ConfigureChildren extends AppCompatActivity {
     // Arbitrary numbers for startActivityForResult:
     private static final int ACTIVITY_RESULT_ADD = 101;
     private static final int ACTIVITY_RESULT_EDIT = 102;
-    private static final int ACTIVITY_RESULT_CALCULATE = 103;
 
     private ChildrenManager children;
     private ArrayAdapter<Children> adapter;
@@ -61,6 +60,28 @@ public class ConfigureChildren extends AppCompatActivity {
         //setupChildrenView();
         populateListView();
         registClickCallback();
+    }
+
+    public void getChild(){
+        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString("childPrefs", null);
+        Type type = new TypeToken<ChildrenManager>() {}.getType();
+        ChildrenManager temp = gson.fromJson(json, type);
+        if(temp != null)
+            ChildrenManager.setInstance(temp);
+        children = ChildrenManager.getInstance();
+    }
+
+    private void setupFloatingActionButton() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = ChildDetails.makeIntentForAdd(ConfigureChildren.this);
+                ConfigureChildren.this.startActivityForResult(i, ACTIVITY_RESULT_ADD);
+            }
+        });
     }
 
     private void populateListView() {
@@ -117,34 +138,6 @@ public class ConfigureChildren extends AppCompatActivity {
         return true;
     }
 
-    //Returning Necessary Activity
-    public static Intent makeIntent(Context context) {
-        Intent configintent = new Intent(context,ConfigureChildren.class);
-        return configintent;
-    }
-
-    private void setupFloatingActionButton() {
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = ChildDetails.makeIntentForAdd(ConfigureChildren.this);
-                ConfigureChildren.this.startActivityForResult(i, ACTIVITY_RESULT_ADD);
-            }
-        });
-    }
-
-    public void getChild(){
-        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = prefs.getString("childPrefs", null);
-        Type type = new TypeToken<ChildrenManager>() {}.getType();
-        ChildrenManager temp = gson.fromJson(json, type);
-        if(temp != null)
-            ChildrenManager.setInstance(temp);
-        children = ChildrenManager.getInstance();
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -164,6 +157,12 @@ public class ConfigureChildren extends AppCompatActivity {
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainIntent);
         ConfigureChildren.this.finish();
+    }
+
+    //Returning Necessary Activity
+    public static Intent makeIntent(Context context) {
+        Intent configintent = new Intent(context,ConfigureChildren.class);
+        return configintent;
     }
 
 }

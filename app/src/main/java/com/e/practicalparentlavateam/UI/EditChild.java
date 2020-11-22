@@ -175,6 +175,26 @@ public class EditChild extends AppCompatActivity {
         );
     }
 
+    /*
+    This button allows us to setup a button to access the gallery, while selecting a picture.
+     */
+    private void setupButtonGallery() {
+        Button gallerbtn=findViewById(R.id.galler_button);
+        gallerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //This allows us to sent a particular type of intent i.e. pick from the gallery.
+                //This customizes the intent's data we are sending in.
+                //We also send in the particular request code, so that we can select from the gallery.
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_FROM_GALLERY);
+
+
+            }
+        });
+    }
+
     private void setupButtonOk() {
         Button btn = findViewById(R.id.btnSaveEdit);
         btn.setOnClickListener(
@@ -225,26 +245,6 @@ public class EditChild extends AppCompatActivity {
         );
     }
 
-    /*
-    This button allows us to setup a button to access the gallery, while selecting a picture.
-     */
-    private void setupButtonGallery() {
-        Button gallerbtn=findViewById(R.id.galler_button);
-        gallerbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //This allows us to sent a particular type of intent i.e. pick from the gallery.
-                //This customizes the intent's data we are sending in.
-                //We also send in the particular request code, so that we can select from the gallery.
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, SELECT_FROM_GALLERY);
-
-
-            }
-        });
-    }
-
     public void saveChildDetails(){
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -255,12 +255,6 @@ public class EditChild extends AppCompatActivity {
         editor.commit();     // This line is IMPORTANT !!!
     }
 
-    public static Intent makeEditIntent(Context c, int childIndex) {
-        Intent intent = new Intent(c, EditChild.class);
-        intent.putExtra(EXTRA_CHILD_INDEX, childIndex);
-        return intent;
-    }
-
     @Override
     public void onBackPressed() {
         //clear the old stack
@@ -269,5 +263,11 @@ public class EditChild extends AppCompatActivity {
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainIntent);
         EditChild.this.finish();
+    }
+
+    public static Intent makeEditIntent(Context c, int childIndex) {
+        Intent intent = new Intent(c, EditChild.class);
+        intent.putExtra(EXTRA_CHILD_INDEX, childIndex);
+        return intent;
     }
 }
