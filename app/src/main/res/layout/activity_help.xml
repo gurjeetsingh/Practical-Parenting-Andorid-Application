@@ -113,7 +113,8 @@
         android:id="@+id/projectid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -123,13 +124,14 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coinsound" />
 
     <TextView
         android:id="@+id/uiart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="52dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -138,7 +140,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gurjeet" />
 
@@ -146,8 +148,7 @@
         android:id="@+id/coinimagecopyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="16dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -155,14 +156,13 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/projectid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uiart" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/HelpToolbar"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
@@ -175,8 +175,7 @@
         android:id="@+id/coinsound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="16dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -184,7 +183,6 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/projectid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coinimagecopyright" />
