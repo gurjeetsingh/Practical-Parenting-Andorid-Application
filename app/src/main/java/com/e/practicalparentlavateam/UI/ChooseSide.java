@@ -66,7 +66,7 @@ public class ChooseSide extends AppCompatActivity {
         Intent i = getIntent();
         name = i.getStringExtra(EXTRA_NAME);
         ImageView imageView = (ImageView) findViewById(R.id.side_child_image);
-        if(name != null){
+        if(name != null && !name.equals("nobody")){
             try {
                 File file=new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
                 Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
