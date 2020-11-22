@@ -40,6 +40,8 @@ import com.e.practicalparentlavateam.R;
 
 import java.util.Locale;
 
+import static java.lang.Math.round;
+
 public class TimeoutActivity extends AppCompatActivity {
 
 
@@ -161,7 +163,8 @@ public class TimeoutActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String newtime = userTime.getText().toString();
-                        long customtime = Long.parseLong(newtime);
+                        double time = Double.parseDouble(newtime);
+                        long customtime = Long.parseLong("" + Math.round(time));
                         timeLeftInMilliseconds = customtime * 60000;
                         selectedTime = timeLeftInMilliseconds;
                         millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
