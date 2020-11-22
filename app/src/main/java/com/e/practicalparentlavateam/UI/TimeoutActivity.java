@@ -153,11 +153,11 @@ public class TimeoutActivity extends AppCompatActivity {
                 Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceintent);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
-                builder.setTitle("Please Enter Custom Minute:");
+                builder.setTitle(R.string.enter_custom_minute);
                 userTime = new EditText(context);
                 builder.setView(userTime);
                 builder.setIcon(R.drawable.babyclock);
-                builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String newtime = userTime.getText().toString();
@@ -167,7 +167,7 @@ public class TimeoutActivity extends AppCompatActivity {
                         millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                     }
                 });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
