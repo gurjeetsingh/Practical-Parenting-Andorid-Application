@@ -172,4 +172,5 @@ public class WhoseTurn extends AppCompatActivity {
         startActivity(mainintent);
         WhoseTurn.this.finish();
     }
+
 }
