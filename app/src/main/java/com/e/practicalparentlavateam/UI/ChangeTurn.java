@@ -78,6 +78,8 @@ public class ChangeTurn extends AppCompatActivity {
 
     private void setImage() {
         children = ChildrenManager.getInstance();
+        if(children == null || children.getNumChildren()==0)
+            return;
         ImageView image = findViewById(R.id.task_image);
         try {
             File f = new File(children.getPath(), taskManager.getTasks(position).getName() + ".jpg");

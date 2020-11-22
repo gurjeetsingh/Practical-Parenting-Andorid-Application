@@ -76,14 +76,14 @@ public class CoinFlipActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.child_coin_image);
         if(name != null){
             text.setText(name);
-            try {
-                File file=new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
-                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
-                imageView.setImageBitmap(bitmap);
-            }
-            catch (FileNotFoundException e)
-            {
-                e.printStackTrace();
+            if(!name.equals("nobody")) {
+                try {
+                    File file = new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
+                    Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                    imageView.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -118,7 +118,7 @@ public class CoinFlipActivity extends AppCompatActivity {
             indHisbt.setVisibility(View.INVISIBLE);
         else {
             indHisbt.setVisibility(View.VISIBLE);
-            indHisbt.setText(name + "'s history");
+            indHisbt.setText(name + getString(R.string.whose_history));
         }
         indHisbt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,12 +154,12 @@ public class CoinFlipActivity extends AppCompatActivity {
                         if(num == 1){
                             //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
                             coinImage.setImageResource(R.drawable.coin_front);
-                            result.setText("Heads");
+                            result.setText(R.string.head);
                             result.setVisibility(View.VISIBLE);
                         }
                         else{
                             coinImage.setImageResource(R.drawable.coin_back);
-                            result.setText("Tails");
+                            result.setText(R.string.tails);
                             result.setVisibility(View.VISIBLE);
                         }
                         back.start();
@@ -187,7 +187,9 @@ public class CoinFlipActivity extends AppCompatActivity {
                     Date currentTime = new Date();
                     history_manager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
                     HistoryManager.setInstance(history_manager);
-                    SaveName(name);
+                    if(!name.equals("nobody")) {
+                        SaveName(name);
+                    }
                     SaveHistory(history_manager);
                 }
                 else {
@@ -195,7 +197,9 @@ public class CoinFlipActivity extends AppCompatActivity {
                     Date currentTime = new Date();
                     history_manager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
                     HistoryManager.setInstance(history_manager);
-                    SaveName(name);
+                    if(!name.equals("nobody")) {
+                        SaveName(name);
+                    }
                     SaveHistory(history_manager);
                 }
             }
@@ -210,7 +214,7 @@ public class CoinFlipActivity extends AppCompatActivity {
                 history_manager = new HistoryManager();
                 HistoryManager.setInstance(new HistoryManager());
                 SaveHistory(history_manager);
-                Toast.makeText(CoinFlipActivity.this,"You Delete Flipping History!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CoinFlipActivity.this, R.string.hint_for_delete_history,Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -136,7 +136,7 @@ public class ChildDetails extends AppCompatActivity {
                         // Extract data from screen
                         String name = etName.getText().toString();
                         if(name.equals("")){
-                            Toast.makeText(ChildDetails.this,"Please Input A Name",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChildDetails.this,R.string.hint_for_name,Toast.LENGTH_SHORT).show();
                             return;
                         }
 

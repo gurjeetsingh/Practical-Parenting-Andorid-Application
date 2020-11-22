@@ -13,7 +13,7 @@
         android:layout_width="412dp"
         android:layout_height="33dp"
         android:gravity="center_horizontal|center_vertical"
-        android:text="TextView"
+        android:text="@string/task_name_in_list"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

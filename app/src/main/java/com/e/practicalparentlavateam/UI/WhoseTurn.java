@@ -103,7 +103,7 @@ public class WhoseTurn extends AppCompatActivity {
             if(child_list == null || child_list.getChildren().size() == 0){
                 taskManager.setName(position,"No Child");
                 saveNewTask(taskManager);
-                nameView.setText("No Child");
+                nameView.setText(R.string.no_child);
             }
             else {
                 if (currentName.equals("No Child")) {
@@ -111,7 +111,19 @@ public class WhoseTurn extends AppCompatActivity {
                     saveNewTask(taskManager);
                     nameView.setText(child_list.get(0).getName());
                 } else {
-                    nameView.setText(currentName);
+                    boolean exist = false;
+                    for (int i = 0; i < child_list.getChildren().size(); i++) {
+                        if (child_list.getChildren().get(i).getName().equals(current_name))
+                            exist = true;
+                    }
+                    if(exist == false){
+                        taskManager.setName(position, child_list.get(0).getName());
+                        saveNewTask(taskManager);
+                        nameView.setText(child_list.get(0).getName());
+                    }
+                    else {
+                        nameView.setText(current_name);
+                    }
                 }
             }
 

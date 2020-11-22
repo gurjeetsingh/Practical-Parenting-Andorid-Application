@@ -62,7 +62,7 @@ public class ChooseChildren extends AppCompatActivity {
         String LastTimeName = sharedPrefernces.getString("name",null);
         if(LastTimeName == null){
             currentChildrenList = children;
-            currentChildrenList.add(new Children("nobody"));
+            currentChildrenList.add(new Children(getString(R.string.nobody)));
         }
         else {
             int index = 0;
@@ -70,12 +70,29 @@ public class ChooseChildren extends AppCompatActivity {
                 if (children.getChildren().get(i).getName().equals(LastTimeName))
                     index = (i + 1) % children.getChildren().size();
             }
-            while (!children.getChildren().get(index).getName().equals(LastTimeName)) {
+            if(index == 0){
+                Intent intent = getIntent();
+                String thisTimeChild = intent.getStringExtra("name this turn");
+                for (int i = 0; i < children.getChildren().size(); i++) {
+                    if (children.getChildren().get(i).getName().equals(thisTimeChild))
+                        index = i;
+                }
                 currentChildrenList.add(children.getChildren().get(index));
-                index = (index + 1) % children.getChildren().size();
+                index++;
+                while (!children.getChildren().get(index).getName().equals(thisTimeChild)) {
+                    currentChildrenList.add(children.getChildren().get(index));
+                    index = (index + 1) % children.getChildren().size();
+                }
+                currentChildrenList.add(new Children("nobody"));
             }
-            currentChildrenList.add(new Children(LastTimeName));
-            currentChildrenList.add(new Children("nobody"));
+            else {
+                while (!children.getChildren().get(index).getName().equals(LastTimeName)) {
+                    currentChildrenList.add(children.getChildren().get(index));
+                    index = (index + 1) % children.getChildren().size();
+                }
+                currentChildrenList.add(new Children(LastTimeName));
+                currentChildrenList.add(new Children("nobody"));
+            }
         }
 
         adapter = new MyListAdapter();
@@ -133,8 +150,9 @@ public class ChooseChildren extends AppCompatActivity {
         });
     }
 
-    public static Intent makeIntent2(Context context){
+    public static Intent makeIntent2(Context context, String name){
         Intent intent = new Intent(context, ChooseChildren.class);
+        intent.putExtra("name this turn",name);
         return intent;
     }
 }

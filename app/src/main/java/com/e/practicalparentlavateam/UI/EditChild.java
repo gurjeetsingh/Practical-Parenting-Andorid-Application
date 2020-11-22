@@ -136,8 +136,8 @@ public class EditChild extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogThemeEditChild);
-                        builder.setTitle("Are you sure you want to delete?");
-                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        builder.setTitle(R.string.do_you_want_to_delete_child);
+                                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         children = ChildrenManager.getInstance();
@@ -148,7 +148,7 @@ public class EditChild extends AppCompatActivity {
                                         finish();
                             }
                         });
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -171,7 +171,7 @@ public class EditChild extends AppCompatActivity {
                         // Extract data from screen
                         String name = editName2.getText().toString();
                         if(name.equals("")){
-                            Toast.makeText(EditChild.this,"Please Input A Name",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditChild.this,R.string.hint_for_name,Toast.LENGTH_SHORT).show();
                             return;
                         }
 
