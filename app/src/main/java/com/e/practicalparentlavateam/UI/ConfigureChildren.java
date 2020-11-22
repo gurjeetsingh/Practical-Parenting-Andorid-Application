@@ -63,56 +63,6 @@ public class ConfigureChildren extends AppCompatActivity {
         registClickCallback();
     }
 
-
-    /*private void setupChildrenView() {
-        // SOURCE: https://developer.android.com/guide/topics/ui/layout/recyclerview
-        ListView rv = findViewById(R.id.childListView);
-        getChildList();
-
-        // Could also use an ArrayAdapter (as in tutorial video)
-        adapter = new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return children.getNumChildren();
-            }
-
-            @Override
-            public String getItem(int position) {
-                return children.get(position);
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return 0;   // unused
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                if (convertView == null) {
-                    convertView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
-                }
-
-                String name = getItem(position);
-                ((TextView) convertView)
-                        .setText(name);
-                return convertView;
-            }
-        };
-        rv.setAdapter(adapter);
-
-        rv.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = EditChild.makeEditIntent(ConfigureChildren.this, position);
-                        ConfigureChildren.this.startActivityForResult(intent, ACTIVITY_RESULT_EDIT);
-                    }
-                }
-        );
-
-
-    }*/
-
     private void populateListView() {
         children = ChildrenManager.getInstance();
         adapter = new MyListAdapter();

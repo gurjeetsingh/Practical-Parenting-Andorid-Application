@@ -104,6 +104,7 @@
     <string name="previous">Previous</string>
     <string name="first_child">Select First Child</string>
     <string name="hint_for_delete_history">You Delete Flipping History!</string>
+    <string name="no_child">No Child</string>
 
 
 </resources>
