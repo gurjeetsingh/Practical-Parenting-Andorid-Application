@@ -78,7 +78,7 @@ public class ChooseChildren extends AppCompatActivity {
                         index = i;
                 }
                 currentChildrenList.add(children.getChildren().get(index));
-                index++;
+                index = (index + 1) % children.getChildren().size();
                 while (!children.getChildren().get(index).getName().equals(thisTimeChild)) {
                     currentChildrenList.add(children.getChildren().get(index));
                     index = (index + 1) % children.getChildren().size();
