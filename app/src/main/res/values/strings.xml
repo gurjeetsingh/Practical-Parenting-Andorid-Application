@@ -48,7 +48,7 @@
     <string name="title_activity_edit_child">EditChild</string>
     <string name="history_starts_here">History Starts Here</string>
     <string name="who_s_turn_it_is">Who\'s turn it is</string>
-    <string name="cmpt276">Project Inspiration: CMPT 276, Professor: Brian Fraser, Simon Fraser University, Fall 2020.\n
+    <string name="cmpt276">Project Inspiration: CMPT 276\n Professor: Brian Fraser\n Simon Fraser University, Fall 2020.\n
         <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">CMPT276 Webpage</a></string>
     <string name="coin">Coin Image All Rights Reserved :
 <a href="https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023">www.mint.ca</a></string>
@@ -70,7 +70,7 @@
     <string name="last_picked">Last Child</string>
     <string name="edit">Edit</string>
     <string name="done">Done</string>
-    <string name="developed_by_team_lava">Developed by Team Lava.</string>
+    <string name="developed_by_team_lava">Developed by Team Lava</string>
     <string name="yuhan_he">Yuhan He</string>
     <string name="gurjeet_singh">Gurjeet Singh</string>
     <string name="yuchun_he">Yuchun He</string>

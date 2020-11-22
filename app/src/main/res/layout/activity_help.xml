@@ -9,11 +9,9 @@
 
     <TextView
         android:id="@+id/yuhan"
-        android:layout_width="159dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/rounded_corners_buttons"
+        android:layout_width="177dp"
+        android:layout_height="38dp"
+        android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center"
         android:text="@string/yuhan_he"
@@ -23,18 +21,21 @@
         android:textStyle="bold"
         android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yuchun" />
 
     <TextView
         android:id="@+id/dev"
         android:layout_width="340dp"
         android:layout_height="50dp"
-        android:background="#A6445871"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/developed_by_team_lava"
-        android:textColor="#E53935"
+        android:textColor="#E6FF5900"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,11 +43,9 @@
 
     <TextView
         android:id="@+id/gurjeet"
-        android:layout_width="159dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/rounded_corners_buttons"
+        android:layout_width="177dp"
+        android:layout_height="38dp"
+        android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center"
         android:text="@string/gurjeet_singh"
@@ -55,16 +54,15 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
-        app:layout_constraintEnd_toStartOf="@+id/yuchun"
-        app:layout_constraintTop_toBottomOf="@+id/members" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yuhan" />
 
     <TextView
         android:id="@+id/yuchun"
-        android:layout_width="159dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/rounded_corners_buttons"
+        android:layout_width="177dp"
+        android:layout_height="38dp"
+        android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center"
         android:text="@string/yuchun_he"
@@ -74,15 +72,15 @@
         android:textStyle="bold"
         android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/members" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sami" />
 
     <TextView
         android:id="@+id/sami"
         android:layout_width="177dp"
         android:layout_height="38dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/rounded_corners_buttons"
+        android:layout_marginTop="16dp"
+        android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center"
         android:text="@string/ahmad_as_sami"
@@ -91,15 +89,15 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gurjeet" />
+        app:layout_constraintTop_toBottomOf="@+id/members" />
 
     <TextView
         android:id="@+id/members"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginTop="52dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -107,7 +105,6 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/gurjeet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dev" />
@@ -116,7 +113,7 @@
         android:id="@+id/projectid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="48dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -126,16 +123,13 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/uiart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="129dp"
+        android:layout_marginTop="76dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -146,14 +140,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sami" />
+        app:layout_constraintTop_toBottomOf="@+id/gurjeet" />
 
     <TextView
         android:id="@+id/coinimagecopyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
