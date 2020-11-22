@@ -65,7 +65,7 @@ public class EditChild extends AppCompatActivity {
         editName2 = findViewById(R.id.edit_name2);
         image = findViewById(R.id.child_photo);
 
-        //initalize values
+        //initalize ui values
         extractIndexFromIntent();
 
         takePhotoForChild();
