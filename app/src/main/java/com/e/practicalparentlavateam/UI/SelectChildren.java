@@ -24,6 +24,7 @@ import java.lang.reflect.Type;
 public class SelectChildren extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
     private String name = null;
+    private ChildrenManager childList;
 
     public static Intent makeLaunch(Context context, String name) {
         Intent intent = new Intent(context, SelectChildren.class);
@@ -53,40 +54,30 @@ public class SelectChildren extends AppCompatActivity {
         chooseSide();
     }
 
-    private void chooseSide() {
-        Button choose = findViewById(R.id.choose_side);
-        if(name == null || name.equals("nobody"))
-            choose.setVisibility(View.INVISIBLE);
-        choose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = ChooseSide.makeLaunch(SelectChildren.this, name);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void skip() {
-        Button skip = findViewById(R.id.skip);
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = CoinFlipActivity.makeLaunch1(SelectChildren.this);
-                startActivity(intent);
-                finish();
-            }
-        });
+    private void getName() {
+        Intent i = getIntent();
+        name = i.getStringExtra(EXTRA_NAME);
+        if(name != null){
+            TextView text = (TextView) findViewById(R.id.name);
+            text.setText(name);
+        }
     }
 
     /*Get the child who flipped last time and choose the child this time to flip*/
     private void loadLastTimeChild() {
+        //Default name
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("childPrefs", null);
         Type type = new TypeToken<ChildrenManager>() {}.getType();
-        ChildrenManager childList = gson.fromJson(json, type);
+        childList = gson.fromJson(json, type);
         if(childList != null)
             ChildrenManager.setInstance(childList);
+        if(childList != null && name == null){
+            TextView text = (TextView) findViewById(R.id.name);
+            text.setText(R.string.first_child);
+        }
+
         SharedPreferences sharedPreferences = getSharedPreferences("Save name",MODE_PRIVATE);
         String LastTimeName = sharedPreferences.getString("name",null);
         TextView lastTimeChild = findViewById(R.id.last_time_child);
@@ -102,7 +93,6 @@ public class SelectChildren extends AppCompatActivity {
                     int num = (i + 1) % childList.getChildren().size();
                     if (name == null) {
                         name = childList.get(num).getName();
-                        System.out.println(name);
                         TextView text = (TextView) findViewById(R.id.name);
                         text.setText(name);
                     }
@@ -113,7 +103,6 @@ public class SelectChildren extends AppCompatActivity {
             if (i == childList.getChildren().size()) {
                 if (name == null) {
                     name = childList.get(0).getName();
-                    System.out.println(name);
                     TextView text = (TextView) findViewById(R.id.name);
                     text.setText(name);
                 }
@@ -132,13 +121,30 @@ public class SelectChildren extends AppCompatActivity {
         });
     }
 
-    private void getName() {
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
-        if(name != null){
-            TextView text = (TextView) findViewById(R.id.name);
-            text.setText(name);
-        }
+    private void skip() {
+        Button skip = findViewById(R.id.skip);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CoinFlipActivity.makeLaunch1(SelectChildren.this);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void chooseSide() {
+        Button choose = findViewById(R.id.choose_side);
+        if(name == null)
+            choose.setVisibility(View.INVISIBLE);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(name);
+                Intent intent = ChooseSide.makeLaunch(SelectChildren.this, name);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
