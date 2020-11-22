@@ -1,7 +1,7 @@
+/*This is the activity to add the task*/
+
 package com.e.practicalparentlavateam.UI;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,27 +13,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
-import com.e.practicalparentlavateam.Model.Task;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 public class AddTask extends AppCompatActivity {
-    private EditText task_name;
-    private TaskManager task_manager;
+    private EditText taskName;
+    private TaskManager taskManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +35,17 @@ public class AddTask extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.AddTaskToolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        task_manager = TaskManager.getInstance();
+        taskManager = TaskManager.getInstance();
         setupButtonCancel();
         setupButtonOk();
     }
 
     private void setupButtonCancel() {
-        Button btn = findViewById(R.id.CancelAddTask);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.CancelAddTask);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -64,15 +56,15 @@ public class AddTask extends AppCompatActivity {
     }
 
     private void setupButtonOk() {
-        task_name = findViewById(R.id.EnterTastName);
-        Button btn = findViewById(R.id.AddTaskOk);
-        btn.setOnClickListener(
+        taskName = findViewById(R.id.EnterTastName);
+        Button button = findViewById(R.id.AddTaskOk);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // Extract data from screen
-                        String child_name;
-                        String name = task_name.getText().toString();
+                        String childName;
+                        String name = taskName.getText().toString();
                         if(name.equals("")){
                             Toast.makeText(AddTask.this,R.string.hint_for_name,Toast.LENGTH_SHORT).show();
                             return;
@@ -81,18 +73,18 @@ public class AddTask extends AppCompatActivity {
                         Gson gson = new Gson();
                         String json = prefs.getString("childPrefs", null);
                         Type type = new TypeToken<ChildrenManager>() {}.getType();
-                        ChildrenManager child_list = gson.fromJson(json, type);
-                        if(child_list == null || child_list.getChildren().size() == 0) {
-                            child_name = "No Child";
+                        ChildrenManager childList = gson.fromJson(json, type);
+                        if(childList == null || childList.getChildren().size() == 0) {
+                            childName = "No Child";
                         }
                         else {
-                            child_name = child_list.get(0).getName();
+                            childName = childList.get(0).getName();
                         }
 
                         // Create new data object
-                        task_manager = TaskManager.getInstance();
-                        task_manager.add(name, child_name);
-                        saveNewTask(task_manager);
+                        taskManager = TaskManager.getInstance();
+                        taskManager.add(name, childName);
+                        saveNewTask(taskManager);
                         Intent intent = EditTasksList.makeLaunch(AddTask.this);
                         startActivity(intent);
                         finish();

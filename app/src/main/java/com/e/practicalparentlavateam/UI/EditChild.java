@@ -1,4 +1,5 @@
-/*This is the class to edit or delete the name of the child*/
+/*This is the class to edit or delete the name of the child
+* and edit the portrait of the chils*/
 
 package com.e.practicalparentlavateam.UI;
 

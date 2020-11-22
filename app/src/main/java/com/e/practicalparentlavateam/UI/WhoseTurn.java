@@ -1,3 +1,5 @@
+/*This is the activity to show the tasks and the child name who should do next*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.annotation.NonNull;

@@ -1,3 +1,6 @@
+/*This is the activity to show the task to edit
+* and you can add task in this part*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.ActionBar;

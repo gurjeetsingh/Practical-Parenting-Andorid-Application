@@ -1,3 +1,5 @@
+/*This is the class to define the data of the task item*/
+
 package com.e.practicalparentlavateam.Model;
 
 public class Task {

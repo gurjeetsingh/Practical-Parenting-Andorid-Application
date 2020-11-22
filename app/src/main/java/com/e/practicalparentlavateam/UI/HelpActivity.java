@@ -1,3 +1,7 @@
+/*Show the name of the team which created the app.
+Show list the names of the developers who created it.
+Show me any copyright information*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.ActionBar;
