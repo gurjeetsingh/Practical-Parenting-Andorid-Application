@@ -118,7 +118,7 @@ public class CoinFlipActivity extends AppCompatActivity {
             indHisbt.setVisibility(View.INVISIBLE);
         else {
             indHisbt.setVisibility(View.VISIBLE);
-            indHisbt.setText(name + "'s history");
+            indHisbt.setText(name + getString(R.string.whose_history));
         }
         indHisbt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,12 +154,12 @@ public class CoinFlipActivity extends AppCompatActivity {
                         if(num == 1){
                             //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
                             coinImage.setImageResource(R.drawable.coin_front);
-                            result.setText("Heads");
+                            result.setText(R.string.head);
                             result.setVisibility(View.VISIBLE);
                         }
                         else{
                             coinImage.setImageResource(R.drawable.coin_back);
-                            result.setText("Tails");
+                            result.setText(R.string.tails);
                             result.setVisibility(View.VISIBLE);
                         }
                         back.start();
