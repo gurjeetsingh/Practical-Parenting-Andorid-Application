@@ -6,7 +6,7 @@
     <string name="menu1">Child Details</string>
     <string name="menu2">Flip A Coin</string>
     <string name="menu3">Timeout Timer</string>
-    <string name="menu4">Whose turn to do</string>
+    <string name="menu4">Whose turn to do task</string>
 
     <string name="configure">Select a Child to edit:</string>
 
@@ -47,7 +47,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_edit_child">EditChild</string>
     <string name="history_starts_here">History Starts Here</string>
-    <string name="who_s_turn_it_is">Who\'s turn it is</string>
+    <string name="who_s_turn_it_is">Whose turn it is</string>
     <string name="cmpt276">Project Inspiration: CMPT 276\n Professor: Brian Fraser\n Simon Fraser University, Fall 2020.\n
         <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">CMPT276 Webpage</a></string>
     <string name="coin">Coin Image All Rights Reserved :
