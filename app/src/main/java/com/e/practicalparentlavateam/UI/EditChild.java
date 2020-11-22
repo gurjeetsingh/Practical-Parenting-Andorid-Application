@@ -189,7 +189,6 @@ public class EditChild extends AppCompatActivity {
                             fileOutputStreams = new FileOutputStream(myPath);
                             // Use the compress method on the BitMap object to write image to the OutputStream
                             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStreams);
-                            Toast.makeText(getApplicationContext(), "Image saved", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
@@ -247,5 +246,15 @@ public class EditChild extends AppCompatActivity {
         Intent intent = new Intent(c, EditChild.class);
         intent.putExtra(EXTRA_CHILD_INDEX, childIndex);
         return intent;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //clear the old stack
+        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        Intent mainIntent = ConfigureChildren.makeIntent(EditChild.this);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainIntent);
+        EditChild.this.finish();
     }
 }

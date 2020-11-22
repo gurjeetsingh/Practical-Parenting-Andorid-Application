@@ -9,7 +9,7 @@
     <string name="menu1">Child Details</string>
     <string name="menu2">Flip A Coin</string>
     <string name="menu3">Timeout Timer</string>
-    <string name="menu4">Whose turn to do</string>
+    <string name="menu4">Whose Turn To Do Task</string>
     <string name="timer1">Pause</string>
     <string name="timer2">Set Custom Time</string>
     <string name="timer3">Alarm OFF</string>
@@ -45,6 +45,8 @@
         <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">CMPT276 Webpage</a></string>
     <string name="coin">Coin Image All Rights Reserved :
 <a href="https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023">www.mint.ca</a></string>
+    <string name="coinsound">Coin Sound All Rights Reserved :
+<a href="https://www.ear0.com/sound/show/soundid-10760">www.ear0.com</a></string>
 
     <string name="none">No Selection</string>
     <string name="textview">TextView</string>
@@ -86,7 +88,7 @@
     <string name="title_activity_timeout_timer">Timeout Timer</string>
     <string name="title_activity_edit_child">EditChild</string>
     <string name="title_select_children">Select Children</string>
-    <string name="title_whose_turn">Whose Turn</string>
+    <string name="title_whose_turn">Whose Turn To Do Task</string>
     <string name="title_edit_tasks_list">Edit Tasks List</string>
     <string name="title_edit_task">Edit Task</string>
     <string name="title_add_tasks">Add Tasks</string>

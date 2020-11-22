@@ -115,7 +115,7 @@ https://developer.android.com/reference/android/os/Handler
         int timer = (int) timeLeftInMilliseconds;
         if(timer<0)
         {
-            startalarm();
+            startAlarm();
             stopSelf();
         }
         comintent.putExtra("time", timer);
@@ -126,7 +126,7 @@ https://developer.android.com/reference/android/os/Handler
     /*
     Using the audio controller to play the alarm sound.
      */
-    public void startalarm() {
+    public void startAlarm() {
        AudioController.playAudio(this,R.raw.alarm_sound);
     }
 

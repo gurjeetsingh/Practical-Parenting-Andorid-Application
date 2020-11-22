@@ -154,7 +154,6 @@ public class ChildDetails extends AppCompatActivity {
                             fileOutputStream = new FileOutputStream(myPath);
                             // Use the compress method on the BitMap object to write image to the OutputStream
                             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
-                            Toast.makeText(getApplicationContext(), "Image saved", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
