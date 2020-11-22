@@ -171,7 +171,7 @@ public class EditChild extends AppCompatActivity {
                         // Extract data from screen
                         String name = editName2.getText().toString();
                         if(name.equals("")){
-                            Toast.makeText(EditChild.this,"Please Input A Name",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditChild.this,R.string.hint_for_name,Toast.LENGTH_SHORT).show();
                             return;
                         }
 

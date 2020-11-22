@@ -64,7 +64,7 @@ public class EditTask extends AppCompatActivity {
                         // Extract data from screen
                         String name = enterEditTask.getText().toString();
                         if(name.equals("")){
-                            Toast.makeText(EditTask.this,"Please Input A Name",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditTask.this, R.string.hint_for_name,Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -86,8 +86,8 @@ public class EditTask extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogThemeEditTask);
-                        builder.setTitle("Are you sure you want to delete?");
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        builder.setTitle(R.string.delete_comfirm);
+                        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 taskManager.remove(position);
@@ -97,7 +97,7 @@ public class EditTask extends AppCompatActivity {
                                 finish();
                             }
                         });
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
