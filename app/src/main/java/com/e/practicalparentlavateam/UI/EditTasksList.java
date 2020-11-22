@@ -64,7 +64,6 @@ public class EditTasksList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 Intent intent = EditTask.makeEditIntent(EditTasksList.this, position);
                 startActivity(intent);
-                finish();
             }
         });
     }
