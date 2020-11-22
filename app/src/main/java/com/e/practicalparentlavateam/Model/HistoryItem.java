@@ -17,14 +17,16 @@ public class HistoryItem {
         this.coinIcon = icon;
     }
 
-    public void setTime(String t){ time = t;}
+    public void setTime(String time){ this.time = time;}
 
-    public void setChoise(String c){choise = c;}
+    public void setChoise(String choise){
+        this.choise = choise;}
 
-    public void setName(String n){name = n;}
+    public void setName(String name){
+        this.name = name;}
 
-    public void setId(int i){
-        winOrLose = i;}
+    public void setId(int id){
+        winOrLose = id;}
 
     public String getTime() {return time;}
 

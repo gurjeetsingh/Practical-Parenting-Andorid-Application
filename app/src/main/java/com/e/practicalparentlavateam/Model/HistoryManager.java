@@ -10,7 +10,7 @@ public class HistoryManager {
 
     private List<HistoryItem> list = new ArrayList<>();
 
-    public void add(HistoryItem h) {list.add(h);}
+    public void add(HistoryItem historyItem) {list.add(historyItem);}
 
     public List<HistoryItem> getList(){return list;}
 

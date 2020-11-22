@@ -1,3 +1,5 @@
+/*This is the class to define the data of the child*/
+
 package com.e.practicalparentlavateam.Model;
 
 public class Children {

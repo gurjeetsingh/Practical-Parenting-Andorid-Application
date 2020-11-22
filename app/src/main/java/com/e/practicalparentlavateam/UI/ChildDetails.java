@@ -1,4 +1,5 @@
-/*This activity is to add the name of the child*/
+/*This activity is to add the name of the child
+and add the portrait for the child*/
 
 package com.e.practicalparentlavateam.UI;
 
