@@ -8,11 +8,9 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.e.practicalparentlavateam.Model.Children;
@@ -44,7 +42,6 @@ public class ChildDetails extends AppCompatActivity {
     private EditText etName;
     private ChildrenManager children;
     private ImageView image;
-    private Button takePhoto;
     private String path;
     private final static int SELECT_FROM_GALLERY = 007;
 
@@ -83,7 +80,7 @@ public class ChildDetails extends AppCompatActivity {
         }
 
         image = findViewById(R.id.child_image);
-        takePhoto = findViewById(R.id.take_photo);
+        Button takePhoto = findViewById(R.id.take_photo);
 
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override

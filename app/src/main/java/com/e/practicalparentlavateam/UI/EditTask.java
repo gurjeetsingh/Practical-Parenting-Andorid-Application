@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -34,8 +33,8 @@ public class EditTask extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.EditTaskToolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getPosition();
         setText();
@@ -56,8 +55,8 @@ public class EditTask extends AppCompatActivity {
 
     private void setUpButtonOk() {
         enterEditTask = findViewById(R.id.EnterEditTastName);
-        Button btn = findViewById(R.id.EditTaskOk);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.EditTaskOk);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -103,8 +102,8 @@ public class EditTask extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-                        AlertDialog ad = builder.create();
-                        ad.show();
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
 
                     }
                 }
@@ -112,8 +111,8 @@ public class EditTask extends AppCompatActivity {
     }
 
     public void saveNewTask(TaskManager task){
-        SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        SharedPreferences preferences = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(task);
         editor.putString("taskPrefs", json);

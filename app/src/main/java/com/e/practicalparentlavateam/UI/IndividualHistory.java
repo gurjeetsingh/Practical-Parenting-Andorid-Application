@@ -78,14 +78,14 @@ public class IndividualHistory extends AppCompatActivity {
         }
     }
 
+    private void getName(){
+        Intent intent = getIntent();
+        name = intent.getStringExtra(EXTRA_NAME);
+    }
+
     public static Intent makeIntent(Context context, String name){
         Intent intent = new Intent(context, IndividualHistory.class);
         intent.putExtra(EXTRA_NAME, name);
         return intent;
-    }
-
-    private void getName(){
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
     }
 }

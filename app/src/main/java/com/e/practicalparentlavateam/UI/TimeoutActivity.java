@@ -68,8 +68,8 @@ public class TimeoutActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.timeout_toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         createTimeDurationSpinner();
 
 
@@ -81,11 +81,9 @@ public class TimeoutActivity extends AppCompatActivity {
          */
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            if(extras == null)
-            {
+            if(extras == null) {
             }
-            else if (extras.getBoolean("StopAlarm"))
-            {
+            else if (extras.getBoolean("StopAlarm")) {
                 AudioController.stopAudio();
                 finish();
             }
@@ -115,8 +113,8 @@ public class TimeoutActivity extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
-                stopService(serviceintent);
+                Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
+                stopService(serviceIntent);
                 timeLeftInMilliseconds = selectedTime;
                 pauseButton.setVisibility(View.INVISIBLE);
                 isTimerRunning = false;
@@ -334,9 +332,9 @@ public class TimeoutActivity extends AppCompatActivity {
             alarm.vibrate(5000);
 
             //This handler is for removing the alarmoff button after a period of time
-            Handler cancelnotificiaton = new Handler();
+            Handler cancelNotIficiaton = new Handler();
             long delay = 12000;
-            cancelnotificiaton.postDelayed(new Runnable() {
+            cancelNotIficiaton.postDelayed(new Runnable() {
                 public void run() {
                     alrmOffButton.setVisibility(View.INVISIBLE);
                 }
@@ -353,15 +351,6 @@ public class TimeoutActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_timeout, menu);
         return true;
-    }
-
-
-    /*
-    For making the intent
-     */
-    public static Intent makeIntent(Context context) {
-        Intent timeoutintent = new Intent(context, TimeoutActivity.class);
-        return timeoutintent;
     }
 
 
@@ -416,4 +405,13 @@ public class TimeoutActivity extends AppCompatActivity {
         usertext.setText(timeLeftFormatted);
     }
 
+
+    /*
+    For making the intent
+     */
+    public static Intent makeIntent(Context context) {
+        Intent timeoutIntent = new Intent(context, TimeoutActivity.class);
+        return timeoutIntent;
     }
+
+}

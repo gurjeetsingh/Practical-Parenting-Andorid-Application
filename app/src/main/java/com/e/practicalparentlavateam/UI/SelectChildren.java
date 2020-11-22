@@ -25,16 +25,6 @@ public class SelectChildren extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
     private String name = null;
 
-    public static Intent makeLaunch(Context context, String name) {
-        Intent intent = new Intent(context, SelectChildren.class);
-        intent.putExtra(EXTRA_NAME, name);
-        return intent;
-    }
-
-    public static Intent makeIntent(Context context) {
-        return new Intent(context, SelectChildren.class);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,25 +70,25 @@ public class SelectChildren extends AppCompatActivity {
 
     /*Get the child who flipped last time and choose the child this time to flip*/
     private void loadLastTimeChild() {
-        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
+        SharedPreferences preferences = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = prefs.getString("childPrefs", null);
+        String json = preferences.getString("childPrefs", null);
         Type type = new TypeToken<ChildrenManager>() {}.getType();
         ChildrenManager childList = gson.fromJson(json, type);
         if(childList != null)
             ChildrenManager.setInstance(childList);
         SharedPreferences sharedPreferences = getSharedPreferences("Save name",MODE_PRIVATE);
-        String LastTimeName = sharedPreferences.getString("name",null);
+        String lastTimeName = sharedPreferences.getString("name",null);
         TextView lastTimeChild = findViewById(R.id.last_time_child);
-        if(LastTimeName == null){
+        if(lastTimeName == null){
             lastTimeChild.setText("None");
         }
         else{
-            lastTimeChild.setText(LastTimeName);
+            lastTimeChild.setText(lastTimeName);
 
             int i = 0;
             while (i < childList.getChildren().size()) {
-                if (childList.get(i).getName().equals(LastTimeName)) {
+                if (childList.get(i).getName().equals(lastTimeName)) {
                     int num = (i + 1) % childList.getChildren().size();
                     if (name == null) {
                         name = childList.get(num).getName();
@@ -133,8 +123,8 @@ public class SelectChildren extends AppCompatActivity {
     }
 
     private void getName() {
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
+        Intent intent = getIntent();
+        name = intent.getStringExtra(EXTRA_NAME);
         if(name != null){
             TextView text = (TextView) findViewById(R.id.name);
             text.setText(name);
@@ -149,5 +139,15 @@ public class SelectChildren extends AppCompatActivity {
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainIntent);
         SelectChildren.this.finish();
+    }
+
+    public static Intent makeLaunch(Context context, String name) {
+        Intent intent = new Intent(context, SelectChildren.class);
+        intent.putExtra(EXTRA_NAME, name);
+        return intent;
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, SelectChildren.class);
     }
 }

@@ -23,7 +23,7 @@ https://stackoverflow.com/questions/3293243/pass-data-from-activity-to-service-u
 public class TimeService extends Service {
 
     private Intent comintent;
-    private Intent mainintent;
+    private Intent mainIntent;
     public static final String TIME_BROADCAST = "TimeService";
     private Handler handler = new Handler();
     private long userSelectedTime;

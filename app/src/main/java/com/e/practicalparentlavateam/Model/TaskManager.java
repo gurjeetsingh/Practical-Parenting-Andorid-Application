@@ -32,20 +32,20 @@ public class TaskManager {
         tasks.remove(index);
     }
 
-    public Task getTasks (int i) {
-        return tasks.get(i);
+    public Task getTasks (int index) {
+        return tasks.get(index);
     }
 
-    public void setTasks (int i, Task task) {
-        tasks.set(i, task);
+    public void setTasks (int index, Task task) {
+        tasks.set(index, task);
     }
 
-    public void setName(int i, String name){
-        tasks.get(i).setName(name);
+    public void setName(int index, String name){
+        tasks.get(index).setName(name);
     }
 
-    public void setTask(int i, String task){
-        tasks.get(i).setTask(task);
+    public void setTask(int index, String task){
+        tasks.get(index).setTask(task);
     }
 
     public int getNumTasks() {
@@ -56,7 +56,7 @@ public class TaskManager {
         return tasks;
     }
 
-    public static void setInstance(TaskManager t){
-        instance = t;
+    public static void setInstance(TaskManager taskManager){
+        instance = taskManager;
     }
 }

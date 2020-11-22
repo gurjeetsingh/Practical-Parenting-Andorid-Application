@@ -1,10 +1,7 @@
 package com.e.practicalparentlavateam.Model;
 
 import android.content.Context;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.os.Vibrator;
 
 /*
 The following class universally declares a mediaplayer,
@@ -16,8 +13,8 @@ to play or stop the alarm.
 public class AudioController {
 
     public static MediaPlayer mediaPlayer;
-    public static void playAudio(Context c,int id){
-        mediaPlayer = MediaPlayer.create(c,id);
+    public static void playAudio(Context context,int id){
+        mediaPlayer = MediaPlayer.create(context,id);
         mediaPlayer.start();
     }
 
@@ -25,8 +22,8 @@ public class AudioController {
         mediaPlayer.stop();
     }
 
-    public static void stopvibration()
+    public static void stopVibration()
     {
-        stopvibration();
+        stopVibration();
     }
 }

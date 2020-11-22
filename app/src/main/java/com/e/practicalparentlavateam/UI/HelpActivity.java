@@ -22,15 +22,15 @@ public class HelpActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.HelpToolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        TextView getapp =(TextView) findViewById(R.id.projectid);
-        getapp.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView getApp =(TextView) findViewById(R.id.projectid);
+        getApp.setMovementMethod(LinkMovementMethod.getInstance());
     }
     //Returning Necessary Activity
     public static Intent makeIntent(Context context) {
-        Intent helpintent = new Intent(context, HelpActivity.class);
-        return helpintent;
+        Intent helpIntent = new Intent(context, HelpActivity.class);
+        return helpIntent;
     }
 }

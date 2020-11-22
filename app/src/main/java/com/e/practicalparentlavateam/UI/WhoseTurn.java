@@ -39,8 +39,8 @@ public class WhoseTurn extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.whose_turn_toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getTasks();
         populateListView();
@@ -88,11 +88,11 @@ public class WhoseTurn extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.tasks_list, parent, false);
             }
 
-            String current_task = taskManager.getTasks().get(position).getTask();
-            String current_name = taskManager.getTasks().get(position).getName();
+            String currentTask = taskManager.getTasks().get(position).getTask();
+            String currentName = taskManager.getTasks().get(position).getName();
 
             TextView taskView = (TextView) itemView.findViewById(R.id.task_name);
-            taskView.setText(current_task);
+            taskView.setText(currentTask);
 
             SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
             Gson gson = new Gson();
@@ -106,12 +106,12 @@ public class WhoseTurn extends AppCompatActivity {
                 nameView.setText("No Child");
             }
             else {
-                if (current_name.equals("No Child")) {
+                if (currentName.equals("No Child")) {
                     taskManager.setName(position, child_list.get(0).getName());
                     saveNewTask(taskManager);
                     nameView.setText(child_list.get(0).getName());
                 } else {
-                    nameView.setText(current_name);
+                    nameView.setText(currentName);
                 }
             }
 
@@ -120,8 +120,8 @@ public class WhoseTurn extends AppCompatActivity {
     }
 
     public void saveNewTask(TaskManager t){
-        SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        SharedPreferences preferences = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(t);
         editor.putString("taskPrefs", json);
@@ -147,17 +147,17 @@ public class WhoseTurn extends AppCompatActivity {
         }
     }
 
-    public static Intent makeIntent(Context context) {
-        return new Intent(context, WhoseTurn.class);
-    }
-
     @Override
     public void onBackPressed() {
         //clear the old stack
         //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
-        Intent mainintent=MainMenu.makeIntent(WhoseTurn.this);
-        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(mainintent);
+        Intent mainIntent = MainMenu.makeIntent(WhoseTurn.this);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainIntent);
         WhoseTurn.this.finish();
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, WhoseTurn.class);
     }
 }
