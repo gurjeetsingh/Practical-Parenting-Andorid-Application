@@ -25,9 +25,23 @@ public class HelpActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        TextView getapp =(TextView) findViewById(R.id.projectid);
-        getapp.setMovementMethod(LinkMovementMethod.getInstance());
+        setHyperlink();
+
+
     }
+
+    private void setHyperlink() {
+        TextView getApp =(TextView) findViewById(R.id.projectid);
+        getApp.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView coin =(TextView) findViewById(R.id.coinimagecopyright);
+        coin.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView coinSound =(TextView) findViewById(R.id.coinsound);
+        coinSound.setMovementMethod(LinkMovementMethod.getInstance());
+
+    }
+
     //Returning Necessary Activity
     public static Intent makeIntent(Context context) {
         Intent helpintent = new Intent(context, HelpActivity.class);
