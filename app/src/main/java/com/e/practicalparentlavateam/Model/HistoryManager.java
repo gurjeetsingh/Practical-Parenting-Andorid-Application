@@ -10,16 +10,16 @@ public class HistoryManager {
 
     private List<HistoryItem> list = new ArrayList<>();
 
-    public void add(HistoryItem h) {list.add(h);}
+    public void add(HistoryItem historyItem) {list.add(historyItem);}
 
     public List<HistoryItem> getList(){return list;}
 
     public static HistoryManager getInstance() {return instance;}
 
-    public static void setInstance(HistoryManager h){
-        if(h == null)
+    public static void setInstance(HistoryManager historyManager){
+        if(historyManager == null)
             instance = new HistoryManager();
         else
-            instance = h;
+            instance = historyManager;
     }
 }

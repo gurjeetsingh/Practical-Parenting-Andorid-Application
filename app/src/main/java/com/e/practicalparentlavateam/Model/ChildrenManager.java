@@ -24,8 +24,8 @@ public class ChildrenManager {
         return instance;
     }
 
-    public static void setInstance(ChildrenManager c){
-        instance = c;
+    public static void setInstance(ChildrenManager childrenManager){
+        instance = childrenManager;
     }
 
     public ChildrenManager() {
@@ -42,8 +42,8 @@ public class ChildrenManager {
         children.remove(index);
     }
 
-    public Children get (int i) {
-        return children.get(i);
+    public Children get (int index) {
+        return children.get(index);
     }
 
     public void set (int i, Children name) {
