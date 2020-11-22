@@ -113,7 +113,7 @@ public class WhoseTurn extends AppCompatActivity {
                 } else {
                     boolean exist = false;
                     for (int i = 0; i < child_list.getChildren().size(); i++) {
-                        if (child_list.getChildren().get(i).getName().equals(current_name))
+                        if (child_list.getChildren().get(i).getName().equals(currentName))
                             exist = true;
                     }
                     if(exist == false){
@@ -122,7 +122,7 @@ public class WhoseTurn extends AppCompatActivity {
                         nameView.setText(child_list.get(0).getName());
                     }
                     else {
-                        nameView.setText(current_name);
+                        nameView.setText(currentName);
                     }
                 }
             }
