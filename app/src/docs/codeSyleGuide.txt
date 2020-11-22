@@ -1,0 +1,76 @@
+Code Style Guide
+
+
+Naming:
+
+1.	Variable: Use a word for the name of variables. If multiple words are needed for a variable, the first letter of the first word of the name is lowercase, the remaining words are uppercase. ie camelCase.
+
+    Example:
+    a)	Bad: childname, ChildN, c_n.
+    b)	Good: childName.
+
+
+2.	Function: Function names should describe what the function does. The first letter of the first word of the name is lowercase, the remaining words are uppercase.
+
+    Example:
+    a)	Bad: ChooseChild(), choosechild(), cc().
+    b)	Good: chooseChild().
+
+
+3.	Class: Every word in class name should be capitalized.
+
+    Example:
+    a)	Bad: Childmanagr, childM, CM.
+    b)	Good: ChildManager.
+
+
+4.	ID: The words of xml layout IDs are all lowercase and connected by "_".
+
+    Example:
+    a)	Bad: ChildList, childlist, cl.
+    b)	Good: child_list.
+
+
+
+Braces:
+
+1.	Opening brace is at the end of the enclosing statement; closing brace is on its own line
+
+    Example:
+    a)	Bad:
+        for ( int i = 0; i < size; i++)
+        {
+            ……
+        }
+
+    b)	Good:
+        for ( int i = 0; i < size; i++){
+            ……
+        }
+
+
+
+Code formatting
+
+1.	Solve problems or functionality requirements using a function. It is confusing if the code is not in a function. If a function cannot be used, add additional comments to describe the code functionality.
+
+
+2.	Format code for readability and keep at an appropriate length.
+
+    Example:
+    a)	Bad:
+        if (children.getIndex() != 10 && children.getIndex() != 15 && children.getIndex() != 20 && children.getIndex() > 3) {
+            ……
+        }
+    b)	Good:
+        if (children.getIndex() != 10
+        && children.getIndex() != 15
+        && children.getIndex() != 20
+        && children.getIndex() > 3) {
+                    ……
+        }
+
+
+3.	The order of functions should be in the order you call them. This makes it easier for other member of the team to find them.
+
+
