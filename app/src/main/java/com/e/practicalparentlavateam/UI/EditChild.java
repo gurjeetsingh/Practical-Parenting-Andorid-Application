@@ -189,7 +189,6 @@ public class EditChild extends AppCompatActivity {
                             fileOutputStreams = new FileOutputStream(myPath);
                             // Use the compress method on the BitMap object to write image to the OutputStream
                             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStreams);
-                            Toast.makeText(getApplicationContext(), "Image saved", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
