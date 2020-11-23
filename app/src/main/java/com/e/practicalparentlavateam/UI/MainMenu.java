@@ -35,7 +35,7 @@ public class MainMenu extends AppCompatActivity {
 
     private void configureChildrenButton() {
         //This will be for our configuring the children activity.
-        Button config_btn=(Button)findViewById(R.id.configchild);
+        Button config_btn=(Button)findViewById(R.id.configure_child);
         config_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +48,7 @@ public class MainMenu extends AppCompatActivity {
 
     private void flipCoinButton() {
         //This will be for flipping the coin activity
-        Button flipButton = (Button)findViewById(R.id.coinflip);
+        Button flipButton = (Button)findViewById(R.id.coin_flip);
         flipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +96,7 @@ public class MainMenu extends AppCompatActivity {
 
     private void helpScreenButton() {
         //This will be for the helpscreen activity
-        ImageButton helpButton=findViewById(R.id.helpbtn);
+        ImageButton helpButton=findViewById(R.id.help_button);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

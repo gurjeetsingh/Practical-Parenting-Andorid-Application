@@ -96,7 +96,7 @@ public class ChooseChildren extends AppCompatActivity {
         }
 
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.listOfChildren);
+        ListView list = (ListView) findViewById(R.id.list_of_children);
         list.setAdapter(adapter);
     }
 
@@ -135,7 +135,7 @@ public class ChooseChildren extends AppCompatActivity {
 
     /*Click to choose children*/
     private void registClickCallback(){
-        ListView list = (ListView) findViewById(R.id.listOfChildren);
+        ListView list = (ListView) findViewById(R.id.list_of_children);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {

@@ -49,7 +49,7 @@ public class IndividualHistory extends AppCompatActivity {
 
     private void populateList() {
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.individualHistory);
+        ListView list = (ListView) findViewById(R.id.individual_history);
         list.setAdapter(adapter);
     }
 

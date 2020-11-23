@@ -44,7 +44,7 @@ public class AddTask extends AppCompatActivity {
     }
 
     private void setupButtonCancel() {
-        Button button = findViewById(R.id.CancelAddTask);
+        Button button = findViewById(R.id.cancel_add_task);
         button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -56,8 +56,8 @@ public class AddTask extends AppCompatActivity {
     }
 
     private void setupButtonOk() {
-        taskName = findViewById(R.id.EnterTastName);
-        Button button = findViewById(R.id.AddTaskOk);
+        taskName = findViewById(R.id.enter_tast_name);
+        Button button = findViewById(R.id.add_task_ok);
         button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

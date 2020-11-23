@@ -96,7 +96,7 @@ public class WhoseTurn extends AppCompatActivity {
             String json = prefs.getString("childPrefs", null);
             Type type = new TypeToken<ChildrenManager>() {}.getType();
             ChildrenManager child_list = gson.fromJson(json, type);
-            TextView nameView = (TextView) itemView.findViewById(R.id.NameOfChild);
+            TextView nameView = (TextView) itemView.findViewById(R.id.name_of_child);
             if(child_list == null || child_list.getChildren().size() == 0){
                 taskManager.setName(position,"No Child");
                 saveNewTask(taskManager);

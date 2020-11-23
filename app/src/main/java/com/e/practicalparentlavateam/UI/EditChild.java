@@ -10,11 +10,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.e.practicalparentlavateam.Model.Children;
@@ -197,7 +195,7 @@ public class EditChild extends AppCompatActivity {
     }
 
     private void setupButtonOk() {
-        Button btn = findViewById(R.id.btnSaveEdit);
+        Button btn = findViewById(R.id.button_save_edit);
         btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

@@ -48,7 +48,7 @@ public class ConfigureChildren extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configure_children);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.configureToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.configure_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
@@ -74,7 +74,7 @@ public class ConfigureChildren extends AppCompatActivity {
     }
 
     private void setupFloatingActionButton() {
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.floating_action_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +87,7 @@ public class ConfigureChildren extends AppCompatActivity {
     private void populateListView() {
         children = ChildrenManager.getInstance();
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.childListView);
+        ListView list = (ListView) findViewById(R.id.child_list_view);
         list.setAdapter(adapter);
     }
 
@@ -122,7 +122,7 @@ public class ConfigureChildren extends AppCompatActivity {
     }
 
     private void registClickCallback(){
-        ListView list = (ListView) findViewById(R.id.childListView);
+        ListView list = (ListView) findViewById(R.id.child_list_view);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
