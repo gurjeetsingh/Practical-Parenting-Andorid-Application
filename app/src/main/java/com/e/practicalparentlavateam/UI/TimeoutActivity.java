@@ -348,7 +348,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 userTime = new EditText(context);
                 builder.setView(userTime);
                 builder.setIcon(R.drawable.babyclock);
-                builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.finish_set_time, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String newTime = userTime.getText().toString();

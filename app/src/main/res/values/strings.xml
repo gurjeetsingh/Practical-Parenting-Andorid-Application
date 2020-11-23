@@ -117,6 +117,7 @@
     <string name="three_minites">Set Time: 3 Minutes</string>
     <string name="five_minites">Set Time: 5 Minutes</string>
     <string name="ten_minites">Set Time: 10 Minutes</string>
+    <string name="finish_set_time">Done</string>
     <string-array name="minutes_array">
         <item>Set Time: 1 Minute</item>
         <item>Set Time: 2 Minutes</item>
