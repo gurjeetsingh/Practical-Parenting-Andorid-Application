@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class ChooseChildren extends AppCompatActivity {
         //setupChildrenView();
         populateListView();
         registClickCallback();
+        nobodyButton();
     }
 
     /*Show the children list to choose*/
@@ -83,7 +85,6 @@ public class ChooseChildren extends AppCompatActivity {
                     currentChildrenList.add(children.getChildren().get(index));
                     index = (index + 1) % children.getChildren().size();
                 }
-                currentChildrenList.add(new Children("nobody"));
             }
             else {
                 while (!children.getChildren().get(index).getName().equals(LastTimeName)) {
@@ -91,7 +92,6 @@ public class ChooseChildren extends AppCompatActivity {
                     index = (index + 1) % children.getChildren().size();
                 }
                 currentChildrenList.add(new Children(LastTimeName));
-                currentChildrenList.add(new Children("nobody"));
             }
         }
 
@@ -146,6 +146,18 @@ public class ChooseChildren extends AppCompatActivity {
                 text.setText(clickedName);*/
 
                 Intent intent = SelectChildren.makeLaunch(ChooseChildren.this, clickedName);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void nobodyButton() {
+        Button nobodyButton = findViewById(R.id.nobody_button);
+        nobodyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SelectChildren.makeLaunch(ChooseChildren.this, "nobody");
                 startActivity(intent);
                 finish();
             }

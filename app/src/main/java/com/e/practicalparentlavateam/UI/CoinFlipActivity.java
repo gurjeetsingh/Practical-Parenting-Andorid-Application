@@ -114,7 +114,7 @@ public class CoinFlipActivity extends AppCompatActivity {
 
     private void individualHistoryButton() {
         Button individualHistory = findViewById(R.id.child_history);
-        if(name == null)
+        if(name == null || name.equals("nobody"))
             individualHistory.setVisibility(View.INVISIBLE);
         else {
             individualHistory.setVisibility(View.VISIBLE);
