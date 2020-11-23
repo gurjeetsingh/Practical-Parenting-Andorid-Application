@@ -51,8 +51,8 @@ public class ConfigureChildren extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.configureToolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         children = ChildrenManager.getInstance();
         getChild();
 
@@ -74,12 +74,12 @@ public class ConfigureChildren extends AppCompatActivity {
     }
 
     private void setupFloatingActionButton() {
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = ChildDetails.makeIntentForAdd(ConfigureChildren.this);
-                ConfigureChildren.this.startActivityForResult(i, ACTIVITY_RESULT_ADD);
+                Intent intent = ChildDetails.makeIntentForAdd(ConfigureChildren.this);
+                ConfigureChildren.this.startActivityForResult(intent, ACTIVITY_RESULT_ADD);
             }
         });
     }
@@ -108,7 +108,7 @@ public class ConfigureChildren extends AppCompatActivity {
 
             ImageView imageView = (ImageView)itemView.findViewById(R.id.portrait);
             try {
-                File file=new File(children.getPath(), currentChild + ".jpg");
+                File file = new File(children.getPath(), currentChild + ".jpg");
                 Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
                 imageView.setImageBitmap(bitmap);
             }
@@ -161,8 +161,8 @@ public class ConfigureChildren extends AppCompatActivity {
 
     //Returning Necessary Activity
     public static Intent makeIntent(Context context) {
-        Intent configintent = new Intent(context,ConfigureChildren.class);
-        return configintent;
+        Intent configIntent = new Intent(context,ConfigureChildren.class);
+        return configIntent;
     }
 
 }

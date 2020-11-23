@@ -93,11 +93,11 @@ public class AddTask extends AppCompatActivity {
         );
     }
 
-    public void saveNewTask(TaskManager t){
+    public void saveNewTask(TaskManager taskManager){
         SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(t);
+        String json = gson.toJson(taskManager);
         editor.putString("taskPrefs", json);
         System.out.println(json);
         editor.commit();

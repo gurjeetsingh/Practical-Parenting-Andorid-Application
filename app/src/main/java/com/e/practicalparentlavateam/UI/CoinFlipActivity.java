@@ -42,12 +42,12 @@ public class CoinFlipActivity extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
 
     private String name = "";
-    private HistoryManager history_manager;
+    private HistoryManager historyManager;
     private String choice = "";
     private int win = R.drawable.win;
     private int lose = R.drawable.lose;
-    private int coin_front = R.drawable.coin_front;
-    private int coin_back = R.drawable.coin_back;
+    private int coinFront = R.drawable.coin_front;
+    private int coinBack = R.drawable.coin_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,8 @@ public class CoinFlipActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.flipCoinToolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getChild();
         getChoice();
@@ -70,8 +70,8 @@ public class CoinFlipActivity extends AppCompatActivity {
     }
 
     private void getChild() {
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
+        Intent intent = getIntent();
+        name = intent.getStringExtra(EXTRA_NAME);
         TextView text = (TextView) findViewById(R.id.ChildName);
         ImageView imageView = (ImageView) findViewById(R.id.child_coin_image);
         if(name != null){
@@ -81,16 +81,16 @@ public class CoinFlipActivity extends AppCompatActivity {
                     File file = new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
                     Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
                     imageView.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                } catch (FileNotFoundException exception) {
+                    exception.printStackTrace();
                 }
             }
         }
     }
 
     private void getChoice() {
-        Intent i = getIntent();
-        choice = i.getStringExtra(EXTRA_CHOICE);
+        Intent intent = getIntent();
+        choice = intent.getStringExtra(EXTRA_CHOICE);
         TextView text = (TextView) findViewById(R.id.choice);
         if(choice != null)
             text.setText(choice);
@@ -98,12 +98,12 @@ public class CoinFlipActivity extends AppCompatActivity {
 
     private void getHistory() {
         HistoryManager.setInstance(getData());
-        history_manager = HistoryManager.getInstance();
+        historyManager = HistoryManager.getInstance();
     }
 
     private void historyButton() {
-        Button his = (Button) findViewById(R.id.history);
-        his.setOnClickListener(new View.OnClickListener() {
+        Button history = (Button) findViewById(R.id.history);
+        history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = FlippingHistory.makeLaunch(CoinFlipActivity.this);
@@ -113,14 +113,14 @@ public class CoinFlipActivity extends AppCompatActivity {
     }
 
     private void individualHistoryButton() {
-        Button indHisbt = findViewById(R.id.childHistory);
+        Button individualHistory = findViewById(R.id.childHistory);
         if(name == null)
-            indHisbt.setVisibility(View.INVISIBLE);
+            individualHistory.setVisibility(View.INVISIBLE);
         else {
-            indHisbt.setVisibility(View.VISIBLE);
-            indHisbt.setText(name + getString(R.string.whose_history));
+            individualHistory.setVisibility(View.VISIBLE);
+            individualHistory.setText(name + getString(R.string.whose_history));
         }
-        indHisbt.setOnClickListener(new View.OnClickListener() {
+        individualHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = IndividualHistory.makeIntent(CoinFlipActivity.this, name);
@@ -169,38 +169,38 @@ public class CoinFlipActivity extends AppCompatActivity {
 
                 //Judge if the child win the Flipping and push into the history
                 //If no choice of heads or tails, no record of history
-                int c = 2;
+                int choiceNum = 2;
                 if(choice == null)
                     return;
                 else if(choice.equals("Tails"))
-                    c = 0;
+                    choiceNum = 0;
                 else if(choice.equals("Heads"))
-                    c = 1;
+                    choiceNum = 1;
                 int image;
                 int coinID;
                 if(num == 1)
-                    coinID = coin_front;
+                    coinID = coinFront;
                 else
-                    coinID = coin_back;
-                if(c == num) {
+                    coinID = coinBack;
+                if(choiceNum == num) {
                     image = win;
                     Date currentTime = new Date();
-                    history_manager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
-                    HistoryManager.setInstance(history_manager);
+                    historyManager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
+                    HistoryManager.setInstance(historyManager);
                     if(!name.equals("nobody")) {
                         saveName(name);
                     }
-                    saveHistory(history_manager);
+                    saveHistory(historyManager);
                 }
                 else {
                     image = lose;
                     Date currentTime = new Date();
-                    history_manager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
-                    HistoryManager.setInstance(history_manager);
+                    historyManager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
+                    HistoryManager.setInstance(historyManager);
                     if(!name.equals("nobody")) {
                         saveName(name);
                     }
-                    saveHistory(history_manager);
+                    saveHistory(historyManager);
                 }
             }
         });
@@ -211,33 +211,33 @@ public class CoinFlipActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                history_manager = new HistoryManager();
+                historyManager = new HistoryManager();
                 HistoryManager.setInstance(new HistoryManager());
-                saveHistory(history_manager);
+                saveHistory(historyManager);
                 Toast.makeText(CoinFlipActivity.this, R.string.hint_for_delete_history,Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private HistoryManager getData(){
-        SharedPreferences sp = getSharedPreferences("Save history",MODE_PRIVATE);
-        Gson g = new Gson();
-        String temp = sp.getString("history",null);
-        return g.fromJson(temp,HistoryManager.class);
+        SharedPreferences prefs = getSharedPreferences("Save history",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String temp = prefs.getString("history",null);
+        return gson.fromJson(temp,HistoryManager.class);
     }
 
     private void saveName(String n){
-        SharedPreferences sp = getSharedPreferences("Save name",MODE_PRIVATE);
-        SharedPreferences.Editor edit = sp.edit();
+        SharedPreferences prefs = getSharedPreferences("Save name",MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
         edit.putString("name",n);
         edit.apply();
     }
 
     private void saveHistory(HistoryManager m){
-        SharedPreferences sp = getSharedPreferences("Save history",MODE_PRIVATE);
-        SharedPreferences.Editor edit = sp.edit();
-        Gson g = new Gson();
-        String temp = g.toJson(m);
+        SharedPreferences prefs = getSharedPreferences("Save history",MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        Gson gson = new Gson();
+        String temp = gson.toJson(m);
         edit.putString("history",temp);
         edit.apply();
     }
@@ -246,9 +246,9 @@ public class CoinFlipActivity extends AppCompatActivity {
     public void onBackPressed() {
         //clear the old stack
         //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
-        Intent mainintent=MainMenu.makeIntent(CoinFlipActivity.this);
-        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(mainintent);
+        Intent mainIntent=MainMenu.makeIntent(CoinFlipActivity.this);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainIntent);
         CoinFlipActivity.this.finish();
     }
 

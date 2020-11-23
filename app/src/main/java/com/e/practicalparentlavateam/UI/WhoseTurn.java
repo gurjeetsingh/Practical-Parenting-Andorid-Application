@@ -95,28 +95,28 @@ public class WhoseTurn extends AppCompatActivity {
             Gson gson = new Gson();
             String json = prefs.getString("childPrefs", null);
             Type type = new TypeToken<ChildrenManager>() {}.getType();
-            ChildrenManager child_list = gson.fromJson(json, type);
+            ChildrenManager childList = gson.fromJson(json, type);
             TextView nameView = (TextView) itemView.findViewById(R.id.NameOfChild);
-            if(child_list == null || child_list.getChildren().size() == 0){
+            if(childList == null || childList.getChildren().size() == 0){
                 taskManager.setName(position,"No Child");
                 saveNewTask(taskManager);
                 nameView.setText(R.string.no_child);
             }
             else {
                 if (currentName.equals("No Child")) {
-                    taskManager.setName(position, child_list.get(0).getName());
+                    taskManager.setName(position, childList.get(0).getName());
                     saveNewTask(taskManager);
-                    nameView.setText(child_list.get(0).getName());
+                    nameView.setText(childList.get(0).getName());
                 } else {
                     boolean exist = false;
-                    for (int i = 0; i < child_list.getChildren().size(); i++) {
-                        if (child_list.getChildren().get(i).getName().equals(currentName))
+                    for (int i = 0; i < childList.getChildren().size(); i++) {
+                        if (childList.getChildren().get(i).getName().equals(currentName))
                             exist = true;
                     }
                     if(exist == false){
-                        taskManager.setName(position, child_list.get(0).getName());
+                        taskManager.setName(position, childList.get(0).getName());
                         saveNewTask(taskManager);
-                        nameView.setText(child_list.get(0).getName());
+                        nameView.setText(childList.get(0).getName());
                     }
                     else {
                         nameView.setText(currentName);
@@ -129,8 +129,8 @@ public class WhoseTurn extends AppCompatActivity {
     }
 
     public void saveNewTask(TaskManager t){
-        SharedPreferences preferences = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(t);
         editor.putString("taskPrefs", json);

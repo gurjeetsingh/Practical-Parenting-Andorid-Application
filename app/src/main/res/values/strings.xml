@@ -105,6 +105,8 @@
     <string name="first_child">Select First Child</string>
     <string name="hint_for_delete_history">You Delete Flipping History!</string>
     <string name="no_child">No Child</string>
+    <string name="time_up">TIME\'S UP!</string>
+    <string name="hint_for_turn_off">Please Click Box To Turn Off Alarm.</string>
 
 
 </resources>

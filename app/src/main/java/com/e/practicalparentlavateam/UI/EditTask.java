@@ -81,8 +81,8 @@ public class EditTask extends AppCompatActivity {
     }
 
     private void setUpButtonDelete() {
-        Button btn = findViewById(R.id.DeleteEditTask);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.DeleteEditTask);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -113,8 +113,8 @@ public class EditTask extends AppCompatActivity {
     }
 
     public void saveNewTask(TaskManager task){
-        SharedPreferences preferences = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        SharedPreferences prefs = this.getSharedPreferences("taskPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(task);
         editor.putString("taskPrefs", json);

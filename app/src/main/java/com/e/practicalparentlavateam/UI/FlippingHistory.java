@@ -67,7 +67,7 @@ public class FlippingHistory extends AppCompatActivity {
         }
     }
 
-    public static Intent makeLaunch(Context c) {
-        return new Intent(c, FlippingHistory.class);
+    public static Intent makeLaunch(Context context) {
+        return new Intent(context, FlippingHistory.class);
     }
 }
