@@ -25,7 +25,7 @@
         app:layout_constraintTop_toBottomOf="@+id/yuchun" />
 
     <TextView
-        android:id="@+id/dev"
+        android:id="@+id/develop"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/HelpToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/help_toolbar" />
 
     <TextView
         android:id="@+id/gurjeet"
@@ -107,10 +107,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dev" />
+        app:layout_constraintTop_toBottomOf="@+id/develop" />
 
     <TextView
-        android:id="@+id/projectid"
+        android:id="@+id/project_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -125,10 +125,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coinsound" />
+        app:layout_constraintTop_toBottomOf="@+id/coin_sound" />
 
     <TextView
-        android:id="@+id/uiart"
+        android:id="@+id/UI_art"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -145,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gurjeet" />
 
     <TextView
-        android:id="@+id/coinimagecopyright"
+        android:id="@+id/coin_image_copyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -158,10 +158,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uiart" />
+        app:layout_constraintTop_toBottomOf="@+id/UI_art" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/HelpToolbar"
+        android:id="@+id/help_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -172,7 +172,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/coinsound"
+        android:id="@+id/coin_sound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -185,6 +185,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coinimagecopyright" />
+        app:layout_constraintTop_toBottomOf="@+id/coin_image_copyright" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

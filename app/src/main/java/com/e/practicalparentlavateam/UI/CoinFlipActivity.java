@@ -130,12 +130,12 @@ public class CoinFlipActivity extends AppCompatActivity {
     }
 
     private void flipCoinButton() {
-        final TextView result = findViewById(R.id.resultOfFlipping);
+        final TextView result = findViewById(R.id.result_of_flipping);
         result.setVisibility(View.INVISIBLE);
         //https://stackoverflow.com/questions/46111262/card-flip-animation-in-android
         final Random random = new Random();
         final ImageView coinImage = (ImageView) findViewById(R.id.front);
-        Button button = (Button) findViewById(R.id.button);
+        Button button = (Button) findViewById(R.id.flip);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,7 +207,7 @@ public class CoinFlipActivity extends AppCompatActivity {
     }
 
     private void deleteHistoryButton() {
-        Button delete = (Button) findViewById(R.id.delethistory);
+        Button delete = (Button) findViewById(R.id.delet_history);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

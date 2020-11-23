@@ -77,7 +77,7 @@ public class ChangeTurn extends AppCompatActivity {
         taskManager = TaskManager.getInstance();
         TextView taskName = findViewById(R.id.task_name);
         taskName.setText(taskManager.getTasks(position).getTask());
-        TextView childName = findViewById(R.id.TurnName);
+        TextView childName = findViewById(R.id.turn_name);
         childName.setText(taskManager.getTasks(position).getName());
     }
 
@@ -132,7 +132,7 @@ public class ChangeTurn extends AppCompatActivity {
     }
 
     private void setupButtonCancel() {
-        Button button = findViewById(R.id.canelChangeTurn);
+        Button button = findViewById(R.id.canel_change_turn);
         if(taskManager.getTasks(position).getName().equals("No Child"))
             button.setVisibility(View.INVISIBLE);
         button.setOnClickListener(

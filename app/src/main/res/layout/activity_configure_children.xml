@@ -8,7 +8,7 @@
     tools:context=".UI.ConfigureChildren">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/select_children"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -20,10 +20,10 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configureToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/configure_toolbar" />
 
     <ListView
-        android:id="@+id/childListView"
+        android:id="@+id/child_list_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -35,10 +35,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/select_children" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/floating_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -46,12 +46,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/childListView"
+        app:layout_constraintTop_toBottomOf="@+id/child_list_view"
         app:layout_constraintVertical_bias="0.6"
         app:srcCompat="@drawable/ic_add_black_24dp" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/configureToolbar"
+        android:id="@+id/configure_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"

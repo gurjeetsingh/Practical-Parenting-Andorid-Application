@@ -32,7 +32,7 @@ public class EditTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
-        Toolbar toolbar = findViewById(R.id.EditTaskToolbar);
+        Toolbar toolbar = findViewById(R.id.edit_task_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();

@@ -23,13 +23,13 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.HelpToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.help_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        TextView getApp =(TextView) findViewById(R.id.projectid);
+        TextView getApp =(TextView) findViewById(R.id.project_id);
         getApp.setMovementMethod(LinkMovementMethod.getInstance());
         setHyperlink();
 
@@ -37,13 +37,13 @@ public class HelpActivity extends AppCompatActivity {
     }
 
     private void setHyperlink() {
-        TextView getApp =(TextView) findViewById(R.id.projectid);
+        TextView getApp =(TextView) findViewById(R.id.project_id);
         getApp.setMovementMethod(LinkMovementMethod.getInstance());
 
-        TextView coin =(TextView) findViewById(R.id.coinimagecopyright);
+        TextView coin =(TextView) findViewById(R.id.coin_image_copyright);
         coin.setMovementMethod(LinkMovementMethod.getInstance());
 
-        TextView coinSound =(TextView) findViewById(R.id.coinsound);
+        TextView coinSound =(TextView) findViewById(R.id.coin_sound);
         coinSound.setMovementMethod(LinkMovementMethod.getInstance());
 
     }

@@ -8,7 +8,7 @@
     tools:context=".UI.ChooseSide">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/select_a_side"
         android:layout_width="246dp"
         android:layout_height="62dp"
         android:layout_marginStart="16dp"

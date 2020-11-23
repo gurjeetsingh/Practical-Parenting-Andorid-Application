@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ChangeTurnToolbar" />
 
     <TextView
-        android:id="@+id/TurnName"
+        android:id="@+id/turn_name"
         android:layout_width="150dp"
         android:layout_height="46dp"
         android:layout_marginTop="32dp"
@@ -62,10 +62,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TurnName" />
+        app:layout_constraintTop_toBottomOf="@+id/turn_name" />
 
     <Button
-        android:id="@+id/canelChangeTurn"
+        android:id="@+id/canel_change_turn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -88,6 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TurnName"
+        app:layout_constraintTop_toBottomOf="@+id/turn_name"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 </androidx.constraintlayout.widget.ConstraintLayout>

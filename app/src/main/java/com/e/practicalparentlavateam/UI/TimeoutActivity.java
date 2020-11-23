@@ -63,7 +63,7 @@ public class TimeoutActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        alarmOffButton = (Button) findViewById(R.id.alarmoff);
+        alarmOffButton = (Button) findViewById(R.id.alarm_off);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeout);
 
@@ -376,7 +376,7 @@ public class TimeoutActivity extends AppCompatActivity {
        */
     private void setupAlarmOffButton() {
 
-        alarmOffButton = (Button) findViewById(R.id.alarmoff);
+        alarmOffButton = (Button) findViewById(R.id.alarm_off);
         alarmOffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
