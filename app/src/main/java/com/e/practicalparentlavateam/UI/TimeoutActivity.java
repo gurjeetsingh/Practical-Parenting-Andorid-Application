@@ -240,33 +240,26 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 1) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceintent);
-                    timeLeftInMilliSeconds = 60000;
-                    selectedTime = 60000;
+                    timeLeftInMilliSeconds = 120000;
+                    selectedTime = 120000;
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
 
                 }
                 if (position == 2) {
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceIntent);
-                    timeLeftInMilliSeconds = 120000;
-                    selectedTime = 120000;
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
-                }
-                if (position == 3) {
-                    Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
-                    stopService(serviceIntent);
                     timeLeftInMilliSeconds = 180000;
                     selectedTime = 180000;
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
-                if (position == 4) {
+                if (position == 3) {
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceIntent);
                     timeLeftInMilliSeconds = 300000;
                     selectedTime = 300000;
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
-                if (position == 5) {
+                if (position == 4) {
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceIntent);
                     timeLeftInMilliSeconds = 600000;
