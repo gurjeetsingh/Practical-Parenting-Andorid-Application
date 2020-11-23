@@ -144,7 +144,8 @@ public class ChildDetails extends AppCompatActivity {
                             return;
                         }
 
-                        //https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android
+                        //https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps
+                        // -images-from-internal-memory-in-android
                         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
                         Bitmap bitmapImage = drawable.getBitmap();
                         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());

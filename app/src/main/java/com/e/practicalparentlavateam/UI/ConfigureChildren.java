@@ -99,7 +99,8 @@ public class ConfigureChildren extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent){
             View itemView = convertView;
             if(itemView == null){
-                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
+                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list,
+                        parent, false);
             }
 
             String currentChild = children.getChildren().get(position).getName();

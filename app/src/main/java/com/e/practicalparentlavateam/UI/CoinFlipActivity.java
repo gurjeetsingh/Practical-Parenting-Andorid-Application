@@ -152,7 +152,8 @@ public class CoinFlipActivity extends AppCompatActivity {
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
                         if(num == 1){
-                            //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
+                            //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---
+                            // robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
                             coinImage.setImageResource(R.drawable.coin_front);
                             result.setText(R.string.head);
                             result.setVisibility(View.VISIBLE);
@@ -214,7 +215,8 @@ public class CoinFlipActivity extends AppCompatActivity {
                 historyManager = new HistoryManager();
                 HistoryManager.setInstance(new HistoryManager());
                 saveHistory(historyManager);
-                Toast.makeText(CoinFlipActivity.this, R.string.hint_for_delete_history,Toast.LENGTH_SHORT).show();
+                Toast.makeText(CoinFlipActivity.this,
+                        R.string.hint_for_delete_history,Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -245,7 +247,8 @@ public class CoinFlipActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //clear the old stack
-        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        //Resource used to understand concept:
+        // https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
         Intent mainIntent=MainMenu.makeIntent(CoinFlipActivity.this);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainIntent);
