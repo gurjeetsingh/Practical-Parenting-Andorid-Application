@@ -127,7 +127,8 @@ public class EditChild extends AppCompatActivity {
 
             //If the resultcode is result_OK, and we send in the request code select from gallery
             //which was predetermined, then we understand that the data send is an image from the gallery.
-            else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
+            else if (requestCode == SELECT_FROM_GALLERY
+                    && resultCode == RESULT_OK && data != null) {
                 //Now, we create an inputstream from the URI data we obtained. Then we decade it, and set on image.
                 //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
                 try {

@@ -58,6 +58,7 @@ Code formatting
 2.	Format code for readability and keep at an appropriate length.
 
     Example:
+    If the code is too long:
     a)	Bad:
         if (children.getIndex() != 10 && children.getIndex() != 15 && children.getIndex() != 20 && children.getIndex() > 3) {
             ……

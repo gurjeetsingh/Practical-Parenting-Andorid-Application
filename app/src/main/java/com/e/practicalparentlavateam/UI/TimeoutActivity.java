@@ -224,7 +224,8 @@ public class TimeoutActivity extends AppCompatActivity {
     private void createTimeDurationSpinner() {
         Spinner timeFieldSpinner = (Spinner) findViewById(R.id.time_spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePiece);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, timePiece);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timeFieldSpinner.setAdapter(adapter);
         timeFieldSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
