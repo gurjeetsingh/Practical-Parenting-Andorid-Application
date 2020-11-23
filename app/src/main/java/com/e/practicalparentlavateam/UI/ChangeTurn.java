@@ -87,7 +87,8 @@ public class ChangeTurn extends AppCompatActivity {
             return;
         ImageView image = findViewById(R.id.task_image);
         try {
-            File file = new File(children.getPath(), taskManager.getTasks(position).getName() + ".jpg");
+            File file = new File(children.getPath(),
+                    taskManager.getTasks(position).getName() + ".jpg");
             Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
             image.setImageBitmap(bitmap);
         }
@@ -112,7 +113,8 @@ public class ChangeTurn extends AppCompatActivity {
                     int index = 0;
                     int num = 0;
                     while (index < childrenList.size()) {
-                        if (childrenList.get(index).getName().equals(taskManager.getTasks(position).getName())) {
+                        if (childrenList.get(index).getName()
+                                .equals(taskManager.getTasks(position).getName())) {
                             num = (index + 1) % childrenList.size();
                             break;
                         }

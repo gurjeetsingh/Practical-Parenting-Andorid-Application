@@ -38,7 +38,8 @@ public class FlippingHistory extends AppCompatActivity {
     }
 
     private class MyListAdapter extends ArrayAdapter<HistoryItem>{
-        public MyListAdapter() {super(FlippingHistory.this, R.layout.history_list, historyManager.getList());}
+        public MyListAdapter() {super(FlippingHistory.this,
+                R.layout.history_list, historyManager.getList());}
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {

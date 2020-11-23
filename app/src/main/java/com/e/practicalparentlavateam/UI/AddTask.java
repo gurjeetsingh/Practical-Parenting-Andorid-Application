@@ -66,7 +66,8 @@ public class AddTask extends AppCompatActivity {
                         String childName;
                         String name = taskName.getText().toString();
                         if(name.equals("")){
-                            Toast.makeText(AddTask.this,R.string.hint_for_name,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddTask.this,R.string.hint_for_name,Toast.LENGTH_SHORT)
+                                    .show();
                             return;
                         }
                         SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);

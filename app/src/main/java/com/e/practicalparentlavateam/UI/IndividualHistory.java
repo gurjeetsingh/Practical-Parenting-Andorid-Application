@@ -54,7 +54,8 @@ public class IndividualHistory extends AppCompatActivity {
     }
 
     private class MyListAdapter extends ArrayAdapter<HistoryItem> {
-        public MyListAdapter() {super(IndividualHistory.this, R.layout.history_list, historyManager.getList());}
+        public MyListAdapter() {super(IndividualHistory.this,
+                R.layout.history_list, historyManager.getList());}
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {

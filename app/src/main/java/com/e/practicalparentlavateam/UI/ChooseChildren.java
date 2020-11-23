@@ -102,13 +102,15 @@ public class ChooseChildren extends AppCompatActivity {
 
     private class MyListAdapter extends ArrayAdapter<Children> {
         public MyListAdapter(){
-            super(ChooseChildren.this, R.layout.children_view_for_list, currentChildrenList.getChildren());
+            super(ChooseChildren.this, R.layout.children_view_for_list,
+                    currentChildrenList.getChildren());
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
             View itemView = convertView;
             if(itemView == null){
-                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
+                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent,
+                        false);
             }
 
             String currentChild = currentChildrenList.getChildren().get(position).getName();

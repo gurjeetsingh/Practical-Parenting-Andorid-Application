@@ -142,8 +142,10 @@ public class CoinFlipActivity extends AppCompatActivity {
                 //This is the animation part
                 MediaPlayer sound = MediaPlayer.create(CoinFlipActivity.this, R.raw.coin);
                 sound.start();
-                final ObjectAnimator front = ObjectAnimator.ofFloat(coinImage, "scaleX", 1f, 0f);
-                final ObjectAnimator back = ObjectAnimator.ofFloat(coinImage, "scaleX", 0f, 1f);
+                final ObjectAnimator front = ObjectAnimator.ofFloat(coinImage, "scaleX",
+                        1f, 0f);
+                final ObjectAnimator back = ObjectAnimator.ofFloat(coinImage, "scaleX",
+                        0f, 1f);
                 front.setInterpolator(new DecelerateInterpolator());
                 back.setInterpolator(new AccelerateDecelerateInterpolator());
                 final int num = random.nextInt(2);
@@ -152,7 +154,8 @@ public class CoinFlipActivity extends AppCompatActivity {
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
                         if(num == 1){
-                            //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
+                            //https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---
+                            // robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
                             coinImage.setImageResource(R.drawable.coin_front);
                             result.setText(R.string.head);
                             result.setVisibility(View.VISIBLE);
@@ -185,7 +188,8 @@ public class CoinFlipActivity extends AppCompatActivity {
                 if(c == num) {
                     image = win;
                     Date currentTime = new Date();
-                    history_manager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
+                    history_manager.add(new HistoryItem(currentTime.toString(), name,
+                            choice, image, coinID));
                     HistoryManager.setInstance(history_manager);
                     if(!name.equals("nobody")) {
                         saveName(name);
@@ -195,7 +199,8 @@ public class CoinFlipActivity extends AppCompatActivity {
                 else {
                     image = lose;
                     Date currentTime = new Date();
-                    history_manager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
+                    history_manager.add(new HistoryItem(currentTime.toString(),name,
+                            choice, image, coinID));
                     HistoryManager.setInstance(history_manager);
                     if(!name.equals("nobody")) {
                         saveName(name);
@@ -214,7 +219,8 @@ public class CoinFlipActivity extends AppCompatActivity {
                 history_manager = new HistoryManager();
                 HistoryManager.setInstance(new HistoryManager());
                 saveHistory(history_manager);
-                Toast.makeText(CoinFlipActivity.this, R.string.hint_for_delete_history,Toast.LENGTH_SHORT).show();
+                Toast.makeText(CoinFlipActivity.this,
+                        R.string.hint_for_delete_history,Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -245,7 +251,8 @@ public class CoinFlipActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //clear the old stack
-        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        //Resource used to understand concept:
+        // https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
         Intent mainintent=MainMenu.makeIntent(CoinFlipActivity.this);
         mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainintent);

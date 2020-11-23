@@ -147,7 +147,8 @@ public class EditChild extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogThemeEditChild);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context,
+                                R.style.MyDialogThemeEditChild);
                         builder.setTitle(R.string.do_you_want_to_delete_child);
                                 builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
@@ -203,7 +204,8 @@ public class EditChild extends AppCompatActivity {
                         // Extract data from screen
                         String name = editName2.getText().toString();
                         if(name.equals("")){
-                            Toast.makeText(EditChild.this,R.string.hint_for_name,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditChild.this,R.string.hint_for_name,Toast.LENGTH_SHORT)
+                                    .show();
                             return;
                         }
 
@@ -257,7 +259,8 @@ public class EditChild extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //clear the old stack
-        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        //Resource used to understand concept:
+        // https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
         Intent mainIntent = ConfigureChildren.makeIntent(EditChild.this);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainIntent);

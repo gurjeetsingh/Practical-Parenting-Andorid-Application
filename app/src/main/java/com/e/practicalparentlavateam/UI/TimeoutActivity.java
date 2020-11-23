@@ -55,7 +55,8 @@ public class TimeoutActivity extends AppCompatActivity {
     private long timeLeftInMilliseconds;
     private long selectedTime;
     Context context = this;
-    String[] timePiece = new String[]{"Select Duration", "Set Time: 1 Minute", "Set Time: 2 Minutes", "Set Time: 3 Minutes", "Set Time: 5 Minutes", "Set Time: 10 Minutes"};
+    String[] timePiece = new String[]{"Select Duration", "Set Time: 1 Minute", "Set Time: 2 Minutes",
+            "Set Time: 3 Minutes", "Set Time: 5 Minutes", "Set Time: 10 Minutes"};
 
 
     private TextView timerValue;
@@ -177,7 +178,8 @@ public class TimeoutActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, TimeoutActivity.class);
         intent.putExtra("StopAlarm",true);
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification AlarmNotify;
         AlarmNotify = new Notification.Builder(this)
@@ -221,7 +223,8 @@ public class TimeoutActivity extends AppCompatActivity {
     private void createTimeDurationSpinner() {
         Spinner timefieldspinner = (Spinner) findViewById(R.id.time_spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePiece);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, timePiece);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timefieldspinner.setAdapter(adapter);
         timefieldspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
