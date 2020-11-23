@@ -1,5 +1,5 @@
 Code Style Guide
-
+(Part of the content consulted by the java style guide instructor provide)
 
 Naming:
 

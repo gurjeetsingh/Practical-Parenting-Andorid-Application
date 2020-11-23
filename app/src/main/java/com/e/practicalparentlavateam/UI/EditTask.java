@@ -1,3 +1,5 @@
+/*This is the activity to edit the task*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.ActionBar;
@@ -15,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.Model.TaskManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -31,11 +32,11 @@ public class EditTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
-        Toolbar toolbar = findViewById(R.id.EditTaskToolbar);
+        Toolbar toolbar = findViewById(R.id.edit_task_toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getPosition();
         setText();
@@ -56,15 +57,16 @@ public class EditTask extends AppCompatActivity {
 
     private void setUpButtonOk() {
         enterEditTask = findViewById(R.id.EnterEditTastName);
-        Button btn = findViewById(R.id.EditTaskOk);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.EditTaskOk);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // Extract data from screen
                         String name = enterEditTask.getText().toString();
                         if(name.equals("")){
-                            Toast.makeText(EditTask.this, R.string.hint_for_name,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditTask.this, R.string.hint_for_name,Toast.LENGTH_SHORT)
+                                    .show();
                             return;
                         }
 
@@ -80,12 +82,13 @@ public class EditTask extends AppCompatActivity {
     }
 
     private void setUpButtonDelete() {
-        Button btn = findViewById(R.id.DeleteEditTask);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.DeleteEditTask);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogThemeEditTask);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context,
+                                R.style.MyDialogThemeEditTask);
                         builder.setTitle(R.string.delete_comfirm);
                         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
@@ -103,8 +106,8 @@ public class EditTask extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-                        AlertDialog ad = builder.create();
-                        ad.show();
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
 
                     }
                 }

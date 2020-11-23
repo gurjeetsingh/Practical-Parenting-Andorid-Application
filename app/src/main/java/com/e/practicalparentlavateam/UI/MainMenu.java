@@ -12,14 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.e.practicalparentlavateam.Model.Children;
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -28,30 +26,30 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        configureChildren_button();
-        flipCoin_button();
-        timeoutTimer_button();
-        whoseTurn_button();
-        helpscreenbutton();
+        configureChildrenButton();
+        flipCoinButton();
+        timeoutTimerButton();
+        whoseTurnButton();
+        helpScreenButton();
     }
 
-    private void configureChildren_button() {
+    private void configureChildrenButton() {
         //This will be for our configuring the children activity.
-        Button config_btn=(Button)findViewById(R.id.configchild);
-        config_btn.setOnClickListener(new View.OnClickListener() {
+        Button configButton=(Button)findViewById(R.id.configure_child);
+        configButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Following activity returns the help menu's intent
-                Intent config_intent=ConfigureChildren.makeIntent(MainMenu.this);
-                startActivity(config_intent);
+                Intent configIntent=ConfigureChildren.makeIntent(MainMenu.this);
+                startActivity(configIntent);
             }
         });
     }
 
-    private void flipCoin_button() {
+    private void flipCoinButton() {
         //This will be for flipping the coin activity
-        Button flip_btn=(Button)findViewById(R.id.coinflip);
-        flip_btn.setOnClickListener(new View.OnClickListener() {
+        Button flipButton = (Button)findViewById(R.id.coin_flip);
+        flipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
@@ -65,53 +63,53 @@ public class MainMenu extends AppCompatActivity {
                 }
                 else {
                     //Following activity returns the help menu's intent
-                    Intent flip_intent = SelectChildren.makeIntent(MainMenu.this);
-                    startActivity(flip_intent);
+                    Intent flipIntent = SelectChildren.makeIntent(MainMenu.this);
+                    startActivity(flipIntent);
                 }
             }
         });
     }
 
-    private void timeoutTimer_button() {
+    private void timeoutTimerButton() {
         //This will be for the timeout timer activity
-        Button timeout_btn=(Button)findViewById(R.id.timeout);
-        timeout_btn.setOnClickListener(new View.OnClickListener() {
+        Button timeoutButton=(Button)findViewById(R.id.timeout);
+        timeoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent timeout_int=TimeoutActivity.makeIntent(MainMenu.this);
-                startActivity(timeout_int);
+                Intent timeoutIntent=TimeoutActivity.makeIntent(MainMenu.this);
+                startActivity(timeoutIntent);
             }
         });
     }
 
-    private void whoseTurn_button() {
+    private void whoseTurnButton() {
         //This will be for the whose turn activity
-        Button whose_turn_btn = findViewById(R.id.tasks);
-        whose_turn_btn.setOnClickListener(new View.OnClickListener() {
+        Button whoseTurnButton = findViewById(R.id.tasks);
+        whoseTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tasks_intent = WhoseTurn.makeIntent(MainMenu.this);
-                startActivity(tasks_intent);
+                Intent tasksIntent = WhoseTurn.makeIntent(MainMenu.this);
+                startActivity(tasksIntent);
             }
         });
     }
 
-    private void helpscreenbutton() {
+    private void helpScreenButton() {
         //This will be for the helpscreen activity
-        ImageButton helpbtn=findViewById(R.id.helpbtn);
-        helpbtn.setOnClickListener(new View.OnClickListener() {
+        ImageButton helpButton=findViewById(R.id.help_button);
+        helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent helpintent=HelpActivity.makeIntent(MainMenu.this);
-                startActivity(helpintent);
+                Intent helpIntent=HelpActivity.makeIntent(MainMenu.this);
+                startActivity(helpIntent);
             }
         });
     }
 
     //Returning Necessary Activity
     public static Intent makeIntent(Context context) {
-        Intent menuintent = new Intent(context, MainMenu.class);
-        return menuintent;
+        Intent menuIntent = new Intent(context, MainMenu.class);
+        return menuIntent;
     }
 
 }

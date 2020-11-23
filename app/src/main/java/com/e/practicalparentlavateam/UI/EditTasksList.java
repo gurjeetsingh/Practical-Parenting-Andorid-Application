@@ -1,3 +1,6 @@
+/*This is the activity to show the task to edit
+* and you can add task in this part*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.ActionBar;
@@ -28,11 +31,11 @@ public class EditTasksList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_tasks_list);
 
-        Toolbar toolbar = findViewById(R.id.EditTaskToolbar);
+        Toolbar toolbar = findViewById(R.id.edit_task_list_toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         setupFloatingActionButton();
         populateListView();
@@ -80,26 +83,27 @@ public class EditTasksList extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.edit_tasks_list, parent, false);
             }
 
-            String current_task = taskManager.getTasks(position).getTask();
+            String currentTask = taskManager.getTasks(position).getTask();
 
             TextView makeView = (TextView) itemView.findViewById(R.id.task_name2);
-            makeView.setText(current_task);
+            makeView.setText(currentTask);
 
             return itemView;
         }
     }
 
-    public static Intent makeLaunch(Context context) {
-        return new Intent(context, EditTasksList.class);
-    }
-
     @Override
     public void onBackPressed() {
         //clear the old stack
-        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
-        Intent mainintent=WhoseTurn.makeIntent(EditTasksList.this);
-        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(mainintent);
+        //Resource used to understand concept:
+        // https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        Intent mainIntent=WhoseTurn.makeIntent(EditTasksList.this);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainIntent);
         EditTasksList.this.finish();
+    }
+
+    public static Intent makeLaunch(Context context) {
+        return new Intent(context, EditTasksList.class);
     }
 }

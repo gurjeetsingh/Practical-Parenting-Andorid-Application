@@ -6,9 +6,4 @@
         android:icon="@drawable/ic_baseline_edit_24"
         app:showAsAction="ifRoom"
         android:title="@string/edit" />
-
-    <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/action_settings"
-        android:title="Do the Awesome stuff"
-        app:showAsAction="never"/>
 </menu>

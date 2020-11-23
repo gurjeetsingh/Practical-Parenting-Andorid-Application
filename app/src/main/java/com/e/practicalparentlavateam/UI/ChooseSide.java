@@ -36,6 +36,23 @@ public class ChooseSide extends AppCompatActivity {
         tailsButton();
     }
 
+    private void getChild() {
+        Intent intent = getIntent();
+        name = intent.getStringExtra(EXTRA_NAME);
+        ImageView imageView = (ImageView) findViewById(R.id.side_child_image);
+        if(name != null && !name.equals("nobody")){
+            try {
+                File file=new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
+                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                imageView.setImageBitmap(bitmap);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void tailsButton() {
         Button tails = (Button) findViewById(R.id.tails);
         tails.setOnClickListener(new View.OnClickListener() {
@@ -60,23 +77,6 @@ public class ChooseSide extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private void getChild() {
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
-        ImageView imageView = (ImageView) findViewById(R.id.side_child_image);
-        if(name != null && !name.equals("nobody")){
-            try {
-                File file=new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
-                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
-                imageView.setImageBitmap(bitmap);
-            }
-            catch (FileNotFoundException e)
-            {
-                e.printStackTrace();
-            }
-        }
     }
 
     public static Intent makeLaunch(Context context, String name){

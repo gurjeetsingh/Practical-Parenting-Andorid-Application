@@ -22,14 +22,13 @@ https://stackoverflow.com/questions/3293243/pass-data-from-activity-to-service-u
  */
 public class TimeService extends Service {
 
-    private Intent comintent;
-    private Intent mainintent;
+    private Intent comIntent;
     public static final String TIME_BROADCAST = "TimeService";
     private Handler handler = new Handler();
     private long userSelectedTime;
     private long finalTime;
     private int flag=0;
-    long timeLeftInMilliseconds;
+    long timeLeftInMilliSeconds;
 
 
 
@@ -60,7 +59,7 @@ https://developer.android.com/reference/android/os/Handler
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        comintent = new Intent(TIME_BROADCAST);
+        comIntent = new Intent(TIME_BROADCAST);
 
         long usertime = intent.getLongExtra("mills",0);
         if(flag<1) {
@@ -84,7 +83,7 @@ https://developer.android.com/reference/android/os/Handler
 
     private Runnable sendUpdatesToUI = new Runnable() {
         public void run() {
-            ServiceUIUpdate();
+            serviceUIUpdate();
             handler.postDelayed(this, 1000); // 1 seconds
         }
     };
@@ -109,17 +108,17 @@ https://developer.android.com/reference/android/os/Handler
   3rd Iteration: timeleftinmillseconds=6000-4002=1998
   and so on...
    */
-    private void ServiceUIUpdate() {
+    private void serviceUIUpdate() {
 
-        timeLeftInMilliseconds = finalTime - System.currentTimeMillis();
-        int timer = (int) timeLeftInMilliseconds;
+        timeLeftInMilliSeconds = finalTime - System.currentTimeMillis();
+        int timer = (int) timeLeftInMilliSeconds;
         if(timer<0)
         {
             startAlarm();
             stopSelf();
         }
-        comintent.putExtra("time", timer);
-        sendBroadcast(comintent);
+        comIntent.putExtra("time", timer);
+        sendBroadcast(comIntent);
 
     }
 

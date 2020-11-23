@@ -1,4 +1,5 @@
-/*This is the class to edit or delete the name of the child*/
+/*This is the class to edit or delete the name of the child
+* and edit the portrait of the chils*/
 
 package com.e.practicalparentlavateam.UI;
 
@@ -9,11 +10,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.e.practicalparentlavateam.Model.Children;
@@ -58,7 +57,7 @@ public class EditChild extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_child);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.edit_child_toolbar);
         setSupportActionBar(toolbar);
 
         children = ChildrenManager.getInstance();
@@ -83,13 +82,13 @@ public class EditChild extends AppCompatActivity {
         editName2.setText(children.get(childEditingIndex).getName());
         //sets the picture as the picture of the current child
         try {
-            File file=new File(children.getPath(), childEditing + ".jpg");
+            File file = new File(children.getPath(), childEditing + ".jpg");
             Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
             image.setImageBitmap(bitmap);
         }
-        catch (FileNotFoundException e)
+        catch (FileNotFoundException exception)
         {
-            e.printStackTrace();
+            exception.printStackTrace();
         }
     }
 
@@ -135,20 +134,21 @@ public class EditChild extends AppCompatActivity {
                     InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
                     Bitmap captureImage = BitmapFactory.decodeStream(inputStream);
                     image.setImageBitmap(captureImage);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                } catch (FileNotFoundException exception) {
+                    exception.printStackTrace();
                 }
             }
         }
     }
 
     private void setupButtonDelete() {
-        Button btn = findViewById(R.id.button_delete);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.button_delete);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogThemeEditChild);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context,
+                                R.style.MyDialogThemeEditChild);
                         builder.setTitle(R.string.do_you_want_to_delete_child);
                                 builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
@@ -175,20 +175,42 @@ public class EditChild extends AppCompatActivity {
         );
     }
 
+    /*
+    This button allows us to setup a button to access the gallery, while selecting a picture.
+     */
+    private void setupButtonGallery() {
+        Button galleryButton=findViewById(R.id.galler_button);
+        galleryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //This allows us to sent a particular type of intent i.e. pick from the gallery.
+                //This customizes the intent's data we are sending in.
+                //We also send in the particular request code, so that we can select from the gallery.
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_FROM_GALLERY);
+
+
+            }
+        });
+    }
+
     private void setupButtonOk() {
-        Button btn = findViewById(R.id.btnSaveEdit);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.button_save_edit);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // Extract data from screen
                         String name = editName2.getText().toString();
                         if(name.equals("")){
-                            Toast.makeText(EditChild.this,R.string.hint_for_name,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditChild.this,R.string.hint_for_name,Toast.LENGTH_SHORT)
+                                    .show();
                             return;
                         }
 
-                        //https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android
+                        //https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps
+                        // -images-from-internal-memory-in-android
                         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
                         Bitmap bitmapImage = drawable.getBitmap();
                         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
@@ -202,13 +224,13 @@ public class EditChild extends AppCompatActivity {
                             fileOutputStreams = new FileOutputStream(myPath);
                             // Use the compress method on the BitMap object to write image to the OutputStream
                             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStreams);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
                         } finally {
                             try {
                                 fileOutputStreams.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                            } catch (IOException exception) {
+                                exception.printStackTrace();
                             }
                         }
                         String path = directory.getAbsolutePath();
@@ -225,26 +247,6 @@ public class EditChild extends AppCompatActivity {
         );
     }
 
-    /*
-    This button allows us to setup a button to access the gallery, while selecting a picture.
-     */
-    private void setupButtonGallery() {
-        Button gallerbtn=findViewById(R.id.galler_button);
-        gallerbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //This allows us to sent a particular type of intent i.e. pick from the gallery.
-                //This customizes the intent's data we are sending in.
-                //We also send in the particular request code, so that we can select from the gallery.
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, SELECT_FROM_GALLERY);
-
-
-            }
-        });
-    }
-
     public void saveChildDetails(){
         SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -255,19 +257,20 @@ public class EditChild extends AppCompatActivity {
         editor.commit();     // This line is IMPORTANT !!!
     }
 
-    public static Intent makeEditIntent(Context c, int childIndex) {
-        Intent intent = new Intent(c, EditChild.class);
-        intent.putExtra(EXTRA_CHILD_INDEX, childIndex);
-        return intent;
-    }
-
     @Override
     public void onBackPressed() {
         //clear the old stack
-        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        //Resource used to understand concept:
+        // https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
         Intent mainIntent = ConfigureChildren.makeIntent(EditChild.this);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainIntent);
         EditChild.this.finish();
+    }
+
+    public static Intent makeEditIntent(Context context, int childIndex) {
+        Intent intent = new Intent(context, EditChild.class);
+        intent.putExtra(EXTRA_CHILD_INDEX, childIndex);
+        return intent;
     }
 }

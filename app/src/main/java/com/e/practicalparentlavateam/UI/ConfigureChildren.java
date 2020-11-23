@@ -39,7 +39,6 @@ public class ConfigureChildren extends AppCompatActivity {
     // Arbitrary numbers for startActivityForResult:
     private static final int ACTIVITY_RESULT_ADD = 101;
     private static final int ACTIVITY_RESULT_EDIT = 102;
-    private static final int ACTIVITY_RESULT_CALCULATE = 103;
 
     private ChildrenManager children;
     private ArrayAdapter<Children> adapter;
@@ -49,11 +48,11 @@ public class ConfigureChildren extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configure_children);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.configureToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.configure_toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         children = ChildrenManager.getInstance();
         getChild();
 
@@ -63,10 +62,32 @@ public class ConfigureChildren extends AppCompatActivity {
         registClickCallback();
     }
 
+    public void getChild(){
+        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString("childPrefs", null);
+        Type type = new TypeToken<ChildrenManager>() {}.getType();
+        ChildrenManager temp = gson.fromJson(json, type);
+        if(temp != null)
+            ChildrenManager.setInstance(temp);
+        children = ChildrenManager.getInstance();
+    }
+
+    private void setupFloatingActionButton() {
+        FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = ChildDetails.makeIntentForAdd(ConfigureChildren.this);
+                ConfigureChildren.this.startActivityForResult(intent, ACTIVITY_RESULT_ADD);
+            }
+        });
+    }
+
     private void populateListView() {
         children = ChildrenManager.getInstance();
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.childListView);
+        ListView list = (ListView) findViewById(R.id.child_list_view);
         list.setAdapter(adapter);
     }
 
@@ -78,7 +99,8 @@ public class ConfigureChildren extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent){
             View itemView = convertView;
             if(itemView == null){
-                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
+                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list,
+                        parent, false);
             }
 
             String currentChild = children.getChildren().get(position).getName();
@@ -87,7 +109,7 @@ public class ConfigureChildren extends AppCompatActivity {
 
             ImageView imageView = (ImageView)itemView.findViewById(R.id.portrait);
             try {
-                File file=new File(children.getPath(), currentChild + ".jpg");
+                File file = new File(children.getPath(), currentChild + ".jpg");
                 Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
                 imageView.setImageBitmap(bitmap);
             }
@@ -101,7 +123,7 @@ public class ConfigureChildren extends AppCompatActivity {
     }
 
     private void registClickCallback(){
-        ListView list = (ListView) findViewById(R.id.childListView);
+        ListView list = (ListView) findViewById(R.id.child_list_view);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
@@ -115,34 +137,6 @@ public class ConfigureChildren extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_configure, menu);
         return true;
-    }
-
-    //Returning Necessary Activity
-    public static Intent makeIntent(Context context) {
-        Intent configintent = new Intent(context,ConfigureChildren.class);
-        return configintent;
-    }
-
-    private void setupFloatingActionButton() {
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = ChildDetails.makeIntentForAdd(ConfigureChildren.this);
-                ConfigureChildren.this.startActivityForResult(i, ACTIVITY_RESULT_ADD);
-            }
-        });
-    }
-
-    public void getChild(){
-        SharedPreferences prefs = this.getSharedPreferences("childPrefs", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = prefs.getString("childPrefs", null);
-        Type type = new TypeToken<ChildrenManager>() {}.getType();
-        ChildrenManager temp = gson.fromJson(json, type);
-        if(temp != null)
-            ChildrenManager.setInstance(temp);
-        children = ChildrenManager.getInstance();
     }
 
     @Override
@@ -159,11 +153,18 @@ public class ConfigureChildren extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //clear the old stack
-        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        //Resource used to understand concept:
+        // https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
         Intent mainIntent = MainMenu.makeIntent(ConfigureChildren.this);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainIntent);
         ConfigureChildren.this.finish();
+    }
+
+    //Returning Necessary Activity
+    public static Intent makeIntent(Context context) {
+        Intent configIntent = new Intent(context,ConfigureChildren.class);
+        return configIntent;
     }
 
 }

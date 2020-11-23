@@ -96,19 +96,21 @@ public class ChooseChildren extends AppCompatActivity {
         }
 
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.listOfChildren);
+        ListView list = (ListView) findViewById(R.id.list_of_children);
         list.setAdapter(adapter);
     }
 
     private class MyListAdapter extends ArrayAdapter<Children> {
         public MyListAdapter(){
-            super(ChooseChildren.this, R.layout.children_view_for_list, currentChildrenList.getChildren());
+            super(ChooseChildren.this, R.layout.children_view_for_list,
+                    currentChildrenList.getChildren());
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
             View itemView = convertView;
             if(itemView == null){
-                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
+                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent,
+                        false);
             }
 
             String currentChild = currentChildrenList.getChildren().get(position).getName();
@@ -122,8 +124,8 @@ public class ChooseChildren extends AppCompatActivity {
             else {
                 try {
                     File f = new File(children.getPath(), currentChild + ".jpg");
-                    Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                    imageView.setImageBitmap(b);
+                    Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+                    imageView.setImageBitmap(bitmap);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -135,7 +137,7 @@ public class ChooseChildren extends AppCompatActivity {
 
     /*Click to choose children*/
     private void registClickCallback(){
-        ListView list = (ListView) findViewById(R.id.listOfChildren);
+        ListView list = (ListView) findViewById(R.id.list_of_children);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
