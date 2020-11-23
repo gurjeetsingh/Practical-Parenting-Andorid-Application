@@ -236,6 +236,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 0) {
                     timeLeftInMilliSeconds = 60000;
                     selectedTime = 60000;
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 1) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
