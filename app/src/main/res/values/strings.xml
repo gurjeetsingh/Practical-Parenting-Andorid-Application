@@ -86,7 +86,7 @@
     <string name="title_activity_Flip_coin">Flip Coin</string>
     <string name="title_activity_configure_children">Configure your Children</string>
     <string name="title_activity_timeout_timer">Timeout Timer</string>
-    <string name="title_activity_edit_child">EditChild</string>
+    <string name="title_activity_edit_child">Edit Child</string>
     <string name="title_select_children">Select Children</string>
     <string name="title_whose_turn">Whose Turn To Do Task</string>
     <string name="title_edit_tasks_list">Edit Tasks List</string>
@@ -107,6 +107,12 @@
     <string name="no_child">No Child</string>
     <string name="time_up">TIME\'S UP!</string>
     <string name="hint_for_turn_off">Please Click Box To Turn Off Alarm.</string>
+    <string name="select_duration">Select Duration</string>
+    <string name="one_minute">Set Time: 1 Minute</string>
+    <string name="two_minites">Set Time: 2 Minutes</string>
+    <string name="three_minites">Set Time: 3 Minutes</string>
+    <string name="five_minites">Set Time: 5 Minutes</string>
+    <string name="ten_minites">Set Time: 10 Minutes</string>
 
 
 </resources>

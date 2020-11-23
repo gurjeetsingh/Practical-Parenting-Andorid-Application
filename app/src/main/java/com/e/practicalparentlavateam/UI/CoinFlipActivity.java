@@ -54,7 +54,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_flip);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.flipCoinToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.flip_coin_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -72,7 +72,7 @@ public class CoinFlipActivity extends AppCompatActivity {
     private void getChild() {
         Intent intent = getIntent();
         name = intent.getStringExtra(EXTRA_NAME);
-        TextView text = (TextView) findViewById(R.id.ChildName);
+        TextView text = (TextView) findViewById(R.id.the_child_name);
         ImageView imageView = (ImageView) findViewById(R.id.child_coin_image);
         if(name != null){
             text.setText(name);
@@ -113,7 +113,7 @@ public class CoinFlipActivity extends AppCompatActivity {
     }
 
     private void individualHistoryButton() {
-        Button individualHistory = findViewById(R.id.childHistory);
+        Button individualHistory = findViewById(R.id.child_history);
         if(name == null)
             individualHistory.setVisibility(View.INVISIBLE);
         else {

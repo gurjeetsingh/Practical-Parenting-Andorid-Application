@@ -35,7 +35,7 @@ public class MainMenu extends AppCompatActivity {
 
     private void configureChildrenButton() {
         //This will be for our configuring the children activity.
-        Button configButton=(Button)findViewById(R.id.configure_child));
+        Button configButton=(Button)findViewById(R.id.configure_child);
         configButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

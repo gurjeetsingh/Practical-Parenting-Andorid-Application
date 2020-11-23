@@ -1,5 +1,7 @@
 /*This activity is to add the name of the child
 and add the portrait for the child*/
+//learn how to take photo: https://www.youtube.com/watch?v=RaOyw84625w
+//learn how to save image and use: https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
 
 package com.e.practicalparentlavateam.UI;
 
@@ -54,7 +56,7 @@ public class ChildDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child_details3);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.add_child_toolbar);
         setSupportActionBar(toolbar);
 
         children = ChildrenManager.getInstance();

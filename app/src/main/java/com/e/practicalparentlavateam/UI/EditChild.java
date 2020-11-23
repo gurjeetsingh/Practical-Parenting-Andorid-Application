@@ -57,7 +57,7 @@ public class EditChild extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_child);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.edit_child_toolbar);
         setSupportActionBar(toolbar);
 
         children = ChildrenManager.getInstance();
