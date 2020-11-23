@@ -97,7 +97,7 @@
         android:id="@+id/members"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="32dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -113,7 +113,6 @@
         android:id="@+id/project_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
@@ -124,14 +123,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coin_sound" />
+        app:layout_constraintTop_toBottomOf="@+id/lose_image_copyright"
+        app:layout_constraintVertical_bias="0.974" />
 
     <TextView
         android:id="@+id/UI_art"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -186,5 +187,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coin_image_copyright" />
+
+    <TextView
+        android:id="@+id/win_image_copyright"
+        android:layout_width="299dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="16dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/winimage"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coin_sound" />
+
+    <TextView
+        android:id="@+id/lose_image_copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/loseimage"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/win_image_copyright" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

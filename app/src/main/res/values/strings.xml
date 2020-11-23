@@ -47,6 +47,10 @@
 <a href="https://www.mint.ca/store/coins/10-oz.-pure-silver-gold-plated-coin---robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023">www.mint.ca</a></string>
     <string name="coinsound">Coin Sound All Rights Reserved :
 <a href="https://www.ear0.com/sound/show/soundid-10760">www.ear0.com</a></string>
+    <string name="winimage">Win Image All Rights Reserved :
+<a href="https://www.stickpng.com/img/icons-logos-emojis/check-signs/green-check-in-green-circle">Here</a></string>
+    <string name="loseimage">Lose Image All Rights Reserved :
+<a href="https://pl.wikipedia.org/wiki/Plik:No-Symbol.svg">Here</a></string>
 
     <string name="none">No Selection</string>
     <string name="textview">TextView</string>

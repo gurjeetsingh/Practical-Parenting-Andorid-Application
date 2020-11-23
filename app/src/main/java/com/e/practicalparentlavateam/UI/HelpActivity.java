@@ -46,6 +46,12 @@ public class HelpActivity extends AppCompatActivity {
         TextView coinSound =(TextView) findViewById(R.id.coin_sound);
         coinSound.setMovementMethod(LinkMovementMethod.getInstance());
 
+        TextView winImage =(TextView) findViewById(R.id.win_image_copyright);
+        winImage.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView loseImage =(TextView) findViewById(R.id.lose_image_copyright);
+        loseImage.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     //Returning Necessary Activity
