@@ -37,8 +37,8 @@ public class ChooseSide extends AppCompatActivity {
     }
 
     private void getChild() {
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
+        Intent intent = getIntent();
+        name = intent.getStringExtra(EXTRA_NAME);
         ImageView imageView = (ImageView) findViewById(R.id.side_child_image);
         if(name != null && !name.equals("nobody")){
             try {

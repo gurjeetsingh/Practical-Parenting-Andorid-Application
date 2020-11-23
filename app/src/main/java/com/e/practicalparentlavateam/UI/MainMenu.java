@@ -35,8 +35,8 @@ public class MainMenu extends AppCompatActivity {
 
     private void configureChildrenButton() {
         //This will be for our configuring the children activity.
-        Button config_btn=(Button)findViewById(R.id.configure_child);
-        config_btn.setOnClickListener(new View.OnClickListener() {
+        Button configButton=(Button)findViewById(R.id.configure_child);
+        configButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Following activity returns the help menu's intent
@@ -52,9 +52,9 @@ public class MainMenu extends AppCompatActivity {
         flipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = getSharedPreferences("childPrefs", MODE_PRIVATE);
+                SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
                 Gson gson = new Gson();
-                String json = preferences.getString("childPrefs", null);
+                String json = prefs.getString("childPrefs", null);
                 Type type = new TypeToken<ChildrenManager>() {}.getType();
                 ChildrenManager childList = gson.fromJson(json, type);
                 if(childList==null || childList.getChildren().size() == 0){
@@ -76,8 +76,8 @@ public class MainMenu extends AppCompatActivity {
         timeoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent timeout_int=TimeoutActivity.makeIntent(MainMenu.this);
-                startActivity(timeout_int);
+                Intent timeoutIntent=TimeoutActivity.makeIntent(MainMenu.this);
+                startActivity(timeoutIntent);
             }
         });
     }
@@ -88,8 +88,8 @@ public class MainMenu extends AppCompatActivity {
         whoseTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tasks_intent = WhoseTurn.makeIntent(MainMenu.this);
-                startActivity(tasks_intent);
+                Intent tasksIntent = WhoseTurn.makeIntent(MainMenu.this);
+                startActivity(tasksIntent);
             }
         });
     }
@@ -100,8 +100,8 @@ public class MainMenu extends AppCompatActivity {
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent helpintent=HelpActivity.makeIntent(MainMenu.this);
-                startActivity(helpintent);
+                Intent helpIntent=HelpActivity.makeIntent(MainMenu.this);
+                startActivity(helpIntent);
             }
         });
     }

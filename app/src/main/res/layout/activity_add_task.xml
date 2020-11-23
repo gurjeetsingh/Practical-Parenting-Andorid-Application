@@ -37,7 +37,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddTaskToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/add_task_toolbar" />
 
     <Button
         android:id="@+id/add_task_ok"
@@ -81,7 +81,7 @@
         app:layout_constraintVertical_bias="0.601"/>
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/AddTaskToolbar"
+        android:id="@+id/add_task_toolbar"
         android:layout_width="416dp"
         android:layout_height="49dp"
         android:background="?attr/colorPrimary"

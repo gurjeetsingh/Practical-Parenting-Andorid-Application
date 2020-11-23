@@ -124,8 +124,8 @@ public class ChooseChildren extends AppCompatActivity {
             else {
                 try {
                     File f = new File(children.getPath(), currentChild + ".jpg");
-                    Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                    imageView.setImageBitmap(b);
+                    Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+                    imageView.setImageBitmap(bitmap);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }

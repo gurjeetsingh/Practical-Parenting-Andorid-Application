@@ -45,8 +45,8 @@ public class SelectChildren extends AppCompatActivity {
     }
 
     private void getName() {
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
+        Intent intent = getIntent();
+        name = intent.getStringExtra(EXTRA_NAME);
         if(name != null){
             TextView text = (TextView) findViewById(R.id.name);
             text.setText(name);
@@ -68,19 +68,19 @@ public class SelectChildren extends AppCompatActivity {
             text.setText(R.string.first_child);
         }
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Save name",MODE_PRIVATE);
-        String LastTimeName = sharedPreferences.getString("name",null);
+        SharedPreferences preferences = getSharedPreferences("Save name",MODE_PRIVATE);
+        String lastTimeName = preferences.getString("name",null);
         TextView lastTimeChild = findViewById(R.id.last_time_child);
-        if(LastTimeName == null){
+        if(lastTimeName == null){
             lastTimeChild.setText("None");
         }
         else{
-            lastTimeChild.setText(LastTimeName);
+            lastTimeChild.setText(lastTimeName);
 
-            int i = 0;
-            while (i < childList.getChildren().size()) {
-                if (childList.get(i).getName().equals(LastTimeName)) {
-                    int num = (i + 1) % childList.getChildren().size();
+            int index = 0;
+            while (index < childList.getChildren().size()) {
+                if (childList.get(index).getName().equals(lastTimeName)) {
+                    int num = (index + 1) % childList.getChildren().size();
                     if (name == null) {
                         name = childList.get(num).getName();
                         System.out.println(name);
@@ -89,9 +89,9 @@ public class SelectChildren extends AppCompatActivity {
                     }
                     break;
                 }
-                i++;
+                index++;
             }
-            if (i == childList.getChildren().size()) {
+            if (index == childList.getChildren().size()) {
                 if (name == null) {
                     name = childList.get(0).getName();
                     System.out.println(name);

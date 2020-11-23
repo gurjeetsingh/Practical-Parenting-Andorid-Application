@@ -43,7 +43,7 @@ public class ChangeTurn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_turn);
 
-        Toolbar toolbar = findViewById(R.id.ChangeTurnToolbar);
+        Toolbar toolbar = findViewById(R.id.change_turn_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();

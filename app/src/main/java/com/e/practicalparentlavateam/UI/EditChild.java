@@ -57,7 +57,7 @@ public class EditChild extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_child);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.edit_child_toolbar);
         setSupportActionBar(toolbar);
 
         children = ChildrenManager.getInstance();
@@ -82,13 +82,13 @@ public class EditChild extends AppCompatActivity {
         editName2.setText(children.get(childEditingIndex).getName());
         //sets the picture as the picture of the current child
         try {
-            File file=new File(children.getPath(), childEditing + ".jpg");
+            File file = new File(children.getPath(), childEditing + ".jpg");
             Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
             image.setImageBitmap(bitmap);
         }
-        catch (FileNotFoundException e)
+        catch (FileNotFoundException exception)
         {
-            e.printStackTrace();
+            exception.printStackTrace();
         }
     }
 
@@ -134,16 +134,16 @@ public class EditChild extends AppCompatActivity {
                     InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
                     Bitmap captureImage = BitmapFactory.decodeStream(inputStream);
                     image.setImageBitmap(captureImage);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                } catch (FileNotFoundException exception) {
+                    exception.printStackTrace();
                 }
             }
         }
     }
 
     private void setupButtonDelete() {
-        Button btn = findViewById(R.id.button_delete);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.button_delete);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -179,8 +179,8 @@ public class EditChild extends AppCompatActivity {
     This button allows us to setup a button to access the gallery, while selecting a picture.
      */
     private void setupButtonGallery() {
-        Button gallerbtn=findViewById(R.id.galler_button);
-        gallerbtn.setOnClickListener(new View.OnClickListener() {
+        Button galleryButton=findViewById(R.id.galler_button);
+        galleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //This allows us to sent a particular type of intent i.e. pick from the gallery.
@@ -196,8 +196,8 @@ public class EditChild extends AppCompatActivity {
     }
 
     private void setupButtonOk() {
-        Button btn = findViewById(R.id.button_save_edit);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.button_save_edit);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -223,13 +223,13 @@ public class EditChild extends AppCompatActivity {
                             fileOutputStreams = new FileOutputStream(myPath);
                             // Use the compress method on the BitMap object to write image to the OutputStream
                             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStreams);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
                         } finally {
                             try {
                                 fileOutputStreams.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                            } catch (IOException exception) {
+                                exception.printStackTrace();
                             }
                         }
                         String path = directory.getAbsolutePath();
@@ -267,8 +267,8 @@ public class EditChild extends AppCompatActivity {
         EditChild.this.finish();
     }
 
-    public static Intent makeEditIntent(Context c, int childIndex) {
-        Intent intent = new Intent(c, EditChild.class);
+    public static Intent makeEditIntent(Context context, int childIndex) {
+        Intent intent = new Intent(context, EditChild.class);
         intent.putExtra(EXTRA_CHILD_INDEX, childIndex);
         return intent;
     }
