@@ -55,9 +55,9 @@ public class TimeoutActivity extends AppCompatActivity {
     private long timeLeftInMilliSeconds;
     private long selectedTime;
     Context context = this;
-    String[] timePiece = new String[]{getString(R.string.select_duration), getString(R.string.one_minute),
-            getString(R.string.two_minites), getString(R.string.three_minites), getString(R.string.five_minites),
-            getString(R.string.ten_minites)};
+    String[] timePiece = new String[]{"Select Duration", "Set Time: 1 Minute",
+            "Set Time: 2 Minutes", "Set Time: 3 Minutes", "Set Time: 5 Minutes",
+            "Set Time: 10 Minutes"};
 
 
     private TextView timerValue;

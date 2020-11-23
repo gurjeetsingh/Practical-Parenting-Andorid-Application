@@ -64,7 +64,6 @@ public class ChooseChildren extends AppCompatActivity {
         String LastTimeName = sharedPrefernces.getString("name",null);
         if(LastTimeName == null){
             currentChildrenList = children;
-            currentChildrenList.add(new Children(getString(R.string.nobody)));
         }
         else {
             int index = 0;
