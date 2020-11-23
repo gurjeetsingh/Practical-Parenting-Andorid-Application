@@ -26,16 +26,6 @@ public class SelectChildren extends AppCompatActivity {
     private String name = null;
     private ChildrenManager childList;
 
-    public static Intent makeLaunch(Context context, String name) {
-        Intent intent = new Intent(context, SelectChildren.class);
-        intent.putExtra(EXTRA_NAME, name);
-        return intent;
-    }
-
-    public static Intent makeIntent(Context context) {
-        return new Intent(context, SelectChildren.class);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +45,8 @@ public class SelectChildren extends AppCompatActivity {
     }
 
     private void getName() {
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
+        Intent intent = getIntent();
+        name = intent.getStringExtra(EXTRA_NAME);
         if(name != null){
             TextView text = (TextView) findViewById(R.id.name);
             text.setText(name);
@@ -78,31 +68,33 @@ public class SelectChildren extends AppCompatActivity {
             text.setText(R.string.first_child);
         }
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Save name",MODE_PRIVATE);
-        String LastTimeName = sharedPreferences.getString("name",null);
+        SharedPreferences preferences = getSharedPreferences("Save name",MODE_PRIVATE);
+        String lastTimeName = preferences.getString("name",null);
         TextView lastTimeChild = findViewById(R.id.last_time_child);
-        if(LastTimeName == null){
+        if(lastTimeName == null){
             lastTimeChild.setText("None");
         }
         else{
-            lastTimeChild.setText(LastTimeName);
+            lastTimeChild.setText(lastTimeName);
 
-            int i = 0;
-            while (i < childList.getChildren().size()) {
-                if (childList.get(i).getName().equals(LastTimeName)) {
-                    int num = (i + 1) % childList.getChildren().size();
+            int index = 0;
+            while (index < childList.getChildren().size()) {
+                if (childList.get(index).getName().equals(lastTimeName)) {
+                    int num = (index + 1) % childList.getChildren().size();
                     if (name == null) {
                         name = childList.get(num).getName();
+                        System.out.println(name);
                         TextView text = (TextView) findViewById(R.id.name);
                         text.setText(name);
                     }
                     break;
                 }
-                i++;
+                index++;
             }
-            if (i == childList.getChildren().size()) {
+            if (index == childList.getChildren().size()) {
                 if (name == null) {
                     name = childList.get(0).getName();
+                    System.out.println(name);
                     TextView text = (TextView) findViewById(R.id.name);
                     text.setText(name);
                 }
@@ -150,10 +142,21 @@ public class SelectChildren extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //clear the old stack
-        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        //Resource used to understand concept:
+        // https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
         Intent mainIntent = MainMenu.makeIntent(SelectChildren.this);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainIntent);
         SelectChildren.this.finish();
+    }
+
+    public static Intent makeLaunch(Context context, String name) {
+        Intent intent = new Intent(context, SelectChildren.class);
+        intent.putExtra(EXTRA_NAME, name);
+        return intent;
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, SelectChildren.class);
     }
 }

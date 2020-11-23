@@ -1,4 +1,7 @@
-/*This activity is to add the name of the child*/
+/*This activity is to add the name of the child
+and add the portrait for the child*/
+//learn how to take photo: https://www.youtube.com/watch?v=RaOyw84625w
+//learn how to save image and use: https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
 
 package com.e.practicalparentlavateam.UI;
 
@@ -8,11 +11,9 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.e.practicalparentlavateam.Model.Children;
@@ -41,10 +42,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ChildDetails extends AppCompatActivity {
-    private EditText etName;
+    private EditText editName;
     private ChildrenManager children;
     private ImageView image;
-    private Button takePhoto;
     private String path;
     private final static int SELECT_FROM_GALLERY = 007;
 
@@ -56,11 +56,11 @@ public class ChildDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child_details3);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.add_child_toolbar);
         setSupportActionBar(toolbar);
 
         children = ChildrenManager.getInstance();
-        etName = findViewById(R.id.edit_name);
+        editName = findViewById(R.id.edit_name);
 
         takePhotoForChild();
         setupButtonCancel();
@@ -83,7 +83,7 @@ public class ChildDetails extends AppCompatActivity {
         }
 
         image = findViewById(R.id.child_image);
-        takePhoto = findViewById(R.id.take_photo);
+        Button takePhoto = findViewById(R.id.take_photo);
 
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,23 +104,25 @@ public class ChildDetails extends AppCompatActivity {
             }
             //If the resultcode is result_OK, and we send in the request code select from gallery
             //which was predetermined, then we understand that the data send is an image from the gallery
-            else if (requestCode == SELECT_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
+            else if (requestCode == SELECT_FROM_GALLERY
+                    && resultCode == RESULT_OK
+                    && data != null) {
                 //Now, we create an inputstream from the URI data we obtained. Then we decade it, and set on image.
                 //https://stackoverflow.com/questions/6612263/converting-input-stream-into-bitmap
                 try {
                     InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
                     Bitmap captureImage = BitmapFactory.decodeStream(inputStream);
                     image.setImageBitmap(captureImage);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                } catch (FileNotFoundException exception) {
+                    exception.printStackTrace();
                 }
             }
         }
     }
 
     private void setupButtonCancel() {
-        Button btn = findViewById(R.id.button_cancel);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.button_cancel);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -131,39 +133,41 @@ public class ChildDetails extends AppCompatActivity {
     }
 
     private void setupButtonOk() {
-        Button btn = findViewById(R.id.button_save);
-        btn.setOnClickListener(
+        Button button = findViewById(R.id.button_save);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // Extract data from screen
-                        String name = etName.getText().toString();
+                        String name = editName.getText().toString();
                         if(name.equals("")){
-                            Toast.makeText(ChildDetails.this,R.string.hint_for_name,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChildDetails.this,R.string.hint_for_name,Toast.LENGTH_SHORT)
+                                    .show();
                             return;
                         }
 
-                        //https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android
+                        //https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps
+                        // -images-from-internal-memory-in-android
                         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
                         Bitmap bitmapImage = drawable.getBitmap();
                         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
                         // path to /data/data/yourapp/app_data/imageDir
                         File directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
                         // Create imageDir
-                        File myPath=new File(directory,etName.getText().toString() + ".jpg");
+                        File myPath=new File(directory, editName.getText().toString() + ".jpg");
 
                         FileOutputStream fileOutputStream = null;
                         try {
                             fileOutputStream = new FileOutputStream(myPath);
                             // Use the compress method on the BitMap object to write image to the OutputStream
                             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
                         } finally {
                             try {
                                 fileOutputStream.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                            } catch (IOException exception) {
+                                exception.printStackTrace();
                             }
                         }
                         path = directory.getAbsolutePath();
@@ -186,8 +190,8 @@ public class ChildDetails extends AppCompatActivity {
 This button allows us to setup a button to access the gallery, while selecting a picture.
  */
     private void setupButtonGallery() {
-        Button gallerbtn=findViewById(R.id.gallery_button);
-        gallerbtn.setOnClickListener(new View.OnClickListener() {
+        Button galleryButton=findViewById(R.id.gallery_button);
+        galleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //This allows us to sent a particular type of intent i.e. pick from the gallery.

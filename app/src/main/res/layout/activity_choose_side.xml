@@ -8,7 +8,7 @@
     tools:context=".UI.ChooseSide">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/select_a_side"
         android:layout_width="246dp"
         android:layout_height="62dp"
         android:layout_marginStart="16dp"
@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/flipCoinToolbar" />
+        app:layout_constraintTop_toTopOf="@+id/flip_coin_toolbar" />
 
     <Button
         android:id="@+id/heads"

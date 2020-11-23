@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class ChooseChildren extends AppCompatActivity {
         //setupChildrenView();
         populateListView();
         registClickCallback();
+        nobodyButton();
     }
 
     /*Show the children list to choose*/
@@ -83,7 +85,6 @@ public class ChooseChildren extends AppCompatActivity {
                     currentChildrenList.add(children.getChildren().get(index));
                     index = (index + 1) % children.getChildren().size();
                 }
-                currentChildrenList.add(new Children("nobody"));
             }
             else {
                 while (!children.getChildren().get(index).getName().equals(LastTimeName)) {
@@ -91,24 +92,25 @@ public class ChooseChildren extends AppCompatActivity {
                     index = (index + 1) % children.getChildren().size();
                 }
                 currentChildrenList.add(new Children(LastTimeName));
-                currentChildrenList.add(new Children("nobody"));
             }
         }
 
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.listOfChildren);
+        ListView list = (ListView) findViewById(R.id.list_of_children);
         list.setAdapter(adapter);
     }
 
     private class MyListAdapter extends ArrayAdapter<Children> {
         public MyListAdapter(){
-            super(ChooseChildren.this, R.layout.children_view_for_list, currentChildrenList.getChildren());
+            super(ChooseChildren.this, R.layout.children_view_for_list,
+                    currentChildrenList.getChildren());
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
             View itemView = convertView;
             if(itemView == null){
-                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent, false);
+                itemView = getLayoutInflater().inflate(R.layout.children_view_for_list, parent,
+                        false);
             }
 
             String currentChild = currentChildrenList.getChildren().get(position).getName();
@@ -122,8 +124,8 @@ public class ChooseChildren extends AppCompatActivity {
             else {
                 try {
                     File f = new File(children.getPath(), currentChild + ".jpg");
-                    Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                    imageView.setImageBitmap(b);
+                    Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+                    imageView.setImageBitmap(bitmap);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -135,7 +137,7 @@ public class ChooseChildren extends AppCompatActivity {
 
     /*Click to choose children*/
     private void registClickCallback(){
-        ListView list = (ListView) findViewById(R.id.listOfChildren);
+        ListView list = (ListView) findViewById(R.id.list_of_children);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
@@ -144,6 +146,18 @@ public class ChooseChildren extends AppCompatActivity {
                 text.setText(clickedName);*/
 
                 Intent intent = SelectChildren.makeLaunch(ChooseChildren.this, clickedName);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void nobodyButton() {
+        Button nobodyButton = findViewById(R.id.nobody_button);
+        nobodyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SelectChildren.makeLaunch(ChooseChildren.this, "nobody");
                 startActivity(intent);
                 finish();
             }

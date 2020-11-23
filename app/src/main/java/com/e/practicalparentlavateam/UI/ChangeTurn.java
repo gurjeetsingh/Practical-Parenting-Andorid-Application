@@ -1,3 +1,8 @@
+/*
+This is the activity to confirm the child have done the task
+and change the turn of the child to the task
+*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.ActionBar;
@@ -38,11 +43,11 @@ public class ChangeTurn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_turn);
 
-        Toolbar toolbar = findViewById(R.id.ChangeTurnToolbar);
+        Toolbar toolbar = findViewById(R.id.change_turn_toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getPosition();
         getChildrenData();
@@ -70,10 +75,10 @@ public class ChangeTurn extends AppCompatActivity {
 
     private void setText() {
         taskManager = TaskManager.getInstance();
-        TextView task_name = findViewById(R.id.task_name);
-        task_name.setText(taskManager.getTasks(position).getTask());
-        TextView child_name = findViewById(R.id.TurnName);
-        child_name.setText(taskManager.getTasks(position).getName());
+        TextView taskName = findViewById(R.id.task_name);
+        taskName.setText(taskManager.getTasks(position).getTask());
+        TextView childName = findViewById(R.id.turn_name);
+        childName.setText(taskManager.getTasks(position).getName());
     }
 
     private void setImage() {
@@ -82,13 +87,14 @@ public class ChangeTurn extends AppCompatActivity {
             return;
         ImageView image = findViewById(R.id.task_image);
         try {
-            File f = new File(children.getPath(), taskManager.getTasks(position).getName() + ".jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            image.setImageBitmap(b);
+            File file = new File(children.getPath(),
+                    taskManager.getTasks(position).getName() + ".jpg");
+            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+            image.setImageBitmap(bitmap);
         }
-        catch (FileNotFoundException e)
+        catch (FileNotFoundException exception)
         {
-            e.printStackTrace();
+            exception.printStackTrace();
         }
     }
 
@@ -99,24 +105,25 @@ public class ChangeTurn extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<Children> child_list = children.getChildren();
-                if(child_list.size() == 0){
+                List<Children> childrenList = children.getChildren();
+                if(childrenList.size() == 0){
                     taskManager.setName(position,"No Child");
                 }
                 else {
-                    int i = 0;
+                    int index = 0;
                     int num = 0;
-                    while (i < child_list.size()) {
-                        if (child_list.get(i).getName().equals(taskManager.getTasks(position).getName())) {
-                            num = (i + 1) % child_list.size();
+                    while (index < childrenList.size()) {
+                        if (childrenList.get(index).getName()
+                                .equals(taskManager.getTasks(position).getName())) {
+                            num = (index + 1) % childrenList.size();
                             break;
                         }
-                        i++;
+                        index++;
                     }
-                    if (i == child_list.size()) {
+                    if (index == childrenList.size()) {
                         num = 0;
                     }
-                    taskManager.setName(position, child_list.get(num).getName());
+                    taskManager.setName(position, childrenList.get(num).getName());
                 }
                 saveNewTask(taskManager);
                 Intent intent = WhoseTurn.makeIntent(ChangeTurn.this);
@@ -127,10 +134,10 @@ public class ChangeTurn extends AppCompatActivity {
     }
 
     private void setupButtonCancel() {
-        Button btn = findViewById(R.id.canelChangeTurn);
+        Button button = findViewById(R.id.canel_change_turn);
         if(taskManager.getTasks(position).getName().equals("No Child"))
-            btn.setVisibility(View.INVISIBLE);
-        btn.setOnClickListener(
+            button.setVisibility(View.INVISIBLE);
+        button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

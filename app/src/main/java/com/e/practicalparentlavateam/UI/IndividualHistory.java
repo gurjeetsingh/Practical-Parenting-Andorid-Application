@@ -34,6 +34,11 @@ public class IndividualHistory extends AppCompatActivity {
         populateList();
     }
 
+    private void getName(){
+        Intent intent = getIntent();
+        name = intent.getStringExtra(EXTRA_NAME);
+    }
+
     private void getIndividualHistory() {
         HistoryManager temp = HistoryManager.getInstance();
         for(int i = 0; i < temp.getList().size(); i++){
@@ -44,12 +49,13 @@ public class IndividualHistory extends AppCompatActivity {
 
     private void populateList() {
         adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.individualHistory);
+        ListView list = (ListView) findViewById(R.id.individual_history);
         list.setAdapter(adapter);
     }
 
     private class MyListAdapter extends ArrayAdapter<HistoryItem> {
-        public MyListAdapter() {super(IndividualHistory.this, R.layout.history_list, historyManager.getList());}
+        public MyListAdapter() {super(IndividualHistory.this,
+                R.layout.history_list, historyManager.getList());}
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -82,10 +88,5 @@ public class IndividualHistory extends AppCompatActivity {
         Intent intent = new Intent(context, IndividualHistory.class);
         intent.putExtra(EXTRA_NAME, name);
         return intent;
-    }
-
-    private void getName(){
-        Intent i = getIntent();
-        name = i.getStringExtra(EXTRA_NAME);
     }
 }

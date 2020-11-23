@@ -8,13 +8,13 @@
     tools:context=".UI.ChooseChildren">
 
     <ListView
-        android:id="@+id/listOfChildren"
+        android:id="@+id/list_of_children"
         android:layout_width="387dp"
         android:layout_height="556dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nobody_button" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/choose_child"
@@ -26,4 +26,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/nobody_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/rounded_corners_buttons"
+        android:fontFamily="@font/imprima"
+        android:text="@string/nobody"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_child" />
 </androidx.constraintlayout.widget.ConstraintLayout>

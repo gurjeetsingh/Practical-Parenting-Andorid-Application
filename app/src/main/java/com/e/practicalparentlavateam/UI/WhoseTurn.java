@@ -1,3 +1,5 @@
+/*This is the activity to show the tasks and the child name who should do next*/
+
 package com.e.practicalparentlavateam.UI;
 
 import androidx.annotation.NonNull;
@@ -39,12 +41,18 @@ public class WhoseTurn extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.whose_turn_toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getTasks();
         populateListView();
         registerClickCallback();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_whose_turn,menu);
+        return true;
     }
 
     private void getTasks() {
@@ -65,17 +73,6 @@ public class WhoseTurn extends AppCompatActivity {
         list.setAdapter(adapter);
     }
 
-    private void registerClickCallback() {
-        ListView list = (ListView) findViewById(R.id.task_list_view);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                Intent intent = ChangeTurn.makeChangeIntent(WhoseTurn.this, position);
-                startActivity(intent);
-            }
-        });
-    }
-
     private class MyListAdapter extends ArrayAdapter<Task> {
         public MyListAdapter() {
             super(WhoseTurn.this, R.layout.tasks_list, taskManager.getTasks());
@@ -88,41 +85,41 @@ public class WhoseTurn extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.tasks_list, parent, false);
             }
 
-            String current_task = taskManager.getTasks().get(position).getTask();
-            String current_name = taskManager.getTasks().get(position).getName();
+            String currentTask = taskManager.getTasks().get(position).getTask();
+            String currentName = taskManager.getTasks().get(position).getName();
 
             TextView taskView = (TextView) itemView.findViewById(R.id.task_name);
-            taskView.setText(current_task);
+            taskView.setText(currentTask);
 
             SharedPreferences prefs = getSharedPreferences("childPrefs", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = prefs.getString("childPrefs", null);
             Type type = new TypeToken<ChildrenManager>() {}.getType();
-            ChildrenManager child_list = gson.fromJson(json, type);
-            TextView nameView = (TextView) itemView.findViewById(R.id.NameOfChild);
-            if(child_list == null || child_list.getChildren().size() == 0){
+            ChildrenManager childList = gson.fromJson(json, type);
+            TextView nameView = (TextView) itemView.findViewById(R.id.name_of_child);
+            if(childList == null || childList.getChildren().size() == 0){
                 taskManager.setName(position,"No Child");
                 saveNewTask(taskManager);
                 nameView.setText(R.string.no_child);
             }
             else {
-                if (current_name.equals("No Child")) {
-                    taskManager.setName(position, child_list.get(0).getName());
+                if (currentName.equals("No Child")) {
+                    taskManager.setName(position, childList.get(0).getName());
                     saveNewTask(taskManager);
-                    nameView.setText(child_list.get(0).getName());
+                    nameView.setText(childList.get(0).getName());
                 } else {
                     boolean exist = false;
-                    for (int i = 0; i < child_list.getChildren().size(); i++) {
-                        if (child_list.getChildren().get(i).getName().equals(current_name))
+                    for (int i = 0; i < childList.getChildren().size(); i++) {
+                        if (childList.getChildren().get(i).getName().equals(currentName))
                             exist = true;
                     }
                     if(exist == false){
-                        taskManager.setName(position, child_list.get(0).getName());
+                        taskManager.setName(position, childList.get(0).getName());
                         saveNewTask(taskManager);
-                        nameView.setText(child_list.get(0).getName());
+                        nameView.setText(childList.get(0).getName());
                     }
                     else {
-                        nameView.setText(current_name);
+                        nameView.setText(currentName);
                     }
                 }
             }
@@ -141,10 +138,15 @@ public class WhoseTurn extends AppCompatActivity {
         editor.commit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_whose_turn,menu);
-        return true;
+    private void registerClickCallback() {
+        ListView list = (ListView) findViewById(R.id.task_list_view);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                Intent intent = ChangeTurn.makeChangeIntent(WhoseTurn.this, position);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
@@ -159,18 +161,18 @@ public class WhoseTurn extends AppCompatActivity {
         }
     }
 
-    public static Intent makeIntent(Context context) {
-        return new Intent(context, WhoseTurn.class);
-    }
-
     @Override
     public void onBackPressed() {
         //clear the old stack
-        //Resource used to understand concept: https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
-        Intent mainintent=MainMenu.makeIntent(WhoseTurn.this);
-        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(mainintent);
+        //Resource used to understand concept:
+        // https://stackoverflow.com/questions/5794506/android-clear-the-back-stack
+        Intent mainIntent = MainMenu.makeIntent(WhoseTurn.this);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainIntent);
         WhoseTurn.this.finish();
     }
 
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, WhoseTurn.class);
+    }
 }
