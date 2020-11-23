@@ -58,11 +58,12 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="205dp"
-        android:layout_height="91dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="245dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corners_buttons"
         android:clickable="true"
+        android:focusable="true"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/who_s_turn_it_is"
@@ -72,8 +73,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view5"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view5" />
 
     <TextView
         android:id="@+id/text_view5"

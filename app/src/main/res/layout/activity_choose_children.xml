@@ -9,12 +9,16 @@
 
     <ListView
         android:id="@+id/list_of_children"
-        android:layout_width="387dp"
-        android:layout_height="556dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="450dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nobody_button" />
+        app:layout_constraintTop_toBottomOf="@+id/choose_child"
+        app:layout_constraintVertical_bias="0.050000012" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/choose_child"
@@ -29,16 +33,21 @@
 
     <Button
         android:id="@+id/nobody_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="36dp"
+        android:layout_width="175dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:text="@string/nobody"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choose_child" />
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_of_children"
+        app:layout_constraintVertical_bias="0.25" />
 </androidx.constraintlayout.widget.ConstraintLayout>
