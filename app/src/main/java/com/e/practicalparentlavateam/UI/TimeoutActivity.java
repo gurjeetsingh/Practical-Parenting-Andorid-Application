@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,10 +55,9 @@ public class TimeoutActivity extends AppCompatActivity {
     private boolean isTimerRunning = false;
     private long timeLeftInMilliSeconds;
     private long selectedTime;
+
     Context context = this;
-    String[] timePiece = new String[]{"Select Duration", "Set Time: 1 Minute",
-            "Set Time: 2 Minutes", "Set Time: 3 Minutes", "Set Time: 5 Minutes",
-            "Set Time: 10 Minutes"};
+
 
 
     private TextView timerValue;
@@ -223,7 +223,9 @@ public class TimeoutActivity extends AppCompatActivity {
      */
     private void createTimeDurationSpinner() {
         Spinner timeFieldSpinner = (Spinner) findViewById(R.id.time_spinner);
-
+        //To get the string array from the Strings.XML
+        Resources res = this.getResources();
+        String[] timePiece = res.getStringArray(R.array.minutes_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, timePiece);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
