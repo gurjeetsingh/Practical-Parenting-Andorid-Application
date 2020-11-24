@@ -52,6 +52,9 @@ public class HelpActivity extends AppCompatActivity {
         TextView loseImage =(TextView) findViewById(R.id.lose_image_copyright);
         loseImage.setMovementMethod(LinkMovementMethod.getInstance());
 
+        TextView alarmSound =(TextView) findViewById(R.id.alarm_sound_copyright);
+        alarmSound.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     //Returning Necessary Activity
