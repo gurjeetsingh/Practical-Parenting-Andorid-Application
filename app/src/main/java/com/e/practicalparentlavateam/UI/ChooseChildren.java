@@ -72,18 +72,7 @@ public class ChooseChildren extends AppCompatActivity {
                     index = (i + 1) % children.getChildren().size();
             }
             if(index == 0){
-                Intent intent = getIntent();
-                String thisTimeChild = intent.getStringExtra("name this turn");
-                for (int i = 0; i < children.getChildren().size(); i++) {
-                    if (children.getChildren().get(i).getName().equals(thisTimeChild))
-                        index = i;
-                }
-                currentChildrenList.add(children.getChildren().get(index));
-                index = (index + 1) % children.getChildren().size();
-                while (!children.getChildren().get(index).getName().equals(thisTimeChild)) {
-                    currentChildrenList.add(children.getChildren().get(index));
-                    index = (index + 1) % children.getChildren().size();
-                }
+                currentChildrenList = children;
             }
             else {
                 while (!children.getChildren().get(index).getName().equals(LastTimeName)) {
@@ -163,9 +152,8 @@ public class ChooseChildren extends AppCompatActivity {
         });
     }
 
-    public static Intent makeIntent2(Context context, String name){
+    public static Intent makeIntent2(Context context){
         Intent intent = new Intent(context, ChooseChildren.class);
-        intent.putExtra("name this turn",name);
         return intent;
     }
 }

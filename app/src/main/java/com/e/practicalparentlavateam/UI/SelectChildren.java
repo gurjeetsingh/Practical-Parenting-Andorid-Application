@@ -107,7 +107,7 @@ public class SelectChildren extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = ChooseChildren.makeIntent2(SelectChildren.this, name);
+                Intent intent = ChooseChildren.makeIntent2(SelectChildren.this);
                 startActivity(intent);
             }
         });
