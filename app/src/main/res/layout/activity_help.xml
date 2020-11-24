@@ -123,10 +123,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lose_image_copyright"
-        app:layout_constraintVertical_bias="0.974" />
+        app:layout_constraintVertical_bias="0.649" />
 
     <TextView
         android:id="@+id/UI_art"
@@ -163,7 +163,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/help_toolbar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
@@ -190,8 +190,8 @@
 
     <TextView
         android:id="@+id/win_image_copyright"
-        android:layout_width="299dp"
-        android:layout_height="23dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"

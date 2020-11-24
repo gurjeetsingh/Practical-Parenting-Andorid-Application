@@ -72,7 +72,7 @@ public class SelectChildren extends AppCompatActivity {
         String lastTimeName = preferences.getString("name",null);
         TextView lastTimeChild = findViewById(R.id.last_time_child);
         if(lastTimeName == null){
-            lastTimeChild.setText("None");
+            lastTimeChild.setText(R.string.none_child);
         }
         else{
             lastTimeChild.setText(lastTimeName);
@@ -107,7 +107,7 @@ public class SelectChildren extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = ChooseChildren.makeIntent2(SelectChildren.this, name);
+                Intent intent = ChooseChildren.makeIntent2(SelectChildren.this);
                 startActivity(intent);
             }
         });
