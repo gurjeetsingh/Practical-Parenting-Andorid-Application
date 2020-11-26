@@ -10,8 +10,8 @@
     <Button
         android:id="@+id/history"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="104dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -20,7 +20,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/history"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +30,6 @@
         android:id="@+id/choice"
         android:layout_width="158dp"
         android:layout_height="34dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="8dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -39,24 +37,22 @@
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/the_child_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.889"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.018" />
+        app:layout_constraintStart_toEndOf="@+id/selected_side"
+        app:layout_constraintTop_toBottomOf="@+id/flip_coin_toolbar" />
 
     <ImageView
         android:id="@+id/front"
-        android:layout_width="160dp"
-        android:layout_height="170dp"
+        android:layout_width="145dp"
+        android:layout_height="142dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:alpha="1.0"
         app:layout_constraintBottom_toTopOf="@+id/flip"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:srcCompat="@drawable/coin_front" />
@@ -93,8 +89,8 @@
     <Button
         android:id="@+id/delet_history"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="104dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
@@ -103,7 +99,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/deletehistory"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,8 +109,8 @@
     <Button
         android:id="@+id/child_history"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="144dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners_buttons"
@@ -128,29 +124,21 @@
         app:layout_constraintEnd_toStartOf="@+id/delet_history"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toEndOf="@+id/history"
-        app:layout_constraintTop_toBottomOf="@+id/flip" />
+        app:layout_constraintTop_toBottomOf="@+id/flip" /><![CDATA[
 
-    <TextView
-        android:id="@+id/selected_side"
-        android:layout_width="169dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
-        android:background="#A6445871"
-        android:fontFamily="@font/imprima"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="@string/SelectedSide"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/the_child_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.018" /><![CDATA[
+
 
     app:layout_constraintTop_toTopOf="@+id/name" />
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -159,11 +147,24 @@
     ]]>
 
     <TextView
+        android:id="@+id/selected_side"
+        android:layout_width="169dp"
+        android:layout_height="34dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/SelectedSide"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flip_coin_toolbar" />
+
+    <TextView
         android:id="@+id/the_child_name"
         android:layout_width="250dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="160dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         android:background="#A6445871"
@@ -171,13 +172,14 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/none"
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/front"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/selected_side"
+        app:layout_constraintVertical_bias="0.243" />
 
     <TextView
         android:id="@+id/result_of_flipping"
@@ -200,8 +202,9 @@
         android:id="@+id/child_coin_image"
         android:layout_width="85dp"
         android:layout_height="81dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/the_child_name"
         tools:srcCompat="@tools:sample/avatars" />
