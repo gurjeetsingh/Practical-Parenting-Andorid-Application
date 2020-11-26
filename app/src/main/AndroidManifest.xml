@@ -52,7 +52,7 @@
         <activity
             android:name=".UI.ChooseChildren"
             android:label="@string/title_activity_select_child"
-            android:parentActivityName=".UI.CoinFlipActivity" />
+            android:parentActivityName=".UI.SelectChildren" />
         <activity
             android:name=".UI.EditChild"
             android:label="@string/title_activity_edit_child"

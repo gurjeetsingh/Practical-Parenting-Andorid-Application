@@ -10,11 +10,8 @@
     <TextView
         android:id="@+id/select_a_side"
         android:layout_width="246dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="44dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center_horizontal|center_vertical"
@@ -22,11 +19,9 @@
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tails"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/flip_coin_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/side_child_image" />
 
     <Button
         android:id="@+id/heads"
@@ -34,24 +29,25 @@
         android:layout_width="129dp"
         android:layout_height="82dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="464dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:text="@string/head"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/select_a_side" />
 
     <Button
         android:id="@+id/tails"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="128dp"
         android:layout_height="82dp"
-        android:layout_marginTop="464dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
@@ -60,17 +56,19 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/select_a_side" />
 
     <ImageView
         android:id="@+id/side_child_image"
         android:layout_width="149dp"
         android:layout_height="149dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />

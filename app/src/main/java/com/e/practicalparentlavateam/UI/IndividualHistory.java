@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.Model.HistoryItem;
 import com.e.practicalparentlavateam.Model.HistoryManager;
 import com.e.practicalparentlavateam.R;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class IndividualHistory extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
@@ -80,6 +87,18 @@ public class IndividualHistory extends AppCompatActivity {
 
             ImageView coin = (ImageView) itemView.findViewById(R.id.coin_result);
             coin.setImageResource(currentItem.getCoinIcon());
+
+            ChildrenManager children = ChildrenManager.getInstance();
+            ImageView imageView = (ImageView)itemView.findViewById(R.id.history_image);
+            try {
+                File file = new File(children.getPath(), currentItem.getName() + ".jpg");
+                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                imageView.setImageBitmap(bitmap);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
             return itemView;
         }
     }

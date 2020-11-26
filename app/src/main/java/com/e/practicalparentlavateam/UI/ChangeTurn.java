@@ -100,14 +100,14 @@ public class ChangeTurn extends AppCompatActivity {
 
     private void doneButton() {
         Button done = findViewById(R.id.done);
-        if(taskManager.getTasks(position).getName().equals("No Child"))
+        if(taskManager.getTasks(position).getName().equals(getString(R.string.no_child)))
             done.setVisibility(View.INVISIBLE);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<Children> childrenList = children.getChildren();
                 if(childrenList.size() == 0){
-                    taskManager.setName(position,"No Child");
+                    taskManager.setName(position,getString(R.string.no_child));
                 }
                 else {
                     int index = 0;
@@ -135,7 +135,7 @@ public class ChangeTurn extends AppCompatActivity {
 
     private void setupButtonCancel() {
         Button button = findViewById(R.id.canel_change_turn);
-        if(taskManager.getTasks(position).getName().equals("No Child"))
+        if(taskManager.getTasks(position).getName().equals(getString(R.string.no_child)))
             button.setVisibility(View.INVISIBLE);
         button.setOnClickListener(
                 new View.OnClickListener() {
