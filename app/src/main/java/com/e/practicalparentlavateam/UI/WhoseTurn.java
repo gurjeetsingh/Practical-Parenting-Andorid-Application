@@ -113,6 +113,16 @@ public class WhoseTurn extends AppCompatActivity {
                     taskManager.setName(position, childList.get(0).getName());
                     saveNewTask(taskManager);
                     nameView.setText(childList.get(0).getName());
+                    ImageView imageView = (ImageView)itemView.findViewById(R.id.task_image);
+                    try {
+                        File file = new File(childList.getPath(), childList.get(0).getName() + ".jpg");
+                        Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                        imageView.setImageBitmap(bitmap);
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        e.printStackTrace();
+                    }
                 } else {
                     boolean exist = false;
                     for (int i = 0; i < childList.getChildren().size(); i++) {
@@ -123,24 +133,31 @@ public class WhoseTurn extends AppCompatActivity {
                         taskManager.setName(position, childList.get(0).getName());
                         saveNewTask(taskManager);
                         nameView.setText(childList.get(0).getName());
-                        currentName = childList.get(0).getName();
+                        ImageView imageView = (ImageView)itemView.findViewById(R.id.task_image);
+                        try {
+                            File file = new File(childList.getPath(), childList.get(0).getName() + ".jpg");
+                            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                            imageView.setImageBitmap(bitmap);
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            e.printStackTrace();
+                        }
                     }
                     else {
                         nameView.setText(currentName);
+                        ImageView imageView = (ImageView)itemView.findViewById(R.id.task_image);
+                        try {
+                            File file = new File(childList.getPath(), currentName + ".jpg");
+                            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                            imageView.setImageBitmap(bitmap);
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-
-            ImageView imageView = (ImageView)itemView.findViewById(R.id.task_image);
-            if(!currentName.equals(getString(R.string.no_child)))
-            try {
-                File file = new File(childList.getPath(), currentName + ".jpg");
-                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
-                imageView.setImageBitmap(bitmap);
-            }
-            catch (FileNotFoundException e)
-            {
-                e.printStackTrace();
             }
 
             return itemView;
