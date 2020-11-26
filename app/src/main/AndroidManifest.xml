@@ -14,9 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.HelpActivity"
+        <activity android:name=".UI.DeepBreath"></activity>
+        <activity
+            android:name=".UI.HelpActivity"
             android:label="@string/title_help"
-            android:parentActivityName=".UI.MainMenu"></activity>
+            android:parentActivityName=".UI.MainMenu" />
         <activity
             android:name=".UI.ChangeTurn"
             android:label="@string/title_change_turn"
