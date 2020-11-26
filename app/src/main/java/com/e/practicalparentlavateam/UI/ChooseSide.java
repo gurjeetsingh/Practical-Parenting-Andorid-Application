@@ -40,7 +40,7 @@ public class ChooseSide extends AppCompatActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra(EXTRA_NAME);
         ImageView imageView = (ImageView) findViewById(R.id.side_child_image);
-        if(name != null && !name.equals("nobody")){
+        if(name != null && !name.equals(getString(R.string.nobody))){
             try {
                 File file=new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
                 Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
@@ -58,7 +58,7 @@ public class ChooseSide extends AppCompatActivity {
         tails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choice = "Tails";
+                choice = getString(R.string.tails);
                 Intent intent = CoinFlipActivity.makeIntent3(ChooseSide.this, choice, name);
                 startActivity(intent);
                 finish();
@@ -71,7 +71,7 @@ public class ChooseSide extends AppCompatActivity {
         heads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choice = "Heads";
+                choice = getString(R.string.head);
                 Intent intent = CoinFlipActivity.makeIntent3(ChooseSide.this, choice, name);
                 startActivity(intent);
                 finish();

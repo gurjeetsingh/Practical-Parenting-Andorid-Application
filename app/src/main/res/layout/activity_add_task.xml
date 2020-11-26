@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/enter_tast_name"
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="33dp"
         android:layout_marginTop="32dp"
         android:background="#A65F9595"

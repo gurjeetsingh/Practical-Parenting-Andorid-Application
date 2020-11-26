@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -76,7 +77,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.child_coin_image);
         if(name != null){
             text.setText(name);
-            if(!name.equals("nobody")) {
+            if(!name.equals(getString(R.string.nobody))) {
                 try {
                     File file = new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
                     Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
@@ -112,9 +113,10 @@ public class CoinFlipActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void individualHistoryButton() {
         Button individualHistory = findViewById(R.id.child_history);
-        if(name == null || name.equals("nobody"))
+        if(name == null || name.equals(getString(R.string.nobody)))
             individualHistory.setVisibility(View.INVISIBLE);
         else {
             individualHistory.setVisibility(View.VISIBLE);
@@ -156,13 +158,12 @@ public class CoinFlipActivity extends AppCompatActivity {
                             // robert-batemans-eminto-the-light---lionem---mintage-700-2019-prod3550023
                             coinImage.setImageResource(R.drawable.coin_front);
                             result.setText(R.string.head);
-                            result.setVisibility(View.VISIBLE);
                         }
                         else{
                             coinImage.setImageResource(R.drawable.coin_back);
                             result.setText(R.string.tails);
-                            result.setVisibility(View.VISIBLE);
                         }
+                        result.setVisibility(View.VISIBLE);
                         back.start();
                     }
                 });
@@ -173,9 +174,9 @@ public class CoinFlipActivity extends AppCompatActivity {
                 int choiceNum = 2;
                 if(choice == null)
                     return;
-                else if(choice.equals("Tails"))
+                else if(choice.equals(getString(R.string.tails)))
                     choiceNum = 0;
-                else if(choice.equals("Heads"))
+                else if(choice.equals(getString(R.string.head)))
                     choiceNum = 1;
                 int image;
                 int coinID;
@@ -187,22 +188,17 @@ public class CoinFlipActivity extends AppCompatActivity {
                     image = win;
                     Date currentTime = new Date();
                     historyManager.add(new HistoryItem(currentTime.toString(), name, choice, image, coinID));
-                    HistoryManager.setInstance(historyManager);
-                    if(!name.equals("nobody")) {
-                        saveName(name);
-                    }
-                    saveHistory(historyManager);
                 }
                 else {
                     image = lose;
                     Date currentTime = new Date();
                     historyManager.add(new HistoryItem(currentTime.toString(),name, choice, image, coinID));
-                    HistoryManager.setInstance(historyManager);
-                    if(!name.equals("nobody")) {
-                        saveName(name);
-                    }
-                    saveHistory(historyManager);
                 }
+                HistoryManager.setInstance(historyManager);
+                if(!name.equals(getString(R.string.nobody))) {
+                    saveName(name);
+                }
+                saveHistory(historyManager);
             }
         });
     }

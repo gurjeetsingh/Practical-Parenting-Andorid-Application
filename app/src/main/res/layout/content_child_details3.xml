@@ -11,8 +11,9 @@
         android:id="@+id/child_image"
         android:layout_width="185dp"
         android:layout_height="192dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_name"
         app:srcCompat="@android:drawable/ic_menu_camera" />
@@ -51,8 +52,8 @@
 
     <Button
         android:id="@+id/button_cancel"
-        android:layout_width="141dp"
-        android:layout_height="53dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
@@ -72,8 +73,8 @@
 
     <Button
         android:id="@+id/button_save"
-        android:layout_width="141dp"
-        android:layout_height="53dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
@@ -92,9 +93,9 @@
 
     <Button
         android:id="@+id/take_photo"
-        android:layout_width="156dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:text="@string/take_photo"
@@ -102,15 +103,14 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/child_image" />
 
     <Button
         android:id="@+id/gallery_button"
-        android:layout_width="262dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="53dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
@@ -120,9 +120,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/take_photo"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

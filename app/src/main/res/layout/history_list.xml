@@ -5,15 +5,15 @@
     android:id="@+id/history_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A6445871">
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/item_time"
         android:layout_width="268dp"
         android:layout_height="28dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="96dp"
         android:text="@string/item_date_in_list"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_name" />
@@ -22,18 +22,18 @@
         android:id="@+id/item_num"
         android:layout_width="75dp"
         android:layout_height="31dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/headOrtail"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.566"
-        app:layout_constraintStart_toEndOf="@+id/item_name"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/coin_result"
+        app:layout_constraintTop_toBottomOf="@+id/text_view2" />
 
     <ImageView
         android:id="@+id/win_or_false"
-        android:layout_width="59dp"
-        android:layout_height="33dp"
+        android:layout_width="56dp"
+        android:layout_height="42dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/checkbox_on_background" />
@@ -43,16 +43,18 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="@string/item_name_in_list"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/win_or_false"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/coin_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="92dp"
+        android:layout_height="95dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toEndOf="@+id/text_view2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/coin_back" />
 
@@ -60,10 +62,20 @@
         android:id="@+id/text_view2"
         android:layout_width="76dp"
         android:layout_height="34dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="12dp"
         android:text="@string/Choice"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/item_num"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/item_name"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/history_image"
+        android:layout_width="126dp"
+        android:layout_height="92dp"
+        app:layout_constraintEnd_toStartOf="@+id/item_num"
+        app:layout_constraintHorizontal_bias="0.791"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_name"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
