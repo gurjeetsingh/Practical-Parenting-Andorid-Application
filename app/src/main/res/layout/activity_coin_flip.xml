@@ -7,6 +7,16 @@
     android:background="@drawable/background"
     tools:context=".UI.CoinFlipActivity">
 
+    <ImageView
+        android:id="@+id/child_coin_image"
+        android:layout_width="85dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/the_child_name"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <Button
         android:id="@+id/history"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -40,22 +50,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/selected_side"
         app:layout_constraintTop_toBottomOf="@+id/flip_coin_toolbar" />
-
-    <ImageView
-        android:id="@+id/front"
-        android:layout_width="145dp"
-        android:layout_height="142dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
-        android:alpha="1.0"
-        app:layout_constraintBottom_toTopOf="@+id/flip"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        app:srcCompat="@drawable/coin_front" />
 
     <Button
         android:id="@+id/flip"
@@ -124,27 +118,7 @@
         app:layout_constraintEnd_toStartOf="@+id/delet_history"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toEndOf="@+id/history"
-        app:layout_constraintTop_toBottomOf="@+id/flip" /><![CDATA[
-
-
-
-    app:layout_constraintTop_toTopOf="@+id/name" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ]]>
+        app:layout_constraintTop_toBottomOf="@+id/flip" />
 
     <TextView
         android:id="@+id/selected_side"
@@ -199,13 +173,16 @@
         app:layout_constraintStart_toEndOf="@+id/front" />
 
     <ImageView
-        android:id="@+id/child_coin_image"
-        android:layout_width="85dp"
-        android:layout_height="81dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/front"
+        android:layout_width="145dp"
+        android:layout_height="142dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="40dp"
+        android:alpha="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/flip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/the_child_name"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/coin_front" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

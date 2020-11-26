@@ -10,7 +10,7 @@
     <ListView
         android:id="@+id/list_of_children"
         android:layout_width="match_parent"
-        android:layout_height="372dp"
+        android:layout_height="600dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toTopOf="@+id/nobody_button"
@@ -36,7 +36,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
-        android:text="@string/nobody"
+        android:text="@string/select_nobody"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="24sp"

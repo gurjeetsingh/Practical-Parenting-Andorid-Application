@@ -10,6 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,6 +30,9 @@ import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
 
 public class WhoseTurn extends AppCompatActivity {
@@ -98,12 +104,12 @@ public class WhoseTurn extends AppCompatActivity {
             ChildrenManager childList = gson.fromJson(json, type);
             TextView nameView = (TextView) itemView.findViewById(R.id.name_of_child);
             if(childList == null || childList.getChildren().size() == 0){
-                taskManager.setName(position,"No Child");
+                taskManager.setName(position,getString(R.string.no_child));
                 saveNewTask(taskManager);
                 nameView.setText(R.string.no_child);
             }
             else {
-                if (currentName.equals("No Child")) {
+                if (currentName.equals(getString(R.string.no_child))) {
                     taskManager.setName(position, childList.get(0).getName());
                     saveNewTask(taskManager);
                     nameView.setText(childList.get(0).getName());
@@ -117,11 +123,24 @@ public class WhoseTurn extends AppCompatActivity {
                         taskManager.setName(position, childList.get(0).getName());
                         saveNewTask(taskManager);
                         nameView.setText(childList.get(0).getName());
+                        currentName = childList.get(0).getName();
                     }
                     else {
                         nameView.setText(currentName);
                     }
                 }
+            }
+
+            ImageView imageView = (ImageView)itemView.findViewById(R.id.task_image);
+            if(!currentName.equals(getString(R.string.no_child)))
+            try {
+                File file = new File(childList.getPath(), currentName + ".jpg");
+                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                imageView.setImageBitmap(bitmap);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
             }
 
             return itemView;
