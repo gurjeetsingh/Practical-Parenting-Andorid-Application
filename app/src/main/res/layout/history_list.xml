@@ -10,24 +10,22 @@
     <TextView
         android:id="@+id/item_time"
         android:layout_width="268dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="96dp"
+        android:layout_height="wrap_content"
         android:text="@string/item_date_in_list"
         android:textColor="#000000"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_name" />
+        app:layout_constraintTop_toBottomOf="@+id/coin_result" />
 
     <TextView
         android:id="@+id/item_num"
-        android:layout_width="75dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="69dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="44dp"
         android:text="@string/headOrtail"
         android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/coin_result"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/coin_result"
         app:layout_constraintTop_toBottomOf="@+id/text_view2" />
 
     <ImageView
@@ -42,40 +40,40 @@
         android:id="@+id/item_name"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:text="@string/item_name_in_list"
         android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/win_or_false"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/text_view2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/coin_result"
-        android:layout_width="92dp"
-        android:layout_height="95dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toEndOf="@+id/text_view2"
+        android:layout_width="66dp"
+        android:layout_height="52dp"
+        app:layout_constraintStart_toEndOf="@+id/win_or_false"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/coin_back" />
 
     <TextView
         android:id="@+id/text_view2"
-        android:layout_width="76dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="12dp"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
         android:text="@string/Choice"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
-        app:layout_constraintStart_toEndOf="@+id/item_name"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/coin_result"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/history_image"
-        android:layout_width="126dp"
-        android:layout_height="92dp"
-        app:layout_constraintEnd_toStartOf="@+id/item_num"
-        app:layout_constraintHorizontal_bias="0.791"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="108dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_time"
         app:layout_constraintTop_toBottomOf="@+id/item_name"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
