@@ -23,6 +23,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.view.Menu;
@@ -31,6 +32,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,6 +40,8 @@ import android.widget.TextView;
 import com.e.practicalparentlavateam.Model.AudioController;
 import com.e.practicalparentlavateam.Model.TimeService;
 import com.e.practicalparentlavateam.R;
+
+import org.w3c.dom.Text;
 
 import java.util.Locale;
 
@@ -55,6 +59,15 @@ public class TimeoutActivity extends AppCompatActivity {
     private boolean isTimerRunning = false;
     private long timeLeftInMilliSeconds;
     private long selectedTime;
+    private ProgressBar progressBar;
+    private TextView progressText;
+    double timeo=0;
+
+    int endTimeFlag=0;
+    long endTime;
+    long systime;
+    double progresstimepercent;
+    int totalpercent=0;
 
     Context context = this;
 
@@ -79,6 +92,10 @@ public class TimeoutActivity extends AppCompatActivity {
 
         timerValue = (TextView) findViewById(R.id.timer_text);
         timerValue.setBackgroundResource(R.color.stopg);
+        //For the progress piechart
+        progressBar=findViewById(R.id.circular_progress_bar);
+        progressText=findViewById(R.id.progressText);
+
 
         /*
         This allows us to use the clickback from the notification box to stop the alarm.
@@ -139,13 +156,23 @@ public class TimeoutActivity extends AppCompatActivity {
     to the phone immediately.
      */
     private void updateUI(Intent intent) {
-        int time = intent.getIntExtra("time", 0);
+
+        if(endTimeFlag==0)
+        {
+            final int time = intent.getIntExtra("time", 0);
+            systime=selectedTime;
+            endTimeFlag++;
+        }
+       final int time = intent.getIntExtra("time", 0);
+        final double elapsedtime=intent.getDoubleExtra("elap",0);
+        endTime=intent.getLongExtra("endtime",0);
         int mins = (int) (time / (double) 1000) / 60;
         int secs = (int) (time / (double) 1000) % 60;
         if (time == 0 || time < 0) {
             isTimerRunning = false;
             alarmOffButton.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.INVISIBLE);
+            endTimeFlag=0;
             notIf();
             //Added vibrator
             Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -161,10 +188,32 @@ public class TimeoutActivity extends AppCompatActivity {
             }, delay);
 
         }
-
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
         timerValue.setText(timeLeftFormatted);
         pauseIntent = intent;
+        if(time == 0 || time < 0)
+        {
+            progressBar.setProgress(0);
+            progressText.setText("0");
+        }
+        else {
+            System.out.println("This is the selected time:" + systime);
+            System.out.println("This is the elapsed time" + elapsedtime);
+            progresstimepercent = (((systime / 1000) - elapsedtime) / (systime / 1000)) * 100;
+            Math.ceil(progresstimepercent);
+            System.out.println(progresstimepercent);
+            //totalpercent= (int) (progresstimepercent+totalpercent);
+            String totper = Integer.toString((int) progresstimepercent);
+            progressBar.setProgress((int) progresstimepercent);
+            if (elapsedtime < 0) {
+                progressText.setText("100");
+            } else {
+                progressText.setText(totper);
+            }
+        }
+
+
+
     }
 
 
@@ -207,6 +256,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 notificationManager.cancel(0);
             }
         }, delay);
+
     }
 
     @Override
@@ -298,6 +348,7 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                 serviceIntent.putExtra("mills", timeLeftInMilliSeconds);
+                selectedTime=timeLeftInMilliSeconds;
                 isTimerRunning = true;
                 startService(serviceIntent);
                 //System.out.println("Time left for start" + mTimeLeftInMillis);
@@ -401,6 +452,11 @@ public class TimeoutActivity extends AppCompatActivity {
                 timeLeftInMilliSeconds = selectedTime;
                 pauseButton.setVisibility(View.INVISIBLE);
                 isTimerRunning = false;
+
+
+                endTimeFlag=0;
+
+
                 millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
             }
 
