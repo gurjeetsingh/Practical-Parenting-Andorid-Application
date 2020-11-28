@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -34,11 +36,45 @@ public class DeepBreath extends AppCompatActivity {
 
     private void enlargeCircle() {
         enlarge.setOnLongClickListener(new View.OnLongClickListener() {
+            Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
+            Animation animationOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_out);
+            private Handler handler = new Handler();
             @Override
             public boolean onLongClick(View v) {
-                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
-                circle.startAnimation(animation);
-                return false;
+                final Runnable actionIn = new Runnable() {
+                    @Override
+                    public void run() {
+                        circle.startAnimation(animationIn);
+                    }
+                };
+                final Runnable actionOut = new Runnable() {
+                    @Override
+                    public void run() {
+                        circle.startAnimation(animationOut);
+                        enlarge.setText("Out");
+                    }
+                };
+                handler.postDelayed(actionIn,0);
+                enlarge.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                            handler.postDelayed(actionIn, 0);
+                        }
+                        if(event.getAction() == MotionEvent.ACTION_UP){
+                            if(event.getEventTime() - event.getDownTime() < 3000) {
+                                circle.clearAnimation();
+                            }
+                            else{
+                                enlarge.setText("Out");
+                                circle.startAnimation(animationOut);
+                            }
+                            return true;
+                        }
+                        return true;
+                    }
+                });
+                return true;
             }
         });
     }
