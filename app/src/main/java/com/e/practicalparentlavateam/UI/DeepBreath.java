@@ -31,7 +31,6 @@ public class DeepBreath extends AppCompatActivity {
         shrink = findViewById(R.id.shrink);
 
         enlargeCircle();
-        shrinkCircle();
     }
 
     private void enlargeCircle() {
@@ -78,16 +77,6 @@ public class DeepBreath extends AppCompatActivity {
                     }
                 });
                 return true;
-            }
-        });
-    }
-
-    private void shrinkCircle() {
-        shrink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_out);
-                circle.startAnimation(animation);
             }
         });
     }

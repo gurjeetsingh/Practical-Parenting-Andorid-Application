@@ -19,23 +19,6 @@
         app:srcCompat="@drawable/circle" />
 
     <Button
-        android:id="@+id/shrink"
-        android:layout_width="114dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_corners_buttons"
-        android:fontFamily="@font/imprima"
-        android:text="shrink"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circle"
-        app:layout_constraintVertical_bias="0.433" />
-
-    <Button
         android:id="@+id/enlarge"
         android:layout_width="118dp"
         android:layout_height="48dp"
@@ -49,6 +32,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shrink"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintTop_toBottomOf="@+id/circle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
