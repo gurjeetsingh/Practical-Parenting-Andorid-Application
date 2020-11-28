@@ -41,7 +41,7 @@
         android:layout_height="48dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
-        android:text="enlarge"
+        android:text="@string/begin"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"

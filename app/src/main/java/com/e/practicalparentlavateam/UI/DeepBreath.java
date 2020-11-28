@@ -47,27 +47,30 @@ public class DeepBreath extends AppCompatActivity {
                         circle.startAnimation(animationIn);
                     }
                 };
-                final Runnable actionOut = new Runnable() {
+                final Runnable toInhale = new Runnable() {
                     @Override
                     public void run() {
-                        circle.startAnimation(animationOut);
-                        enlarge.setText("Out");
+                        enlarge.setText(R.string.in);
                     }
                 };
                 handler.postDelayed(actionIn,0);
+                enlarge.setText(R.string.in);
                 enlarge.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                            enlarge.setText(R.string.in);
                             handler.postDelayed(actionIn, 0);
                         }
                         if(event.getAction() == MotionEvent.ACTION_UP){
                             if(event.getEventTime() - event.getDownTime() < 3000) {
                                 circle.clearAnimation();
+                                enlarge.setText(R.string.begin);
                             }
                             else{
-                                enlarge.setText("Out");
+                                enlarge.setText(R.string.out);
                                 circle.startAnimation(animationOut);
+                                handler.postDelayed(toInhale,3000);
                             }
                             return true;
                         }

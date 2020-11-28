@@ -123,6 +123,9 @@
     <string name="finish_set_time">Done</string>
     <string name="none_child">None</string>
     <string name="nobody">nobody</string>
+    <string name="begin">Begin</string>
+    <string name="out">Out</string>
+    <string name="in">In</string>
     <string-array name="minutes_array">
         <item>Set Time: 1 Minute</item>
         <item>Set Time: 2 Minutes</item>
