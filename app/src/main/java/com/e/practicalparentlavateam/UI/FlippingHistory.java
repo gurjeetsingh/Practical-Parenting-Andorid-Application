@@ -73,17 +73,17 @@ public class FlippingHistory extends AppCompatActivity {
             coin.setImageResource(currentItem.getCoinIcon());
 
             ChildrenManager children = ChildrenManager.getInstance();
-            ImageView imageView = (ImageView)itemView.findViewById(R.id.history_image);
-            if(!currentItem.getName().equals(getString(R.string.nobody)))
+
+            if(!currentItem.getName().equals(getString(R.string.nobody))) {
+                ImageView imageView = (ImageView) itemView.findViewById(R.id.history_image);
                 try {
                     File file = new File(children.getPath(), currentItem.getName() + ".jpg");
                     Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
                     imageView.setImageBitmap(bitmap);
-                }
-                catch (FileNotFoundException e)
-                {
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+            }
 
             return itemView;
         }
