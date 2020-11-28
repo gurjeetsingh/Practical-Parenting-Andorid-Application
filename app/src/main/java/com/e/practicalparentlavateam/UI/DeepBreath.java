@@ -28,7 +28,6 @@ public class DeepBreath extends AppCompatActivity {
         //https://commons.wikimedia.org/wiki/File:Small-dark-green-circle.svg
         circle = findViewById(R.id.circle);
         enlarge = findViewById(R.id.enlarge);
-        shrink = findViewById(R.id.shrink);
 
         enlargeCircle();
     }
