@@ -67,7 +67,7 @@ public class TimeoutActivity extends AppCompatActivity {
     long endTime;
     long systime;
     double progresstimepercent;
-    int totalpercent=0;
+    boolean ispaused=false;
 
     Context context = this;
 
@@ -163,58 +163,57 @@ public class TimeoutActivity extends AppCompatActivity {
             systime=selectedTime;
             endTimeFlag++;
         }
-       final int time = intent.getIntExtra("time", 0);
-        final double elapsedtime=intent.getDoubleExtra("elap",0);
-        endTime=intent.getLongExtra("endtime",0);
-        int mins = (int) (time / (double) 1000) / 60;
-        int secs = (int) (time / (double) 1000) % 60;
-        if (time == 0 || time < 0) {
-            isTimerRunning = false;
-            alarmOffButton.setVisibility(View.VISIBLE);
-            pauseButton.setVisibility(View.INVISIBLE);
-            endTimeFlag=0;
-            notIf();
-            //Added vibrator
-            Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            alarm.vibrate(5000);
+            final int time = intent.getIntExtra("time", 0);
+            double elapsedtime = intent.getDoubleExtra("elap", 0);
+            endTime = intent.getLongExtra("endtime", 0);
+            int mins = (int) (time / (double) 1000) / 60;
+            int secs = (int) (time / (double) 1000) % 60;
+            if (time == 0 || time < 0) {
+                isTimerRunning = false;
+                alarmOffButton.setVisibility(View.VISIBLE);
+                pauseButton.setVisibility(View.INVISIBLE);
+                endTimeFlag = 0;
+                notIf();
+                //Added vibrator
+                Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                alarm.vibrate(5000);
 
-            //This handler is for removing the alarmoff button after a period of time
-            Handler cancelNotificiaton = new Handler();
-            long delay = 12000;
-            cancelNotificiaton.postDelayed(new Runnable() {
-                public void run() {
-                    alarmOffButton.setVisibility(View.INVISIBLE);
-                }
-            }, delay);
+                //This handler is for removing the alarmoff button after a period of time
+                Handler cancelNotificiaton = new Handler();
+                long delay = 12000;
+                cancelNotificiaton.postDelayed(new Runnable() {
+                    public void run() {
+                        alarmOffButton.setVisibility(View.INVISIBLE);
+                    }
+                }, delay);
 
-        }
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
-        timerValue.setText(timeLeftFormatted);
-        pauseIntent = intent;
-        if(time == 0 || time < 0)
-        {
-            progressBar.setProgress(0);
-            progressText.setText("0");
-        }
-        else {
-            System.out.println("This is the selected time:" + systime);
-            System.out.println("This is the elapsed time" + elapsedtime);
-            progresstimepercent = (((systime / 1000) - elapsedtime) / (systime / 1000)) * 100;
-            Math.ceil(progresstimepercent);
-            System.out.println(progresstimepercent);
-            //totalpercent= (int) (progresstimepercent+totalpercent);
-            String totper = Integer.toString((int) progresstimepercent);
-            progressBar.setProgress((int) progresstimepercent);
-            if (elapsedtime < 0) {
-                progressText.setText("100");
+            }
+
+            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
+            timerValue.setText(timeLeftFormatted);
+            pauseIntent = intent;
+
+
+            if (time == 0 || time < 0) {
+                progressBar.setProgress(0);
+                progressText.setText("0");
             } else {
-                progressText.setText(totper);
+                System.out.println("This is the selected time:" + systime);
+                System.out.println("This is the elapsed time" + elapsedtime);
+                progresstimepercent = (((systime / 1000) - elapsedtime) / (systime / 1000)) * 100;
+                Math.ceil(progresstimepercent);
+                System.out.println(progresstimepercent);
+                //totalpercent= (int) (progresstimepercent+totalpercent);
+                String totper = Integer.toString((int) progresstimepercent);
+                progressBar.setProgress((int) progresstimepercent);
+                if (elapsedtime < 0) {
+                    progressText.setText("100");
+                } else {
+                    progressText.setText(totper);
+                }
             }
         }
 
-
-
-    }
 
 
     /*
@@ -350,6 +349,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 serviceIntent.putExtra("mills", timeLeftInMilliSeconds);
                 selectedTime=timeLeftInMilliSeconds;
                 isTimerRunning = true;
+                //ispaused=false;
                 startService(serviceIntent);
                 //System.out.println("Time left for start" + mTimeLeftInMillis);
                 registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
@@ -368,7 +368,10 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int time = pauseIntent.getIntExtra("time", 0);
                 timeLeftInMilliSeconds = time;
+                endTimeFlag=0;
                 isTimerRunning = false;
+               // ispaused=true;
+
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceIntent);
                 // unregisterReceiver(broadcastReceiver);
@@ -452,8 +455,9 @@ public class TimeoutActivity extends AppCompatActivity {
                 timeLeftInMilliSeconds = selectedTime;
                 pauseButton.setVisibility(View.INVISIBLE);
                 isTimerRunning = false;
-
-
+                //ispaused=false;
+                progressBar.setProgress(100);
+                progressText.setText("100");
                 endTimeFlag=0;
 
 
