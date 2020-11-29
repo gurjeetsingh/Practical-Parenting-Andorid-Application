@@ -33,9 +33,14 @@ public class DeepBreath extends AppCompatActivity {
         enlarge = findViewById(R.id.enlarge);
 
         enlargeCircle();
+        //extract number of breaths form setup
+        breathSetup();
     }
 
     private void breathSetup(){
+        Intent intent = getIntent();
+        numBreaths = intent.getIntExtra(EXTRA_NUM_BREATHS, 0);
+
 
     }
 
