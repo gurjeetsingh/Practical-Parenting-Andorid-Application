@@ -20,14 +20,11 @@ public class DeepBreath extends AppCompatActivity {
 
     //Enum for all the states in state machine
     public enum State {
-        WAITING_TO_INHALE, INHALING, DONE_INHALE, EXHALE, DONE,
+        WAITING_TO_INHALE, CONTINUE, INHALING, EXHALE, DONE,
     }
     private State breathState = State.WAITING_TO_INHALE;
 
     private ImageView circle;
-    private Button enlarge;
-    private Button shrink;
-
     //state machine vars
     private static final String EXTRA_NUM_BREATHS = "Extra - Num breaths";
     private static int numBreaths;
@@ -45,7 +42,6 @@ public class DeepBreath extends AppCompatActivity {
 
         //https://commons.wikimedia.org/wiki/File:Small-dark-green-circle.svg
         circle = findViewById(R.id.circle);
-        enlarge = findViewById(R.id.enlarge);
 
         //initialize display of breaths
         breathDisplay = findViewById(R.id.num_breaths_rem);
@@ -54,9 +50,9 @@ public class DeepBreath extends AppCompatActivity {
         //display of state machine
         currentStateView = findViewById(R.id.state);
         //fsm testing begin
-        beginFSM = findViewById(R.id.button_fsm);
+        beginFSM = findViewById(R.id.breath);
 
-        enlargeCircle();
+        //enlargeCircle();
         //extract number of breaths form setup
         breathSetup();
         
@@ -77,89 +73,32 @@ public class DeepBreath extends AppCompatActivity {
 
     }
 
-    private void enlargeCircle() {
-        enlarge.setOnLongClickListener(new View.OnLongClickListener() {
-            Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
-            Animation animationOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_out);
-            private Handler handler = new Handler();
-            @Override
-            public boolean onLongClick(View v) {
-                final Runnable actionIn = new Runnable() {
-                    @Override
-                    public void run() {
-                        circle.startAnimation(animationIn);
-
-                    }
-                };
-                final Runnable toInhale = new Runnable() {
-                    @Override
-                    public void run() {
-                        enlarge.setText(R.string.in);
-                    }
-                };
-                handler.postDelayed(actionIn,0);
-                enlarge.setText(R.string.in);
-                enlarge.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                            enlarge.setText(R.string.in);
-                            handler.postDelayed(actionIn, 0);
-                        }
-                        if(event.getAction() == MotionEvent.ACTION_UP){
-                            if(event.getEventTime() - event.getDownTime() < 3000) {
-                                circle.clearAnimation();
-                                enlarge.setText(R.string.begin);
-                            }
-                            else{
-                                enlarge.setText(R.string.out);
-                                circle.startAnimation(animationOut);
-                                handler.postDelayed(toInhale,3000);
-                            }
-                            return true;
-                        }
-                        return true;
-                    }
-                });
-                return true;
-            }
-        });
-    }
-
-    private void changeState(State newState) {
-        currentStateView.setText(newState.name());
-
-        switch (newState) {
-            case WAITING_TO_INHALE:
-                currentStateView.setText("WAITING_TO_INHALE");
-                waitngToInhale();
-                break;
-            case INHALING:
-                currentStateView.setText("INHALING");
-                inhaling();
-                break;
-            case DONE_INHALE:
-                currentStateView.setText("DONE_INHALE");
-                doneInhale();
-                break;
-            case EXHALE:
-                currentStateView.setText("EXHALE");
-                exhale();
-                break;
-            case DONE:
-                currentStateView.setText("DONE");
-                //done();
-                break;
-        }
-        breathState = newState;
-    }
-
     private void beginBreathing() {
+        final Handler handler = new Handler();
+        final Runnable afterExhaling = new Runnable() {
+            @Override
+            public void run() {
+                if(numBreaths > 0){
+                    if (breathState == State.EXHALE) {
+                        //TODO: reset ontouch listner
+                        //beginBreathing();
+                        changeState(State.CONTINUE);
+
+                    }
+                }
+                else if(numBreaths == 0){
+                    if (breathState == State.EXHALE) {
+                        changeState(State.DONE);
+                    }
+                }
+            }
+        };
+        handler.postDelayed(afterExhaling,3000);
         beginFSM.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (breathState == State.WAITING_TO_INHALE) {
+                    if (breathState == State.WAITING_TO_INHALE || breathState == State.CONTINUE) {
                         changeState(State.INHALING);
                         //currentStateView.setText("INHALING");
                     }
@@ -172,15 +111,12 @@ public class DeepBreath extends AppCompatActivity {
                             //currentStateView.setText("INHALING");
                         }
                     }
-                    if(event.getEventTime() - event.getDownTime() > 3000) {
+                    else {
                         if (breathState == State.INHALING) {
                             changeState(State.EXHALE);
                             //currentStateView.setText("INHALING");
+                            handler.postDelayed(afterExhaling,3000);
                         }
-                    }
-
-                    else{
-                        enlarge.setText(R.string.out);
                     }
                     return true;
                 }
@@ -189,53 +125,63 @@ public class DeepBreath extends AppCompatActivity {
         });
     }
 
+    private void changeState(State newState) {
+        currentStateView.setText(newState.name());
 
-    private void waitngToInhale() {
+        switch (newState) {
+            case WAITING_TO_INHALE:
+                currentStateView.setText(R.string.waiting_to_inhale);
+                waitingToInhale();
+                break;
+            case CONTINUE:
+                currentStateView.setText(R.string.continue_breath);
+                continueInhaling();
+                break;
+            case INHALING:
+                currentStateView.setText(R.string.inhaling);
+                inhaling();
+                break;
+            case EXHALE:
+                currentStateView.setText(R.string.exhaling);
+                exhale();
+                break;
+            case DONE:
+                currentStateView.setText(R.string.finish);
+                beginFSM.setText(R.string.finish);
+                //done();
+                break;
+        }
+        breathState = newState;
+    }
+
+    private void waitingToInhale() {
         //TODO: Stop animation
         //TODO: Stop sound
-        beginFSM.setText("IN");
+        circle.clearAnimation();
+    }
 
+    private void continueInhaling(){
+        beginFSM.setText(R.string.continue_breath);
     }
 
     private void inhaling() {
         //TODO: Begin animation
         //TODO: Begin sound
         //TODO: handler for stopping after 10 seconds
-    }
-
-
-    private void doneInhale() {
-        //TODO: Stop inhale animation
-        //TODO: stop inhale sound
-        if (breathState == State.DONE_INHALE) {
-            changeState(State.EXHALE);
-            //currentStateView.setText("INHALING");
-        }
-        beginFSM.setText("OUT");
-
+        beginFSM.setText(R.string.in);
+        Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
+        circle.startAnimation(animationIn);
     }
 
     private void exhale() {
         //TODO: Start exhale animation
         //TODO: Start exhale sound
+        Animation animationOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_out);
+        circle.startAnimation(animationOut);
 
+        beginFSM.setText(R.string.out);
         numBreaths--;
         breathDisplay.setText(""+ numBreaths);
-
-        if(numBreaths > 0){
-            if (breathState == State.EXHALE) {
-                //TODO: reset ontouch listner
-                //beginBreathing();
-                changeState(State.WAITING_TO_INHALE);
-
-            }
-        }
-        else if(numBreaths == 0){
-            if (breathState == State.EXHALE) {
-                changeState(State.DONE);
-            }
-        }
-
     }
 
 
