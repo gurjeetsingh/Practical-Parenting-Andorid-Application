@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +31,9 @@ public class DeepBreath extends AppCompatActivity {
     private static final String EXTRA_NUM_BREATHS = "Extra - Num breaths";
     private int numBreaths;
     private TextView breathDisplay;
+    //for testing
+    //TODO: delete later, only for testing cycling through state machine
+    private TextView currentStateView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +47,19 @@ public class DeepBreath extends AppCompatActivity {
         //initialize display of breaths
         breathDisplay = findViewById(R.id.num_breaths_rem);
 
+        //TODO: delete after testing of state machine complete
+        //display of state machine
+        currentStateView = findViewById(R.id.state);
+
         enlargeCircle();
         //extract number of breaths form setup
         breathSetup();
+
+        //Set the current state
+        //changeState();
     }
+
+
 
     private void breathSetup(){
         Intent intent = getIntent();
@@ -105,6 +116,32 @@ public class DeepBreath extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void changeState(State newState) {
+        currentStateView.setText(newState.name());
+
+        switch (newState) {
+            case WAITING_TO_INHALE:
+                break;
+            case INHALING:
+                break;
+            case INHALED_FOR_3S:
+                break;
+            case INHALES_FOR_10S:
+                break;
+            case DONE_INHALE:
+                break;
+            case EXHALE:
+                break;
+            case EXHALE_3S:
+                break;
+            case DONE_EXHALE:
+                break;
+            case DONE:
+                break;
+        }
+
     }
 
     public static Intent makeDeepBreathIntent(Context context, int numBreaths) {
