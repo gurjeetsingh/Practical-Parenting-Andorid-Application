@@ -225,6 +225,7 @@ public class DeepBreath extends AppCompatActivity {
         if(numBreaths > 0){
             if (breathState == State.EXHALE) {
                 //TODO: reset ontouch listner
+                //beginBreathing();
                 changeState(State.WAITING_TO_INHALE);
 
             }
