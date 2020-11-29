@@ -30,6 +30,7 @@ public class TimeService extends Service {
     private Handler handler = new Handler();
     private long userSelectedTime;
     private long finalTime;
+    private int timefactor;
     private int flag=0;
     private double progressnum=0;
     long timeLeftInMilliSeconds;
@@ -37,6 +38,7 @@ public class TimeService extends Service {
     CountDownTimer ctimer;
     long elapsedtime;
     long originaltime;
+    int iterator=1;
 
 
 /*
@@ -88,14 +90,24 @@ https://developer.android.com/reference/android/os/Handler
     public int onStartCommand(Intent intent, int flags, int startId) {
         comIntent = new Intent(TIME_BROADCAST);
         long usertime = intent.getLongExtra("mills",0);
+        int timefactorintent=intent.getIntExtra("factor",0);
+        System.out.println(usertime);
+
         if(flag<1) {
             userSelectedTime = usertime;
             finalTime = userSelectedTime + System.currentTimeMillis();
             setFinalTime(finalTime);
+            setTimefactor(timefactorintent);
             flag++;
         }
         return START_STICKY;
     }
+
+    private void setTimefactor(int factor)
+    {
+        timefactor=factor;
+    }
+
 
     /*
     This sets the final time. The final time is basically the current
@@ -137,22 +149,47 @@ https://developer.android.com/reference/android/os/Handler
     and so on...
      */
     private void serviceUIUpdate() {
+        System.out.println(timefactor);
+        if(timefactor==1) {
+            timeLeftInMilliSeconds = finalTime - System.currentTimeMillis();
+            long systemtime = finalTime;
+            int timer = (int) timeLeftInMilliSeconds;
+            long endTime = (int) finalTime;
+            // System.out.println("this is the real endtime" + endTime);
+            if (timer < 0) {
+                startAlarm();
+                stopSelf();
+            }
+            comIntent.putExtra("time", timer);
 
-        timeLeftInMilliSeconds = finalTime - System.currentTimeMillis();
-        long systemtime=finalTime;
-        int timer = (int) timeLeftInMilliSeconds;
-        long endTime=(int) finalTime;
-       // System.out.println("this is the real endtime" + endTime);
-        if(timer<0)
-        {
-            startAlarm();
-            stopSelf();
+            double elapsedSeconds = (double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0);
+            comIntent.putExtra("elap", elapsedSeconds);
+            sendBroadcast(comIntent);
         }
-        comIntent.putExtra("time", timer);
+        if(timefactor==2)
+        {
+            //System.out.println("kalllu");
+            double elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            System.out.println(elapsedSeconds);
+            if(Math.floor(elapsedSeconds%4)==1)
+            {
+                timeLeftInMilliSeconds = userSelectedTime - 1000*iterator;
+                iterator++;
+                long systemtime = finalTime;
+                int timer = (int) timeLeftInMilliSeconds;
+                long endTime = (int) finalTime;
+                // System.out.println("this is the real endtime" + endTime);
+                if (timer < 0) {
+                    startAlarm();
+                    stopSelf();
+                }
+                comIntent.putExtra("time", timer);
+                comIntent.putExtra("elap", Math.floor(elapsedSeconds/4));
+                sendBroadcast(comIntent);
+            }
 
-        double elapsedSeconds = (double) ((getelapsedtimeclock()-getoriginaltimeclock())/ 1000.0);
-        comIntent.putExtra("elap",elapsedSeconds);
-        sendBroadcast(comIntent);
+
+        }
 
     }
 
@@ -174,7 +211,7 @@ https://developer.android.com/reference/android/os/Handler
 
     /*
     Extra generated function, not required.
-     */
+            */
     @Override
     public IBinder onBind(Intent intent) {
         // TODO Auto-generated method stub

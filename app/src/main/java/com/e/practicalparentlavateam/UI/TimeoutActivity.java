@@ -68,6 +68,7 @@ public class TimeoutActivity extends AppCompatActivity {
     long systime;
     double progresstimepercent;
     boolean ispaused=false;
+    int timefactor=1;
 
     Context context = this;
 
@@ -88,6 +89,7 @@ public class TimeoutActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         createTimeDurationSpinner();
+        createTimeFactorSpinner();
 
 
         timerValue = (TextView) findViewById(R.id.timer_text);
@@ -285,7 +287,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 0) {
                     timeLeftInMilliSeconds = 60000;
                     selectedTime = 60000;
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    //millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 1) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -325,6 +327,48 @@ public class TimeoutActivity extends AppCompatActivity {
         });
     }
 
+    private void createTimeFactorSpinner() {
+        final Spinner timeFieldSpinner = (Spinner) findViewById(R.id.factorspinner);
+        //To get the string array from the Strings.XML
+        Resources res = this.getResources();
+        String[] timePiece = res.getStringArray(R.array.timefactor);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, timePiece);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        timeFieldSpinner.setAdapter(adapter);
+        timeFieldSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                  timefactor=1;
+                }
+                if (position == 1) {
+                   timefactor=2;
+                    System.out.println("25%");
+                }
+                if (position == 2) {
+                    timefactor=1/2;
+                }
+                if (position == 3) {
+                    timefactor=3/4;
+                }
+                if (position == 4) {
+                    timefactor = 2;
+                }
+                if(position==4){
+                    timefactor=3;
+                }
+                if(position==4){
+                    timefactor=4;
+                }
+                }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                timefactor=1;
+            }
+        });
+    }
+
 
     //The following function streamlines our updating the textview to easily convert
     //from seconds to milliseconds.
@@ -347,6 +391,7 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                 serviceIntent.putExtra("mills", timeLeftInMilliSeconds);
+                serviceIntent.putExtra("factor",timefactor);
                 selectedTime=timeLeftInMilliSeconds;
                 isTimerRunning = true;
                 //ispaused=false;
