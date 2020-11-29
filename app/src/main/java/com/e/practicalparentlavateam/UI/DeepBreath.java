@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.e.practicalparentlavateam.R;
 
@@ -22,6 +24,7 @@ public class DeepBreath extends AppCompatActivity {
 
     private static final String EXTRA_NUM_BREATHS = "Extra - Num breaths";
     private int numBreaths;
+    private TextView breathDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,9 @@ public class DeepBreath extends AppCompatActivity {
         circle = findViewById(R.id.circle);
         enlarge = findViewById(R.id.enlarge);
 
+        //initialize display of breaths
+        breathDisplay = findViewById(R.id.num_breaths_rem);
+
         enlargeCircle();
         //extract number of breaths form setup
         breathSetup();
@@ -40,6 +46,8 @@ public class DeepBreath extends AppCompatActivity {
     private void breathSetup(){
         Intent intent = getIntent();
         numBreaths = intent.getIntExtra(EXTRA_NUM_BREATHS, 0);
+        //breaths selected displayed
+        breathDisplay.setText(""+ numBreaths);
 
 
     }
