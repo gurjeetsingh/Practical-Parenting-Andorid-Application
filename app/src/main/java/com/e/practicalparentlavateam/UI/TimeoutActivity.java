@@ -69,6 +69,8 @@ public class TimeoutActivity extends AppCompatActivity {
     double progresstimepercent;
     boolean ispaused=false;
     int timefactor=1;
+    int selectedTimeforpause;
+    double totalelapsed=0;
 
     Context context = this;
 
@@ -132,12 +134,17 @@ public class TimeoutActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
+
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (isTimerRunning){
+            pauseButton.setVisibility(View.VISIBLE);
+        }
+
         registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
     }
 
@@ -170,8 +177,11 @@ public class TimeoutActivity extends AppCompatActivity {
             endTime = intent.getLongExtra("endtime", 0);
             int mins = (int) (time / (double) 1000) / 60;
             int secs = (int) (time / (double) 1000) % 60;
-            if (time == 0 || time < 0) {
+            if (time == 0 || time < 0)
+
+            {
                 isTimerRunning = false;
+                totalelapsed=0;
                 alarmOffButton.setVisibility(View.VISIBLE);
                 pauseButton.setVisibility(View.INVISIBLE);
                 endTimeFlag = 0;
@@ -194,18 +204,16 @@ public class TimeoutActivity extends AppCompatActivity {
             String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
             timerValue.setText(timeLeftFormatted);
             pauseIntent = intent;
+            pauseButton.setVisibility(View.VISIBLE);
 
 
             if (time == 0 || time < 0) {
                 progressBar.setProgress(0);
                 progressText.setText("0");
             } else {
-                System.out.println("This is the selected time:" + systime);
-                System.out.println("This is the elapsed time" + elapsedtime);
-                progresstimepercent = (((systime / 1000) - elapsedtime) / (systime / 1000)) * 100;
+                progresstimepercent = (((systime / 1000) - elapsedtime-totalelapsed) / (systime / 1000)) * 100;
                 Math.ceil(progresstimepercent);
-                System.out.println(progresstimepercent);
-                //totalpercent= (int) (progresstimepercent+totalpercent);
+
                 String totper = Integer.toString((int) progresstimepercent);
                 progressBar.setProgress((int) progresstimepercent);
                 if (elapsedtime < 0) {
@@ -214,6 +222,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     progressText.setText(totper);
                 }
             }
+
         }
 
 
@@ -287,6 +296,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 0) {
                     timeLeftInMilliSeconds = 60000;
                     selectedTime = 60000;
+                    selectedTimeforpause = 60000;
                     //millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 1) {
@@ -294,6 +304,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     stopService(serviceintent);
                     timeLeftInMilliSeconds = 120000;
                     selectedTime = 120000;
+                    selectedTimeforpause = 120000;
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
 
                 }
@@ -302,6 +313,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     stopService(serviceIntent);
                     timeLeftInMilliSeconds = 180000;
                     selectedTime = 180000;
+                    selectedTimeforpause = 180000;
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 3) {
@@ -309,6 +321,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     stopService(serviceIntent);
                     timeLeftInMilliSeconds = 300000;
                     selectedTime = 300000;
+                    selectedTimeforpause = 300000;
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 4) {
@@ -316,6 +329,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     stopService(serviceIntent);
                     timeLeftInMilliSeconds = 600000;
                     selectedTime = 600000;
+                    selectedTimeforpause = 60000;
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
             }
@@ -412,15 +426,15 @@ public class TimeoutActivity extends AppCompatActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 int time = pauseIntent.getIntExtra("time", 0);
+                totalelapsed=totalelapsed+pauseIntent.getDoubleExtra("elap", 0);
                 timeLeftInMilliSeconds = time;
-                endTimeFlag=0;
+                ispaused=true;
                 isTimerRunning = false;
-               // ispaused=true;
-
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceIntent);
                 // unregisterReceiver(broadcastReceiver);
                 pauseButton.setVisibility(View.INVISIBLE);
+
 
             }
         });
@@ -497,16 +511,17 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceIntent);
-                timeLeftInMilliSeconds = selectedTime;
+               timeLeftInMilliSeconds = selectedTimeforpause;
                 pauseButton.setVisibility(View.INVISIBLE);
                 isTimerRunning = false;
+                totalelapsed=0;
                 //ispaused=false;
                 progressBar.setProgress(100);
                 progressText.setText("100");
                 endTimeFlag=0;
 
 
-                millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                millisecondConverterAndTimerUIupdate(selectedTimeforpause,timerValue);
             }
 
 
