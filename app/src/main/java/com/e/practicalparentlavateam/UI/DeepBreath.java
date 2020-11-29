@@ -20,7 +20,7 @@ public class DeepBreath extends AppCompatActivity {
 
     //Enu for all the states in state machine
     public enum State {
-        WAITING_TO_INHALE, INHALING, INHALED_FOR_3S, INHALES_FOR_10S, DONE_INHALE, EXHALE, EXHALE_3S, DONE_EXHALE, DONE,
+        WAITING_TO_INHALE, INHALING, INHALED_FOR_3S, INHALES_FOR_10S, DONE_INHALE, EXHALE, EXHALE_3S, DONE_EXHALE, MORE, DONE,
     }
     private State breathState = State.WAITING_TO_INHALE;
 
@@ -125,23 +125,34 @@ public class DeepBreath extends AppCompatActivity {
             case WAITING_TO_INHALE:
                 break;
             case INHALING:
+                //inhaling();
                 break;
             case INHALED_FOR_3S:
+                //inhaled3s();
                 break;
             case INHALES_FOR_10S:
+                //inhaled10s();
                 break;
             case DONE_INHALE:
+                //doneInhale();
                 break;
             case EXHALE:
+                //exhale();
                 break;
             case EXHALE_3S:
+                //exhale3s();
                 break;
             case DONE_EXHALE:
                 break;
+                //doneExhale();
+            case MORE:
+                //moreBreaths();
+                break;
             case DONE:
+                //done();
                 break;
         }
-
+        breathState = newState;
     }
 
     public static Intent makeDeepBreathIntent(Context context, int numBreaths) {
