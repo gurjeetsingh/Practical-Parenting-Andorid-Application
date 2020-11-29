@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.14999998" />
 
     <Button
-        android:id="@+id/begin"
+        android:id="@+id/beginButton"
         android:layout_width="115dp"
         android:layout_height="52dp"
         android:background="@drawable/rounded_corners_buttons"

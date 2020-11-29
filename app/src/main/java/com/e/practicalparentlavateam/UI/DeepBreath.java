@@ -20,6 +20,9 @@ public class DeepBreath extends AppCompatActivity {
     private Button enlarge;
     private Button shrink;
 
+    private static final String EXTRA_NUM_BREATHS = "Extra - Num breaths";
+    private int numBreaths;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +87,9 @@ public class DeepBreath extends AppCompatActivity {
         });
     }
 
-    public static Intent makeIntent(Context context) {
-        return new Intent(context, DeepBreath.class);
+    public static Intent makeDeepBreathIntent(Context context, int numBreaths) {
+        Intent intent = new Intent(context, DeepBreath.class);
+        intent.putExtra(EXTRA_NUM_BREATHS, numBreaths);
+        return intent;
     }
 }
