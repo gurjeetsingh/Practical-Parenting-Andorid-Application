@@ -26,8 +26,7 @@ public class DeepBreath extends AppCompatActivity {
     private State breathState = State.WAITING_TO_INHALE;
 
     private ImageView circle;
-    private Button enlarge;
-    private MediaPlayer sound;
+    private MediaPlayer sound = new MediaPlayer();
 
     //state machine vars
     private static final String EXTRA_NUM_BREATHS = "Extra - Num breaths";
@@ -112,6 +111,7 @@ public class DeepBreath extends AppCompatActivity {
                     if(event.getEventTime() - event.getDownTime() < 3000) {
                         if (breathState == State.INHALING) {
                             changeState(State.WAITING_TO_INHALE);
+                            sound.stop();
                             //currentStateView.setText("INHALING");
                         }
                     }
@@ -175,6 +175,10 @@ public class DeepBreath extends AppCompatActivity {
         beginFSM.setText(R.string.in);
         Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
         circle.startAnimation(animationIn);
+        if(!sound.equals(null))
+            sound.stop();
+        sound = MediaPlayer.create(DeepBreath.this, R.raw.music);
+        sound.start();
     }
 
     private void exhale() {
@@ -182,10 +186,30 @@ public class DeepBreath extends AppCompatActivity {
         //TODO: Start exhale sound
         Animation animationOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_out);
         circle.startAnimation(animationOut);
+        if(!sound.equals(null))
+            sound.stop();
+
+        sound = MediaPlayer.create(DeepBreath.this, R.raw.out);
+        sound.start();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sound.stop();
+            }
+        }, 1000*10);
+
 
         beginFSM.setText(R.string.out);
         numBreaths--;
         breathDisplay.setText(""+ numBreaths);
+    }
+
+    @Override
+    public void onBackPressed() {
+        sound.stop();
+        Intent mainIntent=MainMenu.makeIntent(DeepBreath.this);
+        startActivity(mainIntent);
+        DeepBreath.this.finish();
     }
 
 
