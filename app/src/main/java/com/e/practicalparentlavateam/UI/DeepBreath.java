@@ -18,6 +18,13 @@ import android.widget.TextView;
 import com.e.practicalparentlavateam.R;
 
 public class DeepBreath extends AppCompatActivity {
+
+    //Enu for all the states in state machine
+    public enum State {
+        WAITING_TO_INHALE, INHALING, INHALED_FOR_3S, INHALES_FOR_10S, DONE_INHALE, EXHALE, EXHALE_3S, DONE_EXHALE, DONE,
+    }
+    private State breathState = State.WAITING_TO_INHALE;
+
     private ImageView circle;
     private Button enlarge;
     private Button shrink;
