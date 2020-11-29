@@ -18,9 +18,9 @@ import com.e.practicalparentlavateam.R;
 
 public class DeepBreath extends AppCompatActivity {
 
-    //Enu for all the states in state machine
+    //Enum for all the states in state machine
     public enum State {
-        WAITING_TO_INHALE, INHALING, INHALED_FOR_3S, INHALES_FOR_10S, DONE_INHALE, READY_TO_EXHALE, EXHALING, EXHALE_3S, DONE_EXHALE, MORE, DONE,
+        WAITING_TO_INHALE, INHALING, INHALED_FOR_3S, INHALES_FOR_10S, DONE_INHALE, READY_TO_EXHALE, DONE_EXHALE, MORE, DONE,
     }
     private State breathState = State.WAITING_TO_INHALE;
 
@@ -156,14 +156,6 @@ public class DeepBreath extends AppCompatActivity {
                 currentStateView.setText("READY_TO_EXHALE");
                 readyExhale();
                 break;
-            case EXHALING:
-                currentStateView.setText("EXHALING");
-                exhaling();
-                break;
-            case EXHALE_3S:
-                currentStateView.setText("EXHALE_3S");
-                exhale3s();
-                break;
             case DONE_EXHALE:
                 currentStateView.setText("DONE_EXHALE");
                 break;
@@ -268,66 +260,8 @@ public class DeepBreath extends AppCompatActivity {
     private void readyExhale() {
         //TODO: Start exhale animation
         //TODO: Start exhale sound
-        endBreathing();
     }
 
-    private void exhaling() {
-        //TODO: Play exhale animation
-        //TODO: Start exhale sound
-    }
-
-    private void exhale3s() {
-        //TODO: Update count of breaths left
-        //TODO: Last breath logic
-        beginFSM.setText("IN");
-
-    }
-
-//correct logic for breathing out, but not working
-    private void endBreathing() {
-
-        beginFSM.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (breathState == State.READY_TO_EXHALE) {
-                        changeState(State.EXHALING);
-
-                    }
-
-
-                }
-
-                if(event.getAction() == MotionEvent.ACTION_UP){
-                    if(event.getEventTime() - event.getDownTime() < 3000) {
-                        if (breathState == State.EXHALING) {
-                            changeState(State.READY_TO_EXHALE);
-
-                        }
-                    }
-                    if(event.getEventTime() - event.getDownTime() > 3000) {
-                        if (breathState == State.EXHALING) {
-                            changeState(State.EXHALE_3S);
-
-                        }
-                    }
-                    //TODO: this condition is never checked?
-                    if(event.getEventTime() - event.getDownTime() > 7000) {
-                        if (breathState == State.EXHALING) {
-                            changeState(State.DONE_EXHALE);
-
-                        }
-                    }
-                    else{
-                        enlarge.setText(R.string.out);
-                    }
-                    return true;
-                }
-                return true;
-            }
-        });
-
-    }
 
     public static Intent makeDeepBreathIntent(Context context, int numBreaths) {
         Intent intent = new Intent(context, DeepBreath.class);
