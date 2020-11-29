@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="#A65F9595"
+        android:background="@color/enterTextBackground"
         android:ems="10"
         android:hint="@string/ex_gurjeet"
         android:importantForAutofill="no"
