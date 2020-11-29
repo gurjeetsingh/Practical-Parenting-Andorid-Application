@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="#A6445871"
+        android:background="@color/directionBackground"
         android:fontFamily="@font/imprima"
         android:text="@string/name"
         android:textColor="#FFFFFF"
