@@ -32,6 +32,10 @@ public class DeepBreath extends AppCompatActivity {
         enlargeCircle();
     }
 
+    private void breathSetup(){
+
+    }
+
     private void enlargeCircle() {
         enlarge.setOnLongClickListener(new View.OnLongClickListener() {
             Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);

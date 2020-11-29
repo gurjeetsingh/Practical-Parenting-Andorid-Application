@@ -133,6 +133,7 @@
         <item>Set Time: 5 Minutes</item>
         <item>Set Time: 10 Minutes</item>
     </string-array>
+    <string name="title_activity_breath_setup">BreathSetup</string>
 
 
 </resources>
