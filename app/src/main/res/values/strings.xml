@@ -134,6 +134,9 @@
         <item>Set Time: 10 Minutes</item>
     </string-array>
     <string name="title_activity_breath_setup">BreathSetup</string>
+    <string name="breath_num_hint">3</string>
+    <string name="breath_setup_directions">Please Enter The Number of Breaths you would like to take</string>
+    <string name="b_setup_begin">Begin</string>
 
 
 </resources>
