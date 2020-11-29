@@ -227,7 +227,7 @@ public class TimeoutActivity extends AppCompatActivity {
      */
     public void notIf()
     {
-        Intent intent = new Intent(this, TimeoutActivity.class);
+                Intent intent = new Intent(this, TimeoutActivity.class);
         intent.putExtra("StopAlarm",true);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -347,19 +347,19 @@ public class TimeoutActivity extends AppCompatActivity {
                     System.out.println("25%");
                 }
                 if (position == 2) {
-                    timefactor=1/2;
-                }
-                if (position == 3) {
-                    timefactor=3/4;
-                }
-                if (position == 4) {
-                    timefactor = 2;
-                }
-                if(position==4){
                     timefactor=3;
                 }
-                if(position==4){
+                if (position == 3) {
                     timefactor=4;
+                }
+                if (position == 4) {
+                    timefactor = 5;
+                }
+                if(position==5){
+                    timefactor=6;
+                }
+                if(position==6){
+                    timefactor=7;
                 }
                 }
             @Override

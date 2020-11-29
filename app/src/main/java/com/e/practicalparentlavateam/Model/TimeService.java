@@ -39,6 +39,7 @@ public class TimeService extends Service {
     long elapsedtime;
     long originaltime;
     int iterator=1;
+    int timer;
 
 
 /*
@@ -176,10 +177,17 @@ https://developer.android.com/reference/android/os/Handler
                 timeLeftInMilliSeconds = userSelectedTime - 1000*iterator;
                 iterator++;
                 long systemtime = finalTime;
-                int timer = (int) timeLeftInMilliSeconds;
+             if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
+             {
+                 timer = 0;
+             }
+             else {
+                 timer=(int)timeLeftInMilliSeconds;
+             }
+
                 long endTime = (int) finalTime;
                 // System.out.println("this is the real endtime" + endTime);
-                if (timer < 0) {
+                if (timer < 0 || timer==0) {
                     startAlarm();
                     stopSelf();
                 }
@@ -188,6 +196,125 @@ https://developer.android.com/reference/android/os/Handler
                 sendBroadcast(comIntent);
             }
 
+
+        }
+        if(timefactor==3)
+        {
+            //System.out.println("kalllu");
+            double elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            System.out.println(elapsedSeconds);
+            if(Math.floor(elapsedSeconds%2)==1)
+            {
+                timeLeftInMilliSeconds = userSelectedTime - 1000*iterator;
+                iterator++;
+                long systemtime = finalTime;
+                if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
+                {
+                    timer = 0;
+                }
+                else {
+                    timer=(int)timeLeftInMilliSeconds;
+                }
+
+                long endTime = (int) finalTime;
+                // System.out.println("this is the real endtime" + endTime);
+                if (timer < 0 || timer==0) {
+                    startAlarm();
+                    stopSelf();
+                }
+                comIntent.putExtra("time", timer);
+                comIntent.putExtra("elap", Math.floor(elapsedSeconds/2));
+                sendBroadcast(comIntent);
+            }
+
+
+        }
+        if(timefactor==4)
+        {
+            //System.out.println("kalllu");
+            double elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            System.out.println(elapsedSeconds);
+            if(Math.floor(elapsedSeconds%0.75)==1)
+            {
+                timeLeftInMilliSeconds = userSelectedTime - 1000*iterator;
+                iterator++;
+                long systemtime = finalTime;
+                if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
+                {
+                    timer = 0;
+                }
+                else {
+                    timer=(int)timeLeftInMilliSeconds;
+                }
+
+                long endTime = (int) finalTime;
+                // System.out.println("this is the real endtime" + endTime);
+                if (timer < 0 || timer==0) {
+                    startAlarm();
+                    stopSelf();
+                }
+                comIntent.putExtra("time", timer);
+                comIntent.putExtra("elap", Math.floor(elapsedSeconds/0.75));
+                sendBroadcast(comIntent);
+            }
+
+
+
+        }
+
+        if(timefactor==5)
+        {
+            //System.out.println("kalllu");
+            double elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            System.out.println(elapsedSeconds);
+            timeLeftInMilliSeconds = userSelectedTime - 1000*iterator;
+            iterator+=2;
+            long systemtime = finalTime;
+            if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
+            {
+                timer = 0;
+            }
+            else {
+                timer=(int)timeLeftInMilliSeconds;
+            }
+
+            long endTime = (int) finalTime;
+            // System.out.println("this is the real endtime" + endTime);
+            if (timer < 0 || timer==0) {
+                startAlarm();
+                stopSelf();
+            }
+            comIntent.putExtra("time", timer);
+            comIntent.putExtra("elap", Math.floor(elapsedSeconds*2));
+            sendBroadcast(comIntent);
+
+        }
+        if(timefactor==6)
+        {
+
+            //System.out.println("kalllu");
+            double elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            System.out.println(elapsedSeconds);
+            timeLeftInMilliSeconds = userSelectedTime - 1000*iterator;
+            iterator+=3;
+            long systemtime = finalTime;
+            if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
+            {
+                timer = 0;
+            }
+            else {
+                timer=(int)timeLeftInMilliSeconds;
+            }
+
+            long endTime = (int) finalTime;
+            // System.out.println("this is the real endtime" + endTime);
+            if (timer < 0 || timer==0) {
+                startAlarm();
+                stopSelf();
+            }
+            comIntent.putExtra("time", timer);
+            comIntent.putExtra("elap", Math.floor(elapsedSeconds*3));
+            sendBroadcast(comIntent);
 
         }
 
