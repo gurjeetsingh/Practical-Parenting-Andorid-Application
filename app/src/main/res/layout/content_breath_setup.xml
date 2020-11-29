@@ -13,7 +13,7 @@
         android:background="@color/enterTextBackground"
         android:ems="10"
         android:fontFamily="@font/imprima"
-        android:hint="@string/breath_num_hint"
+        android:text="@string/breath_num_hint"
         android:inputType="number"
         android:numeric="integer"
         android:textAlignment="center"

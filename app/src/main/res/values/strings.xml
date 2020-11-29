@@ -137,6 +137,14 @@
     <string name="breath_num_hint">3</string>
     <string name="breath_setup_directions">Please Enter The Number of Breaths you would like to take</string>
     <string name="b_setup_begin">Begin</string>
+    <string name="waiting_to_inhale">Waiting to Inhale</string>
+    <string name="continue_breath">Continue</string>
+    <string name="inhaling">Inhaling</string>
+    <string name="exhaling">Exhaling</string>
+    <string name="finish">Done</string>
+    <string name="breaths_remaining">Breaths Remaining</string>
+    <string name="state">Let\'s begin</string>
+    <string name="_2">2</string>
 
 
 </resources>

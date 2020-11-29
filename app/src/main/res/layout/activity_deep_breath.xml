@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/circle" />
 
     <Button
-        android:id="@+id/enlarge"
+        android:id="@+id/breath"
         android:layout_width="118dp"
         android:layout_height="48dp"
         android:background="@drawable/rounded_corners_buttons"
@@ -42,7 +42,7 @@
         android:layout_marginBottom="16dp"
         android:background="@color/directionBackground"
         android:fontFamily="@font/imprima"
-        android:text="2"
+        android:text="@string/_2"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
@@ -62,7 +62,7 @@
         android:layout_marginBottom="32dp"
         android:background="@color/directionBackground"
         android:fontFamily="@font/imprima"
-        android:text="Breaths Remaining"
+        android:text="@string/breaths_remaining"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -80,23 +80,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
-        android:text="TextView"
+        android:text="@string/state"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num_breaths_rem" />
-
-    <Button
-        android:id="@+id/button_fsm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Begin"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enlarge" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
