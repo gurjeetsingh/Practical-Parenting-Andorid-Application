@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -18,7 +19,7 @@ import com.e.practicalparentlavateam.R;
 public class DeepBreath extends AppCompatActivity {
     private ImageView circle;
     private Button enlarge;
-    private Button shrink;
+    private MediaPlayer sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class DeepBreath extends AppCompatActivity {
                     @Override
                     public void run() {
                         circle.startAnimation(animationIn);
+                        sound = MediaPlayer.create(DeepBreath.this, R.raw.music);
+                        sound.start();
                     }
                 };
                 final Runnable toInhale = new Runnable() {
@@ -63,11 +66,13 @@ public class DeepBreath extends AppCompatActivity {
                         if(event.getAction() == MotionEvent.ACTION_UP){
                             if(event.getEventTime() - event.getDownTime() < 3000) {
                                 circle.clearAnimation();
+                                sound.stop();
                                 enlarge.setText(R.string.begin);
                             }
                             else{
                                 enlarge.setText(R.string.out);
                                 circle.startAnimation(animationOut);
+                                sound.stop();
                                 handler.postDelayed(toInhale,3000);
                             }
                             return true;
