@@ -116,7 +116,6 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=BreathSetup.makeIntent(MainMenu.this);
                 startActivity(intent);
-                finish();
             }
         });
     }

@@ -73,7 +73,6 @@ public class DeepBreath extends AppCompatActivity {
 
         more = (Button) findViewById(R.id.more);
         more.setVisibility(View.INVISIBLE);
-        back();
 
         //extract number of breaths form setup
         breathSetUp();
@@ -234,19 +233,6 @@ public class DeepBreath extends AppCompatActivity {
         beginFSM.setText(R.string.out);
         numBreaths--;
         breathDisplay.setText(""+ numBreaths);
-    }
-
-    private void back() {
-        Button button = (Button) findViewById(R.id.back);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = MainMenu.makeIntent(DeepBreath.this);
-                soundOut.stop();
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     @Override
