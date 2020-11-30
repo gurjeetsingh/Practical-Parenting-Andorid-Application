@@ -152,6 +152,7 @@
     <string name="breaths_remaining">Breaths Remaining</string>
     <string name="state">Let\'s begin</string>
     <string name="_2">2</string>
+    <string name="good_job">Good Job</string>
     <string-array name="breaths_array">
         <item>1</item>
         <item>2</item>
