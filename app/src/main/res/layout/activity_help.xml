@@ -7,6 +7,160 @@
     android:background="@drawable/background"
     tools:context=".UI.HelpActivity">
 
+    <TextView
+        android:id="@+id/yuhan"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center"
+        android:text="@string/yuhan_he"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yuchun" />
+
+    <TextView
+        android:id="@+id/develop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/developed_by_team_lava"
+        android:textColor="#E6FF5900"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/help_toolbar" />
+
+    <TextView
+        android:id="@+id/gurjeet"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center"
+        android:text="@string/gurjeet_singh"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yuhan" />
+
+    <TextView
+        android:id="@+id/yuchun"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center"
+        android:text="@string/yuchun_he"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sami" />
+
+    <TextView
+        android:id="@+id/sami"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center"
+        android:text="@string/ahmad_as_sami"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/members" />
+
+    <TextView
+        android:id="@+id/members"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/team_members"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/develop" />
+
+    <TextView
+        android:id="@+id/project_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/cmpt276"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_sound_copyright"
+        app:layout_constraintVertical_bias="0.104" />
+
+    <TextView
+        android:id="@+id/UI_art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/ui_art_courtesy_of_gurjeet_singh"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gurjeet" />
+
+    <TextView
+        android:id="@+id/coin_image_copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/coin"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UI_art" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/help_toolbar"
         android:layout_width="match_parent"
@@ -18,265 +172,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="667dp"
+    <TextView
+        android:id="@+id/coin_sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/coinsound"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/help_toolbar"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/coin_image_copyright" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/win_image_copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/winimage"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coin_sound" />
 
-            <TextView
-                android:id="@+id/yuhan"
-                android:layout_width="177dp"
-                android:layout_height="wrap_content"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center"
-                android:text="@string/yuhan_he"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="serif"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/yuchun" />
+    <TextView
+        android:id="@+id/lose_image_copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/loseimage"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/win_image_copyright" />
 
-            <TextView
-                android:id="@+id/develop"
-                android:layout_width="412dp"
-                android:layout_height="32dp"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/developed_by_team_lava"
-                android:textColor="#E6FF5900"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/gurjeet"
-                android:layout_width="177dp"
-                android:layout_height="wrap_content"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center"
-                android:text="@string/gurjeet_singh"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="serif"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/yuhan" />
-
-            <TextView
-                android:id="@+id/yuchun"
-                android:layout_width="177dp"
-                android:layout_height="wrap_content"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center"
-                android:text="@string/yuchun_he"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="serif"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sami" />
-
-            <TextView
-                android:id="@+id/sami"
-                android:layout_width="177dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center"
-                android:text="@string/ahmad_as_sami"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="serif"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/members" />
-
-            <TextView
-                android:id="@+id/members"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/team_members"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/develop" />
-
-            <TextView
-                android:id="@+id/project_id"
-                android:layout_width="408dp"
-                android:layout_height="94dp"
-                android:layout_marginTop="48dp"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/cmpt276"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/music2_copyright" />
-
-            <TextView
-                android:id="@+id/UI_art"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/ui_art_courtesy_of_gurjeet_singh"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gurjeet" />
-
-            <TextView
-                android:id="@+id/coin_image_copyright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/coin"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.504"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/UI_art" />
-
-            <TextView
-                android:id="@+id/coin_sound"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/coinsound"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coin_image_copyright" />
-
-            <TextView
-                android:id="@+id/win_image_copyright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/winimage"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coin_sound" />
-
-            <TextView
-                android:id="@+id/lose_image_copyright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/loseimage"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/win_image_copyright" />
-
-            <TextView
-                android:id="@+id/alarm_sound_copyright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/alarmsound"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lose_image_copyright" />
-
-            <TextView
-                android:id="@+id/music1_copyright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/music1"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/alarm_sound_copyright" />
-
-            <TextView
-                android:id="@+id/music2_copyright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#A6445871"
-                android:fontFamily="@font/imprima"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/music2"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/music1_copyright" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    <TextView
+        android:id="@+id/alarm_sound_copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#A6445871"
+        android:fontFamily="@font/imprima"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/alarmsound"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lose_image_copyright" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
