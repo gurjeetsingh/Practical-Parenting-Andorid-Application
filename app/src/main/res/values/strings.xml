@@ -29,6 +29,7 @@
     <string name="choose_side">choose side</string>
     <string name="done">Task Completed</string>
     <string name="yes">Yes</string>
+    <string name="back">back</string>
 
     <!-- Strings used for TextView Text -->
     <string name="whose_history">\'s history</string>
@@ -37,6 +38,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="delete_comfirm">Are you sure you want to delete?</string>
     <string name="hint_for_name">Please Input A Name</string>
+    <string name="hint_for_release">Release button and breath out.</string>
+    <string name="hint_for_breath">Hold button and breath in.</string>
     <string name="configure">Select a Child to edit:</string>
     <string name="Choice">Choice:</string>
     <string name="history_starts_here">History Starts Here</string>
@@ -101,6 +104,7 @@
     <string name="title_change_turn">Change Turn</string>
     <string name="title_help">Help</string>
     <string name="title_choose_side">Choose Side</string>
+    <string name="title_deep_breath">Deep Breath</string>
 
 
     <!-- Strings used for fragments for navigation -->
