@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.e.practicalparentlavateam.R;
 
@@ -44,6 +45,8 @@ public class BreathSetup extends AppCompatActivity {
                 //extract the number entered
                 numBreaths = Integer.parseInt(editNumBreaths.getText().toString());
                 Intent intent=DeepBreath.makeDeepBreathIntent(BreathSetup.this, numBreaths);
+                Toast.makeText(BreathSetup.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+                        .show();
                 startActivity(intent);
             }
         });
