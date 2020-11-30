@@ -1,5 +1,5 @@
-<!--followed tutorial https://www.youtube.com/watch?v=7tnlh1nVkuE-->
 <?xml version="1.0" encoding="utf-8"?>
+<!--followed tutorial https://www.youtube.com/watch?v=7tnlh1nVkuE-->
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
