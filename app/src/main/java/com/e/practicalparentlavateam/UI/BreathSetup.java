@@ -113,6 +113,7 @@ public class BreathSetup extends AppCompatActivity {
                 saveTimes();
                 Intent intent=DeepBreath.makeDeepBreathIntent(BreathSetup.this, numBreaths);
                 startActivity(intent);
+                finish();
             }
         });
     }
