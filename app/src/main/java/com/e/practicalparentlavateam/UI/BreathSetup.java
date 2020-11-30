@@ -36,7 +36,6 @@ public class BreathSetup extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //editNumBreaths = findViewById(R.id.editTextNumber);
-
         createBreathSpinner();
 
         setupBegin();
