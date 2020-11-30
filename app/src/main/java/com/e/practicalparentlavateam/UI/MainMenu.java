@@ -31,7 +31,6 @@ public class MainMenu extends AppCompatActivity {
         timeoutTimerButton();
         whoseTurnButton();
         helpScreenButton();
-        deepBreathButton();
     }
 
     private void configureChildrenButton() {
@@ -103,18 +102,6 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent helpIntent=HelpActivity.makeIntent(MainMenu.this);
                 startActivity(helpIntent);
-            }
-        });
-    }
-
-    private void deepBreathButton() {
-        //This will be for the deepbreath activity
-        Button breathButton=findViewById(R.id.deep_breath);
-        breathButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=BreathSetup.makeIntent(MainMenu.this);
-                startActivity(intent);
             }
         });
     }
