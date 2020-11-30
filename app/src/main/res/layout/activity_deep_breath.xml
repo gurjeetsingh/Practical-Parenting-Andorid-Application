@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/circle"
-        android:layout_width="118dp"
-        android:layout_height="133dp"
+        android:layout_width="102dp"
+        android:layout_height="107dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
