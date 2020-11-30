@@ -14,17 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".UI.BreathSetup"
-            android:label="@string/title_activity_breath_setup"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".UI.DeepBreath"
-            android:label="@string/title_deep_breath"
-            android:parentActivityName=".UI.MainMenu"/>
-        <activity
-            android:name=".UI.HelpActivity"
+        <activity android:name=".UI.HelpActivity"
             android:label="@string/title_help"
-            android:parentActivityName=".UI.MainMenu" />
+            android:parentActivityName=".UI.MainMenu"></activity>
         <activity
             android:name=".UI.ChangeTurn"
             android:label="@string/title_change_turn"
@@ -58,7 +50,7 @@
         <activity
             android:name=".UI.ChooseChildren"
             android:label="@string/title_activity_select_child"
-            android:parentActivityName=".UI.SelectChildren" />
+            android:parentActivityName=".UI.CoinFlipActivity" />
         <activity
             android:name=".UI.EditChild"
             android:label="@string/title_activity_edit_child"

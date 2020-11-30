@@ -1,9 +1,9 @@
 /*This is the activity for the timer
-* Here, the timeout activity is  defined and
-* layout is used to make the timer run. It
-* is heavily reliant on the TimeService to
-* keep timer alive even if app is closed.
-* */
+ * Here, the timeout activity is  defined and
+ * layout is used to make the timer run. It
+ * is heavily reliant on the TimeService to
+ * keep timer alive even if app is closed.
+ * */
 
 package com.e.practicalparentlavateam.UI;
 
@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -55,6 +57,19 @@ public class TimeoutActivity extends AppCompatActivity {
     private boolean isTimerRunning = false;
     private long timeLeftInMilliSeconds;
     private long selectedTime;
+    private ProgressBar progressBar;
+    private TextView progressText;
+    private TextView timeFactorText;
+    double timeo=0;
+
+    int endTimeFlag=0;
+    long endTime;
+    long systemEndTime;
+    double progresstimepercent;
+    boolean ispaused=false;
+    int timeFactor=1;
+    int selectedTimeForPause;
+    double totalelapsed=0;
 
     Context context = this;
 
@@ -62,6 +77,7 @@ public class TimeoutActivity extends AppCompatActivity {
 
     private TextView timerValue;
     Intent pauseIntent;
+    Intent resetIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,10 +91,17 @@ public class TimeoutActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         createTimeDurationSpinner();
+        timeFactorText=findViewById(R.id.timefactor2);
+        createTimeFactorSpinner();
 
 
         timerValue = (TextView) findViewById(R.id.timer_text);
         timerValue.setBackgroundResource(R.color.stopg);
+        //For the progress piechart
+        progressBar=findViewById(R.id.circular_progress_bar);
+        progressText=findViewById(R.id.progressText);
+
+
 
         /*
         This allows us to use the clickback from the notification box to stop the alarm.
@@ -115,10 +138,18 @@ public class TimeoutActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (isTimerRunning){
+            pauseButton.setVisibility(View.VISIBLE);
+        }
+
         registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
     }
 
@@ -133,19 +164,60 @@ public class TimeoutActivity extends AppCompatActivity {
         }
     };
 
+    private void setLatestEndTime(int restime){
+        SharedPreferences settings = getSharedPreferences("endpref", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("endtime",restime);
+        editor.apply();
+
+    }
+    private int getLatestEndTime()
+    {
+        SharedPreferences settings = getSharedPreferences("resetpref", 0);
+        int newtime = settings.getInt("resettime", 0);
+        return newtime;
+    }
+
     /*
     This updates the UI whenever user is viewing the activity. It gets the information
     from the counterservice. When the time goes to 0 or below 0, a notification is sent
     to the phone immediately.
      */
     private void updateUI(Intent intent) {
-        int time = intent.getIntExtra("time", 0);
+
+        if(endTimeFlag==0)
+        {
+            final int time = intent.getIntExtra("time", 0);
+
+            if(getLatestEndTime()!=0)
+            {
+                systemEndTime =getLatestEndTime();
+            }
+            else
+            {
+                setLatestEndTime(time);
+                systemEndTime=getLatestEndTime();
+            }
+
+            endTimeFlag++;
+        }
+        final int time = intent.getIntExtra("time", 0);
+        double elapsedtime = intent.getDoubleExtra("elap", 0);
+        endTime = intent.getLongExtra("endtime", 0);
         int mins = (int) (time / (double) 1000) / 60;
         int secs = (int) (time / (double) 1000) % 60;
-        if (time == 0 || time < 0) {
+        if (time == 0 || time < 0)
+
+        {
             isTimerRunning = false;
+            totalelapsed=0;
             alarmOffButton.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.INVISIBLE);
+            resetButton.setVisibility(View.INVISIBLE);
+            endTimeFlag = 0;
+            setLatestEndTime(0);
+            setLatestResetTime(0);
+            setTimeFactor(1);
             notIf();
             //Added vibrator
             Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -162,9 +234,65 @@ public class TimeoutActivity extends AppCompatActivity {
 
         }
 
+        //To keep variables updating even if app is closed/sidelined
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
         timerValue.setText(timeLeftFormatted);
         pauseIntent = intent;
+        pauseButton.setVisibility(View.VISIBLE);
+        resetButton.setVisibility(View.VISIBLE);
+        settimespeedtext();
+
+
+        if (time == 0 || time < 0 ||(((systemEndTime / 1000) - elapsedtime-totalelapsed) / (systemEndTime / 1000)) * 100==0) {
+            progressBar.setProgress(0);
+            progressText.setText("0");
+        } else {
+            progresstimepercent = (((systemEndTime / 1000) - elapsedtime-totalelapsed) / (systemEndTime / 1000)) * 100;
+            System.out.println("system end time is"+systemEndTime);
+            Math.ceil(progresstimepercent);
+
+            String totper = Integer.toString((int) progresstimepercent);
+            progressBar.setProgress((int) progresstimepercent);
+            if (elapsedtime < 0) {
+                progressText.setText("100");
+            } else {
+                progressText.setText(totper);
+            }
+        }
+
+    }
+
+    private void settimespeedtext()
+    {
+        int timeFacCheck=getTimeFactor();
+        if(timeFacCheck==1)
+        {
+            timeFactorText.setText("Time Speed@100%");
+        }
+        if(timeFacCheck==2)
+        {
+            timeFactorText.setText("Time Speed@25%");
+        }
+        if(timeFacCheck==3)
+        {
+            timeFactorText.setText("Time Speed@50%");
+        }
+        if(timeFacCheck==4)
+        {
+            timeFactorText.setText("Time Speed@75%");
+        }
+        if(timeFacCheck==5)
+        {
+            timeFactorText.setText("Time Speed@200%");
+        }
+        if(timeFacCheck==6)
+        {
+            timeFactorText.setText("Time Speed@300%");
+        }
+        if(timeFacCheck==7)
+        {
+            timeFactorText.setText("Time Speed@400%");
+        }
     }
 
 
@@ -207,6 +335,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 notificationManager.cancel(0);
             }
         }, delay);
+
     }
 
     @Override
@@ -236,42 +365,150 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 0) {
                     timeLeftInMilliSeconds = 60000;
                     selectedTime = 60000;
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    selectedTimeForPause = 60000;
+                    setLatestResetTime(60000);
+                    //millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 1) {
+                    timeLeftInMilliSeconds = 60000;
+                    selectedTime = 60000;
+                    selectedTimeForPause = 60000;
+                    setLatestResetTime(60000);
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                }
+                if (position == 2) {
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceintent);
                     timeLeftInMilliSeconds = 120000;
                     selectedTime = 120000;
+                    selectedTimeForPause = 120000;
+                    setLatestResetTime(120000);
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
 
-                }
-                if (position == 2) {
-                    Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
-                    stopService(serviceIntent);
-                    timeLeftInMilliSeconds = 180000;
-                    selectedTime = 180000;
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 3) {
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceIntent);
-                    timeLeftInMilliSeconds = 300000;
-                    selectedTime = 300000;
+                    timeLeftInMilliSeconds = 180000;
+                    selectedTime = 180000;
+                    selectedTimeForPause = 180000;
+                    setLatestResetTime(180000);
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 4) {
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceIntent);
+                    timeLeftInMilliSeconds = 300000;
+                    selectedTime = 300000;
+                    selectedTimeForPause = 300000;
+                    setLatestResetTime(300000);
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                }
+                if (position == 5) {
+                    Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceIntent);
                     timeLeftInMilliSeconds = 600000;
                     selectedTime = 600000;
+                    selectedTimeForPause = 600000;
+                    setLatestResetTime(600000);
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                timeLeftInMilliSeconds = selectedTime;
+            }
+        });
+    }
+
+    private void createTimeFactorSpinner() {
+        final Spinner timeFieldSpinner = (Spinner) findViewById(R.id.factorspinner);
+        //To get the string array from the Strings.XML
+        Resources res = this.getResources();
+        String[] timePiece = res.getStringArray(R.array.timefactor);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, timePiece);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        timeFieldSpinner.setAdapter(adapter);
+        timeFieldSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                }
+                if (position == 1) {
+
+                    timeFactor=1;
+                    timeFactorText.setText("Time@100%");
+                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceintent);
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    setTimeFactor(1);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
+                }
+                if (position == 2) {
+
+                    timeFactor=2;
+                    timeFactorText.setText("Time@25%");
+                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceintent);
+                    setTimeFactor(2);
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
+                }
+                if (position == 3) {
+                    timeFactor=3;
+                    timeFactorText.setText("Time@50%");
+                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceintent);
+                    setTimeFactor(3);
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");}
+                if (position == 4) {
+                    timeFactor=4;
+                    timeFactorText.setText("Time@75%");
+                    setTimeFactor(4);
+                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceintent);
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
+                }
+                if (position == 5) {
+                    timeFactor = 5;
+                    timeFactorText.setText("Time@200%");
+                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceintent);
+                    setTimeFactor(5);
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
+                }
+                if(position==6){
+                    timeFactor=6;
+                    timeFactorText.setText("Time@300%");
+                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceintent);
+                    setTimeFactor(6);
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
+                }
+                if(position==7){
+                    timeFactor=7;
+                    timeFactorText.setText("Time@400%");
+                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceintent);
+                    setTimeFactor(7);
+                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
@@ -279,12 +516,12 @@ public class TimeoutActivity extends AppCompatActivity {
 
     //The following function streamlines our updating the textview to easily convert
     //from seconds to milliseconds.
-    public void millisecondConverterAndTimerUIupdate(long selectedtime, TextView usertext)
+    public void millisecondConverterAndTimerUIupdate(long selectedTime, TextView userText)
     {
-        int mins = (int) (selectedtime / (double) 1000) / 60;
-        int secs = (int) (selectedtime / (double) 1000) % 60;
+        int mins = (int) (selectedTime / (double) 1000) / 60;
+        int secs = (int) (selectedTime / (double) 1000) % 60;
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
-        usertext.setText(timeLeftFormatted);
+        userText.setText(timeLeftFormatted);
     }
 
     /*
@@ -297,12 +534,21 @@ public class TimeoutActivity extends AppCompatActivity {
 
             public void onClick(View view) {
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
+
+                serviceIntent.putExtra("factor",timeFactor);
+                if(getLatestResetTime()==0)
+                {
+                    setLatestResetTime((int)timeLeftInMilliSeconds);
+                }
                 serviceIntent.putExtra("mills", timeLeftInMilliSeconds);
+                selectedTime=timeLeftInMilliSeconds;
                 isTimerRunning = true;
+                //ispaused=false;
                 startService(serviceIntent);
                 //System.out.println("Time left for start" + mTimeLeftInMillis);
                 registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
                 pauseButton.setVisibility(View.VISIBLE);
+                resetButton.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -316,16 +562,20 @@ public class TimeoutActivity extends AppCompatActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 int time = pauseIntent.getIntExtra("time", 0);
+                totalelapsed=totalelapsed+pauseIntent.getDoubleExtra("elap", 0);
                 timeLeftInMilliSeconds = time;
+                ispaused=true;
                 isTimerRunning = false;
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceIntent);
                 // unregisterReceiver(broadcastReceiver);
                 pauseButton.setVisibility(View.INVISIBLE);
 
+
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -398,15 +648,53 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceIntent);
-                timeLeftInMilliSeconds = selectedTime;
+                int requiredtime=getLatestResetTime();
+                timeLeftInMilliSeconds = requiredtime;
                 pauseButton.setVisibility(View.INVISIBLE);
                 isTimerRunning = false;
-                millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                totalelapsed=0;
+                //ispaused=false;
+                progressBar.setProgress(100);
+                progressText.setText("100");
+                endTimeFlag=0;
+                setLatestEndTime(0);
+                //  System.out.println(selectedTime);
+                millisecondConverterAndTimerUIupdate(requiredtime,timerValue);
+                setLatestResetTime(0);
+                resetButton.setVisibility(View.INVISIBLE);
             }
 
 
         });
     }
+
+    private void setLatestResetTime(int restime){
+        SharedPreferences settings = getSharedPreferences("resetpref", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("resettime",restime);
+        editor.commit();
+
+    }
+    private int getLatestResetTime()
+    {
+        SharedPreferences settings = getSharedPreferences("resetpref", 0);
+        int newtime = settings.getInt("resettime", 0);
+        return newtime;
+    }
+    private void setTimeFactor(int restime){
+        SharedPreferences settings = getSharedPreferences("timepref", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("factime",restime);
+        editor.commit();
+
+    }
+    private int getTimeFactor()
+    {
+        SharedPreferences settings = getSharedPreferences("timepref", 0);
+        int newtime = settings.getInt("factime", 0);
+        return newtime;
+    }
+
 
 
     /*

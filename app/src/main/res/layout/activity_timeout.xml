@@ -9,8 +9,9 @@
     tools:context=".UI.TimeoutActivity">
 
     <RelativeLayout
-        android:layout_width="407dp"
-        android:layout_height="493dp"
+        android:id="@+id/relativeLayout"
+        android:layout_width="404dp"
+        android:layout_height="406dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
@@ -24,12 +25,12 @@
 
         <Button
             android:id="@+id/time_push_button"
-            android:layout_width="132dp"
-            android:layout_height="62dp"
+            android:layout_width="115dp"
+            android:layout_height="28dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginBottom="128dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="107dp"
             android:background="@drawable/calm_rounded_buttons"
             android:fontFamily="@font/imprima"
             android:text="@string/start_timer"
@@ -52,12 +53,12 @@
 
         <Button
             android:id="@+id/pause_button"
-            android:layout_width="132dp"
-            android:layout_height="62dp"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="26dp"
-            android:layout_marginBottom="106dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="93dp"
             android:background="@drawable/calm_rounded_buttons"
             android:fontFamily="@font/imprima"
             android:text="@string/timer1"
@@ -72,8 +73,8 @@
             android:layout_height="42dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="137dp"
-            android:layout_marginTop="41dp"
+            android:layout_marginStart="138dp"
+            android:layout_marginTop="44dp"
             android:background="@drawable/calm_rounded_buttons"
             android:popupBackground="@color/darksilver"
             android:spinnerMode="dropdown"
@@ -82,11 +83,11 @@
         <Button
             android:id="@+id/custom_time"
             android:layout_width="159dp"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="124dp"
-            android:layout_marginBottom="66dp"
+            android:layout_marginStart="118dp"
+            android:layout_marginBottom="53dp"
             android:background="@drawable/calm_rounded_buttons"
             android:fontFamily="@font/imprima"
             android:text="@string/timer2"
@@ -100,8 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="43dp"
-            android:layout_marginEnd="45dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="13dp"
             android:background="@drawable/calm_rounded_buttons"
             android:fontFamily="@font/imprima"
             android:text="@string/timer3"
@@ -111,17 +112,18 @@
 
         <Button
             android:id="@+id/reset_button"
-            android:layout_width="98dp"
-            android:layout_height="wrap_content"
+            android:layout_width="105dp"
+            android:layout_height="36dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="405dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="388dp"
             android:background="@drawable/calm_rounded_buttons"
             android:fontFamily="@font/imprima"
             android:text="@string/timer4"
             android:textColor="#ED171732"
             android:textSize="18sp"
+            android:visibility="invisible"
             android:textStyle="bold" />
 
     </RelativeLayout>
@@ -134,7 +136,64 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="412dp"
+        android:layout_height="219dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <ProgressBar
+            android:id="@+id/circular_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="186dp"
+            android:layout_height="162dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="117dp"
+            android:layout_marginBottom="8dp"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/circular"
+            android:textAlignment="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/progressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="195dp"
+            android:layout_marginBottom="99dp" />
+
+        <TextView
+            android:id="@+id/timefactor2"
+            android:layout_width="96dp"
+            android:layout_height="108dp"
+            android:textSize="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="5dp" />
+
+    </RelativeLayout>
+
+    <Spinner
+        android:id="@+id/factorspinner"
+        android:layout_width="153dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
