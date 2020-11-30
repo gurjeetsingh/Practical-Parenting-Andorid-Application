@@ -21,7 +21,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.e.practicalparentlavateam.R;
 import com.google.gson.Gson;
@@ -112,6 +114,8 @@ public class BreathSetup extends AppCompatActivity {
                 //numBreaths = Integer.parseInt(editNumBreaths.getText().toString());
                 saveTimes();
                 Intent intent=DeepBreath.makeDeepBreathIntent(BreathSetup.this, numBreaths);
+                Toast.makeText(BreathSetup.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+                        .show();
                 startActivity(intent);
                 finish();
             }
