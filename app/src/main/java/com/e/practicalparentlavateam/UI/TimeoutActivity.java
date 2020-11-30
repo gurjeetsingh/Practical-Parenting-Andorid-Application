@@ -61,6 +61,7 @@ public class TimeoutActivity extends AppCompatActivity {
     private long selectedTime;
     private ProgressBar progressBar;
     private TextView progressText;
+    private TextView timeFactorText;
     double timeo=0;
 
     int endTimeFlag=0;
@@ -91,6 +92,7 @@ public class TimeoutActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         createTimeDurationSpinner();
+        timeFactorText=findViewById(R.id.timefactor2);
         createTimeFactorSpinner();
 
 
@@ -99,6 +101,7 @@ public class TimeoutActivity extends AppCompatActivity {
         //For the progress piechart
         progressBar=findViewById(R.id.circular_progress_bar);
         progressText=findViewById(R.id.progressText);
+
 
 
         /*
@@ -355,25 +358,31 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                   timefactor=1;
+                  timeFactorText.setText("Time@100%");
                 }
                 if (position == 1) {
                    timefactor=2;
-                    System.out.println("25%");
+                    timeFactorText.setText("Time@25%");
                 }
                 if (position == 2) {
                     timefactor=3;
+                    timeFactorText.setText("Time@50%");
                 }
                 if (position == 3) {
                     timefactor=4;
+                    timeFactorText.setText("Time@75%");
                 }
                 if (position == 4) {
                     timefactor = 5;
+                    timeFactorText.setText("Time@200%");
                 }
                 if(position==5){
                     timefactor=6;
+                    timeFactorText.setText("Time@300%");
                 }
                 if(position==6){
                     timefactor=7;
+                    timeFactorText.setText("Time@400%");
                 }
                 }
             @Override
