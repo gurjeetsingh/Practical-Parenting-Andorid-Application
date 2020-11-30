@@ -39,15 +39,15 @@ public class TimeService extends Service {
     int timer;
 
 
-/*
-The oncreate will have handlers; the remove
-call backs will remove any outstanding handler actions on the
-stack, and the postDelayed will delay update to the UI, just so that
-the ticker moves down, subtracting a millisecond..
-To understand how handlers work, which are integral to the application:
-https://developer.android.com/reference/android/os/Handler#removeCallbacks(java.lang.Runnable,%2520java.lang.Object)
-https://developer.android.com/reference/android/os/Handler
- */
+    /*
+    The oncreate will have handlers; the remove
+    call backs will remove any outstanding handler actions on the
+    stack, and the postDelayed will delay update to the UI, just so that
+    the ticker moves down, subtracting a millisecond..
+    To understand how handlers work, which are integral to the application:
+    https://developer.android.com/reference/android/os/Handler#removeCallbacks(java.lang.Runnable,%2520java.lang.Object)
+    https://developer.android.com/reference/android/os/Handler
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -89,7 +89,7 @@ https://developer.android.com/reference/android/os/Handler
         comIntent = new Intent(TIME_BROADCAST);
         long usertime = intent.getLongExtra("mills",0);
         int timefactorintent=intent.getIntExtra("factor",0);
-      //  System.out.println(usertime);
+        //  System.out.println(usertime);
 
         if(flag<1) {
             userSelectedTime = usertime;
@@ -112,10 +112,10 @@ https://developer.android.com/reference/android/os/Handler
     time + the user selected time. This allows us to figure out how much time
     is elapsing, by subtracting the current time from the final time.
      */
-  private void setFinalTime(long end)
-  {
-      finalTime =end;
-  }
+    private void setFinalTime(long end)
+    {
+        finalTime =end;
+    }
 
     private Runnable sendUpdatesToUI = new Runnable() {
         public void run() {
@@ -167,13 +167,13 @@ https://developer.android.com/reference/android/os/Handler
             {
                 timeLeftInMilliSeconds = userSelectedTime - 1000* timeIterator;
                 timeIterator++;
-             if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
-             {
-                 timer = 0;
-             }
-             else {
-                 timer=(int)timeLeftInMilliSeconds;
-             }
+                if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
+                {
+                    timer = 0;
+                }
+                else {
+                    timer=(int)timeLeftInMilliSeconds;
+                }
 
                 if (timer < 0 || timer==0) {
                     startAlarm();
@@ -219,22 +219,22 @@ https://developer.android.com/reference/android/os/Handler
             double elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
 
 
-                timeLeftInMilliSeconds = (long) (userSelectedTime - 1000* timeIterator *0.75);
-                timeIterator++;
-                if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
-                {
-                    timer = 0;
-                }
-                else {
-                    timer=(int)timeLeftInMilliSeconds;
-                }
-                if (timer < 0 || timer==0) {
-                    startAlarm();
-                    stopSelf();
-                }
-                comIntent.putExtra("time", timer);
-                comIntent.putExtra("elap", Math.floor(elapsedSeconds*0.75));
-                sendBroadcast(comIntent);
+            timeLeftInMilliSeconds = (long) (userSelectedTime - 1000* timeIterator *0.75);
+            timeIterator++;
+            if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
+            {
+                timer = 0;
+            }
+            else {
+                timer=(int)timeLeftInMilliSeconds;
+            }
+            if (timer < 0 || timer==0) {
+                startAlarm();
+                stopSelf();
+            }
+            comIntent.putExtra("time", timer);
+            comIntent.putExtra("elap", Math.floor(elapsedSeconds*0.75));
+            sendBroadcast(comIntent);
 
 
 
@@ -314,7 +314,7 @@ https://developer.android.com/reference/android/os/Handler
     Using the audio controller to play the alarm sound.
      */
     public void startAlarm() {
-       AudioController.playAudio(this,R.raw.alarm_sound);
+        AudioController.playAudio(this,R.raw.alarm_sound);
     }
 
     /*

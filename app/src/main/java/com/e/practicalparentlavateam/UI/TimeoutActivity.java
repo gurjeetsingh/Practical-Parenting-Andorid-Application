@@ -1,9 +1,9 @@
 /*This is the activity for the timer
-* Here, the timeout activity is  defined and
-* layout is used to make the timer run. It
-* is heavily reliant on the TimeService to
-* keep timer alive even if app is closed.
-* */
+ * Here, the timeout activity is  defined and
+ * layout is used to make the timer run. It
+ * is heavily reliant on the TimeService to
+ * keep timer alive even if app is closed.
+ * */
 
 package com.e.practicalparentlavateam.UI;
 
@@ -201,66 +201,66 @@ public class TimeoutActivity extends AppCompatActivity {
 
             endTimeFlag++;
         }
-            final int time = intent.getIntExtra("time", 0);
-            double elapsedtime = intent.getDoubleExtra("elap", 0);
-            endTime = intent.getLongExtra("endtime", 0);
-            int mins = (int) (time / (double) 1000) / 60;
-            int secs = (int) (time / (double) 1000) % 60;
-            if (time == 0 || time < 0)
+        final int time = intent.getIntExtra("time", 0);
+        double elapsedtime = intent.getDoubleExtra("elap", 0);
+        endTime = intent.getLongExtra("endtime", 0);
+        int mins = (int) (time / (double) 1000) / 60;
+        int secs = (int) (time / (double) 1000) % 60;
+        if (time == 0 || time < 0)
 
-            {
-                isTimerRunning = false;
-                totalelapsed=0;
-                alarmOffButton.setVisibility(View.VISIBLE);
-                pauseButton.setVisibility(View.INVISIBLE);
-                resetButton.setVisibility(View.INVISIBLE);
-                endTimeFlag = 0;
-                setLatestEndTime(0);
-                setLatestResetTime(0);
-                setTimeFactor(1);
-                notIf();
-                //Added vibrator
-                Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                alarm.vibrate(5000);
+        {
+            isTimerRunning = false;
+            totalelapsed=0;
+            alarmOffButton.setVisibility(View.VISIBLE);
+            pauseButton.setVisibility(View.INVISIBLE);
+            resetButton.setVisibility(View.INVISIBLE);
+            endTimeFlag = 0;
+            setLatestEndTime(0);
+            setLatestResetTime(0);
+            setTimeFactor(1);
+            notIf();
+            //Added vibrator
+            Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            alarm.vibrate(5000);
 
-                //This handler is for removing the alarmoff button after a period of time
-                Handler cancelNotificiaton = new Handler();
-                long delay = 12000;
-                cancelNotificiaton.postDelayed(new Runnable() {
-                    public void run() {
-                        alarmOffButton.setVisibility(View.INVISIBLE);
-                    }
-                }, delay);
-
-            }
-
-            //To keep variables updating even if app is closed/sidelined
-            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
-            timerValue.setText(timeLeftFormatted);
-            pauseIntent = intent;
-            pauseButton.setVisibility(View.VISIBLE);
-            resetButton.setVisibility(View.VISIBLE);
-            settimespeedtext();
-
-
-            if (time == 0 || time < 0 ||(((systemEndTime / 1000) - elapsedtime-totalelapsed) / (systemEndTime / 1000)) * 100==0) {
-                progressBar.setProgress(0);
-                progressText.setText("0");
-            } else {
-                progresstimepercent = (((systemEndTime / 1000) - elapsedtime-totalelapsed) / (systemEndTime / 1000)) * 100;
-                System.out.println("system end time is"+systemEndTime);
-                Math.ceil(progresstimepercent);
-
-                String totper = Integer.toString((int) progresstimepercent);
-                progressBar.setProgress((int) progresstimepercent);
-                if (elapsedtime < 0) {
-                    progressText.setText("100");
-                } else {
-                    progressText.setText(totper);
+            //This handler is for removing the alarmoff button after a period of time
+            Handler cancelNotificiaton = new Handler();
+            long delay = 12000;
+            cancelNotificiaton.postDelayed(new Runnable() {
+                public void run() {
+                    alarmOffButton.setVisibility(View.INVISIBLE);
                 }
-            }
+            }, delay);
 
         }
+
+        //To keep variables updating even if app is closed/sidelined
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
+        timerValue.setText(timeLeftFormatted);
+        pauseIntent = intent;
+        pauseButton.setVisibility(View.VISIBLE);
+        resetButton.setVisibility(View.VISIBLE);
+        settimespeedtext();
+
+
+        if (time == 0 || time < 0 ||(((systemEndTime / 1000) - elapsedtime-totalelapsed) / (systemEndTime / 1000)) * 100==0) {
+            progressBar.setProgress(0);
+            progressText.setText("0");
+        } else {
+            progresstimepercent = (((systemEndTime / 1000) - elapsedtime-totalelapsed) / (systemEndTime / 1000)) * 100;
+            System.out.println("system end time is"+systemEndTime);
+            Math.ceil(progresstimepercent);
+
+            String totper = Integer.toString((int) progresstimepercent);
+            progressBar.setProgress((int) progresstimepercent);
+            if (elapsedtime < 0) {
+                progressText.setText("100");
+            } else {
+                progressText.setText(totper);
+            }
+        }
+
+    }
 
     private void settimespeedtext()
     {
@@ -305,7 +305,7 @@ public class TimeoutActivity extends AppCompatActivity {
      */
     public void notIf()
     {
-                Intent intent = new Intent(this, TimeoutActivity.class);
+        Intent intent = new Intent(this, TimeoutActivity.class);
         intent.putExtra("StopAlarm",true);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -448,7 +448,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 }
                 if (position == 2) {
 
-                   timeFactor=2;
+                    timeFactor=2;
                     timeFactorText.setText("Time@25%");
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceintent);
@@ -506,7 +506,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     progressBar.setProgress(100);
                     progressText.setText("100");
                 }
-                }
+            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -649,7 +649,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                 stopService(serviceIntent);
                 int requiredtime=getLatestResetTime();
-               timeLeftInMilliSeconds = requiredtime;
+                timeLeftInMilliSeconds = requiredtime;
                 pauseButton.setVisibility(View.INVISIBLE);
                 isTimerRunning = false;
                 totalelapsed=0;
@@ -658,7 +658,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 progressText.setText("100");
                 endTimeFlag=0;
                 setLatestEndTime(0);
-              //  System.out.println(selectedTime);
+                //  System.out.println(selectedTime);
                 millisecondConverterAndTimerUIupdate(requiredtime,timerValue);
                 setLatestResetTime(0);
                 resetButton.setVisibility(View.INVISIBLE);
