@@ -122,6 +122,7 @@
     <string name="finish_set_time">Done</string>
     <string name="none_child">None</string>
     <string-array name="minutes_array">
+        <item>Set Time</item>
         <item>Set Time: 1 Minute</item>
         <item>Set Time: 2 Minutes</item>
         <item>Set Time: 3 Minutes</item>
