@@ -117,6 +117,7 @@ public class BreathSetup extends AppCompatActivity {
                 Toast.makeText(BreathSetup.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
                         .show();
                 startActivity(intent);
+                finish();
             }
         });
     }

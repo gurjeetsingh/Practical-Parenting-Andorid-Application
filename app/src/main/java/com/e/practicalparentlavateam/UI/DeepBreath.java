@@ -186,6 +186,7 @@ public class DeepBreath extends AppCompatActivity {
                         Intent intent = BreathSetup.makeIntent(DeepBreath.this);
                         soundOut.stop();
                         startActivity(intent);
+                        finish();
                     }
                 });
                 //done();
@@ -202,6 +203,8 @@ public class DeepBreath extends AppCompatActivity {
 
     private void continueInhaling(){
         beginFSM.setText(R.string.in);
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+                .show();
     }
 
     private void inhaling() {
@@ -241,6 +244,7 @@ public class DeepBreath extends AppCompatActivity {
                 Intent intent = MainMenu.makeIntent(DeepBreath.this);
                 soundOut.stop();
                 startActivity(intent);
+                finish();
             }
         });
     }
