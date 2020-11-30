@@ -177,14 +177,7 @@ public class DeepBreath extends AppCompatActivity {
             case DONE:
                 currentStateView.setText(R.string.finish);
                 beginFSM.setText(R.string.finish);
-                beginFSM.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = MainMenu.makeIntent(DeepBreath.this);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+                beginFSM.setText(R.string.good_job);
                 //done();
                 break;
         }
@@ -198,7 +191,7 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void continueInhaling(){
-        beginFSM.setText(R.string.continue_breath);
+        beginFSM.setText(R.string.in);
     }
 
     private void inhaling() {
