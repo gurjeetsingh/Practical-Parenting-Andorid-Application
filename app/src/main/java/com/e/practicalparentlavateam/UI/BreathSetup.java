@@ -53,6 +53,9 @@ public class BreathSetup extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item, breathOptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         breathSpinner.setAdapter(adapter);
+        //set default value
+        //TODO:change to load previous value
+        breathSpinner.setSelection(2);
         breathSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -72,8 +75,23 @@ public class BreathSetup extends AppCompatActivity {
                 if (position == 4) {
                     numBreaths = 5;
                 }
-            }
+                if (position == 5) {
+                    numBreaths = 6;
+                }
+                if (position == 6) {
+                    numBreaths = 7;
+                }
+                if (position == 7) {
+                    numBreaths = 8;
+                }
+                if (position == 8) {
+                    numBreaths = 9;
+                }
+                if (position == 9) {
+                    numBreaths = 10;
+                }
 
+            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 numBreaths = 3;
