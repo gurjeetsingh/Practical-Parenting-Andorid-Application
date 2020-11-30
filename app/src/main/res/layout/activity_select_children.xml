@@ -23,7 +23,7 @@
         android:id="@+id/last_time_child"
         android:layout_width="174dp"
         android:layout_height="75dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="16dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
@@ -33,7 +33,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toEndOf="@+id/last_time"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,8 +41,7 @@
         android:id="@+id/last_time"
         android:layout_width="174dp"
         android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="96dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
@@ -52,7 +51,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,7 +78,7 @@
         android:id="@+id/text_view5"
         android:layout_width="249dp"
         android:layout_height="86dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:gravity="center"
@@ -88,14 +87,15 @@
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last_time_child" />
 
     <Button
         android:id="@+id/skip"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="129dp"
-        android:layout_height="82dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:layout_marginBottom="140dp"
         android:background="@drawable/rounded_corners_buttons"
@@ -113,8 +113,8 @@
     <Button
         android:id="@+id/choose_side"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="160dp"
-        android:layout_height="82dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:layout_marginBottom="140dp"
         android:background="@drawable/rounded_corners_buttons"

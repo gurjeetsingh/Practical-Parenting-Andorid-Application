@@ -76,7 +76,7 @@ public class AddTask extends AppCompatActivity {
                         Type type = new TypeToken<ChildrenManager>() {}.getType();
                         ChildrenManager childList = gson.fromJson(json, type);
                         if(childList == null || childList.getChildren().size() == 0) {
-                            childName = "No Child";
+                            childName = getString(R.string.no_child);
                         }
                         else {
                             childName = childList.get(0).getName();

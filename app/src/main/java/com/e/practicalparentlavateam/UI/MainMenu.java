@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
@@ -31,6 +32,7 @@ public class MainMenu extends AppCompatActivity {
         timeoutTimerButton();
         whoseTurnButton();
         helpScreenButton();
+        deepBreathButton();
     }
 
     private void configureChildrenButton() {
@@ -102,6 +104,18 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent helpIntent=HelpActivity.makeIntent(MainMenu.this);
                 startActivity(helpIntent);
+            }
+        });
+    }
+
+    private void deepBreathButton() {
+        //This will be for the deepbreath activity
+        Button breathButton=findViewById(R.id.deep_breath);
+        breathButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=BreathSetup.makeIntent(MainMenu.this);
+                startActivity(intent);
             }
         });
     }
