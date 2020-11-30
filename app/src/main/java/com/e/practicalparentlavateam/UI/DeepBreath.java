@@ -43,6 +43,7 @@ public class DeepBreath extends AppCompatActivity {
     //TODO: delete later, only for testing cycling through state machine
     private TextView currentStateView;
     private Button beginFSM;
+    private Button more;
     public Handler fsmHandler = new Handler();
     private Runnable soundInControl;
 
@@ -70,13 +71,14 @@ public class DeepBreath extends AppCompatActivity {
         //fsm testing begin
         beginFSM = findViewById(R.id.breath);
 
-        //enlargeCircle();
+        more = (Button) findViewById(R.id.more);
+        more.setVisibility(View.INVISIBLE);
+        back();
+
         //extract number of breaths form setup
         breathSetUp();
 
         beginBreathing();
-
-        back();
         //Set the current state
         //changeState();
     }
@@ -177,12 +179,13 @@ public class DeepBreath extends AppCompatActivity {
             case DONE:
                 currentStateView.setText(R.string.finish);
                 beginFSM.setText(R.string.finish);
-                beginFSM.setOnClickListener(new View.OnClickListener() {
+                more.setVisibility(View.VISIBLE);
+                more.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = MainMenu.makeIntent(DeepBreath.this);
+                        Intent intent = BreathSetup.makeIntent(DeepBreath.this);
+                        soundOut.stop();
                         startActivity(intent);
-                        finish();
                     }
                 });
                 //done();

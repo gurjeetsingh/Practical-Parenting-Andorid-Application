@@ -30,6 +30,7 @@
     <string name="done">Task Completed</string>
     <string name="yes">Yes</string>
     <string name="back">back</string>
+    <string name="more">for more</string>
 
     <!-- Strings used for TextView Text -->
     <string name="whose_history">\'s history</string>
