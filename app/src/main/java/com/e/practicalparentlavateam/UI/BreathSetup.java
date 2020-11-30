@@ -5,6 +5,7 @@ package com.e.practicalparentlavateam.UI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.e.practicalparentlavateam.R;
+import com.google.gson.Gson;
 
 public class BreathSetup extends AppCompatActivity {
     private static EditText editNumBreaths;
@@ -54,7 +56,10 @@ public class BreathSetup extends AppCompatActivity {
         breathSpinner.setAdapter(adapter);
         //set default value
         //TODO:change to load previous value
-        breathSpinner.setSelection(2);
+        if(getNumBreaths() == 0)
+            breathSpinner.setSelection(2);
+        else
+            breathSpinner.setSelection(getNumBreaths() - 1);
         breathSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -105,10 +110,23 @@ public class BreathSetup extends AppCompatActivity {
             public void onClick(View v) {
                 //extract the number entered
                 //numBreaths = Integer.parseInt(editNumBreaths.getText().toString());
+                saveTimes();
                 Intent intent=DeepBreath.makeDeepBreathIntent(BreathSetup.this, numBreaths);
                 startActivity(intent);
             }
         });
+    }
+
+    private int getNumBreaths(){
+        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
+        return prefs.getInt("last times",0);
+    }
+
+    private void saveTimes(){
+        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("last times", numBreaths);
+        editor.commit();
     }
 
     public static Intent makeIntent(Context context) {

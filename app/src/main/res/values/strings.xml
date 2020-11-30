@@ -10,6 +10,7 @@
     <string name="menu2">Flip A Coin</string>
     <string name="menu3">Timeout Timer</string>
     <string name="menu4">Whose Turn To Do Task</string>
+    <string name="menu5">Take Deep Breath</string>
     <string name="timer1">Pause</string>
     <string name="timer2">Set Custom Time</string>
     <string name="timer3">Alarm OFF</string>
@@ -30,7 +31,6 @@
     <string name="done">Task Completed</string>
     <string name="yes">Yes</string>
     <string name="back">back</string>
-    <string name="more">for more</string>
 
     <!-- Strings used for TextView Text -->
     <string name="whose_history">\'s history</string>
@@ -45,6 +45,8 @@
     <string name="Choice">Choice:</string>
     <string name="history_starts_here">History Starts Here</string>
     <string name="who_s_turn_it_is">Whose turn it is</string>
+    <string name="music1">music1: 远方的寂静-林海</string>
+    <string name="music2">music2: The Promise-Secret Garden</string>
     <string name="cmpt276">Project Inspiration: CMPT 276\n Professor: Brian Fraser\n Simon Fraser University, Fall 2020.\n
         <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">CMPT276 Webpage</a></string>
     <string name="coin">Coin Image All Rights Reserved :
@@ -127,12 +129,40 @@
     <string name="finish_set_time">Done</string>
     <string name="none_child">None</string>
     <string name="nobody">nobody</string>
+    <string name="begin">Begin</string>
+    <string name="out">Out</string>
+    <string name="in">In</string>
     <string-array name="minutes_array">
         <item>Set Time: 1 Minute</item>
         <item>Set Time: 2 Minutes</item>
         <item>Set Time: 3 Minutes</item>
         <item>Set Time: 5 Minutes</item>
         <item>Set Time: 10 Minutes</item>
+    </string-array>
+    <string name="title_activity_breath_setup">BreathSetup</string>
+    <string name="breath_num_hint">3</string>
+    <string name="breath_setup_directions">Please Enter The Number of Breaths you would like to take</string>
+    <string name="b_setup_begin">Begin</string>
+    <string name="waiting_to_inhale">Waiting to Inhale</string>
+    <string name="continue_breath">Continue</string>
+    <string name="inhaling">Inhaling</string>
+    <string name="exhaling">Exhaling</string>
+    <string name="finish">Done</string>
+    <string name="breaths_remaining">Breaths Remaining</string>
+    <string name="state">Let\'s begin</string>
+    <string name="_2">2</string>
+    <string name="good_job">Good Job</string>
+    <string-array name="breaths_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
 
 
