@@ -60,7 +60,7 @@
         app:layout_constraintVertical_bias="0.75" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/breath_spinner"
         android:layout_width="179dp"
         android:layout_height="56dp"
         tools:layout_editor_absoluteX="116dp"
