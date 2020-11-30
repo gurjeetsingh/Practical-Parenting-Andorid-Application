@@ -32,14 +32,10 @@ public class TimeService extends Service {
     private long finalTime;
     private int timefactor;
     private int flag=0;
-    private double progressnum=0;
     long timeLeftInMilliSeconds;
-    long timeLeftforprogress;
-    CountDownTimer ctimer;
     long elapsedtime;
     long originaltime;
     int timeIterator =1;
-    double seventyfiveiterator=0;
     int timer;
 
 
@@ -93,7 +89,7 @@ https://developer.android.com/reference/android/os/Handler
         comIntent = new Intent(TIME_BROADCAST);
         long usertime = intent.getLongExtra("mills",0);
         int timefactorintent=intent.getIntExtra("factor",0);
-        System.out.println(usertime);
+      //  System.out.println(usertime);
 
         if(flag<1) {
             userSelectedTime = usertime;
@@ -221,7 +217,7 @@ https://developer.android.com/reference/android/os/Handler
         if(timefactor==4)
         {
             double elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
-            seventyfiveiterator=seventyfiveiterator+0.75;
+
 
                 timeLeftInMilliSeconds = (long) (userSelectedTime - 1000* timeIterator *0.75);
                 timeIterator++;
@@ -248,7 +244,6 @@ https://developer.android.com/reference/android/os/Handler
         if(timefactor==5)
         {
             double elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
-            System.out.println(elapsedSeconds);
             timeLeftInMilliSeconds = userSelectedTime - 1000* timeIterator;
             timeIterator +=2;
             if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
@@ -264,7 +259,7 @@ https://developer.android.com/reference/android/os/Handler
                 stopSelf();
             }
             comIntent.putExtra("time", timer);
-            comIntent.putExtra("elap", Math.floor(elapsedSeconds*2));
+            comIntent.putExtra("elap",(double) timeIterator);
             sendBroadcast(comIntent);
 
         }
@@ -272,7 +267,6 @@ https://developer.android.com/reference/android/os/Handler
         if(timefactor==6)
         {
             double elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
-            System.out.println(elapsedSeconds);
             timeLeftInMilliSeconds = userSelectedTime - 1000* timeIterator;
             timeIterator +=3;
             if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
@@ -287,7 +281,7 @@ https://developer.android.com/reference/android/os/Handler
                 stopSelf();
             }
             comIntent.putExtra("time", timer);
-            comIntent.putExtra("elap", Math.floor(elapsedSeconds*3));
+            comIntent.putExtra("elap",(double) timeIterator);
             sendBroadcast(comIntent);
 
         }
@@ -309,7 +303,7 @@ https://developer.android.com/reference/android/os/Handler
                 stopSelf();
             }
             comIntent.putExtra("time", timer);
-            comIntent.putExtra("elap", Math.floor(elapsedSeconds*4));
+            comIntent.putExtra("elap",(double) timeIterator);
             sendBroadcast(comIntent);
 
         }

@@ -129,6 +129,7 @@
         <item>Set Time: 10 Minutes</item>
     </string-array>
     <string-array name="timefactor">
+        <item>"Time Speed"</item>
         <item>100%</item>
         <item>25%</item>
         <item>50%</item>
