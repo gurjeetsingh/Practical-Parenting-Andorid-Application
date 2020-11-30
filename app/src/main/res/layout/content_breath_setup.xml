@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/directionBackground"
+        android:background="#A6445871"
         android:fontFamily="@font/imprima"
         android:text="@string/breath_setup_directions"
         android:textAlignment="center"
