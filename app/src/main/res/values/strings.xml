@@ -133,13 +133,6 @@
     <string name="begin">Begin</string>
     <string name="out">Out</string>
     <string name="in">In</string>
-    <string-array name="minutes_array">
-        <item>Set Time: 1 Minute</item>
-        <item>Set Time: 2 Minutes</item>
-        <item>Set Time: 3 Minutes</item>
-        <item>Set Time: 5 Minutes</item>
-        <item>Set Time: 10 Minutes</item>
-    </string-array>
     <string name="title_activity_breath_setup">BreathSetup</string>
     <string name="breath_num_hint">3</string>
     <string name="breath_setup_directions">Please Enter The Number of Breaths you would like to take</string>
@@ -164,6 +157,24 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
+    </string-array>
+<string-array name="minutes_array">
+        <item>Set Time</item>
+        <item>Set Time: 1 Minute</item>
+        <item>Set Time: 2 Minutes</item>
+        <item>Set Time: 3 Minutes</item>
+        <item>Set Time: 5 Minutes</item>
+        <item>Set Time: 10 Minutes</item>
+    </string-array>
+    <string-array name="timefactor">
+        <item>"Time Speed"</item>
+        <item>100%</item>
+        <item>25%</item>
+        <item>50%</item>
+        <item>75%</item>
+        <item>200%</item>
+        <item>300%</item>
+        <item>400%</item>
     </string-array>
 
 
