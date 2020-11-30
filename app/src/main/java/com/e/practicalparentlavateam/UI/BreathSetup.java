@@ -50,8 +50,8 @@ public class BreathSetup extends AppCompatActivity {
         Resources res = this.getResources();
         String[] breathOptions = res.getStringArray(R.array.breaths_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, breathOptions);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.breath_num_spinner, breathOptions);
+        adapter.setDropDownViewResource(R.layout.breath_num_spinner_dropdown);
         breathSpinner.setAdapter(adapter);
         //set default value
         //TODO:change to load previous value
