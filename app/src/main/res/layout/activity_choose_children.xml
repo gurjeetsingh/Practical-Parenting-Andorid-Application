@@ -10,8 +10,8 @@
     <ListView
         android:id="@+id/list_of_children"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toTopOf="@+id/nobody_button"
         app:layout_constraintEnd_toEndOf="parent"
