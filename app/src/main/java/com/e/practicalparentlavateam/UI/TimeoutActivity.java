@@ -634,6 +634,7 @@ public class TimeoutActivity extends AppCompatActivity {
                         long customTime = Long.parseLong("" + Math.round(time));
                         timeLeftInMilliSeconds = customTime * 60000;
                         selectedTime = timeLeftInMilliSeconds;
+                        setLatestResetTime((int)timeLeftInMilliSeconds);
                         millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                     }
                 });
