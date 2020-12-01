@@ -497,7 +497,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     timeFactor=7;
                     timeFactorText.setText("Time@400%");
                     setTimeFactor(7);
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);;

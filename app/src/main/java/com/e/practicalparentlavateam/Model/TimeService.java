@@ -39,6 +39,8 @@ public class TimeService extends Service {
     long timeLeftInMilliSeconds;
     long elapsedtime;
     long originaltime;
+    double specialiterator=0;
+    int times=1;
     double elapsedSeconds;
     int timeIterator =0;
     int timer;
@@ -149,6 +151,11 @@ public class TimeService extends Service {
         System.out.println("checking"+timefactorintent);
        setTimefactor(timefactorintent);
        }
+       private void resetVariables()
+       {
+           specialiterator=0;
+           times=1;
+       }
 
 
     /*
@@ -173,6 +180,7 @@ public class TimeService extends Service {
         timefactorchecker();
        // System.out.println(timefactor);
         if(timefactor==1) {
+            resetVariables();
             timeLeftInMilliSeconds = userSelectedTime-1000*timeIterator;
             timeIterator++;
             int timer = (int) timeLeftInMilliSeconds;
@@ -190,6 +198,7 @@ public class TimeService extends Service {
         if(timefactor==2)
         {
            elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            resetVariables();
             if(Math.floor(elapsedSeconds%4)==1)
             {
                 timeLeftInMilliSeconds = userSelectedTime - 1000* timeIterator;
@@ -218,6 +227,7 @@ public class TimeService extends Service {
         if(timefactor==3)
         {
             elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            resetVariables();
             System.out.println(elapsedSeconds);
             if(Math.floor(elapsedSeconds%2)==1)
             {
@@ -245,29 +255,30 @@ public class TimeService extends Service {
         //For 75% time
         if(timefactor==4)
         {
+            specialiterator= (specialiterator+0.75);
+            System.out.println(specialiterator);
+            System.out.println("mamu");
             elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            if(specialiterator>times) {
+                timeLeftInMilliSeconds = (long) (userSelectedTime - 1000 * timeIterator);
+                timeIterator++;
+                times++;
+                if (timeLeftInMilliSeconds == 0 || timeLeftInMilliSeconds < 0) {
+                    timer = 0;
+                } else {
+                    timer = (int) timeLeftInMilliSeconds;
+                }
+                if (timer < 0 || timer == 0) {
+                    startAlarm();
+                    stopSelf();
+                }
+                comIntent.putExtra("time", timer);
+                //  comIntent.putExtra("elap", Math.floor(elapsedSeconds*0.75));
+                comIntent.putExtra("elap", (double) timeIterator);
+                sendBroadcast(comIntent);
+                System.out.println(elapsedSeconds);
 
-
-            timeLeftInMilliSeconds = (long) (userSelectedTime - 1000* timeIterator *0.75);
-            timeIterator++;
-            if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
-            {
-                timer = 0;
             }
-            else {
-                timer=(int)timeLeftInMilliSeconds;
-            }
-            if (timer < 0 || timer==0) {
-                startAlarm();
-                stopSelf();
-            }
-            comIntent.putExtra("time", timer);
-          //  comIntent.putExtra("elap", Math.floor(elapsedSeconds*0.75));
-            comIntent.putExtra("elap", (double)timeIterator);
-            sendBroadcast(comIntent);
-            System.out.println(elapsedSeconds);
-
-
 
 
         }
@@ -297,6 +308,7 @@ public class TimeService extends Service {
         //For 300% Time
         if(timefactor==6)
         {
+            resetVariables();
             elapsedSeconds += ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
             timeLeftInMilliSeconds = userSelectedTime - 1000* timeIterator;
             timeIterator +=3;
@@ -319,6 +331,7 @@ public class TimeService extends Service {
         //For 400% time
         if(timefactor==7)
         {
+            resetVariables();
             elapsedSeconds += ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
             timeLeftInMilliSeconds = userSelectedTime - 1000* timeIterator;
             timeIterator +=4;
