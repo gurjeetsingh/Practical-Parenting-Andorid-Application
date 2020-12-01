@@ -242,7 +242,7 @@ public class TimeoutActivity extends AppCompatActivity {
         pauseButton.setVisibility(View.VISIBLE);
         resetButton.setVisibility(View.VISIBLE);
         settimespeedtext();
-        requiredintent.putExtra("factor",getTimeFactor());
+     //   requiredintent.putExtra("factor",getTimeFactor());
         System.out.println("real time factor is"+getTimeFactor());
         intent.putExtra("factor",getTimeFactor());
 
@@ -446,8 +446,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     timeFactor=1;
                     timeFactorText.setText("Time@100%");
                     setTimeFactor(1);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
                     requiredintent.putExtra("factor",getTimeFactor());
@@ -458,9 +456,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     timeFactor=2;
                     timeFactorText.setText("Time@25%");
                     setTimeFactor(2);
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
                     requiredintent.putExtra("factor",getTimeFactor());
@@ -470,9 +465,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     timeFactor=3;
                     timeFactorText.setText("Time@50%");
                     setTimeFactor(3);
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
                     requiredintent.putExtra("factor",getTimeFactor());
@@ -481,8 +473,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     timeFactor=4;
                     timeFactorText.setText("Time@75%");
                     setTimeFactor(4);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
                     requiredintent.putExtra("factor",getTimeFactor());
@@ -492,9 +482,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     timeFactor = 5;
                     timeFactorText.setText("Time@200%");
                     setTimeFactor(5);
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
                     requiredintent.putExtra("factor",getTimeFactor());
@@ -504,9 +491,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     timeFactor=6;
                     timeFactorText.setText("Time@300%");
                     setTimeFactor(6);
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
                     requiredintent.putExtra("factor",getTimeFactor());
@@ -517,8 +501,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     timeFactorText.setText("Time@400%");
                     setTimeFactor(7);
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
                     requiredintent.putExtra("factor",getTimeFactor());
