@@ -114,7 +114,7 @@ public class MainMenu extends AppCompatActivity {
         breathButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=BreathSetup.makeIntent(MainMenu.this);
+                Intent intent=DeepBreath.makeDeepBreathIntent(MainMenu.this);
                 startActivity(intent);
             }
         });

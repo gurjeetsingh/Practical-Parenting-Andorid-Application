@@ -709,6 +709,13 @@ public class TimeoutActivity extends AppCompatActivity {
                         timeLeftInMilliSeconds = customTime * 60000;
                         selectedTime = timeLeftInMilliSeconds;
                         setLatestResetTime((int)timeLeftInMilliSeconds);
+                        isTimerRunning = false;
+                        totalelapsed=0;
+                        //ispaused=false;
+                        progressBar.setProgress(100);
+                        progressText.setText("100");
+                        endTimeFlag=0;
+                        setLatestEndTime(0);
                         millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                     }
                 });
