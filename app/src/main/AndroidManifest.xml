@@ -18,10 +18,6 @@
             android:name=".UI.HelpActivity"
             android:label="@string/title_help"
             android:parentActivityName=".UI.MainMenu" />
-        <activity
-            android:name=".UI.BreathSetup"
-            android:label="@string/title_activity_breath_setup"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".UI.DeepBreath"
             android:label="@string/title_deep_breath"
             android:parentActivityName=".UI.MainMenu"/>
