@@ -292,7 +292,6 @@ public class DeepBreath extends AppCompatActivity {
         soundOut = MediaPlayer.create(DeepBreath.this, R.raw.sound_out);
         soundOut.start();
 
-
         beginFSM.setText(R.string.out);
         numBreaths--;
         breathDisplay.setText(""+ numBreaths);
