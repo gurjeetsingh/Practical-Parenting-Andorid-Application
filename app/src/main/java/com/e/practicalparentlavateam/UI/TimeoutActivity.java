@@ -400,6 +400,8 @@ public class TimeoutActivity extends AppCompatActivity {
                     selectedTime = 60000;
                     selectedTimeForPause = 60000;
                     setLatestResetTime(60000);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 2) {
@@ -409,6 +411,8 @@ public class TimeoutActivity extends AppCompatActivity {
                     selectedTime = 120000;
                     selectedTimeForPause = 120000;
                     setLatestResetTime(120000);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
 
                 }
@@ -419,6 +423,8 @@ public class TimeoutActivity extends AppCompatActivity {
                     selectedTime = 180000;
                     selectedTimeForPause = 180000;
                     setLatestResetTime(180000);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 4) {
@@ -428,6 +434,8 @@ public class TimeoutActivity extends AppCompatActivity {
                     selectedTime = 300000;
                     selectedTimeForPause = 300000;
                     setLatestResetTime(300000);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 5) {
@@ -437,6 +445,8 @@ public class TimeoutActivity extends AppCompatActivity {
                     selectedTime = 600000;
                     selectedTimeForPause = 600000;
                     setLatestResetTime(600000);
+                    progressBar.setProgress(100);
+                    progressText.setText("100");
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
             }
