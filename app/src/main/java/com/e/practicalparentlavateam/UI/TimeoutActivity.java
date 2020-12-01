@@ -11,8 +11,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -23,6 +26,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -35,14 +39,17 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.e.practicalparentlavateam.Model.AudioController;
 import com.e.practicalparentlavateam.Model.TimeService;
 import com.e.practicalparentlavateam.R;
 
+import java.sql.Time;
 import java.util.Locale;
 
+import static android.app.Notification.EXTRA_NOTIFICATION_ID;
 import static java.lang.Math.round;
 
 public class TimeoutActivity extends AppCompatActivity {
@@ -72,6 +79,7 @@ public class TimeoutActivity extends AppCompatActivity {
     double totalelapsed=0;
     Intent requiredintent;
     Spinner timeFieldSpinner;
+    private boolean timerforcereset;
 
     Context context = this;
 
@@ -102,6 +110,7 @@ public class TimeoutActivity extends AppCompatActivity {
         //For the progress piechart
         progressBar=findViewById(R.id.circular_progress_bar);
         progressText=findViewById(R.id.progressText);
+        createNotificationChannel();
 
 
 
@@ -213,6 +222,7 @@ public class TimeoutActivity extends AppCompatActivity {
 
         {
             isTimerRunning = false;
+            createNotificationChannel();
             totalelapsed=0;
             alarmOffButton.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.INVISIBLE);
@@ -241,6 +251,7 @@ public class TimeoutActivity extends AppCompatActivity {
             progressText.setText("0");
             String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
             timerValue.setText(timeLeftFormatted);
+            timerforcereset=false;
             return;
 
         }
@@ -252,6 +263,8 @@ public class TimeoutActivity extends AppCompatActivity {
         pauseButton.setVisibility(View.VISIBLE);
         resetButton.setVisibility(View.VISIBLE);
         timeFieldSpinner.setVisibility(View.VISIBLE);
+        timerforcereset=true;
+        createNotificationChannel();
         setTimeSpeedText();
      //   requiredintent.putExtra("factor",getTimeFactor());
         System.out.println("real time factor is"+getTimeFactor());
@@ -329,6 +342,34 @@ public class TimeoutActivity extends AppCompatActivity {
      */
     public void notIf()
     {
+
+        Intent intent = new Intent(this, TimeoutActivity.class);
+        intent.putExtra("StopAlarm",true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent snoozePendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "97")
+                .setSmallIcon(R.drawable.babyclock)
+                .setContentTitle("ALARM")
+                .setContentText("Time's Up! Touch Box To Turn Off Alarm!")
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.babyclock))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setColor(getResources().getColor(R.color.appcolr))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(97, builder.build());
+
+
+
+
+        /*
         Intent intent = new Intent(this, TimeoutActivity.class);
         intent.putExtra("StopAlarm",true);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0,
@@ -359,7 +400,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 notificationManager.cancel(0);
             }
         }, delay);
-
+*/
     }
 
     @Override
@@ -387,67 +428,99 @@ public class TimeoutActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    timeLeftInMilliSeconds = 60000;
-                    selectedTime = 60000;
-                    selectedTimeForPause = 60000;
-                    setLatestResetTime(60000);
-                    //millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+
+                        timeLeftInMilliSeconds = 60000;
+                        selectedTime = 60000;
+                        selectedTimeForPause = 60000;
+                        setLatestResetTime(60000);
+                        //millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+
                 }
                 if (position == 1) {
-                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
-                    stopService(serviceintent);
-                    timeLeftInMilliSeconds = 60000;
-                    selectedTime = 60000;
-                    selectedTimeForPause = 60000;
-                    setLatestResetTime(60000);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    if(timerforcereset==true)
+                    {
+                        Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                        stopService(serviceintent);
+                        timeLeftInMilliSeconds = 60000;
+                        selectedTime = 60000;
+                        selectedTimeForPause = 60000;
+                        setLatestResetTime(60000);
+                        progressBar.setProgress(100);
+                        progressText.setText("100");
+                        millisecondConverterAndTimerUIupdate(selectedTime, timerValue);
+                    }
                 }
                 if (position == 2) {
-                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
-                    stopService(serviceintent);
-                    timeLeftInMilliSeconds = 120000;
-                    selectedTime = 120000;
-                    selectedTimeForPause = 120000;
-                    setLatestResetTime(120000);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    if(timerforcereset==true)
+                    {
+                        Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                        stopService(serviceintent);
+                        timeLeftInMilliSeconds = 120000;
+                        selectedTime = 120000;
+                        selectedTimeForPause = 120000;
+                        setLatestResetTime(120000);
+                        progressBar.setProgress(100);
+                        progressText.setText("100");
+                        millisecondConverterAndTimerUIupdate(selectedTime, timerValue);
+                    }
 
                 }
                 if (position == 3) {
-                    Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
-                    stopService(serviceIntent);
-                    timeLeftInMilliSeconds = 180000;
-                    selectedTime = 180000;
-                    selectedTimeForPause = 180000;
-                    setLatestResetTime(180000);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                        if(timerforcereset==true)
+                        {
+                            Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                        Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
+                        stopService(serviceIntent);
+                        timeLeftInMilliSeconds = 180000;
+                        selectedTime = 180000;
+                        selectedTimeForPause = 180000;
+                        setLatestResetTime(180000);
+                        progressBar.setProgress(100);
+                        progressText.setText("100");
+                        millisecondConverterAndTimerUIupdate(selectedTime, timerValue);
+                    }
                 }
                 if (position == 4) {
-                    Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
-                    stopService(serviceIntent);
-                    timeLeftInMilliSeconds = 300000;
-                    selectedTime = 300000;
-                    selectedTimeForPause = 300000;
-                    setLatestResetTime(300000);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    if(timerforcereset==true)
+                    {
+                        Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
+                        stopService(serviceIntent);
+                        timeLeftInMilliSeconds = 300000;
+                        selectedTime = 300000;
+                        selectedTimeForPause = 300000;
+                        setLatestResetTime(300000);
+                        progressBar.setProgress(100);
+                        progressText.setText("100");
+                        millisecondConverterAndTimerUIupdate(selectedTime, timerValue);
+                    }
                 }
                 if (position == 5) {
-                    Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
-                    stopService(serviceIntent);
-                    timeLeftInMilliSeconds = 600000;
-                    selectedTime = 600000;
-                    selectedTimeForPause = 600000;
-                    setLatestResetTime(600000);
-                    progressBar.setProgress(100);
-                    progressText.setText("100");
-                    millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
+                    if(timerforcereset==true)
+                    {
+                        Toast.makeText(getApplicationContext(),R.string.resetplease,Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
+                        stopService(serviceIntent);
+                        timeLeftInMilliSeconds = 600000;
+                        selectedTime = 600000;
+                        selectedTimeForPause = 600000;
+                        setLatestResetTime(600000);
+                        progressBar.setProgress(100);
+                        progressText.setText("100");
+                        millisecondConverterAndTimerUIupdate(selectedTime, timerValue);
+                    }
                 }
             }
 
@@ -571,6 +644,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
                 pauseButton.setVisibility(View.VISIBLE);
                 resetButton.setVisibility(View.VISIBLE);
+                timerforcereset=false;
                 timeFieldSpinner.setVisibility(View.VISIBLE);
             }
         });
@@ -681,6 +755,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 timeLeftInMilliSeconds = requiredtime;
                 pauseButton.setVisibility(View.INVISIBLE);
                 isTimerRunning = false;
+                timerforcereset=false;
                 totalelapsed=0;
                 //ispaused=false;
                 progressBar.setProgress(100);
@@ -743,6 +818,14 @@ public class TimeoutActivity extends AppCompatActivity {
         return newtime;
     }
 
+    private void forceresetchecker(boolean forceresetcheck)
+    {
+        if(forceresetcheck==true)
+        {
+            Toast.makeText(TimeoutActivity.this,"Please Reset Timer First",Toast.LENGTH_SHORT);
+        }
+    }
+
 
 
 
@@ -753,5 +836,21 @@ public class TimeoutActivity extends AppCompatActivity {
         Intent timeoutIntent = new Intent(context, TimeoutActivity.class);
         return timeoutIntent;
     }
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channelName);
+            String description = getString(R.string.channelDesc);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("97", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
 }
