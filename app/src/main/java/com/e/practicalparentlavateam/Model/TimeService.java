@@ -40,7 +40,7 @@ public class TimeService extends Service {
     long elapsedtime;
     long originaltime;
     double elapsedSeconds;
-    int timeIterator =1;
+    int timeIterator =0;
     int timer;
     int alltime;
 

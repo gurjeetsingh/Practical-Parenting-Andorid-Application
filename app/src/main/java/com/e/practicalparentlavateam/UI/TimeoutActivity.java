@@ -175,8 +175,8 @@ public class TimeoutActivity extends AppCompatActivity {
     }
     private int getLatestEndTime()
     {
-        SharedPreferences settings = getSharedPreferences("resetpref", 0);
-        int newtime = settings.getInt("resettime", 0);
+        SharedPreferences settings = getSharedPreferences("endpref", 0);
+        int newtime = settings.getInt("endtime", 0);
         return newtime;
     }
 
@@ -443,7 +443,6 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     setTimeFactor(1);
-
                 }
                 if (position == 1) {
 
@@ -452,7 +451,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(1);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                    requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);
                 }
                 if (position == 2) {
@@ -462,7 +460,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(2);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                    requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);
                 }
                 if (position == 3) {
@@ -471,7 +468,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(3);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-//                    requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);}
                 if (position == 4) {
                     timeFactor=4;
@@ -479,7 +475,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(4);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                   // requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);;
                 }
                 if (position == 5) {
@@ -488,7 +483,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(5);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                    //requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);;
                 }
                 if(position==6){
@@ -497,7 +491,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(6);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                   // requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);;
                 }
                 if(position==7){
@@ -507,7 +500,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                   // requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);;
                 }
             }
