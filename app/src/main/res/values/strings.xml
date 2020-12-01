@@ -176,6 +176,14 @@
         <item>300%</item>
         <item>400%</item>
     </string-array>
+    <string name="time1">Time@100%</string>
+    <string name="time2">Time@25%</string>
+    <string name="time3">Time@50%</string>
+    <string name="time4">Time@75%</string>
+    <string name="time5">Time@200%</string>
+    <string name="time6">Time@300%</string>
+    <string name="time7">Time@400%</string>
+    <string name="hundred">100%</string>
 
 
 </resources>
