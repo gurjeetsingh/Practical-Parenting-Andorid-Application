@@ -635,6 +635,8 @@ public class TimeoutActivity extends AppCompatActivity {
                         timeLeftInMilliSeconds = customTime * 60000;
                         selectedTime = timeLeftInMilliSeconds;
                         setLatestResetTime((int)timeLeftInMilliSeconds);
+                        progressBar.setProgress(100);
+                        progressText.setText("100");
                         millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                     }
                 });
