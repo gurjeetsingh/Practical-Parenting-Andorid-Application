@@ -35,6 +35,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.e.practicalparentlavateam.Model.AudioController;
@@ -394,6 +395,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     //millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 1) {
+
                     Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
                     stopService(serviceintent);
                     timeLeftInMilliSeconds = 60000;
@@ -635,8 +637,13 @@ public class TimeoutActivity extends AppCompatActivity {
                         timeLeftInMilliSeconds = customTime * 60000;
                         selectedTime = timeLeftInMilliSeconds;
                         setLatestResetTime((int)timeLeftInMilliSeconds);
+                        isTimerRunning = false;
+                        totalelapsed=0;
+                        //ispaused=false;
                         progressBar.setProgress(100);
                         progressText.setText("100");
+                        endTimeFlag=0;
+                        setLatestEndTime(0);
                         millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                     }
                 });
