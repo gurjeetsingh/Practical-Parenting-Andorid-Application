@@ -693,40 +693,45 @@ public class TimeoutActivity extends AppCompatActivity {
         customButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
-                stopService(serviceIntent);
-                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
-                builder.setTitle(R.string.enter_custom_minute);
-                userTime = new EditText(context);
-                builder.setView(userTime);
-                builder.setIcon(R.drawable.babyclock);
-                builder.setPositiveButton(R.string.finish_set_time, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String newTime = userTime.getText().toString();
-                        double time = Double.parseDouble(newTime);
-                        long customTime = Long.parseLong("" + Math.round(time));
-                        timeLeftInMilliSeconds = customTime * 60000;
-                        selectedTime = timeLeftInMilliSeconds;
-                        setLatestResetTime((int)timeLeftInMilliSeconds);
-                        isTimerRunning = false;
-                        totalelapsed=0;
-                        //ispaused=false;
-                        progressBar.setProgress(100);
-                        progressText.setText("100");
-                        endTimeFlag=0;
-                        setLatestEndTime(0);
-                        millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
-                    }
-                });
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                if (timerforcereset == true) {
+                    Toast.makeText(getApplicationContext(), "Please Reset Timer First", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceIntent);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+                    builder.setTitle(R.string.enter_custom_minute);
+                    userTime = new EditText(context);
+                    builder.setView(userTime);
+                    builder.setIcon(R.drawable.babyclock);
+                    builder.setPositiveButton(R.string.finish_set_time, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String newTime = userTime.getText().toString();
+                            double time = Double.parseDouble(newTime);
+                            long customTime = Long.parseLong("" + Math.round(time));
+                            timeLeftInMilliSeconds = customTime * 60000;
+                            selectedTime = timeLeftInMilliSeconds;
+                            setLatestResetTime((int) timeLeftInMilliSeconds);
+                            isTimerRunning = false;
+                            totalelapsed = 0;
+                            //ispaused=false;
+                            progressBar.setProgress(100);
+                            progressText.setText("100");
+                            endTimeFlag = 0;
+                            setLatestEndTime(0);
+                            millisecondConverterAndTimerUIupdate(selectedTime, timerValue);
+                        }
+                    });
+                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
             }
         });
     }
