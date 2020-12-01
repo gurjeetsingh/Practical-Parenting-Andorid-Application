@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,8 +18,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +75,9 @@ public class DeepBreath extends AppCompatActivity {
         //fsm testing begin
         beginFSM = findViewById(R.id.breath);
 
+        //setup breaths spinner
+        createBreathSpinner();
+
         //extract number of breaths form setup
         breathSetUp();
 
@@ -78,6 +86,75 @@ public class DeepBreath extends AppCompatActivity {
         //changeState();
     }
 
+    /* spinner to select number of breaths */
+    private void createBreathSpinner() {
+        Spinner breathSpinner = (Spinner) findViewById(R.id.breath_spinner);
+        //To get the string array from the Strings.XML
+        Resources res = this.getResources();
+        String[] breathOptions = res.getStringArray(R.array.breaths_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                R.layout.breath_num_spinner, breathOptions);
+        adapter.setDropDownViewResource(R.layout.breath_num_spinner_dropdown);
+        breathSpinner.setAdapter(adapter);
+        //set default value
+        //TODO:change to load previous value
+        if(getNumBreaths() == 0)
+            breathSpinner.setSelection(2);
+        else
+            breathSpinner.setSelection(getNumBreaths() - 1);
+        breathSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    numBreaths = 1;
+                    saveTimes();
+                }
+                if (position == 1) {
+                    numBreaths = 2;
+                    saveTimes();
+
+                }
+                if (position == 2) {
+                    numBreaths = 3;
+                    saveTimes();
+                }
+                if (position == 3) {
+                    numBreaths = 4;
+                    saveTimes();
+                }
+                if (position == 4) {
+                    numBreaths = 5;
+                    saveTimes();
+                }
+                if (position == 5) {
+                    numBreaths = 6;
+                    saveTimes();
+                }
+                if (position == 6) {
+                    numBreaths = 7;
+                    saveTimes();
+                }
+                if (position == 7) {
+                    numBreaths = 8;
+                    saveTimes();
+                }
+                if (position == 8) {
+                    numBreaths = 9;
+                    saveTimes();
+                }
+                if (position == 9) {
+                    numBreaths = 10;
+                    saveTimes();
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                numBreaths = 3;
+                saveTimes();
+            }
+        });
+    }
 
     private void breathSetUp(){
         Intent intent = getIntent();
@@ -229,9 +306,21 @@ public class DeepBreath extends AppCompatActivity {
         DeepBreath.this.finish();
     }
 
-    public static Intent makeDeepBreathIntent(Context context, int numBreaths) {
+    private int getNumBreaths(){
+        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
+        return prefs.getInt("last times",0);
+    }
+
+    private void saveTimes(){
+        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("last times", numBreaths);
+        editor.commit();
+    }
+
+    public static Intent makeDeepBreathIntent(Context context) {
         Intent intent = new Intent(context, DeepBreath.class);
-        intent.putExtra(EXTRA_NUM_BREATHS, numBreaths);
+        //intent.putExtra(EXTRA_NUM_BREATHS, numBreaths);
         return intent;
     }
 }

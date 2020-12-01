@@ -42,7 +42,7 @@ public class BreathSetup extends AppCompatActivity {
         //editNumBreaths = findViewById(R.id.editTextNumber);
         createBreathSpinner();
 
-        setupBegin();
+        //setupBegin();
 
     }
 
@@ -105,6 +105,7 @@ public class BreathSetup extends AppCompatActivity {
         });
     }
 
+/*
     public void setupBegin(){
         Button beginButton = findViewById(R.id.beginButton);
         beginButton.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +122,7 @@ public class BreathSetup extends AppCompatActivity {
             }
         });
     }
+*/
 
     private int getNumBreaths(){
         SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
