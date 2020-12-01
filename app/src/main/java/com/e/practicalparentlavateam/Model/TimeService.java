@@ -8,6 +8,10 @@ import android.os.IBinder;
 import android.os.SystemClock;
 
 import com.e.practicalparentlavateam.R;
+import com.e.practicalparentlavateam.UI.TimeoutActivity;
+
+import java.sql.Time;
+
 /*
 This is the underlying service which allows the timer to run in the background
 even if the app is turned off, or if user navigates to different activities.
@@ -87,6 +91,7 @@ public class TimeService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         comIntent = new Intent(TIME_BROADCAST);
+        setIntent(intent);
         long usertime = intent.getLongExtra("mills",0);
         int timefactorintent=intent.getIntExtra("factor",0);
         //  System.out.println(usertime);
@@ -105,6 +110,14 @@ public class TimeService extends Service {
     {
         timefactor=factor;
     }
+    private void setIntent(Intent intent)
+    {
+        progressIntent=intent;
+    }
+    private Intent getIntent()
+    {
+        return progressIntent;
+    }
 
 
     /*
@@ -119,13 +132,21 @@ public class TimeService extends Service {
 
     private Runnable sendUpdatesToUI = new Runnable() {
         public void run() {
+           //
             serviceUIUpdate();
             setelapsedtimeclock();
             handler.postDelayed(this, 1000); // 1 seconds
+           timefactorchecker();
+
         }
     };
 
-
+   private void timefactorchecker() {
+       Intent trumpintent=getIntent();
+       int timefactorintent= trumpintent.getIntExtra("factor",0);
+        System.out.println("checking"+timefactorintent);
+       setTimefactor(timefactorintent);
+       }
 
 
     /*
@@ -147,6 +168,8 @@ public class TimeService extends Service {
     and so on...
      */
     private void serviceUIUpdate() {
+        timefactorchecker();
+       // System.out.println(timefactor);
         if(timefactor==1) {
             timeLeftInMilliSeconds = finalTime - System.currentTimeMillis();
             int timer = (int) timeLeftInMilliSeconds;
