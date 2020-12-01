@@ -48,6 +48,7 @@ public class DeepBreath extends AppCompatActivity {
     //TODO: delete later, only for testing cycling through state machine
     private TextView currentStateView;
     private Button beginFSM;
+    private Spinner breathSpinner;
     public Handler fsmHandler = new Handler();
     private Runnable soundInControl;
 
@@ -88,7 +89,7 @@ public class DeepBreath extends AppCompatActivity {
 
     /* spinner to select number of breaths */
     private void createBreathSpinner() {
-        Spinner breathSpinner = (Spinner) findViewById(R.id.breath_spinner);
+        breathSpinner = (Spinner) findViewById(R.id.breath_spinner);
         //To get the string array from the Strings.XML
         Resources res = this.getResources();
         String[] breathOptions = res.getStringArray(R.array.breaths_array);
@@ -207,6 +208,7 @@ public class DeepBreath extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    breathSpinner.setVisibility(View.INVISIBLE);
                     if (breathState == State.WAITING_TO_INHALE || breathState == State.CONTINUE) {
                         changeState(State.INHALING);
                         //currentStateView.setText("INHALING");
