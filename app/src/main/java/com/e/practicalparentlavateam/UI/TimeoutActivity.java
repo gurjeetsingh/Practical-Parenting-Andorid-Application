@@ -394,6 +394,8 @@ public class TimeoutActivity extends AppCompatActivity {
                     //millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                 }
                 if (position == 1) {
+                    Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                    stopService(serviceintent);
                     timeLeftInMilliSeconds = 60000;
                     selectedTime = 60000;
                     selectedTimeForPause = 60000;
