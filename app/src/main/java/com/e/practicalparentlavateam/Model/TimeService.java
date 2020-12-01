@@ -182,8 +182,8 @@ public class TimeService extends Service {
             }
             comIntent.putExtra("time", timer);
 
-            elapsedSeconds += (double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0);
-            comIntent.putExtra("elap", elapsedSeconds);
+            elapsedSeconds = (double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0);
+            comIntent.putExtra("elap", (double)timeIterator);
             System.out.println(elapsedSeconds);
             sendBroadcast(comIntent);
         }
@@ -207,7 +207,8 @@ public class TimeService extends Service {
                     stopSelf();
                 }
                 comIntent.putExtra("time", timer);
-                comIntent.putExtra("elap", Math.floor(elapsedSeconds/4));
+                //comIntent.putExtra("elap", Math.floor(elapsedSeconds/4));
+                comIntent.putExtra("elap", (double)timeIterator);
                 sendBroadcast(comIntent);
             }
 
@@ -216,7 +217,7 @@ public class TimeService extends Service {
         //for 50% time
         if(timefactor==3)
         {
-            elapsedSeconds += ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
             System.out.println(elapsedSeconds);
             if(Math.floor(elapsedSeconds%2)==1)
             {
@@ -234,7 +235,8 @@ public class TimeService extends Service {
                     stopSelf();
                 }
                 comIntent.putExtra("time", timer);
-                comIntent.putExtra("elap", Math.floor(elapsedSeconds/2));
+               // comIntent.putExtra("elap", Math.floor(elapsedSeconds/2));
+                comIntent.putExtra("elap", (double)timeIterator);
                 sendBroadcast(comIntent);
             }
 
@@ -243,7 +245,7 @@ public class TimeService extends Service {
         //For 75% time
         if(timefactor==4)
         {
-            elapsedSeconds += ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
+            elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
 
 
             timeLeftInMilliSeconds = (long) (userSelectedTime - 1000* timeIterator *0.75);
@@ -260,7 +262,8 @@ public class TimeService extends Service {
                 stopSelf();
             }
             comIntent.putExtra("time", timer);
-            comIntent.putExtra("elap", Math.floor(elapsedSeconds*0.75));
+          //  comIntent.putExtra("elap", Math.floor(elapsedSeconds*0.75));
+            comIntent.putExtra("elap", (double)timeIterator);
             sendBroadcast(comIntent);
             System.out.println(elapsedSeconds);
 

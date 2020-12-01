@@ -71,6 +71,7 @@ public class TimeoutActivity extends AppCompatActivity {
     int selectedTimeForPause;
     double totalelapsed=0;
     Intent requiredintent;
+    Spinner timeFieldSpinner;
 
     Context context = this;
 
@@ -204,6 +205,7 @@ public class TimeoutActivity extends AppCompatActivity {
         }
         final int time = intent.getIntExtra("time", 0);
         double elapsedtime = intent.getDoubleExtra("elap", 0);
+       // setElapsedTime((int)elapsedtime);
         endTime = intent.getLongExtra("endtime", 0);
         int mins = (int) (time / (double) 1000) / 60;
         int secs = (int) (time / (double) 1000) % 60;
@@ -217,7 +219,6 @@ public class TimeoutActivity extends AppCompatActivity {
             resetButton.setVisibility(View.INVISIBLE);
             endTimeFlag = 0;
             setLatestEndTime(0);
-            setLatestResetTime(0);
             setTimeFactor(1);
             notIf();
             //Added vibrator
@@ -252,7 +253,10 @@ public class TimeoutActivity extends AppCompatActivity {
             progressText.setText("0");
         } else {
             progresstimepercent = (((systemEndTime / 1000) - elapsedtime-totalelapsed) / (systemEndTime / 1000)) * 100;
-           //System.out.println("system end time is"+systemEndTime);
+           System.out.println("system end time is"+systemEndTime);
+            System.out.println("progtimepers"+progresstimepercent);
+            System.out.println("elapsed time is"+elapsedtime);
+            System.out.println("total elapsed time is"+totalelapsed);;
             Math.ceil(progresstimepercent);
 
             String totper = Integer.toString((int) progresstimepercent);
@@ -426,7 +430,7 @@ public class TimeoutActivity extends AppCompatActivity {
     }
 
     private void createTimeFactorSpinner() {
-        final Spinner timeFieldSpinner = (Spinner) findViewById(R.id.factorspinner);
+        timeFieldSpinner = (Spinner) findViewById(R.id.factorspinner);
         //To get the string array from the Strings.XML
         Resources res = this.getResources();
         String[] timePiece = res.getStringArray(R.array.timefactor);
@@ -467,7 +471,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(3);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                    requiredintent.putExtra("factor",getTimeFactor());
+//                    requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);}
                 if (position == 4) {
                     timeFactor=4;
@@ -475,7 +479,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(4);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                    requiredintent.putExtra("factor",getTimeFactor());
+                   // requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);;
                 }
                 if (position == 5) {
@@ -484,7 +488,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(5);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                    requiredintent.putExtra("factor",getTimeFactor());
+                    //requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);;
                 }
                 if(position==6){
@@ -493,7 +497,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     setTimeFactor(6);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                    requiredintent.putExtra("factor",getTimeFactor());
+                   // requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);;
                 }
                 if(position==7){
@@ -503,7 +507,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     millisecondConverterAndTimerUIupdate(selectedTime,timerValue);
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                     serviceIntent.putExtra("factor",getTimeFactor());
-                    requiredintent.putExtra("factor",getTimeFactor());
+                   // requiredintent.putExtra("factor",getTimeFactor());
                     startService(serviceIntent);;
                 }
             }
@@ -549,6 +553,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 registerReceiver(broadCastReceiver, new IntentFilter(TimeService.TIME_BROADCAST));
                 pauseButton.setVisibility(View.VISIBLE);
                 resetButton.setVisibility(View.VISIBLE);
+                timeFieldSpinner.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -574,6 +579,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 stopService(serviceIntent);
                 // unregisterReceiver(broadcastReceiver);
                 pauseButton.setVisibility(View.INVISIBLE);
+                timeFieldSpinner.setVisibility(View.INVISIBLE);
 
 
             }
@@ -666,6 +672,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 millisecondConverterAndTimerUIupdate(requiredtime,timerValue);
                 setLatestResetTime(0);
                 resetButton.setVisibility(View.INVISIBLE);
+                timeFieldSpinner.setVisibility(View.INVISIBLE);
             }
 
 
@@ -699,6 +706,22 @@ public class TimeoutActivity extends AppCompatActivity {
         //System.out.println("newtime is"+newtime);
         return newtime;
     }
+
+    private void setElapsedTime(int elapsedTime){
+        SharedPreferences settings = getSharedPreferences("elappref", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("elaptime",elapsedTime);
+        editor.apply();
+
+    }
+    private int getElapsedTime()
+    {
+        SharedPreferences settings = getSharedPreferences("elappref", 0);
+        int newtime = settings.getInt("elaptime", 0);
+        //System.out.println("newtime is"+newtime);
+        return newtime;
+    }
+
 
 
 
