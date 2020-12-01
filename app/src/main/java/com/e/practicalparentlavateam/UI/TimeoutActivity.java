@@ -216,7 +216,7 @@ public class TimeoutActivity extends AppCompatActivity {
             totalelapsed=0;
             alarmOffButton.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.INVISIBLE);
-            resetButton.setVisibility(View.INVISIBLE);
+            timeFieldSpinner.setVisibility(View.INVISIBLE);
             endTimeFlag = 0;
             setLatestEndTime(0);
             setTimeFactor(1);
@@ -233,6 +233,15 @@ public class TimeoutActivity extends AppCompatActivity {
                     alarmOffButton.setVisibility(View.INVISIBLE);
                 }
             }, delay);
+            if(elapsedtime<0)
+            {
+                progressBar.setProgress(0);
+            }
+
+            progressText.setText("0");
+            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
+            timerValue.setText(timeLeftFormatted);
+            return;
 
         }
 
@@ -242,6 +251,7 @@ public class TimeoutActivity extends AppCompatActivity {
         pauseIntent = intent;
         pauseButton.setVisibility(View.VISIBLE);
         resetButton.setVisibility(View.VISIBLE);
+        timeFieldSpinner.setVisibility(View.VISIBLE);
         setTimeSpeedText();
      //   requiredintent.putExtra("factor",getTimeFactor());
         System.out.println("real time factor is"+getTimeFactor());
@@ -253,13 +263,19 @@ public class TimeoutActivity extends AppCompatActivity {
             progressText.setText("0");
         } else {
             progresstimepercent = (((systemEndTime / 1000) - elapsedtime-totalelapsed) / (systemEndTime / 1000)) * 100;
-           System.out.println("system end time is"+systemEndTime);
-            System.out.println("progtimepers"+progresstimepercent);
-            System.out.println("elapsed time is"+elapsedtime);
-            System.out.println("total elapsed time is"+totalelapsed);
+           //System.out.println("system end time is"+systemEndTime);
+            //System.out.println("progtimepers"+progresstimepercent);
+            //System.out.println("elapsed time is"+elapsedtime);
+            //System.out.println("total elapsed time is"+totalelapsed);
             Math.ceil(progresstimepercent);
-
-            String totper = Integer.toString((int) progresstimepercent);
+            String totper;
+            if(progresstimepercent<0)
+            {
+                totper="0";
+            }
+            else {
+                totper = Integer.toString((int) progresstimepercent);
+            }
             progressBar.setProgress((int) progresstimepercent);
             if (elapsedtime < 0) {
                 progressText.setText(R.string.hundred);
