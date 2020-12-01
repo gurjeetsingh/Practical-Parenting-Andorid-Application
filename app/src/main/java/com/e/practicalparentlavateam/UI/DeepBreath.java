@@ -108,43 +108,53 @@ public class DeepBreath extends AppCompatActivity {
                 if (position == 0) {
                     numBreaths = 1;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
                 }
                 if (position == 1) {
                     numBreaths = 2;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
 
                 }
                 if (position == 2) {
                     numBreaths = 3;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
                 }
                 if (position == 3) {
                     numBreaths = 4;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
                 }
                 if (position == 4) {
                     numBreaths = 5;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
                 }
                 if (position == 5) {
                     numBreaths = 6;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
                 }
                 if (position == 6) {
                     numBreaths = 7;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
                 }
                 if (position == 7) {
                     numBreaths = 8;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
                 }
                 if (position == 8) {
                     numBreaths = 9;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
                 }
                 if (position == 9) {
                     numBreaths = 10;
                     saveTimes();
+                    breathDisplay.setText(""+ numBreaths);
                 }
 
             }
@@ -261,6 +271,7 @@ public class DeepBreath extends AppCompatActivity {
         //TODO: Stop animation
         //TODO: Stop sound
         circle.clearAnimation();
+        breathDisplay.setText(""+ numBreaths);
     }
 
     private void continueInhaling(){
@@ -315,6 +326,9 @@ public class DeepBreath extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("last times", numBreaths);
         editor.commit();
+        //TODO: is the placement of this ok? @yha181
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+                .show();
     }
 
     public static Intent makeDeepBreathIntent(Context context) {
