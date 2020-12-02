@@ -1,9 +1,6 @@
 package com.e.practicalparentlavateam.UI;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +9,6 @@ import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -30,24 +25,22 @@ import com.e.practicalparentlavateam.R;
 
 public class DeepBreath extends AppCompatActivity {
 
-    //Enum for all the states in state machine
+    //Enum for states in state machine
     public enum State {
         WAITING_TO_INHALE, CONTINUE, INHALING, EXHALE, DONE,
     }
     private State breathState = State.WAITING_TO_INHALE;
-
-    private ImageView circle;
-    private MediaPlayer soundIn = new MediaPlayer();
-    private MediaPlayer soundOut = new MediaPlayer();
-
     //state machine vars
     private static final String EXTRA_NUM_BREATHS = "Extra - Num breaths";
     private static int numBreaths;
     private TextView breathDisplay;
-    //for testing
-    //TODO: delete later, only for testing cycling through state machine
     private TextView currentStateView;
-    private Button beginFSM;
+    private Button begin;
+
+    //animation and sound vars
+    private ImageView circle;
+    private MediaPlayer soundIn = new MediaPlayer();
+    private MediaPlayer soundOut = new MediaPlayer();
     public Handler fsmHandler = new Handler();
     private Runnable soundInControl;
 
@@ -69,24 +62,19 @@ public class DeepBreath extends AppCompatActivity {
         //initialize display of breaths
         breathDisplay = findViewById(R.id.num_breaths_rem);
 
-        //TODO: delete after testing of state machine complete
         //display of state machine
         currentStateView = findViewById(R.id.state);
-        //fsm testing begin
-        beginFSM = findViewById(R.id.breath);
+        //begin button
+        begin = findViewById(R.id.breath);
 
         //setup breaths spinner
         createBreathSpinner();
-
-        //extract number of breaths form setup
-        breathSetUp();
-
+        //begin exercise/state machine
         beginBreathing();
-        //Set the current state
-        //changeState();
+
     }
 
-    /* spinner to select number of breaths */
+    //spinner to select number of breaths
     private void createBreathSpinner() {
         Spinner breathSpinner = (Spinner) findViewById(R.id.breath_spinner);
         //To get the string array from the Strings.XML
@@ -96,12 +84,15 @@ public class DeepBreath extends AppCompatActivity {
                 R.layout.breath_num_spinner, breathOptions);
         adapter.setDropDownViewResource(R.layout.breath_num_spinner_dropdown);
         breathSpinner.setAdapter(adapter);
-        //set default value
-        //TODO:change to load previous value
-        if(getNumBreaths() == 0)
+
+        //set default value/load previously selected value
+        if(getNumBreaths() == 0) {
             breathSpinner.setSelection(2);
-        else
+        }
+        else {
             breathSpinner.setSelection(getNumBreaths() - 1);
+        }
+
         breathSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -166,12 +157,19 @@ public class DeepBreath extends AppCompatActivity {
         });
     }
 
-    private void breathSetUp(){
-        Intent intent = getIntent();
-        numBreaths = intent.getIntExtra(EXTRA_NUM_BREATHS, 0);
-        //breaths selected displayed
-        breathDisplay.setText(""+ numBreaths);
+    private int getNumBreaths(){
+        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
+        return prefs.getInt("last times",0);
+    }
 
+    private void saveTimes(){
+        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("last times", numBreaths);
+        editor.commit();
+        //TODO: is the placement of this ok? @yha181
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+                .show();
     }
 
     private void beginBreathing() {
@@ -181,8 +179,6 @@ public class DeepBreath extends AppCompatActivity {
             public void run() {
                 if(numBreaths > 0){
                     if (breathState == State.EXHALE) {
-                        //TODO: reset ontouch listner
-                        //beginBreathing();
                         changeState(State.CONTINUE);
 
                     }
@@ -203,13 +199,12 @@ public class DeepBreath extends AppCompatActivity {
             }
         };
 
-        beginFSM.setOnTouchListener(new View.OnTouchListener() {
+        begin.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
                     if (breathState == State.WAITING_TO_INHALE || breathState == State.CONTINUE) {
                         changeState(State.INHALING);
-                        //currentStateView.setText("INHALING");
                         handler.postDelayed(releaseHint,10000);
                     }
                 }
@@ -220,13 +215,11 @@ public class DeepBreath extends AppCompatActivity {
                             changeState(State.WAITING_TO_INHALE);
                             soundIn.stop();
                             handler.removeCallbacks(releaseHint);
-                            //currentStateView.setText("INHALING");
                         }
                     }
                     else {
                         if (breathState == State.INHALING) {
                             changeState(State.EXHALE);
-                            //currentStateView.setText("INHALING");
                             handler.postDelayed(afterExhaling,3000);
                             handler.removeCallbacks(releaseHint);
                         }
@@ -260,7 +253,7 @@ public class DeepBreath extends AppCompatActivity {
                 break;
             case DONE:
                 currentStateView.setText(R.string.finish);
-                beginFSM.setText(R.string.good_job);
+                begin.setText(R.string.good_job);
                 //done();
                 break;
         }
@@ -268,23 +261,19 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void waitingToInhale() {
-        //TODO: Stop animation
-        //TODO: Stop sound
         circle.clearAnimation();
         breathDisplay.setText(""+ numBreaths);
     }
 
     private void continueInhaling(){
-        beginFSM.setText(R.string.in);
+        begin.setText(R.string.in);
         Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
                 .show();
     }
 
     private void inhaling() {
-        //TODO: Begin animation
-        //TODO: Begin sound
-        //TODO: handler for stopping after 10 seconds
-        beginFSM.setText(R.string.in);
+
+        begin.setText(R.string.in);
         Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
         circle.startAnimation(animationIn);
         if(!soundOut.equals(null))
@@ -294,8 +283,6 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void exhale() {
-        //TODO: Start exhale animation
-        //TODO: Start exhale sound
         Animation animationOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_out);
         circle.startAnimation(animationOut);
         if(!soundIn.equals(null))
@@ -303,7 +290,7 @@ public class DeepBreath extends AppCompatActivity {
         soundOut = MediaPlayer.create(DeepBreath.this, R.raw.sound_out);
         soundOut.start();
 
-        beginFSM.setText(R.string.out);
+        begin.setText(R.string.out);
         numBreaths--;
         breathDisplay.setText(""+ numBreaths);
     }
@@ -314,21 +301,6 @@ public class DeepBreath extends AppCompatActivity {
         Intent mainIntent=MainMenu.makeIntent(DeepBreath.this);
         startActivity(mainIntent);
         DeepBreath.this.finish();
-    }
-
-    private int getNumBreaths(){
-        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
-        return prefs.getInt("last times",0);
-    }
-
-    private void saveTimes(){
-        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("last times", numBreaths);
-        editor.commit();
-        //TODO: is the placement of this ok? @yha181
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
-                .show();
     }
 
     public static Intent makeDeepBreathIntent(Context context) {
