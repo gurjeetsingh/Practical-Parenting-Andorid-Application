@@ -35,19 +35,17 @@ public class DeepBreath extends AppCompatActivity {
         WAITING_TO_INHALE, CONTINUE, INHALING, EXHALE, DONE,
     }
     private State breathState = State.WAITING_TO_INHALE;
-
-    private ImageView circle;
-    private MediaPlayer soundIn = new MediaPlayer();
-    private MediaPlayer soundOut = new MediaPlayer();
-
     //state machine vars
     private static final String EXTRA_NUM_BREATHS = "Extra - Num breaths";
     private static int numBreaths;
     private TextView breathDisplay;
-    //for testing
-    //TODO: delete later, only for testing cycling through state machine
     private TextView currentStateView;
     private Button beginFSM;
+
+    //animation and sound vars
+    private ImageView circle;
+    private MediaPlayer soundIn = new MediaPlayer();
+    private MediaPlayer soundOut = new MediaPlayer();
     public Handler fsmHandler = new Handler();
     private Runnable soundInControl;
 
