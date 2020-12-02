@@ -148,7 +148,6 @@ public class TimeService extends Service {
    private void timefactorchecker() {
        Intent trumpintent=getIntent();
        int timefactorintent= trumpintent.getIntExtra("factor",0);
-        System.out.println("checking"+timefactorintent);
        setTimefactor(timefactorintent);
        }
        private void resetVariables()
@@ -192,7 +191,6 @@ public class TimeService extends Service {
 
             elapsedSeconds = (double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0);
             comIntent.putExtra("elap", (double)timeIterator);
-            System.out.println(elapsedSeconds);
             sendBroadcast(comIntent);
         }
         if(timefactor==2)
@@ -228,7 +226,6 @@ public class TimeService extends Service {
         {
             elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
             resetVariables();
-            System.out.println(elapsedSeconds);
             if(Math.floor(elapsedSeconds%2)==1)
             {
                 timeLeftInMilliSeconds = userSelectedTime - 1000* timeIterator;
@@ -256,8 +253,6 @@ public class TimeService extends Service {
         if(timefactor==4)
         {
             specialiterator= (specialiterator+0.75);
-            System.out.println(specialiterator);
-            System.out.println("mamu");
             elapsedSeconds = ((double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0));
             if(specialiterator>times) {
                 timeLeftInMilliSeconds = (long) (userSelectedTime - 1000 * timeIterator);
@@ -349,7 +344,7 @@ public class TimeService extends Service {
             comIntent.putExtra("time", timer);
             comIntent.putExtra("elap",(double) timeIterator);
             sendBroadcast(comIntent);
-            System.out.println(timeIterator);
+          //  System.out.println(timeIterator);
 
         }
 

@@ -123,7 +123,6 @@ public class TimeoutActivity extends AppCompatActivity {
             }
             else if (extras.getBoolean("StopAlarm")) {
                 AudioController.stopAudio();
-                finish();
             }
 
         }
@@ -230,6 +229,7 @@ public class TimeoutActivity extends AppCompatActivity {
             endTimeFlag = 0;
             setLatestEndTime(0);
             setTimeFactor(1);
+            setTimeSpeedText();
             notIf();
             //Added vibrator
             Vibrator alarm = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -267,7 +267,7 @@ public class TimeoutActivity extends AppCompatActivity {
         createNotificationChannel();
         setTimeSpeedText();
      //   requiredintent.putExtra("factor",getTimeFactor());
-        System.out.println("real time factor is"+getTimeFactor());
+       // System.out.println("real time factor is"+getTimeFactor());
         intent.putExtra("factor",getTimeFactor());
 
 
@@ -629,12 +629,21 @@ public class TimeoutActivity extends AppCompatActivity {
 
             public void onClick(View view) {
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
-                serviceIntent.putExtra("factor",timeFactor);
                 setserviceIntent(serviceIntent);
+
                 if(getLatestResetTime()==0)
                 {
                     setLatestResetTime((int)timeLeftInMilliSeconds);
+                    createTimeFactorSpinner();
+                    timeFieldSpinner.setSelection(1);
+                    System.out.println("latest reset time"+getLatestResetTime());
                 }
+                createTimeFactorSpinner();
+                setTimeFactor(1);
+                timeFieldSpinner.setSelection(1);
+                serviceIntent.putExtra("factor",timeFactor);
+                System.out.println("starting timefactor"+timeFactor);
+                System.out.println("mills"+timeLeftInMilliSeconds);
                 serviceIntent.putExtra("mills", timeLeftInMilliSeconds);
                 selectedTime=timeLeftInMilliSeconds;
                 isTimerRunning = true;
