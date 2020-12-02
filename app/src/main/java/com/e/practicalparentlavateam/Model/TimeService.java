@@ -92,20 +92,20 @@ public class TimeService extends Service {
 
     We are using a flag here to determine whether the timer is already running or not.
     If the timer is not running, flag=0, so it will enter the if clause and start the timer.
+    A timefactor is also obtained to recieve the rate of time speeed.
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         comIntent = new Intent(TIME_BROADCAST);
         setIntent(intent);
-        long usertime = intent.getLongExtra("mills",0);
-        int timefactorintent=intent.getIntExtra("factor",0);
-        //  System.out.println(usertime);
+        long userTime = intent.getLongExtra("mills",0);
+        int timeFactorIntent=intent.getIntExtra("factor",0);
 
         if(flag<1) {
-            userSelectedTime = usertime;
+            userSelectedTime = userTime;
             finalTime = userSelectedTime + System.currentTimeMillis();
             setFinalTime(finalTime);
-            setTimefactor(timefactorintent);
+            setTimefactor(timeFactorIntent);
             flag++;
         }
         return START_STICKY;
@@ -181,6 +181,13 @@ public class TimeService extends Service {
     2nd Iteration: timeleftinmillseconds=6000-4001=1999
     3rd Iteration: timeleftinmillseconds=6000-4002=1998
     and so on...
+
+    For our time factor, we calculate the speeds in this fashion;
+    Example, if time factor is 5(200%), then we add 2 seconds
+    to the elapsed time every 1 second passed in real time.
+    Thus, every 1 second counts as 2 seconds in the timer.
+    This TimeFactor is sent to the service upon selection from the timeout
+    activity.
      */
     private void serviceUIUpdate() {
         timefactorchecker();
