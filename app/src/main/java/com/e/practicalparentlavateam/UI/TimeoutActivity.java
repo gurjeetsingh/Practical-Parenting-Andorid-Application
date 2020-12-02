@@ -349,7 +349,7 @@ public class TimeoutActivity extends AppCompatActivity {
         intent.putExtra("StopAlarm",true);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        PendingIntent snoozePendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
 
 
 
@@ -877,5 +877,15 @@ public class TimeoutActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+        }
+        else if (extras.getBoolean("StopAlarm")) {
+            AudioController.stopAudio();
+        }
 
+    }
 }
