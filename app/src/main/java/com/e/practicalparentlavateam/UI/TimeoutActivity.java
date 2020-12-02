@@ -80,6 +80,7 @@ public class TimeoutActivity extends AppCompatActivity {
     Intent requiredintent;
     Spinner timeFieldSpinner;
     private boolean timerforcereset;
+    boolean resetChecker=false;
 
     Context context = this;
 
@@ -628,6 +629,7 @@ public class TimeoutActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
+
                 Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
                 setserviceIntent(serviceIntent);
 
@@ -636,7 +638,6 @@ public class TimeoutActivity extends AppCompatActivity {
                     setLatestResetTime((int)timeLeftInMilliSeconds);
                     createTimeFactorSpinner();
                     timeFieldSpinner.setSelection(1);
-                    System.out.println("latest reset time"+getLatestResetTime());
                 }
                 createTimeFactorSpinner();
                 setTimeFactor(1);
@@ -645,6 +646,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 System.out.println("starting timefactor"+timeFactor);
                 System.out.println("mills"+timeLeftInMilliSeconds);
                 serviceIntent.putExtra("mills", timeLeftInMilliSeconds);
+                serviceIntent.putExtra("reset",resetChecker);
                 selectedTime=timeLeftInMilliSeconds;
                 isTimerRunning = true;
                 //ispaused=false;
@@ -788,6 +790,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 millisecondConverterAndTimerUIupdate(requiredtime,timerValue);
                 setLatestResetTime(0);
                 resetButton.setVisibility(View.INVISIBLE);
+                resetChecker=true;
                 timeFieldSpinner.setVisibility(View.INVISIBLE);
                 setTimeSpeedText();
             }

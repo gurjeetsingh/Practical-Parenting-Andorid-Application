@@ -45,6 +45,7 @@ public class TimeService extends Service {
     int timeIterator =0;
     int timer;
     int alltime;
+    boolean resetcheck;
 
 
     /*
@@ -140,7 +141,7 @@ public class TimeService extends Service {
             serviceUIUpdate();
             setelapsedtimeclock();
             handler.postDelayed(this, 1000); // 1 seconds
-           timefactorchecker();
+            timefactorchecker();
 
         }
     };
@@ -149,6 +150,12 @@ public class TimeService extends Service {
        Intent trumpintent=getIntent();
        int timefactorintent= trumpintent.getIntExtra("factor",0);
        setTimefactor(timefactorintent);
+       }
+       private boolean resetChecker()
+       {
+           Intent trumpintent=getIntent();
+           boolean resetcheck= trumpintent.getBooleanExtra("reset",false);
+           return resetcheck;
        }
        private void resetVariables()
        {
@@ -177,6 +184,11 @@ public class TimeService extends Service {
      */
     private void serviceUIUpdate() {
         timefactorchecker();
+        if(resetChecker())
+        {
+            timefactor=1;
+        }
+
        // System.out.println(timefactor);
         if(timefactor==1) {
             resetVariables();
