@@ -158,6 +158,21 @@ public class DeepBreath extends AppCompatActivity {
         });
     }
 
+    private int getNumBreaths(){
+        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
+        return prefs.getInt("last times",0);
+    }
+
+    private void saveTimes(){
+        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("last times", numBreaths);
+        editor.commit();
+        //TODO: is the placement of this ok? @yha181
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+                .show();
+    }
+
 
     private void beginBreathing() {
         final Handler handler = new Handler();
@@ -166,8 +181,6 @@ public class DeepBreath extends AppCompatActivity {
             public void run() {
                 if(numBreaths > 0){
                     if (breathState == State.EXHALE) {
-                        //TODO: reset ontouch listner
-                        //beginBreathing();
                         changeState(State.CONTINUE);
 
                     }
@@ -194,7 +207,6 @@ public class DeepBreath extends AppCompatActivity {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
                     if (breathState == State.WAITING_TO_INHALE || breathState == State.CONTINUE) {
                         changeState(State.INHALING);
-                        //currentStateView.setText("INHALING");
                         handler.postDelayed(releaseHint,10000);
                     }
                 }
@@ -205,13 +217,11 @@ public class DeepBreath extends AppCompatActivity {
                             changeState(State.WAITING_TO_INHALE);
                             soundIn.stop();
                             handler.removeCallbacks(releaseHint);
-                            //currentStateView.setText("INHALING");
                         }
                     }
                     else {
                         if (breathState == State.INHALING) {
                             changeState(State.EXHALE);
-                            //currentStateView.setText("INHALING");
                             handler.postDelayed(afterExhaling,3000);
                             handler.removeCallbacks(releaseHint);
                         }
@@ -253,8 +263,6 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void waitingToInhale() {
-        //TODO: Stop animation
-        //TODO: Stop sound
         circle.clearAnimation();
         breathDisplay.setText(""+ numBreaths);
     }
@@ -266,9 +274,7 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void inhaling() {
-        //TODO: Begin animation
-        //TODO: Begin sound
-        //TODO: handler for stopping after 10 seconds
+
         begin.setText(R.string.in);
         Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
         circle.startAnimation(animationIn);
@@ -279,8 +285,6 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void exhale() {
-        //TODO: Start exhale animation
-        //TODO: Start exhale sound
         Animation animationOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_out);
         circle.startAnimation(animationOut);
         if(!soundIn.equals(null))
@@ -301,20 +305,6 @@ public class DeepBreath extends AppCompatActivity {
         DeepBreath.this.finish();
     }
 
-    private int getNumBreaths(){
-        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
-        return prefs.getInt("last times",0);
-    }
-
-    private void saveTimes(){
-        SharedPreferences prefs = getSharedPreferences("last times", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("last times", numBreaths);
-        editor.commit();
-        //TODO: is the placement of this ok? @yha181
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
-                .show();
-    }
 
     public static Intent makeDeepBreathIntent(Context context) {
         Intent intent = new Intent(context, DeepBreath.class);
