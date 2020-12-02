@@ -184,6 +184,9 @@
     <string name="time6">Time@300%</string>
     <string name="time7">Time@400%</string>
     <string name="hundred">100%</string>
-
+    <string name="resetplease">Please Reset Timer First.</string>
+    <string name="channelName">newnotif</string>
+    <string name="channelDesc">newnotif</string>
+    <string name="channelID">"newnotif</string>
 
 </resources>

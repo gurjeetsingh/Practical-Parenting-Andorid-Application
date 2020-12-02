@@ -66,8 +66,7 @@
         <activity android:name=".UI.MainMenu" />
         <activity
             android:name=".UI.TimeoutActivity"
-            android:label="@string/title_activity_timeout_timer"
-            android:parentActivityName=".UI.MainMenu" />
+            android:label="@string/title_activity_timeout_timer" />
         <activity
             android:name=".UI.ConfigureChildren"
             android:label="@string/title_activity_configure_children"
@@ -88,6 +87,7 @@
         </activity>
 
         <service android:name=".Model.TimeService" />
+        <receiver android:name=".Model.NotificationReciever"/>
 
         <meta-data
             android:name="preloaded_fonts"
