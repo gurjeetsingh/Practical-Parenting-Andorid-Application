@@ -1,3 +1,6 @@
+/*
+IT is the activity for the deep breath
+*/
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,25 +39,17 @@ public class DeepBreath extends AppCompatActivity {
     private TextView breathDisplay;
     private TextView currentStateView;
     private Button begin;
+    private Spinner breathSpinner;
 
     //animation and sound vars
     private ImageView circle;
     private MediaPlayer soundIn = new MediaPlayer();
     private MediaPlayer soundOut = new MediaPlayer();
-    public Handler fsmHandler = new Handler();
-    private Runnable soundInControl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deep_breath);
-
-        soundInControl = new Runnable() {
-            @Override
-            public void run() {
-                soundIn.stop();
-            }
-        };
 
         //https://commons.wikimedia.org/wiki/File:Small-dark-green-circle.svg
         circle = findViewById(R.id.circle);
@@ -76,7 +71,7 @@ public class DeepBreath extends AppCompatActivity {
 
     //spinner to select number of breaths
     private void createBreathSpinner() {
-        Spinner breathSpinner = (Spinner) findViewById(R.id.breath_spinner);
+        breathSpinner = (Spinner) findViewById(R.id.breath_spinner);
         //To get the string array from the Strings.XML
         Resources res = this.getResources();
         String[] breathOptions = res.getStringArray(R.array.breaths_array);
@@ -168,7 +163,7 @@ public class DeepBreath extends AppCompatActivity {
         editor.putInt("last times", numBreaths);
         editor.commit();
         //TODO: is the placement of this ok? @yha181
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
                 .show();
     }
 
@@ -194,7 +189,7 @@ public class DeepBreath extends AppCompatActivity {
         final Runnable releaseHint = new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(DeepBreath.this, getString(R.string.hint_for_release), Toast.LENGTH_LONG)
+                Toast.makeText(DeepBreath.this, getString(R.string.hint_for_release), Toast.LENGTH_SHORT)
                         .show();
             }
         };
@@ -203,6 +198,7 @@ public class DeepBreath extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    breathSpinner.setVisibility(View.INVISIBLE);
                     if (breathState == State.WAITING_TO_INHALE || breathState == State.CONTINUE) {
                         changeState(State.INHALING);
                         handler.postDelayed(releaseHint,10000);
@@ -267,7 +263,7 @@ public class DeepBreath extends AppCompatActivity {
 
     private void continueInhaling(){
         begin.setText(R.string.in);
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
                 .show();
     }
 
