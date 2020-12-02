@@ -36,6 +36,7 @@ public class DeepBreath extends AppCompatActivity {
     private TextView breathDisplay;
     private TextView currentStateView;
     private Button begin;
+    private Spinner breathSpinner;
 
     //animation and sound vars
     private ImageView circle;
@@ -76,7 +77,7 @@ public class DeepBreath extends AppCompatActivity {
 
     //spinner to select number of breaths
     private void createBreathSpinner() {
-        Spinner breathSpinner = (Spinner) findViewById(R.id.breath_spinner);
+        breathSpinner = (Spinner) findViewById(R.id.breath_spinner);
         //To get the string array from the Strings.XML
         Resources res = this.getResources();
         String[] breathOptions = res.getStringArray(R.array.breaths_array);
@@ -203,6 +204,7 @@ public class DeepBreath extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    breathSpinner.setVisibility(View.INVISIBLE);
                     if (breathState == State.WAITING_TO_INHALE || breathState == State.CONTINUE) {
                         changeState(State.INHALING);
                         handler.postDelayed(releaseHint,10000);
