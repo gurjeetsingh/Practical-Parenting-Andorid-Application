@@ -266,6 +266,7 @@ public class TimeoutActivity extends AppCompatActivity {
         timeFieldSpinner.setVisibility(View.VISIBLE);
         timerforcereset=true;
         createNotificationChannel();
+        setLatestResetTime(getLatestEndTime());
         setTimeSpeedText();
      //   requiredintent.putExtra("factor",getTimeFactor());
        // System.out.println("real time factor is"+getTimeFactor());
