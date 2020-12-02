@@ -1,9 +1,6 @@
 package com.e.practicalparentlavateam.UI;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +9,6 @@ import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -40,7 +35,7 @@ public class DeepBreath extends AppCompatActivity {
     private static int numBreaths;
     private TextView breathDisplay;
     private TextView currentStateView;
-    private Button beginFSM;
+    private Button begin;
 
     //animation and sound vars
     private ImageView circle;
@@ -70,21 +65,17 @@ public class DeepBreath extends AppCompatActivity {
         //TODO: delete after testing of state machine complete
         //display of state machine
         currentStateView = findViewById(R.id.state);
-        //fsm testing begin
-        beginFSM = findViewById(R.id.breath);
+        //begin button
+        begin = findViewById(R.id.breath);
 
         //setup breaths spinner
         createBreathSpinner();
-
-        //extract number of breaths form setup
-        breathSetUp();
-
+        //begin exercise/state machine
         beginBreathing();
-        //Set the current state
-        //changeState();
+
     }
 
-    /* spinner to select number of breaths */
+    //spinner to select number of breaths
     private void createBreathSpinner() {
         Spinner breathSpinner = (Spinner) findViewById(R.id.breath_spinner);
         //To get the string array from the Strings.XML
@@ -94,12 +85,15 @@ public class DeepBreath extends AppCompatActivity {
                 R.layout.breath_num_spinner, breathOptions);
         adapter.setDropDownViewResource(R.layout.breath_num_spinner_dropdown);
         breathSpinner.setAdapter(adapter);
-        //set default value
-        //TODO:change to load previous value
-        if(getNumBreaths() == 0)
+
+        //set default value/load previously selected value
+        if(getNumBreaths() == 0) {
             breathSpinner.setSelection(2);
-        else
+        }
+        else {
             breathSpinner.setSelection(getNumBreaths() - 1);
+        }
+
         breathSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -164,13 +158,6 @@ public class DeepBreath extends AppCompatActivity {
         });
     }
 
-    private void breathSetUp(){
-        Intent intent = getIntent();
-        numBreaths = intent.getIntExtra(EXTRA_NUM_BREATHS, 0);
-        //breaths selected displayed
-        breathDisplay.setText(""+ numBreaths);
-
-    }
 
     private void beginBreathing() {
         final Handler handler = new Handler();
@@ -201,7 +188,7 @@ public class DeepBreath extends AppCompatActivity {
             }
         };
 
-        beginFSM.setOnTouchListener(new View.OnTouchListener() {
+        begin.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -258,7 +245,7 @@ public class DeepBreath extends AppCompatActivity {
                 break;
             case DONE:
                 currentStateView.setText(R.string.finish);
-                beginFSM.setText(R.string.good_job);
+                begin.setText(R.string.good_job);
                 //done();
                 break;
         }
@@ -273,7 +260,7 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void continueInhaling(){
-        beginFSM.setText(R.string.in);
+        begin.setText(R.string.in);
         Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
                 .show();
     }
@@ -282,7 +269,7 @@ public class DeepBreath extends AppCompatActivity {
         //TODO: Begin animation
         //TODO: Begin sound
         //TODO: handler for stopping after 10 seconds
-        beginFSM.setText(R.string.in);
+        begin.setText(R.string.in);
         Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
         circle.startAnimation(animationIn);
         if(!soundOut.equals(null))
@@ -301,7 +288,7 @@ public class DeepBreath extends AppCompatActivity {
         soundOut = MediaPlayer.create(DeepBreath.this, R.raw.sound_out);
         soundOut.start();
 
-        beginFSM.setText(R.string.out);
+        begin.setText(R.string.out);
         numBreaths--;
         breathDisplay.setText(""+ numBreaths);
     }
