@@ -25,7 +25,7 @@ import com.e.practicalparentlavateam.R;
 
 public class DeepBreath extends AppCompatActivity {
 
-    //Enum for all the states in state machine
+    //Enum for states in state machine
     public enum State {
         WAITING_TO_INHALE, CONTINUE, INHALING, EXHALE, DONE,
     }
@@ -62,7 +62,6 @@ public class DeepBreath extends AppCompatActivity {
         //initialize display of breaths
         breathDisplay = findViewById(R.id.num_breaths_rem);
 
-        //TODO: delete after testing of state machine complete
         //display of state machine
         currentStateView = findViewById(R.id.state);
         //begin button
@@ -172,7 +171,6 @@ public class DeepBreath extends AppCompatActivity {
         Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
                 .show();
     }
-
 
     private void beginBreathing() {
         final Handler handler = new Handler();
@@ -304,7 +302,6 @@ public class DeepBreath extends AppCompatActivity {
         startActivity(mainIntent);
         DeepBreath.this.finish();
     }
-
 
     public static Intent makeDeepBreathIntent(Context context) {
         Intent intent = new Intent(context, DeepBreath.class);
