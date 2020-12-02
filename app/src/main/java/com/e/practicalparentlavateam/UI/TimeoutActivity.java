@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 
 import com.e.practicalparentlavateam.Model.AudioController;
+import com.e.practicalparentlavateam.Model.NotificationReciever;
 import com.e.practicalparentlavateam.Model.TimeService;
 import com.e.practicalparentlavateam.R;
 
@@ -370,6 +371,9 @@ public class TimeoutActivity extends AppCompatActivity {
         intent.putExtra("StopAlarm",true);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        Intent broadcastIntent=new Intent(this, NotificationReciever.class);
+        broadcastIntent.putExtra("StopAlarm",true);
+        PendingIntent actionIntent=PendingIntent.getBroadcast(this,0,broadcastIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "97")
                 .setSmallIcon(R.drawable.babyclock)
@@ -380,8 +384,9 @@ public class TimeoutActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
                 .setColor(getResources().getColor(R.color.appcolr))
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
+                .addAction(R.mipmap.ic_launcher_round,"StopAlarm",actionIntent)
+               .setAutoCancel(true);
+
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(97, builder.build());

@@ -87,6 +87,7 @@
         </activity>
 
         <service android:name=".Model.TimeService" />
+        <receiver android:name=".Model.NotificationReciever"/>
 
         <meta-data
             android:name="preloaded_fonts"
