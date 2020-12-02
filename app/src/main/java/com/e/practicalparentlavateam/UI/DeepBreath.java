@@ -1,3 +1,6 @@
+/*
+IT is the activity for the deep breath
+*/
 package com.e.practicalparentlavateam.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,20 +45,11 @@ public class DeepBreath extends AppCompatActivity {
     private ImageView circle;
     private MediaPlayer soundIn = new MediaPlayer();
     private MediaPlayer soundOut = new MediaPlayer();
-    public Handler fsmHandler = new Handler();
-    private Runnable soundInControl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deep_breath);
-
-        soundInControl = new Runnable() {
-            @Override
-            public void run() {
-                soundIn.stop();
-            }
-        };
 
         //https://commons.wikimedia.org/wiki/File:Small-dark-green-circle.svg
         circle = findViewById(R.id.circle);
@@ -169,7 +163,7 @@ public class DeepBreath extends AppCompatActivity {
         editor.putInt("last times", numBreaths);
         editor.commit();
         //TODO: is the placement of this ok? @yha181
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
                 .show();
     }
 
@@ -195,7 +189,7 @@ public class DeepBreath extends AppCompatActivity {
         final Runnable releaseHint = new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(DeepBreath.this, getString(R.string.hint_for_release), Toast.LENGTH_LONG)
+                Toast.makeText(DeepBreath.this, getString(R.string.hint_for_release), Toast.LENGTH_SHORT)
                         .show();
             }
         };
@@ -269,7 +263,7 @@ public class DeepBreath extends AppCompatActivity {
 
     private void continueInhaling(){
         begin.setText(R.string.in);
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_LONG)
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
                 .show();
     }
 
