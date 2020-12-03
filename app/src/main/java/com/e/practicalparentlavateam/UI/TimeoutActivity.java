@@ -278,7 +278,11 @@ public class TimeoutActivity extends AppCompatActivity {
             String totper;
             if(progressTimePercent <0)
             {
-                totper="0";
+                totper="1";
+                if(time==0)
+                {
+                    totper="0";
+                }
             }
             else {
                 totper = Integer.toString((int) progressTimePercent);
@@ -412,8 +416,8 @@ public class TimeoutActivity extends AppCompatActivity {
         Resources res = this.getResources();
         String[] timePiece = res.getStringArray(R.array.minutes_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, timePiece);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.time_duration_spinner, timePiece);
+        adapter.setDropDownViewResource(R.layout.time_duration_spinner_dropdown);
         timeFieldSpinner.setAdapter(adapter);
         timeFieldSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -431,6 +435,15 @@ public class TimeoutActivity extends AppCompatActivity {
                     if(timerForceReset ==true)
                     {
                         Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                        Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                        stopService(serviceintent);
+                        timeLeftInMilliSeconds = 60000;
+                        selectedTime = 60000;
+                        selectedTimeForPause = 60000;
+                        setLatestResetTime(60000);
+                        progressBar.setProgress(100);
+                        progressText.setText("100");
+                        millisecondConverterAndTimerUIupdate(selectedTime, timerValue);
                     }
                     else {
                         Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -533,8 +546,8 @@ public class TimeoutActivity extends AppCompatActivity {
         Resources res = this.getResources();
         String[] timePiece = res.getStringArray(R.array.timefactor);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, timePiece);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.time_factor_spinner, timePiece);
+        adapter.setDropDownViewResource(R.layout.time_factor_spinner_dropdown);
         timeFieldSpinner.setAdapter(adapter);
         timeFieldSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
