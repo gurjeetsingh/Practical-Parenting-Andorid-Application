@@ -202,10 +202,18 @@ public class TimeService extends Service {
             timeLeftInMilliSeconds = userSelectedTime-1000*timeIterator;
             timeIterator++;
             int timer = (int) timeLeftInMilliSeconds;
-            if (timer < 0) {
+            if(timeLeftInMilliSeconds==0 ||timeLeftInMilliSeconds<0)
+            {
+                timer = 0;
+            }
+            else {
+                timer=(int)timeLeftInMilliSeconds;
+            }
+            if (timer < 0 || timer ==0) {
                 startAlarm();
                 stopSelf();
             }
+
             comIntent.putExtra("time", timer);
 
             elapsedSeconds = (double) ((getelapsedtimeclock() - getoriginaltimeclock()) / 1000.0);

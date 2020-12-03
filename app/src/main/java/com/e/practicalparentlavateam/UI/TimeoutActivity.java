@@ -278,7 +278,11 @@ public class TimeoutActivity extends AppCompatActivity {
             String totper;
             if(progressTimePercent <0)
             {
-                totper="0";
+                totper="1";
+                if(time==0)
+                {
+                    totper="0";
+                }
             }
             else {
                 totper = Integer.toString((int) progressTimePercent);
@@ -431,6 +435,15 @@ public class TimeoutActivity extends AppCompatActivity {
                     if(timerForceReset ==true)
                     {
                         Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                        Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
+                        stopService(serviceintent);
+                        timeLeftInMilliSeconds = 60000;
+                        selectedTime = 60000;
+                        selectedTimeForPause = 60000;
+                        setLatestResetTime(60000);
+                        progressBar.setProgress(100);
+                        progressText.setText("100");
+                        millisecondConverterAndTimerUIupdate(selectedTime, timerValue);
                     }
                     else {
                         Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
