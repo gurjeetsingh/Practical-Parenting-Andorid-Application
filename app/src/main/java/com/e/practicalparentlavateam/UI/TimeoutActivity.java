@@ -278,7 +278,11 @@ public class TimeoutActivity extends AppCompatActivity {
             String totper;
             if(progressTimePercent <0)
             {
-                totper="0";
+                totper="1";
+                if(time==0)
+                {
+                    totper="0";
+                }
             }
             else {
                 totper = Integer.toString((int) progressTimePercent);
