@@ -25,17 +25,17 @@
 
         <Button
             android:id="@+id/time_push_button"
-            android:layout_width="115dp"
-            android:layout_height="28dp"
+            android:layout_width="125dp"
+            android:layout_height="37dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginBottom="49dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="90dp"
             android:background="@drawable/calm_rounded_buttons"
             android:fontFamily="@font/imprima"
             android:text="@string/start_timer"
             android:textColor="#ED171732"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -54,16 +54,16 @@
         <Button
             android:id="@+id/pause_button"
             android:layout_width="125dp"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="11dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="90dp"
             android:background="@drawable/calm_rounded_buttons"
             android:fontFamily="@font/imprima"
             android:text="@string/timer1"
             android:textColor="#ED171732"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
@@ -82,17 +82,17 @@
 
         <Button
             android:id="@+id/custom_time"
-            android:layout_width="159dp"
+            android:layout_width="165dp"
             android:layout_height="37dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="117dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginStart="125dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/calm_rounded_buttons"
             android:fontFamily="@font/imprima"
             android:text="@string/timer2"
             android:textColor="#ED171732"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button
