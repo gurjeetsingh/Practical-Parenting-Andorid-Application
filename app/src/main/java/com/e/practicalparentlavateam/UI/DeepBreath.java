@@ -194,6 +194,13 @@ public class DeepBreath extends AppCompatActivity {
             }
         };
 
+        final Runnable changeButton = new Runnable() {
+            @Override
+            public void run() {
+                begin.setText(R.string.out);
+            }
+        };
+
         begin.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -202,6 +209,7 @@ public class DeepBreath extends AppCompatActivity {
                     if (breathState == State.WAITING_TO_INHALE || breathState == State.CONTINUE) {
                         changeState(State.INHALING);
                         handler.postDelayed(releaseHint,10000);
+                        handler.postDelayed(changeButton,3000);
                     }
                 }
 
@@ -211,6 +219,7 @@ public class DeepBreath extends AppCompatActivity {
                             changeState(State.WAITING_TO_INHALE);
                             soundIn.stop();
                             handler.removeCallbacks(releaseHint);
+                            handler.removeCallbacks(changeButton);
                         }
                     }
                     else {
@@ -289,6 +298,8 @@ public class DeepBreath extends AppCompatActivity {
         begin.setText(R.string.out);
         numBreaths--;
         breathDisplay.setText(""+ numBreaths);
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_release), Toast.LENGTH_SHORT)
+                .show();
     }
 
     @Override
