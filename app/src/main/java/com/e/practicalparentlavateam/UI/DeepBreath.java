@@ -175,6 +175,8 @@ public class DeepBreath extends AppCompatActivity {
         final Runnable afterExhaling = new Runnable() {
             @Override
             public void run() {
+                numBreaths--;
+                breathDisplay.setText(""+ numBreaths);
                 if(numBreaths > 0){
                     if (breathState == State.EXHALE) {
                         changeState(State.CONTINUE);
@@ -305,8 +307,6 @@ public class DeepBreath extends AppCompatActivity {
         soundOut.start();
 
         begin.setText(R.string.out);
-        numBreaths--;
-        breathDisplay.setText(""+ numBreaths);
         Toast.makeText(DeepBreath.this, getString(R.string.hint_for_release), Toast.LENGTH_SHORT)
                 .show();
     }
