@@ -55,6 +55,7 @@ public class DeepBreath extends AppCompatActivity {
         //https://commons.wikimedia.org/wiki/File:Small-dark-green-circle.svg
         circleIn = findViewById(R.id.circleIn);
         circleOut = findViewById(R.id.circleOut);
+        circleOut.setVisibility(View.INVISIBLE);
 
         //initialize display of breaths
         breathDisplay = findViewById(R.id.num_breaths_rem);
