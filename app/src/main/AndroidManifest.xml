@@ -66,7 +66,8 @@
         <activity android:name=".UI.MainMenu" />
         <activity
             android:name=".UI.TimeoutActivity"
-            android:label="@string/title_activity_timeout_timer" />
+            android:label="@string/title_activity_timeout_timer"
+            android:parentActivityName=".UI.MainMenu" />
         <activity
             android:name=".UI.ConfigureChildren"
             android:label="@string/title_activity_configure_children"
