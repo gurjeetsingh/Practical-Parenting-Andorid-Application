@@ -805,8 +805,8 @@ public class TimeoutActivity extends AppCompatActivity {
     private int getLatestResetTime()
     {
         SharedPreferences settings = getSharedPreferences("resetpref", 0);
-        int newtime = settings.getInt("resettime", 0);
-        return newtime;
+        int newTime = settings.getInt("resettime", 0);
+        return newTime;
     }
     private void setTimeFactor(int restime){
         SharedPreferences settings = getSharedPreferences("timepref", 0);
@@ -818,9 +818,9 @@ public class TimeoutActivity extends AppCompatActivity {
     private int getTimeFactor()
     {
         SharedPreferences settings = getSharedPreferences("timepref", 0);
-        int newtime = settings.getInt("factime", 0);
-        //System.out.println("newtime is"+newtime);
-        return newtime;
+        int newTime = settings.getInt("factime", 0);
+        //System.out.println("newTime is"+newTime);
+        return newTime;
     }
 
     private void setElapsedTime(int elapsedTime){
@@ -833,9 +833,9 @@ public class TimeoutActivity extends AppCompatActivity {
     private int getElapsedTime()
     {
         SharedPreferences settings = getSharedPreferences("elappref", 0);
-        int newtime = settings.getInt("elaptime", 0);
-        //System.out.println("newtime is"+newtime);
-        return newtime;
+        int newTime = settings.getInt("elaptime", 0);
+        //System.out.println("newTime is"+newTime);
+        return newTime;
     }
 
     private void setTimeSpeedText()

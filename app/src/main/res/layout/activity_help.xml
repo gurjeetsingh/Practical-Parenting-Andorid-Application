@@ -146,11 +146,9 @@
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/music2_copyright" />
+                app:layout_constraintTop_toBottomOf="@+id/music1_copyright" />
 
             <TextView
                 android:id="@+id/UI_art"
@@ -185,6 +183,21 @@
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/UI_art" />
+
+            <TextView
+                android:id="@+id/defult_image_copyright"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#A6445871"
+                android:fontFamily="@font/imprima"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/defultimage"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sun_image_copyright" />
 
             <TextView
                 android:id="@+id/coin_sound"
@@ -259,7 +272,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/alarm_sound_copyright" />
+                app:layout_constraintTop_toBottomOf="@+id/music2_copyright" />
 
             <TextView
                 android:id="@+id/music2_copyright"
@@ -274,13 +287,12 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/music1_copyright" />
+                app:layout_constraintTop_toBottomOf="@+id/defult_image_copyright" />
 
             <TextView
                 android:id="@+id/sun_image_copyright"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:background="#A6445871"
                 android:fontFamily="@font/imprima"
                 android:gravity="center_horizontal|center_vertical"
@@ -290,7 +302,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/music1_copyright" />
+                app:layout_constraintTop_toBottomOf="@+id/alarm_sound_copyright" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
