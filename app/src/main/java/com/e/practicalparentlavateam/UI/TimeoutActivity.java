@@ -279,13 +279,9 @@ public class TimeoutActivity extends AppCompatActivity {
             //System.out.println("total elapsed time is"+totalelapsed);
             Math.ceil(progressTimePercent);
             String totper;
-            if(progressTimePercent <0)
+            if(progressTimePercent <0 && time>0)
             {
                 totper="1";
-                if(time==0)
-                {
-                    totper="0";
-                }
             }
             else {
                 totper = Integer.toString((int) progressTimePercent);
