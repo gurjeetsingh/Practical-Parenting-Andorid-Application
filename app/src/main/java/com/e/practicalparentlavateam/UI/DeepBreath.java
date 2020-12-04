@@ -42,7 +42,8 @@ public class DeepBreath extends AppCompatActivity {
     private Spinner breathSpinner;
 
     //animation and sound vars
-    private ImageView circle;
+    private ImageView circleIn;
+    private ImageView circleOut;
     private MediaPlayer soundIn = new MediaPlayer();
     private MediaPlayer soundOut = new MediaPlayer();
 
@@ -52,7 +53,9 @@ public class DeepBreath extends AppCompatActivity {
         setContentView(R.layout.activity_deep_breath);
 
         //https://commons.wikimedia.org/wiki/File:Small-dark-green-circle.svg
-        circle = findViewById(R.id.circle);
+        circleIn = findViewById(R.id.circleIn);
+        circleOut = findViewById(R.id.circleOut);
+        circleOut.setVisibility(View.INVISIBLE);
 
         //initialize display of breaths
         breathDisplay = findViewById(R.id.num_breaths_rem);
@@ -162,9 +165,6 @@ public class DeepBreath extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("last times", numBreaths);
         editor.commit();
-        //TODO: is the placement of this ok? @yha181
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
-                .show();
     }
 
     private void beginBreathing() {
@@ -172,6 +172,8 @@ public class DeepBreath extends AppCompatActivity {
         final Runnable afterExhaling = new Runnable() {
             @Override
             public void run() {
+                numBreaths--;
+                breathDisplay.setText(""+ numBreaths);
                 if(numBreaths > 0){
                     if (breathState == State.EXHALE) {
                         changeState(State.CONTINUE);
@@ -266,7 +268,7 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void waitingToInhale() {
-        circle.clearAnimation();
+        circleIn.clearAnimation();
         breathDisplay.setText(""+ numBreaths);
     }
 
@@ -279,25 +281,31 @@ public class DeepBreath extends AppCompatActivity {
     private void inhaling() {
 
         begin.setText(R.string.in);
+        circleIn.setVisibility(View.VISIBLE);
         Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
-        circle.startAnimation(animationIn);
+        circleOut.clearAnimation();
+        circleOut.setVisibility(View.INVISIBLE);
+        circleIn.startAnimation(animationIn);
         if(!soundOut.equals(null))
             soundOut.stop();
         soundIn = MediaPlayer.create(DeepBreath.this, R.raw.sound_in);
         soundIn.start();
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
+                .show();
     }
 
     private void exhale() {
+        circleOut.setVisibility(View.VISIBLE);
         Animation animationOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_out);
-        circle.startAnimation(animationOut);
+        circleIn.clearAnimation();
+        circleIn.setVisibility(View.INVISIBLE);
+        circleOut.startAnimation(animationOut);
         if(!soundIn.equals(null))
             soundIn.stop();
         soundOut = MediaPlayer.create(DeepBreath.this, R.raw.sound_out);
         soundOut.start();
 
         begin.setText(R.string.out);
-        numBreaths--;
-        breathDisplay.setText(""+ numBreaths);
         Toast.makeText(DeepBreath.this, getString(R.string.hint_for_release), Toast.LENGTH_SHORT)
                 .show();
     }
