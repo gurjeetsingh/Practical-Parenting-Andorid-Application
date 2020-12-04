@@ -217,6 +217,7 @@ public class TimeoutActivity extends AppCompatActivity {
             isTimerRunning = false;
             createNotificationChannel();
             totalElapsed =0;
+            setElapsedTime(0);
             alarmOffButton.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.INVISIBLE);
             timeFieldSpinner.setVisibility(View.INVISIBLE);
@@ -266,8 +267,17 @@ public class TimeoutActivity extends AppCompatActivity {
      //   requiredintent.putExtra("factor",getTimeFactor());
        // System.out.println("real time factor is"+getTimeFactor());
         intent.putExtra("factor",getTimeFactor());
+        if(time==60000 || time==120000 || time==180000 || time== 300000 || time==600000)
+        {
+            setElapsedTime(0);
+            totalElapsed=0;
+        }
+        else
+        {
+            totalElapsed=getElapsedTime();
+        }
 
-
+        System.out.println(totalElapsed);
         if (time == 0 || time < 0 ||(((systemEndTime / 1000) - elapsedtime- totalElapsed) / (systemEndTime / 1000)) * 100==0) {
             progressBar.setProgress(0);
             progressText.setText("0");
@@ -295,40 +305,6 @@ public class TimeoutActivity extends AppCompatActivity {
         }
 
     }
-
-    private void setTimeSpeedText()
-    {
-        int timeFacCheck=getTimeFactor();
-        if(timeFacCheck==1)
-        {
-            timeFactorText.setText(R.string.time1);
-        }
-        if(timeFacCheck==2)
-        {
-            timeFactorText.setText(R.string.time2);
-        }
-        if(timeFacCheck==3)
-        {
-            timeFactorText.setText(R.string.time3);
-        }
-        if(timeFacCheck==4)
-        {
-            timeFactorText.setText(R.string.time4);
-        }
-        if(timeFacCheck==5)
-        {
-            timeFactorText.setText(R.string.time5);
-        }
-        if(timeFacCheck==6)
-        {
-            timeFactorText.setText(R.string.time6);
-        }
-        if(timeFacCheck==7)
-        {
-            timeFactorText.setText(R.string.time7);
-        }
-    }
-
 
     /*
     The following methods implement our notification, which takes sends an intent to the TimeoutActivity
@@ -640,6 +616,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 {
                     setLatestResetTime((int)timeLeftInMilliSeconds);
                     createTimeFactorSpinner();
+                    setElapsedTime(0);
                     timeFieldSpinner.setSelection(1);
                 }
                 //Then, we recreate the timefactorspinner
@@ -684,6 +661,7 @@ public class TimeoutActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int time = pauseIntent.getIntExtra("time", 0);
                 totalElapsed = totalElapsed +pauseIntent.getDoubleExtra("elap", 0);
+                setElapsedTime((int) totalElapsed);
                 timeLeftInMilliSeconds = time;
                 ispaused=true;
                 isTimerRunning = false;
@@ -789,6 +767,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 isTimerRunning = false;
                 timerForceReset =false;
                 totalElapsed =0;
+                setElapsedTime(0);
                 //ispaused=false;
                 progressBar.setProgress(100);
                 progressText.setText("100");
@@ -857,6 +836,39 @@ public class TimeoutActivity extends AppCompatActivity {
         int newtime = settings.getInt("elaptime", 0);
         //System.out.println("newtime is"+newtime);
         return newtime;
+    }
+
+    private void setTimeSpeedText()
+    {
+        int timeFacCheck=getTimeFactor();
+        if(timeFacCheck==1)
+        {
+            timeFactorText.setText(R.string.time1);
+        }
+        if(timeFacCheck==2)
+        {
+            timeFactorText.setText(R.string.time2);
+        }
+        if(timeFacCheck==3)
+        {
+            timeFactorText.setText(R.string.time3);
+        }
+        if(timeFacCheck==4)
+        {
+            timeFactorText.setText(R.string.time4);
+        }
+        if(timeFacCheck==5)
+        {
+            timeFactorText.setText(R.string.time5);
+        }
+        if(timeFacCheck==6)
+        {
+            timeFactorText.setText(R.string.time6);
+        }
+        if(timeFacCheck==7)
+        {
+            timeFactorText.setText(R.string.time7);
+        }
     }
 
     /*
