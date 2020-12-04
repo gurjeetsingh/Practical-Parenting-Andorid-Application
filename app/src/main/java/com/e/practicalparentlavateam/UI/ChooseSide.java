@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.e.practicalparentlavateam.Model.ChildrenManager;
 import com.e.practicalparentlavateam.R;
@@ -39,6 +40,8 @@ public class ChooseSide extends AppCompatActivity {
     private void getChild() {
         Intent intent = getIntent();
         name = intent.getStringExtra(EXTRA_NAME);
+        TextView text = findViewById(R.id.child_name_for_side);
+        text.setText(name);
         ImageView imageView = (ImageView) findViewById(R.id.side_child_image);
         if(name != null && !name.equals(getString(R.string.nobody))){
             try {

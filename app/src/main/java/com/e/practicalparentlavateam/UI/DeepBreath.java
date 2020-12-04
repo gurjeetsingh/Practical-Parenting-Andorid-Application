@@ -30,7 +30,7 @@ public class DeepBreath extends AppCompatActivity {
 
     //Enum for states in state machine
     public enum State {
-        WAITING_TO_INHALE, CONTINUE, INHALING, EXHALE, DONE,
+        WAITING_TO_INHALE, INHALING, EXHALE, DONE,
     }
     private State breathState = State.WAITING_TO_INHALE;
     //state machine vars
@@ -69,7 +69,6 @@ public class DeepBreath extends AppCompatActivity {
         createBreathSpinner();
         //begin exercise/state machine
         beginBreathing();
-
     }
 
     //spinner to select number of breaths
@@ -176,7 +175,7 @@ public class DeepBreath extends AppCompatActivity {
                 breathDisplay.setText(""+ numBreaths);
                 if(numBreaths > 0){
                     if (breathState == State.EXHALE) {
-                        changeState(State.CONTINUE);
+                        changeState(State.WAITING_TO_INHALE);
 
                     }
                 }
@@ -208,7 +207,7 @@ public class DeepBreath extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
                     breathSpinner.setVisibility(View.INVISIBLE);
-                    if (breathState == State.WAITING_TO_INHALE || breathState == State.CONTINUE) {
+                    if (breathState == State.WAITING_TO_INHALE) {
                         changeState(State.INHALING);
                         handler.postDelayed(releaseHint,10000);
                         handler.postDelayed(changeButton,3000);
@@ -246,10 +245,6 @@ public class DeepBreath extends AppCompatActivity {
                 currentStateView.setText(R.string.waiting_to_inhale);
                 waitingToInhale();
                 break;
-            case CONTINUE:
-                currentStateView.setText(R.string.continue_breath);
-                continueInhaling();
-                break;
             case INHALING:
                 currentStateView.setText(R.string.inhaling);
                 inhaling();
@@ -268,18 +263,14 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void waitingToInhale() {
+        begin.setText(R.string.in);
         circleIn.clearAnimation();
         breathDisplay.setText(""+ numBreaths);
-    }
-
-    private void continueInhaling(){
-        begin.setText(R.string.in);
         Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
                 .show();
     }
 
     private void inhaling() {
-
         begin.setText(R.string.in);
         circleIn.setVisibility(View.VISIBLE);
         Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
@@ -290,8 +281,6 @@ public class DeepBreath extends AppCompatActivity {
             soundOut.stop();
         soundIn = MediaPlayer.create(DeepBreath.this, R.raw.sound_in);
         soundIn.start();
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
-                .show();
     }
 
     private void exhale() {
@@ -306,8 +295,6 @@ public class DeepBreath extends AppCompatActivity {
         soundOut.start();
 
         begin.setText(R.string.out);
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_release), Toast.LENGTH_SHORT)
-                .show();
     }
 
     @Override
