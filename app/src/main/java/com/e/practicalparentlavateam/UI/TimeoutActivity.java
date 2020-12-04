@@ -349,7 +349,6 @@ public class TimeoutActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TimeoutActivity.class);
         intent.putExtra("StopAlarm",true);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         Intent broadcastIntent=new Intent(this, NotificationReciever.class);
         broadcastIntent.putExtra("StopAlarm",true);
         PendingIntent actionIntent=PendingIntent.getBroadcast(this,0,broadcastIntent,PendingIntent.FLAG_UPDATE_CURRENT);
