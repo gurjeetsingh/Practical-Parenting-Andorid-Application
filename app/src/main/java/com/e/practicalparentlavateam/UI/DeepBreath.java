@@ -165,9 +165,6 @@ public class DeepBreath extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("last times", numBreaths);
         editor.commit();
-        //TODO: is the placement of this ok? @yha181
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
-                .show();
     }
 
     private void beginBreathing() {
@@ -293,6 +290,8 @@ public class DeepBreath extends AppCompatActivity {
             soundOut.stop();
         soundIn = MediaPlayer.create(DeepBreath.this, R.raw.sound_in);
         soundIn.start();
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
+                .show();
     }
 
     private void exhale() {
