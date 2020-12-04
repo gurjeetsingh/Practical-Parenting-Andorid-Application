@@ -75,6 +75,7 @@ public class TimeoutActivity extends AppCompatActivity {
     double totalElapsed =0;
     Intent requiredIntent;
     Spinner timeFieldSpinner;
+    Spinner timeDurationSpinner;
     private boolean timerForceReset;
     boolean resetChecker=false;
 
@@ -219,6 +220,7 @@ public class TimeoutActivity extends AppCompatActivity {
             alarmOffButton.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.INVISIBLE);
             timeFieldSpinner.setVisibility(View.INVISIBLE);
+            timeDurationSpinner.setVisibility(View.VISIBLE);
             endTimeFlag = 0;
             setLatestEndTime(0);
             setTimeFactor(1);
@@ -256,6 +258,7 @@ public class TimeoutActivity extends AppCompatActivity {
         pauseButton.setVisibility(View.VISIBLE);
         resetButton.setVisibility(View.VISIBLE);
         timeFieldSpinner.setVisibility(View.VISIBLE);
+        timeDurationSpinner.setVisibility(View.INVISIBLE);
         timerForceReset =true;
         createNotificationChannel();
         setLatestResetTime(getLatestEndTime());
@@ -411,15 +414,15 @@ public class TimeoutActivity extends AppCompatActivity {
     time will be sent to the UI updater. Then, you can START TIMER to restart the timer with the set duration.
      */
     private void createTimeDurationSpinner() {
-        Spinner timeFieldSpinner = (Spinner) findViewById(R.id.time_spinner);
+        timeDurationSpinner = (Spinner) findViewById(R.id.time_spinner);
         //To get the string array from the Strings.XML
         Resources res = this.getResources();
         String[] timePiece = res.getStringArray(R.array.minutes_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 R.layout.time_duration_spinner, timePiece);
         adapter.setDropDownViewResource(R.layout.time_duration_spinner_dropdown);
-        timeFieldSpinner.setAdapter(adapter);
-        timeFieldSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        timeDurationSpinner.setAdapter(adapter);
+        timeDurationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
@@ -666,6 +669,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 pauseButton.setVisibility(View.VISIBLE);
                 resetButton.setVisibility(View.VISIBLE);
                 timeFieldSpinner.setVisibility(View.VISIBLE);
+                timeDurationSpinner.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -801,9 +805,10 @@ public class TimeoutActivity extends AppCompatActivity {
                 resetButton.setVisibility(View.INVISIBLE);
                 resetChecker=true;
                 timeFieldSpinner.setVisibility(View.INVISIBLE);
+                timeDurationSpinner.setVisibility(View.VISIBLE);
                 setTimeSpeedText();
-                createTimeDurationSpinner();
-            }
+
+       }
 
 
         });
