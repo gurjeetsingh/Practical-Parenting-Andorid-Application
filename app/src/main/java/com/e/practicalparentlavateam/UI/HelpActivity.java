@@ -55,6 +55,9 @@ public class HelpActivity extends AppCompatActivity {
         TextView alarmSound =(TextView) findViewById(R.id.alarm_sound_copyright);
         alarmSound.setMovementMethod(LinkMovementMethod.getInstance());
 
+        TextView sunImage =(TextView) findViewById(R.id.sun_image_copyright);
+        sunImage.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     //Returning Necessary Activity
