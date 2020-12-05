@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
+import java.util.Objects;
 
 public class SelectChildren extends AppCompatActivity {
     private static final String EXTRA_NAME = "com.e.practicalparentlavateam.UI - the name";
@@ -122,7 +123,7 @@ public class SelectChildren extends AppCompatActivity {
 
     private void portrait(){
         ImageView portrait = findViewById(R.id.portrait_selection);
-        if(name != null || name != getString(R.string.nobody)) {
+        if(name != null && !name.equals(getString(R.string.nobody))) {
             try {
                 File f = new File(childList.getPath(), name + ".jpg");
                 Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(f));

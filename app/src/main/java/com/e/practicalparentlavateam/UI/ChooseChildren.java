@@ -106,17 +106,12 @@ public class ChooseChildren extends AppCompatActivity {
             makeView.setText(currentChild);
 
             ImageView imageView = (ImageView)itemView.findViewById(R.id.portrait);
-            if(currentChild == getString(R.string.nobody)){
-                imageView.setVisibility(View.INVISIBLE);
-            }
-            else {
-                try {
-                    File f = new File(children.getPath(), currentChild + ".jpg");
-                    Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
-                    imageView.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+            try {
+                File f = new File(children.getPath(), currentChild + ".jpg");
+                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+                imageView.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
 
             return itemView;
