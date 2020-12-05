@@ -3,6 +3,7 @@
  * layout is used to make the timer run. It
  * is heavily reliant on the TimeService to
  * keep timer alive even if app is closed.
+ * add the vis-bar and speed up
  * */
 
 package com.e.practicalparentlavateam.UI;

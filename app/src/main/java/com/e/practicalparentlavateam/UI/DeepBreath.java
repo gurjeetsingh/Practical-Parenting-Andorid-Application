@@ -34,6 +34,7 @@ public class DeepBreath extends AppCompatActivity {
         WAITING_TO_INHALE, INHALING, EXHALE, DONE,
     }
     private State breathState = State.WAITING_TO_INHALE;
+
     //state machine vars
     private static final String EXTRA_NUM_BREATHS = "Extra - Num breaths";
     private static int numBreaths;
@@ -69,7 +70,7 @@ public class DeepBreath extends AppCompatActivity {
         //setup breaths spinner
         createBreathSpinner();
         //begin exercise/state machine
-        beginBreathing();
+        breathing();
         Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
                 .show();
     }
@@ -169,8 +170,11 @@ public class DeepBreath extends AppCompatActivity {
         editor.commit();
     }
 
-    private void beginBreathing() {
+    //This is the main part to do the breath activity///////////////////////////////
+    private void breathing() {
         final Handler handler = new Handler();
+
+        //This is the function to judge the state should be after exhaling
         final Runnable afterExhaling = new Runnable() {
             @Override
             public void run() {
@@ -190,6 +194,7 @@ public class DeepBreath extends AppCompatActivity {
             }
         };
 
+        //hint for if breath for 10s
         final Runnable releaseHint = new Runnable() {
             @Override
             public void run() {
@@ -198,6 +203,7 @@ public class DeepBreath extends AppCompatActivity {
             }
         };
 
+        //change the button message if inhale for 3s
         final Runnable changeButton = new Runnable() {
             @Override
             public void run() {
@@ -217,7 +223,10 @@ public class DeepBreath extends AppCompatActivity {
                     }
                 }
 
+                //Release the button
                 if(event.getAction() == MotionEvent.ACTION_UP){
+
+                    //if not hold for 3s
                     if(event.getEventTime() - event.getDownTime() < 3000) {
                         if (breathState == State.INHALING) {
                             changeState(State.WAITING_TO_INHALE);
@@ -226,9 +235,13 @@ public class DeepBreath extends AppCompatActivity {
                             handler.removeCallbacks(changeButton);
                         }
                     }
+
+                    //start exhaling
                     else {
                         if (breathState == State.INHALING) {
                             changeState(State.EXHALE);
+
+                            //After exhaling 3s change the state
                             handler.postDelayed(afterExhaling,3000);
                             handler.removeCallbacks(releaseHint);
                         }
@@ -240,6 +253,7 @@ public class DeepBreath extends AppCompatActivity {
         });
     }
 
+    //This is the function to change the state of the breathing
     private void changeState(State newState) {
         currentStateView.setText(newState.name());
 
@@ -257,6 +271,7 @@ public class DeepBreath extends AppCompatActivity {
                 exhale();
                 break;
             case DONE:
+                //If all the # of breath is used then stop
                 currentStateView.setText(R.string.finish);
                 begin.setText(R.string.good_job);
                 //done();
@@ -265,6 +280,7 @@ public class DeepBreath extends AppCompatActivity {
         breathState = newState;
     }
 
+    //Those are the function to use for the state of breath
     private void waitingToInhale() {
         begin.setText(R.string.in);
         circleIn.clearAnimation();
