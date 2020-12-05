@@ -70,6 +70,9 @@ public class HelpActivity extends AppCompatActivity {
         TextView music2 =(TextView) findViewById(R.id.music2_copyright);
         music2.setMovementMethod(LinkMovementMethod.getInstance());
 
+        TextView software =(TextView) findViewById(R.id.suport_software);
+        software.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     //Returning Necessary Activity
