@@ -63,8 +63,8 @@
 
     <Button
         android:id="@+id/breath"
-        android:layout_width="118dp"
-        android:layout_height="48dp"
+        android:layout_width="119dp"
+        android:layout_height="81dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
         android:text="@string/begin"
