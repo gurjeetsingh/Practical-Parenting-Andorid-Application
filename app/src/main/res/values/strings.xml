@@ -46,8 +46,12 @@
     <string name="Choice">Choice:</string>
     <string name="history_starts_here">History Starts Here</string>
     <string name="who_s_turn_it_is">Whose turn it is</string>
-    <string name="music1">music1: 远方的寂静-林海</string>
-    <string name="music2">music2: The Promise-Secret Garden</string>
+    <string name="software">Music editing software:
+        <a href="https://www.audacityteam.org/">Audacity</a></string>
+    <string name="music1">music2: 远方的寂静-林海
+<a href="https://y.qq.com/"> web</a></string>
+    <string name="music2">music1: The Promise-Secret Garden
+<a href="https://y.qq.com/"> web</a></string>
     <string name="cmpt276">Project Inspiration: CMPT 276\n Professor: Brian Fraser\n Simon Fraser University, Fall 2020.\n
         <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">CMPT276 Webpage</a></string>
     <string name="coin">Coin Image All Rights Reserved :
@@ -62,11 +66,16 @@
 <a href="http://soundbible.com/2197-Analog-Watch-Alarm.html">Here</a></string>
     <string name="sunimage">Sun Image All Right Reserved :
 <a href="https://solarsystem.nasa.gov/system/basic_html_elements/11561_Sun.png">Here</a></string>
+    <string name="circleimage">Circle Image All Right Reserved :
+<a href="https://commons.wikimedia.org/wiki/File:Small-dark-green-circle.svg">Here</a></string>
+    <string name="defultimage">Defult Image All Right Reserved :
+<a href="https://www.dreamstime.com/default-avatar-profile-flat-icon-social-media-user-vector-portrait-unknown-human-image-default-avatar-profile-flat-icon-image184330869">Here</a></string>
 
     <string name="none">No Selection</string>
     <string name="textview">TextView</string>
     <string name="button">Button</string>
     <string name="select_a_side">Select a side</string>
+    <string name="child_name_for_side">name</string>
     <string name="select_child">Selected child:</string>
     <string name="name">Name</string>
     <string name="task_name">Task Name:</string>
@@ -144,7 +153,7 @@
     <string name="inhaling">Inhaling</string>
     <string name="exhaling">Exhaling</string>
     <string name="finish">Done</string>
-    <string name="breaths_remaining">Breaths Remaining</string>
+    <string name="breaths_remaining">Let us take</string>
     <string name="state">Let\'s begin</string>
     <string name="_2">2</string>
     <string name="good_job">Good Job</string>
@@ -190,5 +199,12 @@
     <string name="channelName">newnotif</string>
     <string name="channelDesc">newnotif</string>
     <string name="channelID">"newnotif</string>
+    <string name="breath_together">breath together</string>
+    <string name="breath_in">Breath In</string>
+    <string name="breath_out">Breath Out</string>
+    <string name="notification_title">ALARM</string>
+    <string name="notification_content">Time\'s Up! Touch Box To Turn Off Alarm!</string>
+    <string name="stop_alarm">StopAlarm</string>
+    <string name="hint_for_reset_timer">Please Reset Timer First</string>
 
 </resources>

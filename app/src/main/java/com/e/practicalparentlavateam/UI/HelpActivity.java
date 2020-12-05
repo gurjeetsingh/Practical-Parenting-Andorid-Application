@@ -58,6 +58,21 @@ public class HelpActivity extends AppCompatActivity {
         TextView sunImage =(TextView) findViewById(R.id.sun_image_copyright);
         sunImage.setMovementMethod(LinkMovementMethod.getInstance());
 
+        TextView defultImage =(TextView) findViewById(R.id.defult_image_copyright);
+        defultImage.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView circleImage =(TextView) findViewById(R.id.circle_image_copyright);
+        circleImage.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView music1 =(TextView) findViewById(R.id.music1_copyright);
+        music1.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView music2 =(TextView) findViewById(R.id.music2_copyright);
+        music2.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView software =(TextView) findViewById(R.id.suport_software);
+        software.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     //Returning Necessary Activity

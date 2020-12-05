@@ -33,26 +33,23 @@ the picture on its side. This is a common issue with some Android Virtual Device
 speaking with the professor about this, he said to include a note in our readme file, that
 our camera works on a normal Android phone.
 
-
-
-
-Iteration 3
-----------
-Team Lava:
-Yuchun He(Scrum Master)
-Gurjeet Singh(Repo Manager)
-Yuhan He(Product Owner)
-Ahmad As Sami(Team Member)
-
-We have implemented all user stories required for Iteration 3.
-
-All stories work fine with the current requirements according to our testing. The Take A Breath
-is implemented using the state machine framework and the Visual Timer is a Custom Clock
-running with conjunction with a real time clock to slow/speed up time dynamically.
-
 We have also done plenty of code reviews on our merge requests and have
 reviewed each other's code, and also done pair programming(virtually) as our effort
 to work as a team.
 
 Our application has been extensively tested for all User Stories with
-Google Pixel 2 API 27.
+Google Pixel 2 API 24.
+
+Iteration 3
+------------
+Team Lava:
+Gurjeet Singh(Repo Manager)
+Yuchun He(Scrum Master)
+Yuhan He(Product Owner)
+Ahmad As Sami(Team Member)
+
+We have implemented all user stories required for Iteration 3.
+We use the enum to build the state machine which we thought should be easy to build state machine
+Everything should be used on API 27 device
+
+We have made code reviews for the merge requests

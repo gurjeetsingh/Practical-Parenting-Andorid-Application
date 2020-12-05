@@ -3,6 +3,7 @@
  * layout is used to make the timer run. It
  * is heavily reliant on the TimeService to
  * keep timer alive even if app is closed.
+ * add the vis-bar and speed up
  * */
 
 package com.e.practicalparentlavateam.UI;
@@ -355,14 +356,14 @@ public class TimeoutActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "97")
                 .setSmallIcon(R.drawable.babyclock)
-                .setContentTitle("ALARM")
-                .setContentText("Time's Up! Touch Box To Turn Off Alarm!")
+                .setContentTitle(getString(R.string.notification_title))
+                .setContentText(getString(R.string.notification_content))
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.babyclock))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
                 .setColor(getResources().getColor(R.color.appcolr))
-                .addAction(R.mipmap.ic_launcher_round,"StopAlarm",actionIntent)
+                .addAction(R.mipmap.ic_launcher_round,getString(R.string.stop_alarm),actionIntent)
                .setAutoCancel(true);
 
 
@@ -408,7 +409,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 1) {
                     if(timerForceReset ==true)
                     {
-                        Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.hint_for_reset_timer,Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -426,7 +427,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     System.out.println("yo!");
                     if(timerForceReset ==true)
                     {
-                        Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),R.string.hint_for_reset_timer,Toast.LENGTH_SHORT).show();
 
                     }
                     else {
@@ -445,7 +446,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 3) {
                         if(timerForceReset ==true)
                         {
-                            Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),R.string.hint_for_reset_timer,Toast.LENGTH_SHORT).show();
                         }
                         else {
                         Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -462,7 +463,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 4) {
                     if(timerForceReset ==true)
                     {
-                        Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),R.string.hint_for_reset_timer,Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -691,7 +692,7 @@ public class TimeoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (timerForceReset == true) {
-                    Toast.makeText(getApplicationContext(), "Please Reset Timer First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.hint_for_reset_timer, Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -804,8 +805,8 @@ public class TimeoutActivity extends AppCompatActivity {
     private int getLatestResetTime()
     {
         SharedPreferences settings = getSharedPreferences("resetpref", 0);
-        int newtime = settings.getInt("resettime", 0);
-        return newtime;
+        int newTime = settings.getInt("resettime", 0);
+        return newTime;
     }
     private void setTimeFactor(int restime){
         SharedPreferences settings = getSharedPreferences("timepref", 0);
@@ -817,9 +818,9 @@ public class TimeoutActivity extends AppCompatActivity {
     private int getTimeFactor()
     {
         SharedPreferences settings = getSharedPreferences("timepref", 0);
-        int newtime = settings.getInt("factime", 0);
-        //System.out.println("newtime is"+newtime);
-        return newtime;
+        int newTime = settings.getInt("factime", 0);
+        //System.out.println("newTime is"+newTime);
+        return newTime;
     }
 
     private void setElapsedTime(int elapsedTime){
@@ -832,9 +833,9 @@ public class TimeoutActivity extends AppCompatActivity {
     private int getElapsedTime()
     {
         SharedPreferences settings = getSharedPreferences("elappref", 0);
-        int newtime = settings.getInt("elaptime", 0);
-        //System.out.println("newtime is"+newtime);
-        return newtime;
+        int newTime = settings.getInt("elaptime", 0);
+        //System.out.println("newTime is"+newTime);
+        return newTime;
     }
 
     private void setTimeSpeedText()
