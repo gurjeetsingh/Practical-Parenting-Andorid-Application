@@ -202,5 +202,9 @@
     <string name="breath_together">breath together</string>
     <string name="breath_in">Breath In</string>
     <string name="breath_out">Breath Out</string>
+    <string name="notification_title">ALARM</string>
+    <string name="notification_content">Time\'s Up! Touch Box To Turn Off Alarm!</string>
+    <string name="stop_alarm">StopAlarm</string>
+    <string name="hint_for_reset_timer">Please Reset Timer First</string>
 
 </resources>
