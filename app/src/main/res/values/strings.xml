@@ -199,5 +199,7 @@
     <string name="channelDesc">newnotif</string>
     <string name="channelID">"newnotif</string>
     <string name="breath_together">breath together</string>
+    <string name="breath_in">Breath In</string>
+    <string name="breath_out">Breath Out</string>
 
 </resources>

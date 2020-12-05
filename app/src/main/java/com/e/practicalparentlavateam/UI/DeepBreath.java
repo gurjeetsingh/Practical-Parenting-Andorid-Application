@@ -317,6 +317,8 @@ public class DeepBreath extends AppCompatActivity {
             soundOut.stop();
         soundIn = MediaPlayer.create(DeepBreath.this, R.raw.sound_in);
         soundIn.start();
+        Toast.makeText(DeepBreath.this, R.string.breath_in, Toast.LENGTH_SHORT)
+                .show();
     }
 
     private void exhale() {
@@ -331,6 +333,8 @@ public class DeepBreath extends AppCompatActivity {
         soundOut.start();
 
         breath.setText(R.string.out);
+        Toast.makeText(DeepBreath.this, R.string.breath_out, Toast.LENGTH_SHORT)
+                .show();
     }
 
     @Override
