@@ -357,14 +357,14 @@ public class TimeoutActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "97")
                 .setSmallIcon(R.drawable.babyclock)
-                .setContentTitle("ALARM")
-                .setContentText("Time's Up! Touch Box To Turn Off Alarm!")
+                .setContentTitle(getString(R.string.notification_title))
+                .setContentText(getString(R.string.notification_content))
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.babyclock))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
                 .setColor(getResources().getColor(R.color.appcolr))
-                .addAction(R.mipmap.ic_launcher_round,"StopAlarm",actionIntent)
+                .addAction(R.mipmap.ic_launcher_round,getString(R.string.stop_alarm),actionIntent)
                .setAutoCancel(true);
 
 
@@ -410,7 +410,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 1) {
                     if(timerForceReset ==true)
                     {
-                        Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.hint_for_reset_timer,Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Intent serviceintent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -428,7 +428,7 @@ public class TimeoutActivity extends AppCompatActivity {
                     System.out.println("yo!");
                     if(timerForceReset ==true)
                     {
-                        Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),R.string.hint_for_reset_timer,Toast.LENGTH_SHORT).show();
 
                     }
                     else {
@@ -447,7 +447,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 3) {
                         if(timerForceReset ==true)
                         {
-                            Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),R.string.hint_for_reset_timer,Toast.LENGTH_SHORT).show();
                         }
                         else {
                         Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -464,7 +464,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 if (position == 4) {
                     if(timerForceReset ==true)
                     {
-                        Toast.makeText(getApplicationContext(),"Please Reset Timer First",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),R.string.hint_for_reset_timer,Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
@@ -693,7 +693,7 @@ public class TimeoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (timerForceReset == true) {
-                    Toast.makeText(getApplicationContext(), "Please Reset Timer First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.hint_for_reset_timer, Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Intent serviceIntent = new Intent(TimeoutActivity.this, TimeService.class);
