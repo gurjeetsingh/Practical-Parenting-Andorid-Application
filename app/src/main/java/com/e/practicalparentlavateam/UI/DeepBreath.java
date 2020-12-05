@@ -28,6 +28,7 @@ import com.e.practicalparentlavateam.R;
 
 public class DeepBreath extends AppCompatActivity {
 
+    //https://stackoverflow.com/questions/25581176/java-enum-based-state-machine-fsm-passing-in-events
     //Enum for states in state machine
     public enum State {
         WAITING_TO_INHALE, INHALING, EXHALE, DONE,
@@ -69,6 +70,8 @@ public class DeepBreath extends AppCompatActivity {
         createBreathSpinner();
         //begin exercise/state machine
         beginBreathing();
+        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
+                .show();
     }
 
     //spinner to select number of breaths
