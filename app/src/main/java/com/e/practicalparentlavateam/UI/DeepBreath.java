@@ -308,6 +308,7 @@ public class DeepBreath extends AppCompatActivity {
     private void inhaling() {
         breath.setText(R.string.in);
         circleIn.setVisibility(View.VISIBLE);
+        //https://www.youtube.com/watch?v=jHT9QQf4_Pw&t=509s
         Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
         circleOut.clearAnimation();
         circleOut.setVisibility(View.INVISIBLE);

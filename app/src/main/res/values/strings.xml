@@ -152,7 +152,7 @@
     <string name="inhaling">Inhaling</string>
     <string name="exhaling">Exhaling</string>
     <string name="finish">Done</string>
-    <string name="breaths_remaining">Breaths Remaining</string>
+    <string name="breaths_remaining">Let us take</string>
     <string name="state">Let\'s begin</string>
     <string name="_2">2</string>
     <string name="good_job">Good Job</string>
@@ -198,5 +198,6 @@
     <string name="channelName">newnotif</string>
     <string name="channelDesc">newnotif</string>
     <string name="channelID">"newnotif</string>
+    <string name="breath_together">breath together</string>
 
 </resources>
