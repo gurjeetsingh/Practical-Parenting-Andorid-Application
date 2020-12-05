@@ -77,7 +77,7 @@ public class CoinFlipActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.child_coin_image);
         if(name != null){
             text.setText(name);
-            if(name == getString(R.string.nobody)) {
+            if(name != getString(R.string.nobody)) {
                 try {
                     File file = new File(ChildrenManager.getInstance().getPath(), name + ".jpg");
                     Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
