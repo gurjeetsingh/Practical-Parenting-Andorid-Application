@@ -223,6 +223,7 @@ public class TimeoutActivity extends AppCompatActivity {
             pauseButton.setVisibility(View.INVISIBLE);
             timeFieldSpinner.setVisibility(View.INVISIBLE);
             timeDurationSpinner.setVisibility(View.VISIBLE);
+            startButton.setVisibility(View.INVISIBLE);
             endTimeFlag = 0;
             setLatestEndTime(0);
             setTimeFactor(1);
@@ -622,12 +623,12 @@ public class TimeoutActivity extends AppCompatActivity {
                 //Then, we recreate the timefactorspinner
                 //and set our rate at 100% which corresponds to 1
                 createTimeFactorSpinner();
-                setTimeFactor(1);
+                //setTimeFactor(1);
 
                 //The following variables are sent as extras to the service
                 //The service recieves the rate of time speed, time selected by user
                 //and a default boolean to check in future if the timer has been reset or not
-                timeFieldSpinner.setSelection(1);
+                timeFieldSpinner.setSelection(getTimeFactor());
                 serviceIntent.putExtra("factor",timeFactor);
                 serviceIntent.putExtra("mills", timeLeftInMilliSeconds);
                 serviceIntent.putExtra("reset",resetChecker);
@@ -782,6 +783,7 @@ public class TimeoutActivity extends AppCompatActivity {
                 timeFieldSpinner.setVisibility(View.INVISIBLE);
                 timeDurationSpinner.setVisibility(View.VISIBLE);
                 setTimeSpeedText();
+                startButton.setVisibility(View.VISIBLE);
 
        }
 
