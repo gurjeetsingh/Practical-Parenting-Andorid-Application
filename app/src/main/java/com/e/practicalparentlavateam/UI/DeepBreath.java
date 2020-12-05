@@ -40,6 +40,7 @@ public class DeepBreath extends AppCompatActivity {
     private static int numBreaths;
     private TextView breathDisplay;
     private TextView currentStateView;
+    private Button breath;
     private Button begin;
     private Spinner breathSpinner;
 
@@ -64,15 +65,29 @@ public class DeepBreath extends AppCompatActivity {
 
         //display of state machine
         currentStateView = findViewById(R.id.state);
+        //breath button
+        breath = findViewById(R.id.breath);
         //begin button
-        begin = findViewById(R.id.breath);
+        begin = findViewById(R.id.begin);
 
+        //begin breath process
+        readyToBreath();
         //setup breaths spinner
         createBreathSpinner();
         //begin exercise/state machine
         breathing();
-        Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
-                .show();
+    }
+
+    private void readyToBreath() {
+        begin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
+                        .show();
+                begin.setVisibility(View.INVISIBLE);
+                breathSpinner.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     //spinner to select number of breaths
@@ -174,7 +189,7 @@ public class DeepBreath extends AppCompatActivity {
     private void breathing() {
         final Handler handler = new Handler();
 
-        //This is the function to judge the state should be after exhaling
+        //This is the function to judge the state should be after exhaling for 3s
         final Runnable afterExhaling = new Runnable() {
             @Override
             public void run() {
@@ -207,18 +222,19 @@ public class DeepBreath extends AppCompatActivity {
         final Runnable changeButton = new Runnable() {
             @Override
             public void run() {
-                begin.setText(R.string.out);
+                breath.setText(R.string.out);
             }
         };
 
-        begin.setOnTouchListener(new View.OnTouchListener() {
+        breath.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    breathSpinner.setVisibility(View.INVISIBLE);
                     if (breathState == State.WAITING_TO_INHALE) {
                         changeState(State.INHALING);
+                        //hint for if breath for 10s
                         handler.postDelayed(releaseHint,10000);
+                        //change the button message if inhale for 3s
                         handler.postDelayed(changeButton,3000);
                     }
                 }
@@ -273,7 +289,7 @@ public class DeepBreath extends AppCompatActivity {
             case DONE:
                 //If all the # of breath is used then stop
                 currentStateView.setText(R.string.finish);
-                begin.setText(R.string.good_job);
+                breath.setText(R.string.good_job);
                 //done();
                 break;
         }
@@ -282,7 +298,7 @@ public class DeepBreath extends AppCompatActivity {
 
     //Those are the function to use for the state of breath
     private void waitingToInhale() {
-        begin.setText(R.string.in);
+        breath.setText(R.string.in);
         circleIn.clearAnimation();
         breathDisplay.setText(""+ numBreaths);
         Toast.makeText(DeepBreath.this, getString(R.string.hint_for_breath), Toast.LENGTH_SHORT)
@@ -290,7 +306,7 @@ public class DeepBreath extends AppCompatActivity {
     }
 
     private void inhaling() {
-        begin.setText(R.string.in);
+        breath.setText(R.string.in);
         circleIn.setVisibility(View.VISIBLE);
         Animation animationIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
         circleOut.clearAnimation();
@@ -313,7 +329,7 @@ public class DeepBreath extends AppCompatActivity {
         soundOut = MediaPlayer.create(DeepBreath.this, R.raw.sound_out);
         soundOut.start();
 
-        begin.setText(R.string.out);
+        breath.setText(R.string.out);
     }
 
     @Override

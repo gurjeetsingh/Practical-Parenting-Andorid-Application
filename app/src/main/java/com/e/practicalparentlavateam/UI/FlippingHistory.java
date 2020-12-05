@@ -74,7 +74,7 @@ public class FlippingHistory extends AppCompatActivity {
 
             ChildrenManager children = ChildrenManager.getInstance();
 
-            if(!currentItem.getName().equals(getString(R.string.nobody))) {
+            if(currentItem.getName() == getString(R.string.nobody)) {
                 ImageView imageView = (ImageView) itemView.findViewById(R.id.history_image);
                 try {
                     File file = new File(children.getPath(), currentItem.getName() + ".jpg");

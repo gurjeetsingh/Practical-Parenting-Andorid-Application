@@ -67,6 +67,21 @@
         android:layout_height="81dp"
         android:background="@drawable/rounded_corners_buttons"
         android:fontFamily="@font/imprima"
+        android:text="@string/in"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/circleIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/circleIn" />
+
+    <Button
+        android:id="@+id/begin"
+        android:layout_width="119dp"
+        android:layout_height="81dp"
+        android:background="@drawable/rounded_corners_buttons"
+        android:fontFamily="@font/imprima"
         android:text="@string/begin"
         android:textColor="#FFFFFF"
         android:textSize="24sp"

@@ -109,7 +109,7 @@ public class WhoseTurn extends AppCompatActivity {
                 nameView.setText(R.string.no_child);
             }
             else {
-                if (currentName.equals(getString(R.string.no_child))) {
+                if (currentName == getString(R.string.no_child)) {
                     taskManager.setName(position, childList.get(0).getName());
                     saveNewTask(taskManager);
                     nameView.setText(childList.get(0).getName());

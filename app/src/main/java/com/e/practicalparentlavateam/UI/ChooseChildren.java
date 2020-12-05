@@ -106,7 +106,7 @@ public class ChooseChildren extends AppCompatActivity {
             makeView.setText(currentChild);
 
             ImageView imageView = (ImageView)itemView.findViewById(R.id.portrait);
-            if(currentChild.equals(getString(R.string.nobody))){
+            if(currentChild == getString(R.string.nobody)){
                 imageView.setVisibility(View.INVISIBLE);
             }
             else {
