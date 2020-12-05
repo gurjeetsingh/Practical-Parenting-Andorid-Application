@@ -39,3 +39,17 @@ to work as a team.
 
 Our application has been extensively tested for all User Stories with
 Google Pixel 2 API 24.
+
+Iteration 3
+------------
+Team Lava:
+Gurjeet Singh(Repo Manager)
+Yuchun He(Scrum Master)
+Yuhan He(Product Owner)
+Ahmad As Sami(Team Member)
+
+We have implemented all user stories required for Iteration 3.
+We use the enum to build the state machine which we thought should be easy to build state machine
+Everything should be used on API 27 device
+
+We have made code reviews for the merge requests
