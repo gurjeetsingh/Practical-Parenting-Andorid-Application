@@ -96,7 +96,7 @@ public class TimeoutActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         createTimeDurationSpinner();
-        timeFactorText=findViewById(R.id.timefactor2);
+        timeFactorText=findViewById(R.id.time_factor2);
         createTimeFactorSpinner();
 
 
@@ -104,7 +104,7 @@ public class TimeoutActivity extends AppCompatActivity {
         timerValue.setBackgroundResource(R.color.stopg);
         //For the progress piechart
         progressBar=findViewById(R.id.circular_progress_bar);
-        progressText=findViewById(R.id.progressText);
+        progressText=findViewById(R.id.progress_text);
         createNotificationChannel();
 
 
@@ -510,7 +510,7 @@ public class TimeoutActivity extends AppCompatActivity {
      */
 
     private void createTimeFactorSpinner() {
-        timeFieldSpinner = (Spinner) findViewById(R.id.factorspinner);
+        timeFieldSpinner = (Spinner) findViewById(R.id.factor_spinner);
         //To get the string array from the Strings.XML
         Resources res = this.getResources();
         String[] timePiece = res.getStringArray(R.array.timefactor);
