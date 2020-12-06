@@ -341,7 +341,7 @@ public class DeepBreath extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        soundOut.stop();
+        soundOut.release();
         Intent mainIntent=MainMenu.makeIntent(DeepBreath.this);
         startActivity(mainIntent);
         DeepBreath.this.finish();
