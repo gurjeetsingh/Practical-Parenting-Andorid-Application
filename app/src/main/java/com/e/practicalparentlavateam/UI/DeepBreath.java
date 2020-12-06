@@ -246,7 +246,7 @@ public class DeepBreath extends AppCompatActivity {
                     if(event.getEventTime() - event.getDownTime() < 3000) {
                         if (breathState == State.INHALING) {
                             changeState(State.WAITING_TO_INHALE);
-                            soundIn.stop();
+                            soundIn.release();
                             handler.removeCallbacks(releaseHint);
                             handler.removeCallbacks(changeButton);
                         }
@@ -313,8 +313,9 @@ public class DeepBreath extends AppCompatActivity {
         circleOut.clearAnimation();
         circleOut.setVisibility(View.INVISIBLE);
         circleIn.startAnimation(animationIn);
-        if(!soundOut.equals(null))
-            soundOut.stop();
+        if(!soundOut.equals(null)){
+            soundOut.release();
+        }
         soundIn = MediaPlayer.create(DeepBreath.this, R.raw.sound_in);
         soundIn.start();
         Toast.makeText(DeepBreath.this, R.string.breath_in, Toast.LENGTH_SHORT)
@@ -327,8 +328,9 @@ public class DeepBreath extends AppCompatActivity {
         circleIn.clearAnimation();
         circleIn.setVisibility(View.INVISIBLE);
         circleOut.startAnimation(animationOut);
-        if(!soundIn.equals(null))
-            soundIn.stop();
+        if(!soundIn.equals(null)){
+            soundIn.release();
+        }
         soundOut = MediaPlayer.create(DeepBreath.this, R.raw.sound_out);
         soundOut.start();
 
