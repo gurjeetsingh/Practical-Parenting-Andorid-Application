@@ -32,7 +32,7 @@ Welcome to the **Practical Parenting Android Application** repository! This appl
 
 ## Technologies Used
 
-- **Programming Language**: Java/Kotlin
+- **Programming Language**: Java
 - **Architecture**: MVVM (Model-View-ViewModel)
 - **Database**: Room or SQLite
 - **UI Framework**: Android Jetpack Compose or XML-based layouts
